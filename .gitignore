@@ -1,0 +1,16 @@
+*.log
+*.aux
+*.pdf
+*.swp
+*.DS_Store
+*.d
+*~
+*.fls
+*.temp
+*.dvi
+*.out
+*.toc
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+
