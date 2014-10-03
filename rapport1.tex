@@ -25,7 +25,7 @@ nécéssaire pour produire $1000 \si{\tonne}$ d'ammoniac (\ce{NH3}).
 \end{equation}
 
 La masse molaire de l'ammoniac vaut $17 \si{\gram\per\mole}$,
-il faut donc produire $5.88 \cdot 10^7 \si{\mole}.$
+il faut donc en produire $5.88 \cdot 10^7 \si{\mole}.$
 
 On obtient les nombres de moles de réactifs à partir de la réaction pondérée. 
 
@@ -38,6 +38,60 @@ Les masses de \ce{H2} et de \ce{N2} valent donc
 respectivement $1.765 \si{\tonne}$ et $8.235 \si{\tonne}$.
 Le bilan de masse est correct : si on fait la somme des masses des réactifs,
 on retrouve la même masse produite.
+
+
+\section{Débit d'eau nécessaire}
+
+Afin de maintenir les réacteurs à température constante, on refroidit ceux-ci avec de l'eau.
+Il faut tout d'abord calculer la chaleur dégagée par jour par les réacteurs,
+pour ensuite déterminer la quantité d'eau nécessaire pour absorber cette chaleur,
+sachant que l'eau entre à $25 \si{\degreeCelsius}$ et 
+est évacuée à $90 \si{\degreeCelsius}$. 
+
+\paragraph{In}
+
+La chaleur dégagée par la réaction \ref{eq:ammoniac} correspond à la 
+différence entre l'enthalpie de formation des produits et celle des réactifs. 
+
+\begin{equation}
+	\Delta H_{reaction} = \Delta H_{f, \ce{NH3}, 773K} 
+	- \frac{1}{2} \Delta H_{f, \ce{N2}, 773K}
+	- \frac{3}{2} \Delta H_{f, \ce{H2}, 773K}
+	\label{eq:enthalpie_reaction}
+\end{equation}
+
+La réaction se passe à $500 \si{\degreeCelsius}$, 
+on détermine donc les $\Delta H_{f}$ des différents 
+composés à partir des valeurs des enthalpies standard
+de formation\footnote{Atkins \& Jones - Chemical Principles}
+(à $25 \si{\degreeCelsius}$)
+et des capacités calorifiques molaires ($C_p$), gr\^ace 
+à l'équation suivante.
+
+\begin{equation}
+	\Delta H_{f, T2} = \Delta H_{f, T1} + \int_{T1}^{T2} C_p \, \mathrm{d}T
+	\label{eq:enthalpie_temp}
+\end{equation}
+
+Étant donné que nous travaillons avec des quantités importantes de matière,
+nous ne pouvons pas considérer que $C_p$ est constant.
+On sait que $C_p$ varie en fonction de la température 
+selon une fonction $a + b T + c T^2$, 
+où $a$, $b$ et $c$ sont des constantes
+\footnote{\url{http://www.edu.upmc.fr/
+chimie/lc101-202-301/communs/public/capcalo.htm}}. 
+
+Nous pouvons à présent calculer les enthalpies 
+de formation à $500 \si{\degreeCelsius}$
+
+\begin{equation}
+	\Delta H_f = \Delta H_{f}^{\si{\degree}} + 
+	\int_{298}^{773} (a + b T + c T^2) \, \mathrm{d}T
+\end{equation}
+
+
+\paragraph{Out}
+
 
 \end{document}
 
