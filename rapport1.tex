@@ -30,8 +30,10 @@ il faut donc en produire $5.88 \cdot 10^7 \si{\mole}.$
 On obtient les nombres de moles de réactifs à partir de la réaction pondérée. 
 
 \begin{align*}
-	m_{\ce{H2}}  =\frac{3}{2} \, n_{\ce{NH3}} * M_{m, \ce{H2}} = 1.765 \cdot 10^8  \si{\gram} \\
-	m_{\ce{N2}} = \frac{1}{2} \, n_{\ce{NH3}} * M_{m, \ce{N2}} = 8.235 \cdot 10^8 \si{\gram}
+	m_{\ce{H2}}  = \frac{3}{2} \, n_{\ce{NH3}} * M_{m, \ce{H2}} 
+	= 1.765 \cdot 10^8  \si{\gram} \\
+	m_{\ce{N2}} = \frac{1}{2} \, n_{\ce{NH3}} * M_{m, \ce{N2}} 
+	= 8.235 \cdot 10^8 \si{\gram}
 \end{align*}
 
 Les masses de \ce{H2} et de \ce{N2} valent donc 
@@ -42,7 +44,8 @@ on retrouve la même masse produite.
 
 \section{Débit d'eau nécessaire}
 
-Afin de maintenir les réacteurs à température constante, on refroidit ceux-ci avec de l'eau.
+Afin de maintenir les réacteurs à température constante, 
+on refroidit ceux-ci avec de l'eau.
 Il faut tout d'abord calculer la chaleur dégagée par jour par les réacteurs,
 pour ensuite déterminer la quantité d'eau nécessaire pour absorber cette chaleur,
 sachant que l'eau entre à $25 \si{\degreeCelsius}$ et 
@@ -54,9 +57,9 @@ La chaleur dégagée par la réaction \ref{eq:ammoniac} correspond à la
 différence entre l'enthalpie de formation des produits et celle des réactifs. 
 
 \begin{equation}
-	\Delta H_{reaction} = \Delta H_{f, \ce{NH3}, 773K} 
-	- \frac{1}{2} \Delta H_{f, \ce{N2}, 773K}
-	- \frac{3}{2} \Delta H_{f, \ce{H2}, 773K}
+	\Delta H_{reaction} = \Delta H_{f, \ce{NH3}} 
+	- \frac{1}{2} \Delta H_{f, \ce{N2}}
+	- \frac{3}{2} \Delta H_{f, \ce{H2}}
 	\label{eq:enthalpie_reaction}
 \end{equation}
 
@@ -69,7 +72,8 @@ et des capacités calorifiques molaires ($C_p$), gr\^ace
 à l'équation suivante.
 
 \begin{equation}
-	\Delta H_{f, T2} = \Delta H_{f, T1} + \int_{T1}^{T2} C_p \, \mathrm{d}T
+	\Delta H_{f, T2} = \Delta H_{f, T1} 
+	+ \int_{T1}^{T2} C_p \, \mathrm{d}T
 	\label{eq:enthalpie_temp}
 \end{equation}
 
@@ -84,13 +88,27 @@ chimie/lc101-202-301/communs/public/capcalo.htm}}.
 Nous pouvons à présent calculer les enthalpies 
 de formation à $500 \si{\degreeCelsius}$
 
-\begin{equation}
+\begin{equation*}
 	\Delta H_f = \Delta H_{f}^{\si{\degree}} + 
 	\int_{298}^{773} (a + b T + c T^2) \, \mathrm{d}T
-\end{equation}
-
+\end{equation*}
 
 \paragraph{Out}
+
+Le raisonnement pour la chaleur absorbée est similaire 
+au précédent.
+La différence d'enthalpie vaut exactement
+
+\[
+	\int_{298}^{363} C_{p, \ce{H2O}} \, \mathrm{d}T
+\]
+
+Il faut que
+
+\[
+	\frac{\Delta H_{out}}{\mathrm{jour}} 
+	= - \frac{\Delta H_{in}}{\mathrm{jour}}
+\]
 
 
 \end{document}
