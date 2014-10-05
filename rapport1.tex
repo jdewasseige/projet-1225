@@ -81,17 +81,32 @@ et des capacités calorifiques molaires ($C_p$), gr\^ace
 nous ne pouvons pas considérer que $C_p$ est constant.
 On sait que $C_p$ varie en fonction de la température 
 selon une fonction $a + b T + c T^2$, 
-où $a$, $b$ et $c$ sont des constantes
-\footnote{\url{http://www.edu.upmc.fr/
+où $a$, $b$ et $c$ sont des constantes\footnote{\url{http://www.edu.upmc.fr/
 chimie/lc101-202-301/communs/public/capcalo.htm}}. 
 
 Nous pouvons à présent calculer les enthalpies 
 de formation à $500 \si{\degreeCelsius}$
 
-\begin{equation*}
+\begin{equation}
 	\Delta H_f = \Delta H_{f}^{\si{\degree}} + 
 	\int_{298}^{773} (a + b T + c T^2) \, \mathrm{d}T
-\end{equation*}
+	\label{eq:enthalpie_500C}
+\end{equation}
+
+À partir de l'équation \ref{eq:enthalpie_500C}, 
+on obtient les valeurs suivantes
+
+\begin{align*}
+	\Delta H_{\ce{H2}} = 14 \, \si{\kilo\joule\per\mole} \\
+	\Delta H_{\ce{N2}} = 14.19 \, \si{\kilo\joule\per\mole} \\
+	\Delta H_{\ce{NH3}} = 19.9 \, \si{\kilo\joule\per\mole} \\
+\end{align*}
+
+Pour finir, on trouve l'enthalpie de réaction par l'équation \ref{eq:enthalpie_reaction}
+
+\[
+	\Delta H_{reaction} = -54.32 \, \si{\kilo\joule\per\mole}
+\]
 
 \paragraph{Out}
 
