@@ -30,9 +30,9 @@ il faut donc en produire $5.88 \cdot 10^7 \si{\mole}.$
 On obtient les nombres de moles de réactifs à partir de la réaction pondérée. 
 
 \begin{align*}
-	m_{\ce{H2}}  = \frac{3}{2} \, n_{\ce{NH3}} * M_{m, \ce{H2}} 
+	m_{\ce{H2}}  = \frac{3}{2} \, n_{\ce{NH3}} \cdot M_{m, \ce{H2}} 
 	= 1.765 \cdot 10^8  \si{\gram} \\
-	m_{\ce{N2}} = \frac{1}{2} \, n_{\ce{NH3}} * M_{m, \ce{N2}} 
+	m_{\ce{N2}} = \frac{1}{2} \, n_{\ce{NH3}} \cdot M_{m, \ce{N2}} 
 	= 8.235 \cdot 10^8 \si{\gram}
 \end{align*}
 
@@ -71,11 +71,10 @@ de formation\footnote{Atkins \& Jones - Chemical Principles}
 et des capacités calorifiques molaires ($C_p$), gr\^ace 
 à l'équation suivante.
 
-\begin{equation}
+\begin{equation*}
 	\Delta H_{f, T2} = \Delta H_{f, T1} 
 	+ \int_{T1}^{T2} C_p \, \mathrm{d}T
-	\label{eq:enthalpie_temp}
-\end{equation}
+\end{equation*}
 
 Étant donné que nous travaillons avec des quantités importantes de matière,
 nous ne pouvons pas considérer que $C_p$ est constant.
@@ -111,20 +110,44 @@ Pour finir, on trouve l'enthalpie de réaction par l'équation \ref{eq:enthalpie
 \paragraph{Out}
 
 Le raisonnement pour la chaleur absorbée est similaire 
-au précédent.
-La différence d'enthalpie vaut exactement
+au précédent, sauf que cette fois ci, 
+on considère que la capacité calorifique est constante.
+Cette hypothèse peut être raisonnablement envisagée 
+étant donné que\footnote{\url{http://kinetics.nist.gov/janaf/html/H-065.html}} 
+$C_{p, 298 \si{\kelvin}} \approx 75.35 \, \si{\joule\per\kelvin\per\mole}$ 
+et $C_{p, 368 \si{\kelvin}} \approx 75.78 \, \si{\joule\per\kelvin\per\mole}$.
+La différence étant très petite, 
+nous prendrons la moyenne de ces deux valeurs. 
 
-\[
-	\int_{298}^{363} C_{p, \ce{H2O}} \, \mathrm{d}T
-\]
+La chaleur absorbée par une mole d'eau vaut exactement
 
+\begin{equation}
+	\Delta H = \int_{298}^{363} C_{p, \ce{H2O}} \, \mathrm{d}T
+	= 75.565 \cdot 65 = 4911.73 \, \si{\joule\per\mole}
+\end{equation}
+
+\paragraph{Débit}
+
+Il s'agit maintenant de déterminer la quantité d'eau nécessaire par jour.
 Il faut que
 
 \[
-	\frac{\Delta H_{out}}{\mathrm{jour}} 
-	= - \frac{\Delta H_{in}}{\mathrm{jour}}
+	\frac{\Delta H_{in}}{\mathrm{jour}} 
+	= - \frac{\Delta H_{out}}{\mathrm{jour}}
 \]
 
+En sachant qu'on produit $1000 \si{\tonne}$ de \ce{NH3} par jour
+(cela équivaut à $5.88 \cdot 10^7 \, \si{\mole}$),
+et à partir des données trouvées ci-dessus, 
+on trouve que
+
+\begin{align*}
+	n_{\ce{H2O}} &= \frac{n_{\ce{NH3}} \, \Delta H_{in}}{\Delta H_{out}} \\
+	&= 6.5 \cdot 10^8 \si{\mole} 
+\end{align*}
+
+Il faut donc $11703 \si{\tonne}$ d'eau par jour, 
+ou encore 136 litres par seconde.
 
 \end{document}
 
