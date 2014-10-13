@@ -1,0 +1,41 @@
+\documentclass[a4paper, oneside, 12pt]{article}
+
+\usepackage{custom}
+
+\title{Rapport 2}
+\author{Groupe 1225}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Calculs énergétiques}
+
+Pour réaliser nos calculs, il est nécessaire de prendre en compte la variation possible de deux facteurs: $m$ la capacité du plant(en tonnes par jour) et $T$ la température à la sortie du réacteur de reformage à la vapeur de méthane. Nous obtiendront donc des formules où ces variables sont des paramètres.\\
+La réaction analysée est la suivante:
+\begin{equation}
+	CH_4+H_2O \rightleftharpoons CO+3H_2
+\end{equation}
+Afin de connaître l'énergie demandée par cette réaction, il nous faut trouver son avancement. Celle-ci n'est en effet pas complète. Pour ce faire, nous devons commencer par obtenir la constante $K_{c}$ de la réaction. Or, elle peut être donnée par la relation:
+
+\begin{equation}
+	ln(K(T))=ln(K(298.15))-\frac{\DeltaH°(T)}{R}(\frac{1}{T}\frac{1}{298.15})
+\end{equation}
+
+L'enthalpie de la réaction à une température est égale à la différence pondérée des enthalpies de formation:
+
+\begin{equation}
+	\Delta_{réac}H°(T)=\Delta_{form,CO}H°(T)+\Delta_{form,H_2}H°(T)-\Delta_{form,CH_4}H°(T)-\Delta_{form,H_2O}H°(T)
+\end{equation}
+
+La différence d'enthalpie de formation d'une molécule entre deux températures est égales à l'intégrale de sa capacité calorifique (à pression fixe) entre ces deux températures. On utilise donc cette formule en partant de la température standard:$\Delta_{form}H°(T)= \Delta_{form}H°(298.15)+\int_298.15^T Cp(T) \, \mathrm dT$ et pouvons remettre notre équation sous la forme suivante:
+
+\begin{equation}
+	\Delta_{réac}H°(T)=\Delta_{réac}H°(298.15)+\sum_i \int_298.15^T Cp_i(T) \, \mathrm dT
+\end{equation}
+
+
+
+\end{document}
+
