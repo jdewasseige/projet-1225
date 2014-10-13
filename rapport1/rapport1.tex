@@ -1,0 +1,153 @@
+\documentclass[a4paper, oneside, 12pt]{article}
+
+\usepackage{../custom}
+
+\title{Rapport 1}
+\author{Groupe 1225}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Bilan de matière}
+
+Nous faisons l'hypothèse que la réaction est parfaite, 
+c'est-à-dire que tous les réactifs sont consommés 
+et que l'on obtient uniquement le produit.
+
+Il faut déterminer la quantité de dihydrogène (\ce{H2}) et d'azote (\ce{N2}) 
+nécéssaire pour produire $1000 \si{\tonne}$ d'ammoniac (\ce{NH3}).
+
+\begin{equation}
+	\ce{\frac{3}{2} \, H2 + \frac{1}{2} \, N2 -> NH3} 
+	\label{eq:ammoniac}
+\end{equation}
+
+La masse molaire de l'ammoniac vaut $17 \si{\gram\per\mole}$,
+il faut donc en produire $5.88\e{7} \si{\mole}.$
+
+On obtient les nombres de moles de réactifs à partir de la réaction pondérée. 
+
+\begin{align*}
+	m_{\ce{H2}}  = \frac{3}{2} \, n_{\ce{NH3}} \cdot M_{m, \ce{H2}} 
+	= 1.765\e{8} \si{\gram} \\
+	m_{\ce{N2}} = \frac{1}{2} \, n_{\ce{NH3}} \cdot M_{m, \ce{N2}} 
+	= 8.235\e{8} \si{\gram}
+\end{align*}
+
+Les masses de \ce{H2} et de \ce{N2} valent donc 
+respectivement $176.5 \si{\tonne}$ et $823.5 \si{\tonne}$.
+Le bilan de masse est correct : si on fait la somme des masses des réactifs,
+on retrouve la même masse produite.
+
+
+\section{Débit d'eau nécessaire}
+
+Afin de maintenir les réacteurs à température constante, 
+on refroidit ceux-ci avec de l'eau.
+Il faut tout d'abord calculer la chaleur dégagée par jour par les réacteurs,
+pour ensuite déterminer la quantité d'eau nécessaire pour absorber cette chaleur,
+sachant que l'eau entre à $25 \si{\degreeCelsius}$ et 
+est évacuée à $90 \si{\degreeCelsius}$. 
+
+\paragraph{In}
+
+La chaleur dégagée par la réaction \ref{eq:ammoniac} correspond à la 
+différence entre l'enthalpie de formation des produits et celle des réactifs. 
+
+\begin{equation}
+	\Delta H_{reaction} = \Delta H_{f, \ce{NH3}} 
+	- \frac{1}{2} \Delta H_{f, \ce{N2}}
+	- \frac{3}{2} \Delta H_{f, \ce{H2}}
+	\label{eq:enthalpie_reaction}
+\end{equation}
+
+La réaction se passe à $500 \si{\degreeCelsius}$, 
+on détermine donc les $\Delta H_{f}$ des différents 
+composés à partir des valeurs des enthalpies standard
+de formation\footnote{Atkins \& Jones - Chemical Principles}
+(à $25 \si{\degreeCelsius}$)
+et des capacités calorifiques molaires ($C_p$), gr\^ace 
+à l'équation suivante.
+
+\begin{equation*}
+	\Delta H_{f, T2} = \Delta H_{f, T1} 
+	+ \int_{T1}^{T2} C_p \, \dif{T}
+\end{equation*}
+
+Étant donné que nous travaillons avec des quantités importantes de matière,
+nous ne pouvons pas considérer que $C_p$ est constant.
+On sait que $C_p$ varie en fonction de la température 
+selon une fonction $a + b T + c T^2$, 
+où $a$, $b$ et $c$ sont des constantes\footnote{\url{http://www.edu.upmc.fr/
+chimie/lc101-202-301/communs/public/capcalo.htm}}. 
+
+Nous pouvons à présent calculer les enthalpies 
+de formation à $500 \si{\degreeCelsius}$
+
+\begin{equation}
+	\Delta H_f = \Delta H_{f}^{\si{\degree}} + 
+	\int_{298}^{773} (a + b T + c T^2) \, \dif{T}
+	\label{eq:enthalpie_500C}
+\end{equation}
+
+À partir de l'équation \ref{eq:enthalpie_500C}, 
+on obtient les valeurs suivantes
+
+\begin{align*}
+	\Delta H_{\ce{H2}} &= 14 \, \si{\kilo\joule\per\mole} \\
+	\Delta H_{\ce{N2}} &= 14.19 \, \si{\kilo\joule\per\mole} \\
+	\Delta H_{\ce{NH3}} &= -26.21 \, \si{\kilo\joule\per\mole} 
+\end{align*}
+
+Pour finir, on trouve l'enthalpie de réaction par l'équation \ref{eq:enthalpie_reaction}
+
+\[
+	\Delta H_{reaction} = -54.31 \, \si{\kilo\joule\per\mole}
+\]
+
+\paragraph{Out}
+
+Le raisonnement pour la chaleur absorbée est similaire 
+au précédent, sauf que cette fois ci, 
+on considère que la capacité calorifique est constante.
+Cette hypothèse peut être raisonnablement envisagée 
+étant donné que\footnote{\url{http://kinetics.nist.gov/janaf/html/H-065.html}} 
+$C_{p, 298 \si{\kelvin}} \approx 75.35 \, \si{\joule\per\kelvin\per\mole}$ 
+et $C_{p, 368 \si{\kelvin}} \approx 75.78 \, \si{\joule\per\kelvin\per\mole}$.
+La différence étant très petite, 
+nous prendrons la moyenne de ces deux valeurs. 
+
+La chaleur absorbée par une mole d'eau vaut exactement
+
+\begin{equation}
+	\Delta H = \int_{298}^{363} C_{p, \ce{H2O}} \, \dif{T}
+	= 75.565 \cdot 65 = 4911.73 \, \si{\joule\per\mole}
+\end{equation}
+
+\paragraph{Débit}
+
+Il s'agit maintenant de déterminer la quantité d'eau nécessaire par jour.
+Il faut que
+
+\[
+	\frac{\Delta H_{in}}{\mathrm{jour}} 
+	= - \frac{\Delta H_{out}}{\mathrm{jour}}
+\]
+
+En sachant qu'on produit $1000 \si{\tonne}$ de \ce{NH3} par jour
+(cela équivaut à $5.88\e{7} \, \si{\mole}$),
+et à partir des données trouvées ci-dessus, 
+on trouve que
+
+\begin{align*}
+	n_{\ce{H2O}} &= \frac{n_{\ce{NH3}} \, \Delta H_{in}}{\Delta H_{out}} \\
+	&= 6.5\e{8} \si{\mole} 
+\end{align*}
+
+Il faut donc $11703 \si{\tonne}$ d'eau par jour, 
+ou encore 136 litres par seconde.
+
+\end{document}
+
