@@ -1,6 +1,7 @@
 \documentclass[a4paper, oneside, 12pt]{article}
 
 \usepackage{../custom}
+\usepackage{float}
 
 \title{Rapport 2}
 \author{Groupe 1225}
@@ -10,6 +11,63 @@
 
 \maketitle
 
+\section{Introduction}
+
+Ce second rapport est une extension et une amélioration du rapport rendu en S2 et a pour but d'étudier plus en détail la production d'ammoniac. Il comprend un flow sheet qui permet de voir les flux de matières en les différentes étapes de la synthèse par le procédé Haber-Bosh. Il comprend aussi un calcul détaillé des aspects énergétiques dans le réformateur primaire. S’y trouve ensuite une explication du fonctionnement de l’outil de calcul réalisé sur MATLAB (ainsi que l'outis de calcul en annexe). Celui-ci permet le calcul des flux entrants et sortants en fonction de la quantité d'ammoniac voulue dans la journée ainsi que de la température dans le réformateur primaire. Il calcul également les aspects énergétiques lors des différentes étapes. 
+Et enfin ce rapport se termine par une analyse de l'effet du changement des variables que sont la température et la quantité d'ammoniac produite sur le bilan de matière.
+
+\section{Flow-sheet}
+
+\begin{tikzpicture}
+[node distance = 7em]
+
+\tikzstyle{decision} = [diamond, draw, fill=blue!20, 
+    text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+    text width=15em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
+    minimum height=2em]
+    
+\node [block] (primaire) {Reformage primaire (T)\\
+\ce{CH4 + H2O <=> CO + 3H2} \\
+\ce{CO + H2O <=> CO2 + H2}};
+\node [cloud, left = 2em of primaire] (H2O) {\ce{H2O}};
+\node [block, right = 2em of primaire] (four) {Four: Combustion \ce{CH4} (rendement 75\%) (\simeq 1300K)\\
+\ce{CH4 + 2O2 -> CO2 + 2H2O}};
+	\node [cloud, below = 2em of four] (O2) {\ce{O2}};
+	\node [cloud, above = 2em of four] (CH4) {\ce{CH4}};
+\node [block, below of=primaire] (secondaire) {Reformage secondaire (\simeq 1200K)\\
+\ce{2CH4 + O2 -> 2CO + 4H2}};
+	\node [cloud, right = 1em of secondaire] (air) {Air (21\% \ce{O2} 78\% \ce{N2} 1\% \ce{Ar})};
+	\node [block, below of=secondaire] (wgs) {Water-Gas-Shift (\simeq 500-700K)\\
+\ce{CO + H2O -> CO2 + H2}};
+\node [block, below of=wgs] (abso) {Absorbtion du \ce{CO2} et compression};
+	\node [decision, right = 2em of abso] (CO22) {\ce{CO2}};
+	\node [decision, left = 2em of abso] (H2O2) {\ce{H2O}};
+	\node [block, below of=abso] (synthese) {Synthèse \ce{NH3} et séparation de l'argon \\
+(Sortie réacteur: 270bar, 750K) \\
+\ce{3H2 + N2 <=> 2NH3}};
+\node [decision, below of=synthese] (NH3) {\ce{NH3}};
+\node [decision, right = 2em of synthese] (argon) {\ce{Ar}};
+
+
+	\path [line] (primaire) -- node[anchor = east] {\ce{H2} \ce{CH4} \ce{CO2} \ce{CO} \ce{H2O}}(secondaire);
+\path [line] (four) -- node[anchor = south] {ENERGIE}(primaire);
+    \path [line,dashed] (CH4) -- (four);
+    \path [line,dashed] (CH4) -| (primaire);
+    \path [line,dashed] (O2) -- (four);
+    \path [line] (secondaire) -- node[anchor = east] {\ce{H2} \ce{N2} \ce{CO2} \ce{CO} \ce{Ar} \ce{H2O}}(wgs);
+    \path [line] (wgs) -- node[anchor = east] {\ce{H2} \ce{H2O} \ce{CO2} \ce{N2} \ce{Ar}}(abso);
+    \path [line] (abso) -- node[anchor = east] {\ce{H2} \ce{N2} \ce{Ar}}(synthese);
+\path [line,dashed] (synthese) -- (NH3);
+\path [line,dashed] (synthese) -- (argon);
+\path [line,dashed] (air) -- (secondaire);
+\path [line,dashed] (H2O) -- (primaire);
+\path [line,dashed] (abso) -- (CO22);
+\path [line,dashed] (abso) -- (H2O2);
+
+\end{tikzpicture}
 
 \section{Calculs énergétiques}
 
@@ -257,7 +315,7 @@ Si l'on concidère notre calcul en un espace de temps d'1 seconde. La simplifica
 \[
 x=\frac{nRT}{AcP}
 \]
-Ou la seule inconnue est les nombre de môles de produit rentrant, c'est a dire de $CH_{4}$ et de $H_{2}O$. Ce que nosu avons pu déterminer grace au programme MATLAB sachant que 1500 T d'ammoniac était demandée à la sortie.\\
+Ou la seule inconnue est les nombre de môles de produit rentrant, c'est a dire de $CH_{4}$ et de $H_{2}O$. Ce que nous avons pu déterminer grace au programme MATLAB sachant que 1500 T d'ammoniac était demandée à la sortie.\\
 \\
 $n_{CH_{4}}= 7,56_{kg} / 0,016_{kg/mole} = 472,18 moles$\\
 $n_{H_{2}O}= 18,94_{kg/s}/ 0,016_{kg/mole} = 1052,22 moles$\\
@@ -271,12 +329,26 @@ x=\frac{(n_{CH_{4}}+n_{H_{2}O})8,314.1080}{\pi(0,05^2).2.(31.10^5)}=281,1
 
 Il faut donc 282 tuyaux pour assurer l'approvionnnement des composés dans le reformateur primaire.
 
-\begin{figure}[htp]
-\includegraphics[scale=0.82]{flow_sheet.pdf}
+\section{Bilan énergétique de la partie réformateur primaire-four}
 
-	%\input{flow.tex}
-	\caption{Flow-sheet}
-\end{figure}
-
+Afin de connaître les quantités de \ce{CH4} et de \ce{O2} à introduire dans le four afin de garder le réformateur primaire à température constante nous devons étudier les réactions ayant lieu dans ce réformateur. Les calculs exposés dans cette section sont fait pour une température dans le réformateur de 1080K et pour une production journalière d'ammoniac de 1500T. Bien sur ces résultats sont facilement transposables à d'autres données grace au code MATLAB. \\
+Tout d'abord nous allons calculer les enthalpies des différentes réactions qui nous intéressent: \\
+\begin{itemize}
+\item{\ce{CH4 + H2O <=> CO + 3H2} \\
+$\Delta H_{reac1} (1080)=\int_{298.15}^{1080} Cp$ $dT = 226,94 kJ/mol$ (endothermique)}
+\item{\ce{CO + H2O <=> CO2 + H2} \\
+En appliquant la même formule on obtient: $\Delta H_{reac2} (1080) = -35,55 kJ/mol$ (exothermique)}
+\item{\ce{CH4 + 2O2 -> CO2 + 2H2O} \\
+En appliquant la même formule on obtient: $\Delta H_{reac3} (1080) = -803,56 kJ/mol$ (exothermique)}
+\end{itemize}
+\\
+Après quelques calculs, on trouve que 478,17 moles de \ce{CH4} sont injectées par seconde dans le réformateur primaire, mais que seules 42.5\% de ces moles y "réagissent vraiment" (le reste va au secondaire).
+Pour la 2ème réaction du réformateur primaire, seules 13,5\% des moles "réagissent vraiment". \\
+De là, on peut calculer le bilan énergétique dans le réformateur primaire: \\
+$\Delta U = (478,17 * 0,425) * (\Delta H_{reac1} (1080) + \Delta H_{reac2} (1080) * 0,135) = 45143,94 kJ/s$ \\
+On sait que $\Delta H_{reac3} (1080) = -803,56 kJ/mol$, on peut en déduire le nombre de moles/s de \ce{CH4} dont on a besoin pour compenser le $\Delta U$ du réformateur primaire. \\
+On obtient: n = 56,18 moles/s.
+On sait que le rendement énergétique du four est de 75\%.
+On aura donc besoin de 74,9 moles/s de \ce{CH4}, soit 1,2kg/s pour approvisionner le four. 
 
 \end{document}
