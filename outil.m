@@ -81,7 +81,7 @@ eq2= K_r2 == (ksi2*(3*ksi1 + ksi2))/((ksi1 - ksi2)*(n_H2O - ksi1 - ksi2))
 %donnee a l'entree du reformage secondaire
 eq3= n_CH4 - ksi1 == (7/442)*m_NH3
 %donnee a la sortie du reformage secondaire
-eq4= 3*ksi1 + ksi2 == (7/221)*m_NH3
+eq4= 3*ksi1 + ksi2 == (9/221)*m_NH3
 
 %resoudre le systeme de 4 equations a 4 inconnues 
 [n_CH4,n_H2O,ksi1,ksi2] = solve(eq1, eq2, eq3, eq4, n_CH4, n_H2O, ksi1, ksi2)
