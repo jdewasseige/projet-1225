@@ -197,33 +197,31 @@ n_\ce{CH4}-\xi_1=\frac{7m_\ce{NH3}}{442}
 3\xi_1+\xi_2=\frac{9m_\ce{NH3}}{221}
 \end{equation}
 
-On obtient donc finalement un système de quatre équations à 4 inconnues - où 2 d'entre elles ne sont autres que les débits d'\ce{H2O} et de \ce{CH4} -, que nous pouvons résoudre sur Matlab pour plus de facilité (voir annexe). Comme prévu, ces quantités dépendent de T et de la masse d'ammoniac voulue à la sortie.
+On obtient donc finalement un système de quatre équations à 4 inconnues - où 2 d'entre elles ne sont autres que les débits 
+d'\ce{H2O} et de \ce{CH4} -, que nous pouvons résoudre sur Matlab pour plus de facilité (voir annexe). 
+Comme prévu, ces quantités dépendent de T et de la masse d'ammoniac voulue à la sortie.
+
 \section{Fonctionnement de l'outil de calcul}
 
-Notre outil de calcul a été réalisé via matlab et prends en considération deux variables : 
-la température du réacteur de reformage primaire et la quantité d'ammoniac 
-que l'on désire produire en 24H. 
-
-A partir de la quantité d'ammoniac que nous désirons 
-produire, l'outil calcule les quantités d'azote, d'hydrogène et d'oxygène 
-nécessaires aux différentes réactions en considérant que
-les réactions respectent les hypothèses données (toutes les réactions sauf 
-le reformage primaire sont complètes et les différents composants sont présents en 
-quantités stoechiométriques). L'oxygène et l'azote étant fournis par l'air,
-l'outil nous donne directement la quantité d'air qui sera
-nécessaire. Nous connaissons également la quantité d'hydrogène produite dans 
-le reformage secondaire de par les hypothèses. 
-Il nous reste donc à déterminer la quantité de méthane nécessaire 
-pour produire le reste de l'hydrogène requis. 
+L'outil de calcul a été réalisé en matlab et prends en considération deux variables : la température du 
+réacteur primaire (en K) et la quantité d'ammoniac (en tonnes) que l'on souhaite produire en 24h. 
 \\
-La réaction se déroulant dans le reformage primaire est incomplète et 
-globalement endothermique (deux réactions se déroulent au même moment).
-Le K de la réaction va donc varier suivant la température du réacteur.
-Nous calculons donc d'abord le K de la réaction afin de 
-connaitre la quantité de méthane nécessaire et la quantité d'hydrogène produite,
-puis nous calculons l'énergie utilisée par la réaction.
-Une fois l'énergie nécessaire connue, nous pouvons déterminer la quantité 
-de méthane qui doit être fournie au four pour que le réacteur reste à température constante.
+
+Nous commençons tout d'abord par calculer les enthalpies (incl. Gibbs) et entropies des réactions du réacteur 
+primaire (vaporeformage). Nous calculons ensuite les constantes d'équilibres pour les deux réactions. 
+Avec les hypothèses posées sur les réactions (toutes sont complètes exceptées celles s'effectuant dans le réacteur primaire),
+et avec la masse désirée de \ce{NH3}, nous calculons les masses nécessaires de \ce{H2}, \ce{N2}. Puisque l'azote est fourni
+par l'air, nous déterminons la masse de \ce{O2} fournie (ainsi que la masse de \ce{Ar}, mais l'argon est un gaz noble et 
+n'intervient pas dans la réaction). 
+
+Avec les hypothèses et la masse de \ce{O2}, nous déterminons la quantité de \ce{CH4} 
+utilisé dans le réacteur secondaire et donc la production de \ce{H2} dans ce réacteur. Nous savons désormais 
+déterminer la quantité de \ce{H2} à produire dans le réacteur primaire, et grâce à la constante d'équilibre déterminée 
+plus tôt, nous pouvons déterminer la quantité de \ce{CH4} nécessaire pour les deux réactions. L'outil nous permet également
+de calculer la quantité minimum de \ce{H2O} à fournir pour que toutes les équations se passent comme prévu. 
+\\
+
+Il est à noter que l'outil nous fourni des valeurs en tonnes par jour.
 
 \section*{Tubes}
 Nous recherchons le nombre de tubes nécaissaire à l'acheminement du méthane et de l'eau dans le reformateur primaire.\\
