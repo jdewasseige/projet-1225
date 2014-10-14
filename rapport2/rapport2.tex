@@ -19,7 +19,7 @@ et $T$ la température à la sortie du
 réacteur de reformage à la vapeur de méthane.
 Nous obtiendrons donc des formules où ces variables sont des paramètres.
 
-La réaction analysée est la suivante:
+La première réaction analysée est la suivante:
 
 \begin{equation*}
 	\ce{CH4 + H2O -> CO + 3H2}
@@ -49,7 +49,7 @@ La différence d'enthalpie de formation d'une molécule entre deux températures
 On utilise donc cette formule en partant de la température standard:$\Delta_{form}H°(T)= \Delta_{form}H°(298.15)+\int_298.15^T Cp(T) \, \mathrm dT$ et pouvons remettre notre équation sous la forme suivante:
 
 \begin{equation}
-	\Delta_{réac}H°(T)=\Delta_{réac}H°(298.15)+\sum_i \int_298.15^T \nu_i Cp_i(T) \, \mathrm dT
+	\Delta_{réac}H°(T)=\Delta_{réac}H°(298.15)+\sum_i \int_{298.15}^T \nu_i Cp_i(T) \, \mathrm dT
 \end{equation}
 
 Nous utilisons alors l'approximation suivante pour les différents $C_P$\footnote{http://www.edu.upmc.fr/
@@ -69,7 +69,7 @@ chacun étant sous la forme $a+bT+cT^2$:
 
 On a alors:
 \begin{equation}
-	\sum_i \int_298.15^T \nu_i Cp_i(T) \, \mathrm dT=\int_298.15^T 71.16-8.326 10^{-2}T+2.427 10^{-5}T^2 \, \mathrm dT
+	\sum_i \int_298.15^T \nu_i Cp_i(T) \, \mathrm dT=\int_{298.15}^T 71.16-8.326 10^{-2}T+2.427 10^{-5}T^2 \, \mathrm dT
 \end{equation}
 Une fois l'expression intégrée, on peut simplifier dans l'équation pour trouver l'enthalpie de réaction en fonction de la température:
 
@@ -80,14 +80,22 @@ Une fois l'expression intégrée, on peut simplifier dans l'équation pour trouv
 Maintenant que l'on dispose de cela, il ne nous faut plus qu'une valeur de K à une certaine température pour l'obtenir comme une fonction de T. Pour trouver cette valeur particulière, on utilise la formule $K(T)=exp(-\frac{\DeltaG°(T)}{RT})$ à la température standard. On trouve facilement $\DeltaG°$ grâce aux valeurs des énergies libres de formation (obtenues dans un livre de référence\footnote{Chimie Physique de Atkins, DE BOECK} dont on fait la différence pondérée. Le résultat est: $K(298.15)=1.2597*10^-25$.\\
 Nous pouvons enfin injecter ces résultats dans notre équation de départ:
 \begin{equation}
-	ln(K(T))=ln(K(298.15))-\frac{\DeltaH°(T)}{R}(\frac{1}{T}\frac{1}{298.15})
+	ln(K(T))=ln(K(298.15))-\frac{\DeltaH°(T)}{R}(\frac{1}{T}-\frac{1}{298.15})
+\end{equation}
+
+Et en simplifiant (attention, le grand nombre de simplification influe sur la précision):
+
+\begin{equation}
+	K(T)=exp(\frac{-22664.245}{T}+10.128+0.0337T+1.5797 10^{-5}T^2+3.263 10^{-9}T^3)
 \end{equation}
 
 \section{Fonctionnement de l'outil de calcul}
 
 Notre outil de calcul a été réalisé via matlab et prends en considération deux variables : 
 la température du réacteur de reformage primaire et la quantité d'ammoniac 
-que l'on désire produire en 24H. A partir de la quantité d'ammoniac que nous désirons 
+que l'on désire produire en 24H. 
+
+A partir de la quantité d'ammoniac que nous désirons 
 produire, l'outil calcule les quantités d'azote, d'hydrogène et d'oxygène 
 nécessaires aux différentes réactions en considérant que
 les réactions respectent les hypothèses données (toutes les réactions sauf 
@@ -98,9 +106,9 @@ nécessaire. Nous connaissons également la quantité d'hydrogène produite dans
 le reformage secondaire de par les hypothèses. 
 Il nous reste donc à déterminer la quantité de méthane nécessaire 
 pour produire le reste de l'hydrogène requis. 
-
+\\
 La réaction se déroulant dans le reformage primaire est incomplète et 
-globalement endothermique (deux réactions se déroulent au meme moment).
+globalement endothermique (deux réactions se déroulent au même moment).
 Le K de la réaction va donc varier suivant la température du réacteur.
 Nous calculons donc d'abord le K de la réaction afin de 
 connaitre la quantité de méthane nécessaire et la quantité d'hydrogène produite,
@@ -109,4 +117,3 @@ Une fois l'énergie nécessaire connue, nous pouvons déterminer la quantité
 de méthane qui doit être fournie au four pour que le réacteur reste à température constante.
 
 \end{document}
-
