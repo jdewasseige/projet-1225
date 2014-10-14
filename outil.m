@@ -72,19 +72,19 @@ p_st = 1e5
 K_r1 = exp(-dG_r1/(R*T))
 K_r2 = exp(-dG_r2/(R*T))
 
-syms eps1 eps2 n_CH4 n_H2O
+syms ksi1 ksi2 n_CH4 n_H2O
 %equilibre des pressions reaction 1 reformage primaire
-eq1= K_r1 == (p_tot^2 *(eps1 - eps2)*(3*eps1 + eps2).^3)...
-              /(p_st^2 *(n_CH4 + n_H2O + 2*eps1)^2 *(n_CH4 - eps1)*(n_H2O - eps1 - eps2))
+eq1= K_r1 == (p_tot^2 *(ksi1 - ksi2)*(3*ksi1 + ksi2).^3)...
+              /(p_st^2 *(n_CH4 + n_H2O + 2*ksi1)^2 *(n_CH4 - ksi1)*(n_H2O - ksi1 - ksi2))
 %equilibre des pressions reaction 2 (WGS) reformage primaire
-eq2= K_r2 == (eps2*(3*eps1 + eps2))/((eps1 - eps2)*(n_H2O - eps1 - eps2))
+eq2= K_r2 == (ksi2*(3*ksi1 + ksi2))/((ksi1 - ksi2)*(n_H2O - ksi1 - ksi2))
 %donnee a l'entree du reformage secondaire
-eq3= n_CH4 - eps1 == (7/442)*m_NH3
+eq3= n_CH4 - ksi1 == (7/442)*m_NH3
 %donnee a la sortie du reformage secondaire
-eq4= 3*eps1 + eps2 == (7/221)*m_NH3
+eq4= 3*ksi1 + ksi2 == (7/221)*m_NH3
 
 %resoudre le systeme de 4 equations a 4 inconnues 
-[n_CH4,n_H2O,eps1,eps2] = solve([eq1 eq2 eq3 eq4])
+[n_CH4,n_H2O,ksi1,ksi2] = solve(eq1, eq2, eq3, eq4, n_CH4, n_H2O, ksi1, ksi2)
 
 
 %out- m_CH4 = masse en tonnes de methane
