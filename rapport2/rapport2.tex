@@ -156,9 +156,28 @@ A présent, intéressons nous à l'avancement des réactions dans le réacteur p
   \ce{CH4} & \ce{H2O} & \ce{CO} & \ce{H2} & n_gaz \\
   \hline
   n_{CH_4} & n_{H_2O} & 0 & 0 & n_{CH_4} + n{H_2O}\\
-  n_{CH_4}-\xi & n_{H_2O}-\xi & \xi & $3 \xi$ & n_{CH_4} + n{H_2O} + $2 \xi$\\
+  n_{CH_4}-\xi & n_{H_2O}-\xi & \xi & $3 \xi$ & n_{CH_4} + n_{H_2O} + $2 \xi$\\
   \hline
 \end{tabular}
+
+Pour la deuxième équation, avec un certain \eta:\\
+	\begin{equation}
+	\ce{CO + H2O <-> CO2 + H2}
+	\end{equation}\\
+\begin{tabular}{|l|c|c|c|r|}
+  \hline
+  \ce{CO} & \ce{H2O} & \ce{CO2} & \ce{H2} & n_gaz \\
+  \hline
+   \xi & n_\ce{H_2O}-\xi & 0 & $3\xi$ & n_{H_2O}+$3\xi$\\
+   \xi-\eta & n_\ce{H_2O}-\xi-\eta & \eta & $3\xi +\eta$ & n_{H_2O}+$3\xi$\\
+  \hline
+\end{tabular}\\
+Grâce à cela, on peut obtenir une expression pour les constantes d'équilibres K_1 et K_2:
+$$K_1=\frac{{p_{tot}}^2}{{p_0}^2} \frac{1}{(n_\ce{CH4}+n_\ce{H2O}+2\xi)^2} \frac{(\xi-\eta)(3\xi+\eta)^{-3}}{(n_\ce{CH4}-\xi)(n_\ce{H2O}-\xi-\eta)}$$
+$$K_2=\frac{\eta (3\xi+\eta}{(\xi-\eta)(n_\ce{H2O}-\xi-\eta)}$$
+
+Ce que l'on peut égaler aux valeurs des constantes trouvées dans la section précédente.
+
 
 
 \section{Fonctionnement de l'outil de calcul}
