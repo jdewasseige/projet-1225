@@ -2,4 +2,4 @@
 
 latexmk -pdf -auxdir=file -outdir=file rapport2 
 shopt -s extglob
-mv file/*.!(pdf) ../file/aux
+mv file/*.!(pdf) file/aux
