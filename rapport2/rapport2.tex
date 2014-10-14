@@ -53,7 +53,7 @@ On utilise donc cette formule en partant de la température standard:$\Delta_{fo
 	\Delta_{réac}H°(T)=\Delta_{réac}H°(298.15)+\sum_i \int_{298.15}^T \nu_i Cp_i(T) \, \mathrm dT
 \end{equation}
 
-Nous utilisons alors l'approximation suivante pour les différents $C_P$\footnote{http://www.edu.upmc.fr/
+Nous utilisons alors l'approxi_{1}mation suivante pour les différents $C_P$\footnote{http://www.edu.upmc.fr/
 chimie/lc101-202-301/communs/public/capcalo.htm}, 
 chacun étant sous la forme $a+bT+cT^2$:
 
@@ -90,7 +90,7 @@ Et en simplifiant (attention, le grand nombre de simplification influe sur la pr
 	K(T)=exp(\frac{-22664.245}{T}+10.128+0.0337T+1.5797 10^{-5}T^2+3.263 10^{-9}T^3)
 \end{equation}
 
-Faisant exactement de la même manière, on peut obtenir la constante K de la deuxième équation. Tous les détails calculatoires sont en annexe sous la forme de code matlab.
+Faisant exactement de la même manière, on peut obtenir la constante K de la deuxi_{1}ème équation. Tous les détails calculatoires sont en annexe sous la forme de code matlab.
 
 \section{Bilan de matière}
 
@@ -147,7 +147,7 @@ Et enfin dans la réaction du Water-Gas-Shift:
 	n_{CO_2}/jour=n_{CO}/jour
 \end{equation}
 
-A présent, intéressons nous à l'avancement des réactions dans le réacteur primaire. Pour la première réaction, à l'équilibre, on a une quantité suivante de réactifs pour un certain \xi:
+A présent, intéressons nous à l'avancement des réactions dans le réacteur primaire. Pour la première réaction, à l'équilibre, on a une quantité suivante de réactifs pour un certain \xi_{1}:
 	\begin{equation}
 	\ce{CH4 + H2O <-> CO + 3H2}
 	\end{equation}
@@ -156,11 +156,11 @@ A présent, intéressons nous à l'avancement des réactions dans le réacteur p
   \ce{CH4} & \ce{H2O} & \ce{CO} & \ce{H2} & n_gaz \\
   \hline
   n_{CH_4} & n_{H_2O} & 0 & 0 & n_{CH_4} + n{H_2O}\\
-  n_{CH_4}-\xi & n_{H_2O}-\xi & \xi & $3 \xi$ & n_{CH_4} + n_{H_2O} + $2 \xi$\\
+  n_{CH_4}-\xi_{1} & n_{H_2O}-\xi_{1} & \xi_{1} & $3 \xi_{1}$ & n_{CH_4} + n_{H_2O} + $2 \xi_{1}$\\
   \hline
 \end{tabular}
 
-Pour la deuxième équation, avec un certain \eta:\\
+Pour la deuxième équation, avec un certain \xi_{2}:\\
 	\begin{equation}
 	\ce{CO + H2O <-> CO2 + H2}
 	\end{equation}\\
@@ -168,13 +168,13 @@ Pour la deuxième équation, avec un certain \eta:\\
   \hline
   \ce{CO} & \ce{H2O} & \ce{CO2} & \ce{H2} & n_gaz \\
   \hline
-   \xi & n_\ce{H_2O}-\xi & 0 & $3\xi$ & n_{H_2O}+$3\xi$\\
-   \xi-\eta & n_\ce{H_2O}-\xi-\eta & \eta & $3\xi +\eta$ & n_{H_2O}+$3\xi$\\
+   \xi_{1} & n_\ce{H_2O}-\xi_{1} & 0 & $3\xi_{1}$ & n_{H_2O}+$3\xi_{1}$\\
+   \xi_{1}-\xi_{2} & n_\ce{H_2O}-\xi_{1}-\xi_{2} & \xi_{2} & $3\xi_{1} +\xi_{2}$ & n_{H_2O}+$3\xi_{1}$\\
   \hline
 \end{tabular}\\
 Grâce à cela, on peut obtenir une expression pour les constantes d'équilibres K_1 et K_2:
-$$K_1=\frac{{p_{tot}}^2}{{p_0}^2} \frac{1}{(n_\ce{CH4}+n_\ce{H2O}+2\xi)^2} \frac{(\xi-\eta)(3\xi+\eta)^{-3}}{(n_\ce{CH4}-\xi)(n_\ce{H2O}-\xi-\eta)}$$
-$$K_2=\frac{\eta (3\xi+\eta}{(\xi-\eta)(n_\ce{H2O}-\xi-\eta)}$$
+$$K_1=\frac{{p_{tot}}^2}{{p_0}^2} \frac{1}{(n_\ce{CH4}+n_\ce{H2O}+2\xi_{1})^2} \frac{(\xi_{1}-\xi_{2})(3\xi_{1}+\xi_{2})^{-3}}{(n_\ce{CH4}-\xi_{1})(n_\ce{H2O}-\xi_{1}-\xi_{2})}$$
+$$K_2=\frac{\xi_{2} (3\xi_{1}+\xi_{2}}{(\xi_{1}-\xi_{2})(n_\ce{H2O}-\xi_{1}-\xi_{2})}$$
 
 Ce que l'on peut égaler aux valeurs des constantes trouvées dans la section précédente.
 
