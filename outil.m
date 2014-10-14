@@ -38,36 +38,27 @@ dS_st_ch4 = 186.251
 dH_st_o2  = 0
 dS_st_o2  = 205.147
 
-%reformage primaire
-dH_co = dH_st_co + integral(@(t) cp_co*[t.^0;t.^1;t.^2], 298, T)
+%reformage primaire + water gas shift 
+dH_co = dH_st_co + integral(@(t) cp_co*[t.^0;t.^1;t.^2], 298, T);
 dS_co = dS_st_co + integral(@(t) cp_co*[t.^-1; t.^0 ; t.^1], 298, T);
 
-dH_h2 = dH_st_h2 + integral(@(t) cp_h2*[t.^0;t.^1;t.^2], 298, T)
+dH_h2 = dH_st_h2 + integral(@(t) cp_h2*[t.^0;t.^1;t.^2], 298, T);
 dS_h2 = dS_st_h2 + integral(@(t) cp_h2*[t.^-1 ; t.^0 ; t.^1], 298, T);
 
-dH_h2o = dH_st_h2o + integral(@(t) cp_h2o_g*[t.^0;t.^1;t.^2], 298, T)
+dH_h2o = dH_st_h2o + integral(@(t) cp_h2o_g*[t.^0;t.^1;t.^2], 298, T);
 dS_h2o = dS_st_h2o + integral(@(t) cp_h2o_g*[t.^-1 ; t.^0 ; t.^1], 298, T);
 
-dH_ch4 = dH_st_ch4 + integral(@(t) cp_ch4*[t.^0;t.^1;t.^2], 298, T)
+dH_ch4 = dH_st_ch4 + integral(@(t) cp_ch4*[t.^0;t.^1;t.^2], 298, T);
 dS_ch4 = dS_st_ch4 + integral(@(t) cp_ch4*[t.^-1 ; t.^0 ; t.^1], 298, T);
 
+dH_co2 = dH_st_co2 + integral(@(t) cp_co2*[t.^0;t.^1;t.^2], 298, T);
+dS_co2 = dS_st_co2 + integral(@(t) cp_co2*[t.^-1; t.^0 ; t.^1], 298, T);
+
+%reaction1
 dH_r1 = dH_co + 3*dH_h2 - dH_h2o - dH_ch4;
 dS_r1 = dS_co + 3*dS_h2 - dS_h2o - dS_ch4;
 dG_r1 = dH_r1 - T*dS_r1
-
-%water gas shift - reformage primaire
-dH_co2 = dH_st_co2 + integral(@(t) cp_co2*[t.^0;t.^1;t.^2], 298, T)
-dS_co2 = dS_st_co2 + integral(@(t) cp_co2*[t.^-1; t.^0 ; t.^1], 298, T);
-
-dH_h2 = dH_st_h2 + integral(@(t) cp_h2*[t.^0;t.^1;t.^2], 298, T)
-dS_h2 = dS_st_h2 + integral(@(t) cp_h2*[t.^-1 ; t.^0 ; t.^1], 298, T);
-
-dH_h2o = dH_st_h2o + integral(@(t) cp_h2o_g*[t.^0;t.^1;t.^2], 298, T)
-dS_h2o = dS_st_h2o + integral(@(t) cp_h2o_g*[t.^-1 ; t.^0 ; t.^1], 298, T);
-
-dH_co = dH_st_co + integral(@(t) cp_co*[t.^0;t.^1;t.^2], 298, T)
-dS_co = dS_st_co + integral(@(t) cp_co*[t.^-1 ; t.^0 ; t.^1], 298, T);
-
+%reaction2
 dH_r2 = dH_co2 + dH_h2 - dH_h2o - dH_co;
 dS_r2 = dS_co2 + dS_h2 - dS_h2o - dS_co;
 dG_r2 = dH_r2 - T*dS_r2
