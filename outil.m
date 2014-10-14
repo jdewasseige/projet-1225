@@ -1,5 +1,5 @@
 function out = outil(T, m_NH3)
-%Outil de gestion du plant de formation d'ammoniac à partir de methane.
+%Outil de gestion du plant de formation d'ammoniac a partir de methane.
 
 %in - T     = temperature reacteur
 %   - m_NH3 = masse en tonnes d'ammoniac
@@ -10,7 +10,7 @@ function out = outil(T, m_NH3)
 %   - m_N2  = masse en tonnes de nitrogen
 %   - m_Ar  = masse en tonnes d'argon
 
-%capacités calorifiques
+%capacites calorifiques
 cp_h2o_l = 75.349
 cp_h2o_g = [30.13 10.46e-3 0]
 cp_n2    = [27.62 4.19e-3 0]
