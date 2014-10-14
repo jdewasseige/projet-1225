@@ -23,7 +23,7 @@ Nous obtiendrons donc des formules où ces variables sont des paramètres.
 La première réaction analysée est la suivante:
 
 \begin{equation*}
-	\ce{CH4 + H2O -> CO + 3H2}
+	\ce{CH4 + H2O <-> CO + 3H2}
 \end{equation*}
 
 Afin de connaître l'énergie demandée par cette réaction,
@@ -146,6 +146,19 @@ Et enfin dans la réaction du Water-Gas-Shift:
 \begin{equation}
 	n_{CO_2}/jour=n_{CO}/jour
 \end{equation}
+
+A présent, intéressons nous à l'avancement des réactions dans le réacteur primaire. Pour la première réaction, à l'équilibre, on a une quantité suivante de réactifs pour un certain \xi:
+	\begin{equation}
+	\ce{CH4 + H2O <-> CO + 3H2}
+	\end{equation}
+\begin{tabular}{|l|c|c|c|r|}
+  \hline
+  \ce{CH4} & \ce{H2O} & \ce{CO} & \ce{H2} & n_gaz \\
+  \hline
+  n_{CH_4} & n_{H_2O} & 0 & 0 & n_{CH_4} + n{H_2O}\\
+  n_{CH_4}-\xi & n_{H_2O}-\xi & \xi & $3 \xi$ & n_{CH_4} + n{H_2O} + $2 \xi$\\
+  \hline
+\end{tabular}
 
 
 \section{Fonctionnement de l'outil de calcul}
