@@ -130,7 +130,7 @@ On trouve ensuite les débits molaires au reformage secondaire:
 \end{equation}
 
 \begin{equation}
-	n_{H_2}/jour <=> \frac{7m}{221}
+	n_{H_2}/jour <=> \frac{9m}{221}
 \end{equation}
 
 Et enfin dans la réaction du Water-Gas-Shift:
@@ -173,13 +173,25 @@ Pour la deuxième équation, avec un certain \eta:\\
   \hline
 \end{tabular}\\
 Grâce à cela, on peut obtenir une expression pour les constantes d'équilibres K_1 et K_2:
-$$K_1=\frac{{p_{tot}}^2}{{p_0}^2} \frac{1}{(n_\ce{CH4}+n_\ce{H2O}+2\xi)^2} \frac{(\xi-\eta)(3\xi+\eta)^{-3}}{(n_\ce{CH4}-\xi)(n_\ce{H2O}-\xi-\eta)}$$
-$$K_2=\frac{\eta (3\xi+\eta}{(\xi-\eta)(n_\ce{H2O}-\xi-\eta)}$$
+\begin{equation}
+K_1=\frac{{p_{tot}}^2}{{p_0}^2} \frac{1}{(n_\ce{CH4}+n_\ce{H2O}+2\xi)^2} \frac{(\xi-\eta)(3\xi+\eta)^{-3}}{(n_\ce{CH4}-\xi)(n_\ce{H2O}-\xi-\eta)}
+\end{equation}
+\begin{equation}
+K_2=\frac{\eta (3\xi+\eta}{(\xi-\eta)(n_\ce{H2O}-\xi-\eta)}
+\end{equation}
 
 Ce que l'on peut égaler aux valeurs des constantes trouvées dans la section précédente.
 
+De plus, nous pouvons égaler ce qui sort du réacteur primaire à ce qui rentre dans le réacteur secondaire (trouvé précédemment):
+\begin{equation}
+n_\ce{CH4}-\xi_1=\frac{7m_\ce{NH3}}{442}
+\end{equation}
 
+\begin{equation}
+3\xi_1+\xi_2=\frac{9m_\ce{NH3}}{221}
+\end{equation}
 
+On obtient donc finalement un système de quatre équations à 4 inconnues - où 2 d'entre elles ne sont autres que les débits d'\ce{H2O} et de \ce{CH4} -, que nous pouvons résoudre sur Matlab pour plus de facilité (voir annexe). Comme prévu, ces quantités dépendent de T et de la masse d'ammoniac voulue à la sortie.
 \section{Fonctionnement de l'outil de calcul}
 
 Notre outil de calcul a été réalisé via matlab et prends en considération deux variables : 
