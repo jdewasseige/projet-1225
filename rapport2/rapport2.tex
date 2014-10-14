@@ -225,4 +225,36 @@ puis nous calculons l'énergie utilisée par la réaction.
 Une fois l'énergie nécessaire connue, nous pouvons déterminer la quantité 
 de méthane qui doit être fournie au four pour que le réacteur reste à température constante.
 
+\section*{Tubes}
+Nous recherchons le nombre de tubes nécaissaire à l'acheminement du méthane et de l'eau dans le reformateur primaire.\\
+\\
+Soit $x$ le nombre de tubes, nous avons l'équation suivante :
+\[
+V'_{(m^3/s)} = A_{(m^2)}. c'_{(m/s)} .x
+\]
+Avec $V'$ le débit; $A$ la section d'un tuyau et $c'$ la vitesse superficielle à l'entrée du réacteur.\\
+\\
+Le volume peut être calculé grace à la loi des gaz parfaits;
+\[
+V=\frac{nRT}{P}
+\]
+
+Si l'on concidère notre calcul en un espace de temps d'1 seconde. La simplification des deux formules ci-dessus nous amène à
+\[
+x=\frac{nRT}{AcP}
+\]
+Ou la seule inconnue est les nombre de môles de produit rentrant, c'est a dire de $CH_{4}$ et de $H_{2}O$. Ce que nosu avons pu déterminer grace au programme MATLAB sachant que 1500 T d'ammoniac était demandée à la sortie.\\
+\\
+$n_{CH_{4}}= 7,56_{kg} / 0,016_{kg/mole} = 472,18 moles$\\
+$n_{H_{2}O}= 18,94_{kg/s}/ 0,016_{kg/mole} = 1052,22 moles$\\
+
+Grâce aux autres valeurs données dans l'énoncé nous pouvons calculer le nombre de tubes nécessaire 
+
+
+\[
+x=\frac{(n_{CH_{4}}+n_{H_{2}O})8,314.1080}{\pi(0,05^2).2.(31.10^5)}=281,1
+\]
+
+Il faut donc 282 tuyaux pour assurer l'approvionnnement des composés dans le reformateur primaire.
+
 \end{document}
