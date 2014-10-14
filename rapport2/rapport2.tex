@@ -299,7 +299,7 @@ de calculer la quantité minimum de \ce{H2O} à fournir pour que toutes les équ
 Il est à noter que l'outil nous fourni des valeurs en tonnes par jour.
 
 \section*{Tubes}
-Nous recherchons le nombre de tubes nécaissaire à l'acheminement du méthane et de l'eau dans le reformateur primaire.\\
+Nous recherchons le nombre de tubes nécessaire à l'acheminement du méthane et de l'eau dans le reformateur primaire.\\
 \\
 Soit $x$ le nombre de tubes, nous avons l'équation suivante :
 \[
@@ -316,7 +316,7 @@ Si l'on concidère notre calcul en un espace de temps d'1 seconde. La simplifica
 \[
 x=\frac{nRT}{AcP}
 \]
-Ou la seule inconnue est les nombre de môles de produit rentrant, c'est a dire de $CH_{4}$ et de $H_{2}O$. Ce que nosu avons pu déterminer grace au programme MATLAB sachant que 1500 T d'ammoniac était demandée à la sortie.\\
+Ou la seule inconnue est les nombre de môles de produit rentrant, c'est a dire de $CH_{4}$ et de $H_{2}O$. Ce que nous avons pu déterminer grace au programme MATLAB sachant que 1500 T d'ammoniac était demandée à la sortie.\\
 \\
 $n_{CH_{4}}= 7,56_{kg} / 0,016_{kg/mole} = 472,18 moles$\\
 $n_{H_{2}O}= 18,94_{kg/s}/ 0,016_{kg/mole} = 1052,22 moles$\\
@@ -339,7 +339,7 @@ Il faut donc 282 tuyaux pour assurer l'approvionnnement des composés dans le re
 \section{Bilan énergétique de la partie réformateur primaire-four}
 
 Afin de connaître les quantités de \ce{CH4} et de \ce{O2} à introduire dans le four afin de garder le réformateur primaire à température constante nous devons étudier les réactions ayant lieu dans ce réformateur. Les calculs exposés dans cette section sont fait pour une température dans le réformateur de 1080K et pour une production journalière d'ammoniac de 1500T. Bien sur ces résultats sont facilement transposables à d'autres données grace au code MATLAB. \\
-Tout d'abord nous allons calculer les enthalpies des différentes réactions qui nous intéresse: \\
+Tout d'abord nous allons calculer les enthalpies des différentes réactions qui nous intéressent: \\
 \begin{itemize}
 \item{\ce{CH4 + H2O <=> CO + 3H2} \\
 $\Delta H_{reac1} (1080)=\int_{298.15}^{1080} Cp$ $dT = 226,94 kJ/mol$ (endothermique)}
