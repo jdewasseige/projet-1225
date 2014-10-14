@@ -105,17 +105,47 @@ Disposant de cette donnée, on trouve directement le nombre de moles qui y corre
 Puisque $N_2$ provient de l'apport d'air et que nous connaissons la composition molaire de ce dernier (78% d'$N_2$, 21% d'$O_2$ et 1% d'$Ar$), on trouve aisément les débit d'air, d'$O_2$ et d'Ar correspondant:
 
 \begin{equation}
-	n_{air}/jour=\frac{1}{0.78} n_{N_2}/jour=\frac{25 m}{663}
+	n_{air}/jour=\frac{1}{0.78} n_{N_2}/jour <=> \frac{25 m}{663}
 \end{equation}
 
 \begin{equation}
-	n_{O_2}/jour=0.21 n_{air}/jour=\frac{7 m}{884}
+	n_{O_2}/jour=0.21 n_{air}/jour <=> \frac{7 m}{884}
 \end{equation}
 
 \begin{equation}
-	n_{Ar}/jour=0.01 n_{air}/jour=\frac{m}{2652}
+	n_{Ar}/jour=0.01 n_{air}/jour <=> \frac{m}{2652}
 \end{equation}
 
+On trouve ensuite les débits molaires au reformage secondaire:
+\begin{equation*}
+	\ce{2CH4 + O2 -> 2CO + 4H2}
+\end{equation*}
+
+\begin{equation}
+	n_{CH4}/jour=2 n_{N_2}/jour <=> \frac{7 m}{442}
+\end{equation}
+
+\begin{equation}
+	n_{CO}/jour=n_{CH_4}/jour
+\end{equation}
+
+\begin{equation}
+	n_{H_2}/jour <=> \frac{7m}{221}
+\end{equation}
+
+Et enfin dans la réaction du Water-Gas-Shift:
+
+\begin{equation*}
+	\ce{CO + H2O -> CO2 + H2}
+\end{equation*}
+
+\begin{equation}
+	n_{CO}/jour=n_{{CH_4}_{secondaire}}+n_{{CH_4}_{primaire}}
+\end{equation}
+
+\begin{equation}
+	n_{CO_2}/jour=n_{CO}/jour
+\end{equation}
 
 
 \section{Fonctionnement de l'outil de calcul}
