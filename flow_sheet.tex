@@ -38,12 +38,20 @@
 \node [decision, right = 2em of synthese] (argon) {\ce{Ar}};
 
 
+<<<<<<< HEAD
 	\path [line] (primaire) -- node[anchor = east] {\ce{H2} \ce{CH4} \ce{CO2} \ce{CO} \ce{H2O}}(secondaire);
+=======
+\path [line] (primaire) -- node[anchor = east] {\ce{H2} \ce{H2O} \ce{CH4} \ce{CO2} \ce{CO}}(secondaire);
+>>>>>>> fccf62e470415239687043a1c0418030247e4731
 \path [line] (four) -- node[anchor = south] {ENERGIE}(primaire);
     \path [line,dashed] (CH4) -- (four);
     \path [line,dashed] (CH4) -| (primaire);
     \path [line,dashed] (O2) -- (four);
+<<<<<<< HEAD
     \path [line] (secondaire) -- node[anchor = east] {\ce{H2} \ce{N2} \ce{CO2} \ce{CO} \ce{Ar} \ce{H2O}}(wgs);
+=======
+    \path [line] (secondaire) -- node[anchor = east] {\ce{H2} \ce{H2O} \ce{N2} \ce{CO2} \ce{CO} \ce{Ar}}(wgs);
+>>>>>>> fccf62e470415239687043a1c0418030247e4731
     \path [line] (wgs) -- node[anchor = east] {\ce{H2} \ce{H2O} \ce{CO2} \ce{N2} \ce{Ar}}(abso);
     \path [line] (abso) -- node[anchor = east] {\ce{H2} \ce{N2} \ce{Ar}}(synthese);
 \path [line,dashed] (synthese) -- (NH3);
