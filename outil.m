@@ -1,5 +1,5 @@
 function out = outil(T, m_NH3)
-%Outil de gestion du plant de formation d'ammoniac à partir de methane.
+%Outil de gestion du plant de formation d'ammoniac a partir de methane.
 
 %in - T     = temperature reacteur
 %   - m_NH3 = masse en tonnes d'ammoniac
@@ -10,7 +10,7 @@ function out = outil(T, m_NH3)
 %   - m_N2  = masse en tonnes de nitrogen
 %   - m_Ar  = masse en tonnes d'argon
 
-%capacités calorifiques
+%capacites calorifiques
 cp_h2o_l = 75.349
 cp_h2o_g = [30.13 10.46e-3 0]
 cp_n2    = [27.62 4.19e-3 0]
@@ -38,36 +38,27 @@ dS_st_ch4 = 186.251
 dH_st_o2  = 0
 dS_st_o2  = 205.147
 
-%reformage primaire
-dH_co = dH_st_co + integral(@(t) cp_co*[t.^0;t.^1;t.^2], 298, T)
+%reformage primaire + water gas shift 
+dH_co = dH_st_co + integral(@(t) cp_co*[t.^0;t.^1;t.^2], 298, T);
 dS_co = dS_st_co + integral(@(t) cp_co*[t.^-1; t.^0 ; t.^1], 298, T);
 
-dH_h2 = dH_st_h2 + integral(@(t) cp_h2*[t.^0;t.^1;t.^2], 298, T)
+dH_h2 = dH_st_h2 + integral(@(t) cp_h2*[t.^0;t.^1;t.^2], 298, T);
 dS_h2 = dS_st_h2 + integral(@(t) cp_h2*[t.^-1 ; t.^0 ; t.^1], 298, T);
 
-dH_h2o = dH_st_h2o + integral(@(t) cp_h2o_g*[t.^0;t.^1;t.^2], 298, T)
+dH_h2o = dH_st_h2o + integral(@(t) cp_h2o_g*[t.^0;t.^1;t.^2], 298, T);
 dS_h2o = dS_st_h2o + integral(@(t) cp_h2o_g*[t.^-1 ; t.^0 ; t.^1], 298, T);
 
-dH_ch4 = dH_st_ch4 + integral(@(t) cp_ch4*[t.^0;t.^1;t.^2], 298, T)
+dH_ch4 = dH_st_ch4 + integral(@(t) cp_ch4*[t.^0;t.^1;t.^2], 298, T);
 dS_ch4 = dS_st_ch4 + integral(@(t) cp_ch4*[t.^-1 ; t.^0 ; t.^1], 298, T);
 
+dH_co2 = dH_st_co2 + integral(@(t) cp_co2*[t.^0;t.^1;t.^2], 298, T);
+dS_co2 = dS_st_co2 + integral(@(t) cp_co2*[t.^-1; t.^0 ; t.^1], 298, T);
+
+%reaction1
 dH_r1 = dH_co + 3*dH_h2 - dH_h2o - dH_ch4;
 dS_r1 = dS_co + 3*dS_h2 - dS_h2o - dS_ch4;
 dG_r1 = dH_r1 - T*dS_r1
-
-%water gas shift - reformage primaire
-dH_co2 = dH_st_co2 + integral(@(t) cp_co2*[t.^0;t.^1;t.^2], 298, T)
-dS_co2 = dS_st_co2 + integral(@(t) cp_co2*[t.^-1; t.^0 ; t.^1], 298, T);
-
-dH_h2 = dH_st_h2 + integral(@(t) cp_h2*[t.^0;t.^1;t.^2], 298, T)
-dS_h2 = dS_st_h2 + integral(@(t) cp_h2*[t.^-1 ; t.^0 ; t.^1], 298, T);
-
-dH_h2o = dH_st_h2o + integral(@(t) cp_h2o_g*[t.^0;t.^1;t.^2], 298, T)
-dS_h2o = dS_st_h2o + integral(@(t) cp_h2o_g*[t.^-1 ; t.^0 ; t.^1], 298, T);
-
-dH_co = dH_st_co + integral(@(t) cp_co*[t.^0;t.^1;t.^2], 298, T)
-dS_co = dS_st_co + integral(@(t) cp_co*[t.^-1 ; t.^0 ; t.^1], 298, T);
-
+%reaction2
 dH_r2 = dH_co2 + dH_h2 - dH_h2o - dH_co;
 dS_r2 = dS_co2 + dS_h2 - dS_h2o - dS_co;
 dG_r2 = dH_r2 - T*dS_r2
@@ -81,19 +72,19 @@ p_st = 1e5
 K_r1 = exp(-dG_r1/(R*T))
 K_r2 = exp(-dG_r2/(R*T))
 
-syms eps1 eps2 n_CH4 n_H2O
+syms ksi1 ksi2 n_CH4 n_H2O positive
 %equilibre des pressions reaction 1 reformage primaire
-eq1= K_r1 == (p_tot^2 *(eps1 - eps2)*(3*eps1 + eps2).^3)...
-              /(p_st^2 *(n_CH4 + n_H2O + 2*eps1)^2 *(n_CH4 - eps1)*(n_H2O - eps1 - eps2))
+eq1= K_r1 == (p_tot^2 *(ksi1 - ksi2)*(3*ksi1 + ksi2)^3)...
+    /(p_st^2 *(n_CH4 + n_H2O + 2*ksi1)^2 *(n_CH4 - ksi1)*(n_H2O - ksi1 - ksi2))
 %equilibre des pressions reaction 2 (WGS) reformage primaire
-eq2= K_r2 == (eps2*(3*eps1 + eps2))/((eps1 - eps2)*(n_H2O - eps1 - eps2))
+eq2= K_r2 == (ksi2*(3*ksi1 + ksi2))/((ksi1 - ksi2)*(n_H2O - ksi1 - ksi2))
 %donnee a l'entree du reformage secondaire
-eq3= n_CH4 - eps1 == (7/442)*m_NH3
+eq3= n_CH4 - ksi1 == (7/442)*m_NH3
 %donnee a la sortie du reformage secondaire
-eq4= 3*eps1 + eps2 == (7/221)*m_NH3
+eq4= 3*ksi1 + ksi2 == (9/221)*m_NH3
 
 %resoudre le systeme de 4 equations a 4 inconnues 
-[n_CH4,n_H2O,eps1,eps2] = solve([eq1 eq2 eq3 eq4])
+[n_CH4,n_H2O,ksi1,ksi2] = solve(eq1, eq2, eq3, eq4, n_CH4, n_H2O, ksi1, ksi2)
 
 
 %out- m_CH4 = masse en tonnes de methane

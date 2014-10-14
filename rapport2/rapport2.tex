@@ -11,12 +11,15 @@
 
 \maketitle
 
+<<<<<<< HEAD
 \section{Introduction}
 
 Ce second rapport est une extension et une amélioration du rapport rendu en S2 et a pour but d'étudier plus en détail la production d'ammoniac. Il comprend un flow sheet qui permet de voir les flux de matières en les différentes étapes de la synthèse par le procédé Haber-Bosh. Il comprend aussi un calcul détaillé des aspects énergétiques dans le réformateur primaire. S’y trouve ensuite une explication du fonctionnement de l’outil de calcul réalisé sur MATLAB (ainsi que l'outis de calcul en annexe). Celui-ci permet le calcul des flux entrants et sortants en fonction de la quantité d'ammoniac voulue dans la journée ainsi que de la température dans le réformateur primaire. Il calcul également les aspects énergétiques lors des différentes étapes. 
 Et enfin ce rapport se termine par une analyse de l'effet du changement des variables que sont la température et la quantité d'ammoniac produite sur le bilan de matière.
 
 \section{Flow-sheet}
+=======
+>>>>>>> 5681e5b41a9a4456fc8295d7d8ce202afa505a47
 
 \section{Calculs énergétiques}
 
@@ -30,7 +33,7 @@ Nous obtiendrons donc des formules où ces variables sont des paramètres.
 La première réaction analysée est la suivante:
 
 \begin{equation*}
-	\ce{CH4 + H2O -> CO + 3H2}
+	\ce{CH4 + H2O <-> CO + 3H2}
 \end{equation*}
 
 Afin de connaître l'énergie demandée par cette réaction,
@@ -60,7 +63,7 @@ On utilise donc cette formule en partant de la température standard:$\Delta_{fo
 	\Delta_{réac}H°(T)=\Delta_{réac}H°(298.15)+\sum_i \int_{298.15}^T \nu_i Cp_i(T) \, \mathrm dT
 \end{equation}
 
-Nous utilisons alors l'approximation suivante pour les différents $C_P$\footnote{http://www.edu.upmc.fr/
+Nous utilisons alors l'approxi_{1}mation suivante pour les différents $C_P$\footnote{http://www.edu.upmc.fr/
 chimie/lc101-202-301/communs/public/capcalo.htm}, 
 chacun étant sous la forme $a+bT+cT^2$:
 
@@ -91,12 +94,120 @@ Nous pouvons enfin injecter ces résultats dans notre équation de départ:
 	ln(K(T))=ln(K(298.15))-\frac{\DeltaH°(T)}{R}(\frac{1}{T}-\frac{1}{298.15})
 \end{equation}
 
-Et en simplifiant (attention, le grand nombre de simplification influe sur la précision):
+Et en simplifiant (attention, le grand nombre de simplification influe sur la précision!):
 
 \begin{equation}
 	K(T)=exp(\frac{-22664.245}{T}+10.128+0.0337T+1.5797 10^{-5}T^2+3.263 10^{-9}T^3)
 \end{equation}
 
+Faisant exactement de la même manière, on peut obtenir la constante K de la deuxi_{1}ème équation. Tous les détails calculatoires sont en annexe sous la forme de code matlab.
+
+\section{Bilan de matière}
+
+Nous cherchons le débit des différents réactifs qu'il faut introduire en fonction de celui de $NH_3$, variable, que l'on note $m$[tonnes/jour].
+
+Disposant de cette donnée, on trouve directement le nombre de moles qui y correspond ainsi que celles de $H_2$ ($\frac{3m}{34}$) et de $N-2$ ($\frac{m}{34}$) nécessaires  pour cette quantité dans la réaction finale:
+
+\begin{equation*}
+	\ce{3H2 + N2 -> 2NH3}
+\end{equation*}
+
+Puisque $N_2$ provient de l'apport d'air et que nous connaissons la composition molaire 
+de ce dernier (78\% d'\ce{N2}, 21\% d'\ce{O2} et 1\% d'\ce{Ar}), 
+on trouve aisément les débit d'air, d'$O_2$ et d'Ar correspondant:
+
+\begin{equation}
+	n_{air}/jour=\frac{1}{0.78} n_{N_2}/jour <=> \frac{25 m}{663}
+\end{equation}
+
+\begin{equation}
+	n_{O_2}/jour=0.21 n_{air}/jour <=> \frac{7 m}{884}
+\end{equation}
+
+\begin{equation}
+	n_{Ar}/jour=0.01 n_{air}/jour <=> \frac{m}{2652}
+\end{equation}
+
+On trouve ensuite les débits molaires au reformage secondaire:
+\begin{equation*}
+	\ce{2CH4 + O2 -> 2CO + 4H2}
+\end{equation*}
+
+\begin{equation}
+	n_{CH4}/jour=2 n_{N_2}/jour <=> \frac{7 m}{442}
+\end{equation}
+
+\begin{equation}
+	n_{CO}/jour=n_{CH_4}/jour
+\end{equation}
+
+\begin{equation}
+	n_{H_2}/jour <=> \frac{9m}{221}
+\end{equation}
+
+Et enfin dans la réaction du Water-Gas-Shift:
+
+\begin{equation*}
+	\ce{CO + H2O -> CO2 + H2}
+\end{equation*}
+
+\begin{equation}
+	n_{CO}/jour=n_{{CH_4}_{secondaire}}+n_{{CH_4}_{primaire}}
+\end{equation}
+
+\begin{equation}
+	n_{CO_2}/jour=n_{CO}/jour
+\end{equation}
+
+A présent, intéressons nous à l'avancement des réactions dans le réacteur primaire. Pour la première réaction, à l'équilibre, on a une quantité suivante de réactifs pour un certain \xi_{1}:
+	\begin{equation}
+	\ce{CH4 + H2O <-> CO + 3H2}
+	\end{equation}
+\begin{tabular}{|l|c|c|c|r|}
+  \hline
+  \ce{CH4} & \ce{H2O} & \ce{CO} & \ce{H2} & n_gaz \\
+  \hline
+  n_{CH_4} & n_{H_2O} & 0 & 0 & n_{CH_4} + n{H_2O}\\
+  n_{CH_4}-\xi_{1} & n_{H_2O}-\xi_{1} & \xi_{1} & $3 \xi_{1}$ & n_{CH_4} + n_{H_2O} + $2 \xi_{1}$\\
+  \hline
+\end{tabular}
+
+Pour la deuxième équation, avec un certain \xi_{2}:\\
+	\begin{equation}
+	\ce{CO + H2O <-> CO2 + H2}
+	\end{equation}\\
+\begin{tabular}{|l|c|c|c|r|}
+  \hline
+  \ce{CO} & \ce{H2O} & \ce{CO2} & \ce{H2} & n_gaz \\
+  \hline
+   \xi_{1} & n_\ce{H_2O}-\xi_{1} & 0 & $3\xi_{1}$ & n_{H_2O}+$3\xi_{1}$\\
+   \xi_{1}-\xi_{2} & n_\ce{H_2O}-\xi_{1}-\xi_{2} & \xi_{2} & $3\xi_{1} +\xi_{2}$ & n_{H_2O}+$3\xi_{1}$\\
+  \hline
+\end{tabular}\\
+Grâce à cela, on peut obtenir une expression pour les constantes d'équilibres K_1 et K_2:
+<<<<<<< HEAD
+$$K_1=\frac{{p_{tot}}^2}{{p_0}^2} \frac{1}{(n_\ce{CH4}+n_\ce{H2O}+2\xi_{1})^2} \frac{(\xi_{1}-\xi_{2})(3\xi_{1}+\xi_{2})^{-3}}{(n_\ce{CH4}-\xi_{1})(n_\ce{H2O}-\xi_{1}-\xi_{2})}$$
+$$K_2=\frac{\xi_{2} (3\xi_{1}+\xi_{2}}{(\xi_{1}-\xi_{2})(n_\ce{H2O}-\xi_{1}-\xi_{2})}$$
+=======
+\begin{equation}
+K_1=\frac{{p_{tot}}^2}{{p_0}^2} \frac{1}{(n_\ce{CH4}+n_\ce{H2O}+2\xi)^2} \frac{(\xi-\eta)(3\xi+\eta)^{-3}}{(n_\ce{CH4}-\xi)(n_\ce{H2O}-\xi-\eta)}
+\end{equation}
+\begin{equation}
+K_2=\frac{\eta (3\xi+\eta}{(\xi-\eta)(n_\ce{H2O}-\xi-\eta)}
+\end{equation}
+
+Ce que l'on peut égaler aux valeurs des constantes trouvées dans la section précédente.
+
+De plus, nous pouvons égaler ce qui sort du réacteur primaire à ce qui rentre dans le réacteur secondaire (trouvé précédemment):
+\begin{equation}
+n_\ce{CH4}-\xi_1=\frac{7m_\ce{NH3}}{442}
+\end{equation}
+
+\begin{equation}
+3\xi_1+\xi_2=\frac{9m_\ce{NH3}}{221}
+\end{equation}
+
+On obtient donc finalement un système de quatre équations à 4 inconnues - où 2 d'entre elles ne sont autres que les débits d'\ce{H2O} et de \ce{CH4} -, que nous pouvons résoudre sur Matlab pour plus de facilité (voir annexe). Comme prévu, ces quantités dépendent de T et de la masse d'ammoniac voulue à la sortie.
 \section{Fonctionnement de l'outil de calcul}
 
 Notre outil de calcul a été réalisé via matlab et prends en considération deux variables : 
