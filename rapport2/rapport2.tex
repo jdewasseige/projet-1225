@@ -165,6 +165,7 @@ A présent, intéressons nous à l'avancement des réactions dans le réacteur p
 	\begin{equation}
 	\ce{CH4 + H2O <-> CO + 3H2}
 	\end{equation}
+	\\
 \begin{tabular}{|l|c|c|c|r|}
   \hline
   \ce{CH4} & \ce{H2O} & \ce{CO} & \ce{H2} & n_gaz \\
@@ -173,11 +174,12 @@ A présent, intéressons nous à l'avancement des réactions dans le réacteur p
   n_{CH_4}-\xi_{1} & n_{H_2O}-\xi_{1} & \xi_{1} & $3 \xi_{1}$ & n_{CH_4} + n_{H_2O} + $2 \xi_{1}$\\
   \hline
 \end{tabular}
-
+\\
 Pour la deuxième équation, avec un certain \xi_{2}:\\
 	\begin{equation}
 	\ce{CO + H2O <-> CO2 + H2}
-	\end{equation}\\
+	\end{equation}
+	\\
 \begin{tabular}{|l|c|c|c|r|}
   \hline
   \ce{CO} & \ce{H2O} & \ce{CO2} & \ce{H2} & n_gaz \\
@@ -185,12 +187,13 @@ Pour la deuxième équation, avec un certain \xi_{2}:\\
    \xi_{1} & n_\ce{H_2O}-\xi_{1} & 0 & $3\xi_{1}$ & n_{H_2O}+$3\xi_{1}$\\
    \xi_{1}-\xi_{2} & n_\ce{H_2O}-\xi_{1}-\xi_{2} & \xi_{2} & $3\xi_{1} +\xi_{2}$ & n_{H_2O}+$3\xi_{1}$\\
   \hline
-\end{tabular}\\
+\end{tabular}
+\\
 Grâce à cela, on peut obtenir une expression pour les constantes d'équilibres K_1 et K_2:
-<<<<<<< HEAD
+
 $$K_1=\frac{{p_{tot}}^2}{{p_0}^2} \frac{1}{(n_\ce{CH4}+n_\ce{H2O}+2\xi_{1})^2} \frac{(\xi_{1}-\xi_{2})(3\xi_{1}+\xi_{2})^{-3}}{(n_\ce{CH4}-\xi_{1})(n_\ce{H2O}-\xi_{1}-\xi_{2})}$$
 $$K_2=\frac{\xi_{2} (3\xi_{1}+\xi_{2}}{(\xi_{1}-\xi_{2})(n_\ce{H2O}-\xi_{1}-\xi_{2})}$$
-=======
+
 \begin{equation}
 K_1=\frac{{p_{tot}}^2}{{p_0}^2} \frac{1}{(n_\ce{CH4}+n_\ce{H2O}+2\xi)^2} \frac{(\xi-\eta)(3\xi+\eta)^{-3}}{(n_\ce{CH4}-\xi)(n_\ce{H2O}-\xi-\eta)}
 \end{equation}
