@@ -72,10 +72,10 @@ p_st = 1e5
 K_r1 = exp(-dG_r1/(R*T))
 K_r2 = exp(-dG_r2/(R*T))
 
-syms ksi1 ksi2 n_CH4 n_H2O
+syms ksi1 ksi2 n_CH4 n_H2O positive
 %equilibre des pressions reaction 1 reformage primaire
-eq1= K_r1 == (p_tot^2 *(ksi1 - ksi2)*(3*ksi1 + ksi2).^3)...
-              /(p_st^2 *(n_CH4 + n_H2O + 2*ksi1)^2 *(n_CH4 - ksi1)*(n_H2O - ksi1 - ksi2))
+eq1= K_r1 == (p_tot^2 *(ksi1 - ksi2)*(3*ksi1 + ksi2)^3)...
+    /(p_st^2 *(n_CH4 + n_H2O + 2*ksi1)^2 *(n_CH4 - ksi1)*(n_H2O - ksi1 - ksi2))
 %equilibre des pressions reaction 2 (WGS) reformage primaire
 eq2= K_r2 == (ksi2*(3*ksi1 + ksi2))/((ksi1 - ksi2)*(n_H2O - ksi1 - ksi2))
 %donnee a l'entree du reformage secondaire
