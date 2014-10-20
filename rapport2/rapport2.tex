@@ -3,6 +3,8 @@
 \usepackage{../custom}
 \usepackage{float}
 
+\addbibresource{biblio.bib}
+
 \title{Rapport 2}
 \author{Groupe 1225}
 \date{\today}
@@ -13,151 +15,20 @@
 
 \section{Introduction}
 
-Ce second rapport est une extension et une amélioration du rapport rendu en S2 et a pour but d'étudier plus en détail la production d'ammoniac. Il comprend un flow sheet qui permet de voir les flux de matières en les différentes étapes de la synthèse par le procédé Haber-Bosh. Il comprend aussi un calcul détaillé des aspects énergétiques dans le réformateur primaire. S’y trouve ensuite une explication du fonctionnement de l’outil de calcul réalisé sur MATLAB (ainsi que l'outis de calcul en annexe). Celui-ci permet le calcul des flux entrants et sortants en fonction de la quantité d'ammoniac voulue dans la journée ainsi que de la température dans le réformateur primaire. Il calcul également les aspects énergétiques lors des différentes étapes. 
-Et enfin ce rapport se termine par une analyse de l'effet du changement des variables que sont la température et la quantité d'ammoniac produite sur le bilan de matière.
-
-\section{Flow-sheet}
-
-\begin{tikzpicture}
-[node distance = 7em]
-
-\tikzstyle{decision} = [diamond, draw, fill=blue!20, 
-    text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
-\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
-    text width=15em, text centered, rounded corners, minimum height=4em]
-\tikzstyle{line} = [draw, -latex']
-\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
-    minimum height=2em]
-    
-\node [block] (primaire) {Reformage primaire (T)\\
-\ce{CH4 + H2O <=> CO + 3H2} \\
-\ce{CO + H2O <=> CO2 + H2}};
-\node [cloud, left = 2em of primaire] (H2O) {\ce{H2O}};
-\node [block, right = 2em of primaire] (four) {Four: Combustion \ce{CH4} (rendement 75\%) (\simeq 1300K)\\
-\ce{CH4 + 2O2 -> CO2 + 2H2O}};
-	\node [cloud, below = 2em of four] (O2) {\ce{O2}};
-	\node [cloud, above = 2em of four] (CH4) {\ce{CH4}};
-\node [block, below of=primaire] (secondaire) {Reformage secondaire (\simeq 1200K)\\
-\ce{2CH4 + O2 -> 2CO + 4H2}};
-	\node [cloud, right = 1em of secondaire] (air) {Air (21\% \ce{O2} 78\% \ce{N2} 1\% \ce{Ar})};
-	\node [block, below of=secondaire] (wgs) {Water-Gas-Shift (\simeq 500-700K)\\
-\ce{CO + H2O -> CO2 + H2}};
-\node [block, below of=wgs] (abso) {Absorbtion du \ce{CO2} et compression};
-	\node [decision, right = 2em of abso] (CO22) {\ce{CO2}};
-	\node [decision, left = 2em of abso] (H2O2) {\ce{H2O}};
-	\node [block, below of=abso] (synthese) {Synthèse \ce{NH3} et séparation de l'argon \\
-(Sortie réacteur: 270bar, 750K) \\
-\ce{3H2 + N2 <=> 2NH3}};
-\node [decision, below of=synthese] (NH3) {\ce{NH3}};
-\node [decision, right = 2em of synthese] (argon) {\ce{Ar}};
-
-
-	\path [line] (primaire) -- node[anchor = east] {\ce{H2} \ce{CH4} \ce{CO2} \ce{CO} \ce{H2O}}(secondaire);
-\path [line] (four) -- node[anchor = south] {ENERGIE}(primaire);
-    \path [line,dashed] (CH4) -- (four);
-    \path [line,dashed] (CH4) -| (primaire);
-    \path [line,dashed] (O2) -- (four);
-    \path [line] (secondaire) -- node[anchor = east] {\ce{H2} \ce{N2} \ce{CO2} \ce{CO} \ce{Ar} \ce{H2O}}(wgs);
-    \path [line] (wgs) -- node[anchor = east] {\ce{H2} \ce{H2O} \ce{CO2} \ce{N2} \ce{Ar}}(abso);
-    \path [line] (abso) -- node[anchor = east] {\ce{H2} \ce{N2} \ce{Ar}}(synthese);
-\path [line,dashed] (synthese) -- (NH3);
-\path [line,dashed] (synthese) -- (argon);
-\path [line,dashed] (air) -- (secondaire);
-\path [line,dashed] (H2O) -- (primaire);
-\path [line,dashed] (abso) -- (CO22);
-\path [line,dashed] (abso) -- (H2O2);
-
-\end{tikzpicture}
-
-\section{Calculs énergétiques}
-
-Pour réaliser nos calculs, il est nécessaire de prendre 
-en compte la variation possible de 
-deux facteurs: $m$ la capacité du plant(en tonnes par jour) 
-et $T$ la température à la sortie du
-réacteur de reformage à la vapeur de méthane.
-Nous obtiendrons donc des formules où ces variables sont des paramètres.
-
-La première réaction analysée est la suivante:
-
-\begin{equation*}
-	\ce{CH4 + H2O <-> CO + 3H2}
-\end{equation*}
-
-Afin de connaître l'énergie demandée par cette réaction,
-il nous faut trouver son avancement. Celle-ci n'est en effet pas complète.
-Pour ce faire, nous devons commencer par obtenir la constante $K$ 
-de la réaction. Or, elle peut être donnée par la relation:
-
-\begin{equation}
-	\ln{(K(T))} = \ln{(K(298.15))} - 
-	\frac{\Delta H^{\circ}}{R}(\frac{1}{T} - \frac{1}{298.15})
-\end{equation}
-
-L'enthalpie de la réaction à une température est égale 
-à la différence pondérée des enthalpies de formation:
-
-\begin{equation}
-	\Delta_{reac} H^{\circ} (T)= \Delta_{form,\ce{CO}} H^{\circ}(T)
-	+\Delta_{form, \ce{H2}} H^{\circ} (T) - \Delta_{form, \ce{CH4}} H^{\circ} (T) 
-	-\Delta_{form, \ce{H2O}} H^{\circ} (T)
-\end{equation}
-
-La différence d'enthalpie de formation d'une molécule entre deux 
-températures est égale à l'intégrale de sa capacité calorifique 
-(à pression fixe) entre ces deux températures.
-On utilise donc cette formule en partant de la  température 
-standard: $\Delta_{form}H°(T)= \Delta_{form}H°(298.15)+\int_298.15^T Cp(T) \, \mathrm dT$ et pouvons 
-remettre notre équation sous la forme suivante:
-
-\begin{equation}
-	\Delta_{réac}H°(T)=\Delta_{réac}H°(298.15)+\sum_i \int_{298.15}^T \nu_i Cp_i(T) \, \mathrm dT
-\end{equation}
-
-Nous utilisons alors l'approximation suivante pour les différents $C_P$\footnote{http://www.edu.upmc.fr/
-chimie/lc101-202-301/communs/public/capcalo.htm}, 
-chacun étant sous la forme $a+bT+cT^2$:
-
-\begin{tabular}{|l|c|c|r|}
-  \hline
-  Gaz & $a$ & $b\e{3}$ & $c\e{6}$ \\
-  \hline
-  \ce{CH4} & 14,23 & 75,3 & -18,00\\
-  \ce{H2O} & 30,13 & 10,46 & 0 \\
-  \ce{CO} & 27,62 & 5,02 & 0\\
-  \ce{H2} & 29,30 & -0,84 & 2,09\\
-  \hline
-\end{tabular}
-
-On a alors:
-\begin{equation}
-	\sum_i \int_298.15^T \nu_i Cp_i(T) \, \mathrm dT=\int_{298.15}^T 71.16-8.326 10^{-2}T+2.427 10^{-5}T^2 \, \mathrm dT
-\end{equation}
-Une fois l'expression intégrée, on peut simplifier dans l'équation pour trouver l'enthalpie de réaction en 
-fonction de la température:
-
-\begin{equation}
-	\Delta_{réac}H°(T)=188441.8653+71.16T-4.163 10^-2 T^2 + 8.09 10^-6 T^3
-\end{equation}
-
-Maintenant que l'on dispose de cela, il ne nous faut plus qu'une valeur de K à une certaine température 
-pour l'obtenir comme une fonction de T. Pour trouver cette valeur particulière, on utilise la 
-formule $K(T)=exp(-\frac{\DeltaG°(T)}{RT})$ à la température standard. On trouve facilement $\DeltaG°$ grâce 
-aux valeurs des énergies libres de formation (obtenues dans un livre de référence\footnote{Chimie Physique de 
-Atkins, DE BOECK} dont on fait la différence pondérée. Le résultat est: $K(298.15)=1.2597*10^-25$.\\
-Nous pouvons enfin injecter ces résultats dans notre équation de départ:
-\begin{equation}
-	ln(K(T))=ln(K(298.15))-\frac{\DeltaH°(T)}{R}(\frac{1}{T}-\frac{1}{298.15})
-\end{equation}
-
-Et en simplifiant (attention, le grand nombre de simplification influe sur la précision!):
-
-\begin{equation}
-	K(T)=exp(\frac{-22664.245}{T}+10.128+0.0337T+1.5797 10^{-5}T^2+3.263 10^{-9}T^3)
-\end{equation}
-
-Faisant exactement de la même manière, on peut obtenir la constante K de la deuxième équation. Tous 
-les détails calculatoires sont en annexe sous la forme de code matlab.
+Ce second rapport est une extension et une amélioration du rapport rendu 
+en S2 et a pour but d'étudier plus en détail la production d'ammoniac. 
+Il comprend un flow sheet qui permet de voir les flux de matières en 
+les différentes étapes de la synthèse par le procédé Haber-Bosh. 
+Il comprend aussi un calcul détaillé des aspects énergétiques dans le réformateur primaire.
+S’y trouve ensuite une explication du fonctionnement de l’outil de calcul
+réalisé sur \textsc{matlab} (ainsi que l'outis de calcul en annexe).
+Celui-ci permet le calcul des flux entrants et sortants en fonction 
+de la quantité d'ammoniac voulue dans la journée ainsi que de la 
+température dans le réformateur primaire. Il calcul également les aspects énergétiques 
+lors des différentes étapes. 
+Et enfin ce rapport se termine par une analyse de l'effet du changement 
+des variables que sont la température et la quantité d'ammoniac produite 
+sur le bilan de matière.
 
 \section{Bilan de matière}
 
@@ -174,10 +45,12 @@ que l'ordre des réactions durant tout le processus.
 Un flow-sheet simplifié de l'ensemble du processus détaillant chacune
 des réactions se trouve à la section \ref{sec:flow}.
 
+\subsection{Quantité d'air à introduire en fonction de la production d'azote}
+
 Nous connaissons la masse d'ammoniac à produire par jour, 
 et par conséquent son nombre de moles ($n_{\ce{NH3}} = m_{\ce{NH3}}/M_{\ce{NH3}}$).
-Note que les nombres de moles seront généralement écrits
-en fonction de $m_{\ce{NH3}}$.
+Les nombres de moles seront généralement écrits en fonction de $m_{\ce{NH3}}$ 
+de façon à montrer la relation par rapport au paramètre qui varie.
 
 À partir de la réaction suivante,
 
@@ -203,10 +76,15 @@ l'air, on peut facilement obtenir les quantités de \ce{O2} et de \ce{Ar}.
 	n_{\ce{Ar}} = 0.01 \, n_{air} = \frac{1}{2652} \, m_{\ce{NH3}}
 \end{align}
 
-Il nous reste maintenant à déterminer les quantités de \ce{CH4} et de \ce{H20}.
+\subsection{Quantité de méthane et d'eau}
+
+Il nous reste maintenant à déterminer les quantités de \ce{CH4} et de \ce{H2O}.
 On voit que la seule réaction nécessitant de l'oxygène est celle du 
 réformage secondaire. Ceci nous permet de conna\^itre toutes les quantités 
-associées à cette réaction.
+associées à cette réaction. 
+Afin de ne pas oublier à quelle réaction est associée chaque quantité, 
+on notera \textit{rp} (resp. \textit{rs}) pour réformage primaire (resp. secondaire)
+et \textit{wgs} pour Water-Gas-Shift.
 
 \begin{equation}
 	\ce{2CH4 + O2 -> 2CO + 4H2}
@@ -216,85 +94,140 @@ associées à cette réaction.
 Dès lors, 
 
 \begin{align}
-	n_{\ce{CO}-3} = n_{\ce{CH4}-3} 
-	= 2 \, n_{\ce{O2}} = \frac{7}{442} \, m_{\ce{NH3}} \\
-	n_{\ce{H2}-3} = 4 \, n_{\ce{O2}} = \frac{7}{221} \, m_{\ce{NH3}}
+	n_{\ce{CO}, rs} = n_{\ce{CH4}, rs} 
+	= 2 \, n_{\ce{O2}} = \frac{7}{442} \, m_{\ce{NH3}} 
+	\label{eq:moles1_ref_sec} \\
+	n_{\ce{H2}, rs} = 4 \, n_{\ce{O2}} = \frac{7}{221} \, m_{\ce{NH3}}
+	\label{eq:moles2_ref_sec}
 \end{align}
 
-On peut ensuite utiliser le fait que les deux premières réactions soient 
-à l'équilibre. C'est ici qu'intervient le paramètre $T$. On va donc commencer
-par calculer les $\Delta G^{\circ}_{reaction}$ pour déterminer les $K(T)$.
+Comme les deux premières réactions sont à l'équilibre,
+il va falloir déterminer leurs constantes d'équilibres sans
+oublier qu'elles s'influencent mutuellement.
+C'est ici qu'intervient le paramètre $T$. On va donc commencer
+par calculer les $\Delta G^{\circ}_{reaction}$ afin de conna\^itre les constantes
+d'équilibres $K(T)$, pour finalement déterminer les quantités des différents composés
+à l'équilibre.
 
-On détermine ceux-ci via la relation 
-\begin{equation}
-	\Delta G_{reaction} = \Delta H_{reaction} - T \, \Delta S_{reaction}
-\end{equation}
+\paragraph{Calcul des constantes d'équilibres $K(T)$}
 
-On rappelera que 
-\begin{align}
-	\Delta H_{f, T2} = \Delta H_{f, T1} + \int_{T1}^{T2} C_p \, \dif{T} \\
-	\Delta S_{f, T2} = \Delta S_{f, T1} + \int_{T1}^{T2} 
-	\frac{C_p}{T} \, \dif{T}
-\end{align}
-
-Les valeurs des coefficients\footnote{\url{http://www.edu.upmc.fr/
-chimie/lc101-202-301/communs/public/capcalo.htm}} $a + b T + c T^{2}$, 
-ainsi que les enthalpies et entropies standard\footnote{\url{http://kinetics.
-nist.gov/janaf/html/H-065.html}} 
-sont trouvées dans les liens ci-dessous.
-
-La relation suivante
+On a déjà vu précedement que les valeurs des capacités calorifiques
+à pression constante varient avec la température. Afin d'avoir un outil de gestion
+le plus précis possible, nous allons utiliser les équations de Shomate pour calculer 
+les enthalpies et entropies standards. 
+Lors du précédent rapport, nous avions décris que $C_{p,m}^{\circ} = A + B \, T + C \, T^2$,
+on ajoute un degré de précision en posant
 
 \begin{equation}
-	K(T) = \exp{(\frac{- \Delta G}{R \, T})}
+	C_{p,m}^{\circ} = A + B \, t + C \, t^2 + D \, t^3 + \frac{E}{t^2}
+	\quad \text{avec} \quad t = \frac{T[K]}{1000}
+	\label{eq:shomate}
 \end{equation}
 
-nous permet de trouver K_{c}.
+les valeurs des différents coefficients\footnote{Il faut ajouter deux autres 
+coefficients F et G à cause des constantes d'intégrations pour les
+enthalpies et entropies.} se trouvent \cite{shomate} dans le fichier \texttt{outil.m}.
+On en déduit donc les valeurs des enthalpies et entropies
+à partir de l'équation \ref{eq:shomate} dans 
 
-Et enfin dans la réaction du Water-Gas-Shift:
+\begin{align*}
+	\Delta H_{f, T2}^{\circ} &= \Delta H_{f, T1}^{\circ} 
+	+ \int_{T1}^{T2} C_p \, \dif{T} \\ 
+				 &= \Delta H_{f, T1}^{\circ} 
+	+ A \, t + B \, \frac{t^2}{2}  + C \,  \frac{t^3}{3} 
+	+ D \, \frac{t^4}{4} + \frac{E}{t} + K_{1} \\		 
+	\Delta S_{f, T2}^{\circ} &= \Delta S_{f, T1}^{\circ} + \int_{T1}^{T2} 
+	\frac{C_p}{T} \, \dif{T} \\
+				 &= \Delta S_{f, T1} + A \, \ln{t} 
+	+ B \, t + C \, \frac{t^2}{2} 
+	+ D \, \frac{t^3}{3} - \frac{E}{2 t^{2}} + K_{2} 
+\end{align*}
+
+Afin de ne pas trop alourdir ce document, les détails des calculs sont ignorés.
+
+On détermine ensuite l'enthalpie libre de Gibbs via la relation 
+
+\begin{equation}
+	\Delta G_{reaction}^{\circ} = \Delta H_{reaction}^{\circ} 
+	- T \, \Delta S_{reaction}^{\circ}
+\end{equation}
+
+et finalement la constante d'équilibre 
+
+\begin{equation}
+	K(T) = \exp{\left(\frac{- \Delta G}{R \, T}\right)}
+\end{equation}
+
+\paragraph{Calcul des pressions partielles à l'équilibre}
+
+Les tableaux \ref{tab:reaction1_primaire} et \ref{tab:reaction2_primaire} nous 
+permettent de conna\^itre les quantités des réactifs et des produits à l'équilibre. 
+
+\begin{table}
+	\centering
+	\begin{tabular}{l|c|c|c|c|c}
+		 & $\ce{CH4}$ & $\ce{H2O}$ & $\ce{CO}$ & $\ce{3H2}$ & $n_{gaz}$ \\
+		\hline
+		$p_{i}$ & $n_{\ce{CH4}}$ & $n_{\ce{H2O}}$ & $0$ & $0$ &
+		$n_{\ce{CH4}} + n_{\ce{H2O}}$ \\
+		$p_{eq}$ & $n_{\ce{CH4}} - \xi_1$ & $n_{\ce{H2O}} - \xi_1$ & 
+		$\xi_1$ & $3 \, \xi_1$ & $n_{\ce{CH4}} + n_{\ce{H2O}} + 2 \, \xi_1 $\\
+	\end{tabular}
+	\caption{Première réaction du réformage primaire à l'équilibre}
+	\label{tab:reaction1_primaire}
+\end{table}
+
+\begin{table}
+	\centering
+	\begin{tabular}{l|c|c|c|c|c}
+		 & $\ce{CO}$ & $\ce{H2O}$ & $\ce{CO2}$ & $\ce{H2}$ & $n_{gaz}$ \\
+		\hline
+		$p_{i}$ & $\xi_1$ & $n_{\ce{H2O}} - \xi_1$ & $0$ & $3 \, \xi_1$ &
+		$n_{\ce{H2O}} + 3 \, \xi_1$ \\
+		$p_{eq}$ & $\xi_1 - \xi_2$ & $n_{\ce{H2O}} - \xi_1 - \xi_2$ & 
+		$\xi_2$ & $3 \, \xi_1 + \xi_2$ & $n_{\ce{H2O}} + 3 \, \xi_1 $\\
+	\end{tabular}
+	\caption{Deuxième réaction du réformage primaire à l'équilibre}
+	\label{tab:reaction2_primaire}
+\end{table}
+
+Il s'agit maintenant de résoudre 4 équations afin de déterminer nos inconnues que 
+sont $\xi_1$, $\xi_2$, $n_{\ce{CH4}}$ et $n_{\ce{H2O}}$. 
+On a tout d'abord les deux liées aux activités et constantes $K$, que nous déduisons
+à partir des informations des réactions à l'équilibre.
+Les deux suivantes s'appuyent sur le fait que si une mole d'un composé $X$ est
+produite à une réaction $\alpha$, une mole de ce même réactif sera disponible 
+dans la réaction suivante.
+
+On a pu voir dans le tableau \ref{tab:reaction1_primaire} qu'il reste après 
+équilibre exactement $n_{\ce{CH4}} - \xi_1$ moles de \ce{CH4}, qui seront 
+entièrement consommée pendant le réformage secondaire. 
+Par l'équation \ref{eq:ref_sec}, on a que 
 
 \begin{equation*}
-	\ce{CO + H2O -> CO2 + H2}
+	n_{\ce{CH4}} - \xi_1 = \frac{7}{442} \, m_{\ce{NH3}} 
 \end{equation*}
 
-\begin{equation}
-	n_{CO}/jour=n_{{CH_4}_{secondaire}}+n_{{CH_4}_{primaire}}
-\end{equation}
+Pour finir, on remarque que 
 
-\begin{equation}
-	n_{CO_2}/jour=n_{CO}/jour
-\end{equation}
+\begin{equation*}
+	n_{\ce{H2}} = n_{\ce{H2}, rp} + n_{\ce{H2}, rs} + n_{\ce{H2}, wgs}
+\end{equation*}
 
-A présent, intéressons nous à l'avancement des réactions dans le réacteur primaire. Pour la première réaction, 
-à l'équilibre, on a une quantité suivante de réactifs pour un certain \xi_{1}:
-	\begin{equation}
-	\ce{CH4 + H2O <-> CO + 3H2}
-	\end{equation}
-	\\
-\begin{tabular}{|l|c|c|c|r|}
-  \hline
-  \ce{CH4} & \ce{H2O} & \ce{CO} & \ce{H2} & n_gaz \\
-  \hline
-  n_{CH_4} & n_{H_2O} & 0 & 0 & n_{CH_4} + n{H_2O}\\
-  n_{CH_4}-\xi_{1} & n_{H_2O}-\xi_{1} & \xi_{1} & $3 \xi_{1}$ & n_{CH_4} + n_{H_2O} + $2 \xi_{1}$\\
-  \hline
-\end{tabular}
-\\
-Pour la deuxième équation, avec un certain \xi_{2}:\\
-	\begin{equation}
-	\ce{CO + H2O <-> CO2 + H2}
-	\end{equation}
-	\\
-\begin{tabular}{|l|c|c|c|r|}
-  \hline
-  \ce{CO} & \ce{H2O} & \ce{CO2} & \ce{H2} & n_gaz \\
-  \hline
-   \xi_{1} & n_\ce{H_2O}-\xi_{1} & 0 & $3\xi_{1}$ & n_{H_2O}+$3\xi_{1}$\\
-   \xi_{1}-\xi_{2} & n_\ce{H_2O}-\xi_{1}-\xi_{2} & \xi_{2} & $3\xi_{1} +\xi_{2}$ & n_{H_2O}+$3\xi_{1}$\\
-  \hline
-\end{tabular}
-\\
-Grâce à cela, on peut obtenir une expression pour les constantes d'équilibres K_1 et K_2:
+on vient de voir (tableau \ref{tab:reaction2_primaire})
+que $n_{\ce{H2}, rp} = 3 \, \xi_1 + \xi_2$, nous connaissons égalemment
+$n_{\ce{H2}, rs}$ (équation \ref{eq:moles1_ref_sec}), on a ensuite 
+
+\begin{align*}
+	n_{\ce{H2}, wgs} = n_{\ce{CO}, total} 
+	&= n_{\ce{CO}, rp} + n_{\ce{CO}, rs} \quad &\text{(voir flow-sheet)} \\
+	&= \xi_1 - \xi_2 + \frac{7}{442} \, m_{\ce{NH3}} 
+	\quad &\text{(voir eq.\ref{eq:moles2_ref_sec})}
+\end{align*}
+
+Nous résolvons ce système de 4 équations dans le script \texttt{outil.m}.
+
+Grâce à cela, on peut obtenir une expression pour les constantes d'équilibres $K_1$ et $K_2$:
 
 $$K_1=\frac{{p_{tot}}^2}{{p_0}^2} \frac{1}{(n_\ce{CH4}+n_\ce{H2O}+2\xi_{1})^2} \frac{(\xi_{1}-\xi_{2})(3\xi_{1}+\xi_{2})^{-3}}{(n_\ce{CH4}-\xi_{1})(n_\ce{H2O}-\xi_{1}-\xi_{2})}$$
 $$K_2=\frac{\xi_{2} (3\xi_{1}+\xi_{2}}{(\xi_{1}-\xi_{2})(n_\ce{H2O}-\xi_{1}-\xi_{2})}$$
@@ -324,62 +257,82 @@ Comme prévu, ces quantités dépendent de T et de la masse d'ammoniac voulue à
 
 \section{Fonctionnement de l'outil de calcul}
 
-L'outil de calcul a été réalisé en matlab et prends en considération deux variables : la température du 
-réacteur primaire (en K) et la quantité d'ammoniac (en tonnes) que l'on souhaite produire en 24h. 
-\\
+L'outil de calcul a été réalisé en matlab et prends en considération 
+deux variables : la température du réacteur primaire (en K) et la quantité 
+d'ammoniac (en tonnes) que l'on souhaite produire en 24h. 
 
-Nous commençons tout d'abord par calculer les enthalpies (incl. Gibbs) et entropies des réactions du réacteur 
-primaire (vaporeformage). Nous calculons ensuite les constantes d'équilibres pour les deux réactions. 
-Avec les hypothèses posées sur les réactions (toutes sont complètes exceptées celles s'effectuant dans le réacteur primaire),
-et avec la masse désirée de \ce{NH3}, nous calculons les masses nécessaires de \ce{H2}, \ce{N2}. Puisque l'azote est fourni
-par l'air, nous déterminons la masse de \ce{O2} fournie (ainsi que la masse de \ce{Ar}, mais l'argon est un gaz noble et 
-n'intervient pas dans la réaction). 
+Nous commençons tout d'abord par calculer les enthalpies (incl. Gibbs) 
+et entropies des réactions du réacteur primaire (vaporeformage).
+Nous calculons ensuite les constantes d'équilibres pour les deux réactions. 
+Avec les hypothèses posées sur les réactions (toutes sont complètes 
+exceptées celles s'effectuant dans le réacteur primaire),
+et avec la masse désirée de \ce{NH3}, nous calculons les masses 
+nécessaires de \ce{H2}, \ce{N2}. Puisque l'azote est fourni
+par l'air, nous déterminons la masse de \ce{O2} fournie (ainsi que la masse de \ce{Ar}, 
+mais l'argon est un gaz noble et n'intervient pas dans la réaction). 
 
 Avec les hypothèses et la masse de \ce{O2}, nous déterminons la quantité de \ce{CH4} 
-utilisé dans le réacteur secondaire et donc la production de \ce{H2} dans ce réacteur. Nous savons désormais 
-déterminer la quantité de \ce{H2} à produire dans le réacteur primaire, et grâce à la constante d'équilibre déterminée 
-plus tôt, nous pouvons déterminer la quantité de \ce{CH4} nécessaire pour les deux réactions. L'outil nous permet également
-de calculer la quantité minimum de \ce{H2O} à fournir pour que toutes les équations se passent comme prévu. 
-\\
+utilisé dans le réacteur secondaire et donc la production de \ce{H2} dans ce réacteur. 
+Nous savons désormais déterminer la quantité de \ce{H2} à produire dans 
+le réacteur primaire, et grâce à la constante d'équilibre déterminée plus tôt, 
+nous pouvons déterminer la quantité de \ce{CH4} nécessaire pour les deux réactions.
+L'outil nous permet également de calculer la quantité minimum de \ce{H2O} à fournir
+pour que toutes les équations se passent comme prévu. 
 
 Il est à noter que l'outil nous fourni des valeurs en tonnes par jour.
 
 \section{Tubes}
-Nous recherchons le nombre de tubes nécaissaire à l'acheminement du méthane et de l'eau dans le reformateur primaire.\\
-\\
+
+Nous recherchons le nombre de tubes nécaissaire à l'acheminement du 
+méthane et de l'eau dans le reformateur primaire.
+
 Soit $x$ le nombre de tubes, nous avons l'équation suivante :
 \[
 V'_{(m^3/s)} = A_{(m^2)}. c'_{(m/s)} .x
 \]
-Avec $V'$ le débit; $A$ la section d'un tuyau et $c'$ la vitesse superficielle à l'entrée du réacteur.\\
-\\
-Le volume peut être calculé grace à la loi des gaz parfaits;
+
+Avec $V'$ le débit; $A$ la section d'un tuyau 
+et $c'$ la vitesse superficielle à l'entrée du réacteur.
+Le volume peut être calculé grace à la loi des gaz parfaits
 \[
 V=\frac{nRT}{P}
 \]
 
-Si l'on concidère notre calcul en un espace de temps d'1 seconde. La simplification des deux formules ci-dessus nous amène à
+Si l'on concidère notre calcul en un espace de temps d'1 seconde. 
+La simplification des deux formules ci-dessus nous amène à
 \[
 x=\frac{nRT}{AcP}
 \]
-Ou la seule inconnue est les nombre de môles de produit rentrant, c'est a dire de $CH_{4}$ et de $H_{2}O$. Ce que nous avons pu déterminer grace au programme MATLAB sachant que 1500 T d'ammoniac était demandée à la sortie.\\
-\\
-$n_{CH_{4}}= 7,56_{kg} / 0,016_{kg/mole} = 472,18 moles$\\
-$n_{H_{2}O}= 18,94_{kg/s}/ 0,016_{kg/mole} = 1052,22 moles$\\
+
+Ou les seules inconnues sont les nombre de môles de produit rentrant, 
+c'est a dire de $CH_{4}$ et de $H_{2}O$. Ce que nous avons pu déterminer grace au 
+programme MATLAB sachant que 1500 T d'ammoniac était demandée à la sortie.
+\begin{align*}
+	n_{CH_{4}} = 7,56 \si{\kilo\per\second} / 0,016 \si{\kilo\per\mole} 
+	= 472,18 \si{\mole\per\second} \\
+	n_{H_{2}O} = 18,94 \si{\kilo\per\second}/ 0,016 \si{\kilo\per\mole}
+	= 1052,22 \si{\mole\per\second}
+\end{align*}
 
 Grâce aux autres valeurs données dans l'énoncé nous pouvons calculer le nombre de tubes nécessaire 
 
-
 \[
-x=\frac{(n_{CH_{4}}+n_{H_{2}O})8,314.1080}{\pi(0,05^2).2.(31.10^5)}=281,1
+x = \frac{(n_{CH_{4}}+n_{H_{2}O})8,314.1080}{\pi(0,05^2).2.(31.10^5)} = 281,1
 \]
 
 Il faut donc 282 tuyaux pour assurer l'approvionnnement des composés dans le reformateur primaire.
 
 \section{Bilan énergétique de la partie réformateur primaire-four}
 
-Afin de connaître les quantités de \ce{CH4} et de \ce{O2} à introduire dans le four afin de garder le réformateur primaire à température constante nous devons étudier les réactions ayant lieu dans ce réformateur. Les calculs exposés dans cette section sont fait pour une température dans le réformateur de 1080K et pour une production journalière d'ammoniac de 1500T. Bien sur ces résultats sont facilement transposables à d'autres données grace au code MATLAB. \\
-Tout d'abord nous allons calculer les enthalpies des différentes réactions qui nous intéressent: \\
+Afin de connaître les quantités de \ce{CH4} et de \ce{O2} à introduire dans le four 
+afin de garder le réformateur primaire à température constante nous devons étudier 
+les réactions ayant lieu dans ce réformateur. Les calculs exposés dans cette section 
+sont fait pour une température dans le réformateur de 1080K et pour une production 
+journalière d'ammoniac de 1500T. Bien sur ces résultats sont facilement transposables
+à d'autres données grace au code MATLAB.
+
+Tout d'abord nous allons calculer les enthalpies des différentes réactions qui nous intéressent:
+
 \begin{itemize}
 \item{\ce{CH4 + H2O <=> CO + 3H2} \\
 $\Delta H_{reac1} (1080)=\int_{298.15}^{1080} Cp$ $dT = 226,94 kJ/mol$ (endothermique)}
@@ -388,14 +341,36 @@ En appliquant la même formule on obtient: $\Delta H_{reac2} (1080) = -35,55 kJ/
 \item{\ce{CH4 + 2O2 -> CO2 + 2H2O} \\
 En appliquant la même formule on obtient: $\Delta H_{reac3} (1080) = -803,56 kJ/mol$ (exothermique)}
 \end{itemize}
-\\
-Après quelques calculs, on trouve que 478,17 moles de \ce{CH4} sont injectées par seconde dans le réformateur primaire, mais que seules 42.5\% de ces moles y "réagissent vraiment" (le reste va au secondaire).
-Pour la 2ème réaction du réformateur primaire, seules 13,5\% des moles "réagissent vraiment". \\
-De là, on peut calculer le bilan énergétique dans le réformateur primaire: \\
-$\Delta U = (478,17 * 0,425) * (\Delta H_{reac1} (1080) + \Delta H_{reac2} (1080) * 0,135) = 45143,94 kJ/s$ \\
-On sait que $\Delta H_{reac3} (1080) = -803,56 kJ/mol$, on peut en déduire le nombre de moles/s de \ce{CH4} dont on a besoin pour compenser le $\Delta U$ du réformateur primaire. \\
+
+
+Après quelques calculs, on trouve que $478,17$ moles de \ce{CH4} sont injectées 
+par seconde dans le réformateur primaire, mais que seules $42.5\%$ de ces moles 
+y "réagissent vraiment" (le reste va au secondaire).
+Pour la 2ème réaction du réformateur primaire, seules 13,5\% des moles "réagissent vraiment". 
+De là, on peut calculer le bilan énergétique dans le réformateur primaire: 
+\[
+\Delta U = (478,17 * 0,425) * (\Delta H_{reac1} (1080) + \Delta H_{reac2} (1080) * 0,135)
+= 45143,94 \si{\kilo\joule\per\second}
+\]
+On sait que $\Delta H_{reac3} (1080) = -803,56 kJ/mol$, on peut en déduire le nombre de 
+moles/s de \ce{CH4} dont on a besoin pour compenser le $\Delta U$ du réformateur primaire. 
+
 On obtient: n = 56,18 moles/s.
 On sait que le rendement énergétique du four est de 75\%.
 On aura donc besoin de 74,9 moles/s de \ce{CH4}, soit 1,2kg/s pour approvisionner le four. 
+
+
+\section{Flow-sheet}
+\label{sec:flow}
+
+\begin{figure}
+	\begin{center}
+		\input{flow.tex}
+	\end{center}
+	\caption{Flow-sheet simplifié.}
+	\label{fig:flow}
+\end{figure}
+
+\printbibliography
 
 \end{document}
