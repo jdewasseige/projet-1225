@@ -1,104 +1,134 @@
 function out = outil(T, m_NH3)
-%Outil de gestion du plant de formation d'ammoniac a partir de methane.
-
-%in - T     = temperature reacteur
-%   - m_NH3 = masse en tonnes d'ammoniac
-
-%out- m_CH4 = masse en tonnes de methane
-%   - m_H2O = masse en tonnes d'eau
-%   - m_O2  = masse en tonnes d'oxygene
-%   - m_N2  = masse en tonnes de nitrogen
-%   - m_Ar  = masse en tonnes d'argon
-
-%capacites calorifiques
-cp_h2o_l = 75.349
-cp_h2o_g = [30.13 10.46e-3 0]
-cp_n2    = [27.62 4.19e-3 0]
-cp_h2    = [29.30 -0.84e-3 2.09e-6]
-cp_nh3   = [31.81 15.48e-3 5.86e-6]
-cp_co    = [27.62 5.02e-3 0]
-cp_o2    = [25.73 12.97e-3 -3.77e-6]
-cp_co2   = [32.22 22.18e-3 -3.35e-6]
-cp_ch4   = [14.23 75.3e-3 -18e-6]
-%enthalpies et entropies standards
-dH_st_h2o = -241.826e3
-dS_st_h2o = 188.834
-dH_st_n2  = 0
-dS_st_n2  = 191.609
-dH_st_h2  = 0
-dS_st_h2  = 130.68
-dH_st_nh3 = -45.898e3
-dS_st_nh3 = 192.774
-dH_st_co  = -110.527e3
-dS_st_co  = 197.653
-dH_st_co2 = -393.522e3
-dS_st_co2 = 213.795
-dH_st_ch4 = -74.873e3
-dS_st_ch4 = 186.251
-dH_st_o2  = 0
-dS_st_o2  = 205.147
-
-%reformage primaire + water gas shift 
-dH_co = dH_st_co + integral(@(t) cp_co*[t.^0;t.^1;t.^2], 298, T);
-dS_co = dS_st_co + integral(@(t) cp_co*[t.^-1; t.^0 ; t.^1], 298, T);
-
-dH_h2 = dH_st_h2 + integral(@(t) cp_h2*[t.^0;t.^1;t.^2], 298, T);
-dS_h2 = dS_st_h2 + integral(@(t) cp_h2*[t.^-1 ; t.^0 ; t.^1], 298, T);
-
-dH_h2o = dH_st_h2o + integral(@(t) cp_h2o_g*[t.^0;t.^1;t.^2], 298, T);
-dS_h2o = dS_st_h2o + integral(@(t) cp_h2o_g*[t.^-1 ; t.^0 ; t.^1], 298, T);
-
-dH_ch4 = dH_st_ch4 + integral(@(t) cp_ch4*[t.^0;t.^1;t.^2], 298, T);
-dS_ch4 = dS_st_ch4 + integral(@(t) cp_ch4*[t.^-1 ; t.^0 ; t.^1], 298, T);
-
-dH_co2 = dH_st_co2 + integral(@(t) cp_co2*[t.^0;t.^1;t.^2], 298, T);
-dS_co2 = dS_st_co2 + integral(@(t) cp_co2*[t.^-1; t.^0 ; t.^1], 298, T);
-
-%reaction1
-dH_r1 = dH_co + 3*dH_h2 - dH_h2o - dH_ch4;
-dS_r1 = dS_co + 3*dS_h2 - dS_h2o - dS_ch4;
-dG_r1 = dH_r1 - T*dS_r1
-%reaction2
-dH_r2 = dH_co2 + dH_h2 - dH_h2o - dH_co;
-dS_r2 = dS_co2 + dS_h2 - dS_h2o - dS_co;
-dG_r2 = dH_r2 - T*dS_r2
+% Outil de gestion du plant de formation d'ammoniac
+% a partir de methane.
+% 
+% in - T     = temperature en KELVIN reacteur
+%    - m_NH3 = masse en tonnes d'ammoniac
+% 
+% out- m_CH4 = masse en tonnes de methane
+%    - m_H2O = masse en tonnes d'eau
+%    - m_O2  = masse en tonnes d'oxygene
+%    - m_N2  = masse en tonnes de nitrogen
+%    - m_Ar  = masse en tonnes d'argon
+%    - nombre de tubes
 
 
-%constantes d'eq K
-R = 8,3144621
-p_tot = 28e5
-p_st = 1e5
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Coefficients pour les equations de Shomate 
 
-K_r1 = exp(-dG_r1/(R*T))
-K_r2 = exp(-dG_r2/(R*T))
+if T < 1000
+    cp_h2 = [33.066178 -11.363417 11.432816 -2.772874 ...
+        -0.158558 -9.980797 172.707974 0] ;
+else
+    cp_h2 = [18.563083 12.257357 -2.859786 0.268238 ...
+        1.977990 -1.147438 156.288133 0] ;
+end
+cp_h2o = [30.09200 6.832514 6.793435 -2.534480 ...
+    0.082139 -250.8810 223.3967 -241.8264] ;
+cp_n2  = [19.50583 19.88705 -8.598535 1.369784 ...
+    0.527601 -4.935202 212.3900 0] ;
+cp_nh3 = [19.99563 49.77119 -15.37599	1.921168 ...
+    0.189174 -53.30667 203.8591 -45.89806] ;
+cp_co  = [25.56759 6.096130 4.054656 -2.671301 ...
+    0.131021 -118.0089 227.3665 -110.5271] ;
+cp_o2  = [30.03235 8.772972 -3.988133 0.788313 ...
+    -0.741599 -11.32468 236.1663 0] ;
+cp_co2 = [24.99735 55.18696 -33.69137 7.948387 ...
+    -0.136638 -403.6075 228.2431 -393.5224] ;
+cp_ch4 = [-0.703029 108.4773 -42.52157 5.862788 ...
+    0.678565 -76.84376 158.7163 -74.87310] ;
 
-syms ksi1 ksi2 n_CH4 n_H2O positive
-%equilibre des pressions reaction 1 reformage primaire
+t = T/1000 ;
+
+% Calcul des enthalpies et entropies standards à la temperature T
+calcH = [t t^2/2 t^3/3 t^4/4 -1/t 1 0 0] ; % en kilo Joules
+calcS = [log(t) t t^2/2 t^3/3 -1/(2*t^2) 0 1 0] ;
+
+dH_co = cp_co*calcH' * 1000 ;
+dS_co = cp_co*calcS' ;
+dH_h2 = cp_h2*calcH' * 1000 ;
+dS_h2 = cp_h2*calcS' ;
+dH_ch4 = cp_ch4*calcH' * 1000 ;
+dS_ch4= cp_ch4*calcS' ;
+dH_co2= cp_co2*calcH' * 1000 ;
+dS_co2 = cp_co2*calcS' ;
+dH_h2o = cp_h2o*calcH' * 1000 ;
+dS_h2o = cp_h2o*calcS' ;
+
+% reaction1
+dH_r1 = dH_co + 3*dH_h2 - dH_h2o - dH_ch4 ;
+dS_r1 = dS_co + 3*dS_h2 - dS_h2o - dS_ch4 ;
+dG_r1 = dH_r1 - T*dS_r1 ;
+% reaction2
+dH_r2 = dH_co2 + dH_h2 - dH_h2o - dH_co ;
+dS_r2 = dS_co2 + dS_h2 - dS_h2o - dS_co ;
+dG_r2 = dH_r2 - T*dS_r2 ;
+
+% constantes d'eq K
+R = 8.3144621 ;
+p_tot = 28e5 ;
+p_st = 1e5 ;
+
+K_r1 = exp(-dG_r1/(R*T)) ;
+K_r2 = exp(-dG_r2/(R*T)) ;
+
+% resolution des equations pour trouver le 
+% nombre de moles de CH4 et de H2O 
+
+syms ksi1 ksi2 n_CH4 n_H2O positive 
+
+% equilibre des pressions reaction 1 reformage primaire
 eq1= K_r1 == (p_tot^2 *(ksi1 - ksi2)*(3*ksi1 + ksi2)^3)...
-    /(p_st^2 *(n_CH4 + n_H2O + 2*ksi1)^2 *(n_CH4 - ksi1)*(n_H2O - ksi1 - ksi2))
-%equilibre des pressions reaction 2 (WGS) reformage primaire
-eq2= K_r2 == (ksi2*(3*ksi1 + ksi2))/((ksi1 - ksi2)*(n_H2O - ksi1 - ksi2))
-%donnee a l'entree du reformage secondaire
-eq3= n_CH4 - ksi1 == (7/442)*m_NH3
-%donnee a la sortie du reformage secondaire
-eq4= 3*ksi1 + ksi2 == (9/221)*m_NH3
+    /(p_st^2 *(n_CH4 + n_H2O + 2*ksi1)^2 *(n_CH4 - ksi1)* ...
+    (n_H2O - ksi1 - ksi2)) ;
 
-%resoudre le systeme de 4 equations a 4 inconnues 
-[n_CH4,n_H2O,ksi1,ksi2] = solve(eq1, eq2, eq3, eq4, n_CH4, n_H2O, ksi1, ksi2)
+% equilibre des pressions reaction 2 (WGS) reformage primaire
+eq2= K_r2 == (ksi2*(3*ksi1 + ksi2)) ...
+    /((ksi1 - ksi2)*(n_H2O - ksi1 - ksi2)) ;
+
+% donnee a l'entree du reformage secondaire
+eq3= n_CH4 - ksi1 == (7/442)*m_NH3 ;
+
+% donnee a la sortie du reformage secondaire
+eq4= 3*ksi1 + ksi2 == (9/221)*m_NH3 ;
+
+% resoudre le systeme de 4 equations a 4 inconnues 
+[n_CH4,n_H2O,ksi1,ksi2] = ... 
+    solve(eq1, eq2, eq3, eq4, n_CH4, n_H2O, ksi1, ksi2);
+
+% masses
+m_CH4= 16*n_CH4 ;
+m_H2O= 18*n_H2O ;
+m_O2 = 32*((7/884)* m_NH3) ; 
+m_N2 = 28*((1/34)* m_NH3) ;
+m_Ar = 40*((1/2652)* m_NH3) ;
 
 
-%out- m_CH4 = masse en tonnes de methane
-%   - m_H2O = masse en tonnes d'eau
-%   - m_O2  = masse en tonnes d'oxygene
-%   - m_N2  = masse en tonnes de nitrogen
-%   - m_Ar  = masse en tonnes d'argon
+disp(['Quantite de CH4 en tonnes par jour : ', ...
+    num2str(roundn(double(m_CH4),-2))])
+disp(['Quantite de H2O en tonnes par jour : ', ... 
+    num2str(roundn(double(m_H2O),-2))])
+disp(['Quantite de O2 en tonnes par jour : ', ...
+    num2str(roundn(double(m_O2),-2))])
+disp(['Quantite de N2 en tonnes par jour : ', ...
+    num2str(roundn(double(m_N2),-2))])
+disp(['Quantite de Ar en tonnes par jour : ', ...
+    num2str(roundn(double(m_Ar),-2))])
 
-m_CH4= 16*n_CH4
-m_H2O= 18*n_H2O
-m_O2 = 32*((7/884)* m_NH3) 
-m_N2 = 28*((1/34)* m_NH3)
-m_Ar = 40*((1/2652)* m_NH3)
+% out = [m_CH4 m_H2O m_O2 m_N2 m_Ar] ;
 
-out = [m_CH4 m_H2O m_O2 m_N2 m_Ar]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Nombre de tubes (pression à l'entrée = 31 bars)
+
+p_tubes = 31e5 ;
+r_tubes = 5e-2 ;
+v_tubes = 2 ;
+tubes = (((n_CH4+n_H2O)*1e6/(24*3600))*R*T)/...
+    (pi*r_tubes^2*v_tubes*p_tubes) ;
+
+disp(['Nombre de tubes : ', ...
+    num2str(ceil(double(tubes)))])
+
 
 end
+
