@@ -16,3 +16,5 @@
 *.run.xml
 #biblatex
 *.bbl
+*.bcf
+*.blg
