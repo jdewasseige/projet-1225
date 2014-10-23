@@ -1,7 +1,7 @@
 \documentclass[a4paper, oneside, 12pt]{article}
 
 \usepackage{../custom}
-\usepackage{float}
+%\usepackage{float}
 
 \addbibresource{biblio.bib}
 
@@ -136,9 +136,9 @@ On en déduit donc les valeurs des enthalpies et entropies
 				 &= \Delta H_{f, T1}^{\circ} 
 	+ A \, t + B \, \frac{t^2}{2}  + C \,  \frac{t^3}{3} 
 	+ D \, \frac{t^4}{4} + \frac{E}{t} + K_{1} \\		 
-	\Delta S_{f, T2}^{\circ} &= \Delta S_{f, T1}^{\circ} + \int_{T1}^{T2} 
+	S_{T2}^{\circ}  &= S_{T1}^{\circ} + \int_{T1}^{T2} 
 	\frac{C_p}{T} \, \dif{T} \\
-				 &= \Delta S_{f, T1} + A \, \ln{t} 
+			&= S_{T1}^{\circ} + A \, \ln{t} 
 	+ B \, t + C \, \frac{t^2}{2} 
 	+ D \, \frac{t^3}{3} - \frac{E}{2 t^{2}} + K_{2} 
 \end{align*}
@@ -195,6 +195,17 @@ Il s'agit maintenant de résoudre 4 équations afin de déterminer nos inconnues
 sont $\xi_1$, $\xi_2$, $n_{\ce{CH4}}$ et $n_{\ce{H2O}}$. 
 On a tout d'abord les deux liées aux activités et constantes $K$, que nous déduisons
 à partir des informations des réactions à l'équilibre.
+
+\begin{align}
+	K_1 &= \frac{p_{tot}^2 \, (\xi_1 - \xi_2) \, (3 \xi_1 + \xi_2)^3}
+	{p_{0}^2 \, (n_{\ce{CH4}} + n_{\ce{H2O}} + 2 \xi_2)^2 \, (n_{\ce{CH4}} - 
+	\xi_1) \, (n_{\ce{H2O}} - \xi_1 - \xi_2 )} 
+	\label{eq:systeme1} \\
+	K_2 &= \frac{\xi_2 \, (3 \xi_1 + \xi_2)}
+	{(\xi_1 - \xi_2) \, (n_{\ce{H2O}} - \xi_1 - \xi_2)}
+	\label{eq:systeme2}
+\end{align}
+
 Les deux suivantes s'appuyent sur le fait que si une mole d'un composé $X$ est
 produite à une réaction $\alpha$, une mole de ce même réactif sera disponible 
 dans la réaction suivante.
@@ -202,11 +213,12 @@ dans la réaction suivante.
 On a pu voir dans le tableau \ref{tab:reaction1_primaire} qu'il reste après 
 équilibre exactement $n_{\ce{CH4}} - \xi_1$ moles de \ce{CH4}, qui seront 
 entièrement consommée pendant le réformage secondaire. 
-Par l'équation \ref{eq:ref_sec}, on a que 
+Par l'équation \ref{eq:moles1_ref_sec}, on a que 
 
-\begin{equation*}
-	n_{\ce{CH4}} - \xi_1 = \frac{7}{442} \, m_{\ce{NH3}} 
-\end{equation*}
+\begin{equation}
+	n_{\ce{CH4}} - \xi_1 = \frac{7}{442} \, m_{\ce{NH3}}
+	\label{eq:systeme3}
+\end{equation}
 
 Pour finir, on remarque que 
 
@@ -216,44 +228,25 @@ Pour finir, on remarque que
 
 on vient de voir (tableau \ref{tab:reaction2_primaire})
 que $n_{\ce{H2}, rp} = 3 \, \xi_1 + \xi_2$, nous connaissons égalemment
-$n_{\ce{H2}, rs}$ (équation \ref{eq:moles1_ref_sec}), on a ensuite 
+$n_{\ce{H2}, rs}$ (équation \ref{eq:moles2_ref_sec}), on a ensuite 
 
 \begin{align*}
 	n_{\ce{H2}, wgs} = n_{\ce{CO}, total} 
 	&= n_{\ce{CO}, rp} + n_{\ce{CO}, rs} \quad &\text{(voir flow-sheet)} \\
 	&= \xi_1 - \xi_2 + \frac{7}{442} \, m_{\ce{NH3}} 
-	\quad &\text{(voir eq.\ref{eq:moles2_ref_sec})}
+	\quad &\text{(voir tableau \ref{tab:reaction2_primaire} et eq \ref{eq:moles1_ref_sec})}
 \end{align*}
 
-Nous résolvons ce système de 4 équations dans le script \texttt{outil.m}.
-
-Grâce à cela, on peut obtenir une expression pour les constantes d'équilibres $K_1$ et $K_2$:
-
-$$K_1=\frac{{p_{tot}}^2}{{p_0}^2} \frac{1}{(n_\ce{CH4}+n_\ce{H2O}+2\xi_{1})^2} \frac{(\xi_{1}-\xi_{2})(3\xi_{1}+\xi_{2})^{-3}}{(n_\ce{CH4}-\xi_{1})(n_\ce{H2O}-\xi_{1}-\xi_{2})}$$
-$$K_2=\frac{\xi_{2} (3\xi_{1}+\xi_{2}}{(\xi_{1}-\xi_{2})(n_\ce{H2O}-\xi_{1}-\xi_{2})}$$
+Ce qui nous donne 
 
 \begin{equation}
-K_1=\frac{{p_{tot}}^2}{{p_0}^2} \frac{1}{(n_\ce{CH4}+n_\ce{H2O}+2\xi)^2} \frac{(\xi-\eta)(3\xi+\eta)^{-3}}{(n_\ce{CH4}-\xi)(n_\ce{H2O}-\xi-\eta)}
-\end{equation}
-\begin{equation}
-K_2=\frac{\eta (3\xi+\eta}{(\xi-\eta)(n_\ce{H2O}-\xi-\eta)}
+	4 \, \xi_1 = \frac{9}{221} \, m_\ce{NH3}
+	\label{eq:systeme4}
 \end{equation}
 
-Ce que l'on peut égaler aux valeurs des constantes trouvées dans la section précédente.
-
-De plus, nous pouvons égaler ce qui sort du réacteur primaire à ce qui rentre dans le réacteur secondaire 
-(trouvé précédemment):
-\begin{equation}
-n_\ce{CH4}-\xi_1=\frac{7m_\ce{NH3}}{442}
-\end{equation}
-
-\begin{equation}
-3\xi_1+\xi_2=\frac{9m_\ce{NH3}}{221}
-\end{equation}
-
-On obtient donc finalement un système de quatre équations à 4 inconnues - où 2 d'entre elles ne sont autres que les débits 
-d'\ce{H2O} et de \ce{CH4} -, que nous pouvons résoudre sur Matlab pour plus de facilité (voir annexe). 
-Comme prévu, ces quantités dépendent de T et de la masse d'ammoniac voulue à la sortie.
+Nous résolvons le système de 4 équations 
+(\ref{eq:systeme1}, \ref{eq:systeme2}, \ref{eq:systeme3}, \ref{eq:systeme4})
+dans \texttt{outil.m}.
 
 \section{Fonctionnement de l'outil de calcul}
 

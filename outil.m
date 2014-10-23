@@ -40,7 +40,7 @@ cp_ch4 = [-0.703029 108.4773 -42.52157 5.862788 ...
 
 t = T/1000 ;
 
-% Calcul des enthalpies et entropies standards à la temperature T
+% Calcul des enthalpies et entropies standards a la temperature T
 calcH = [t t^2/2 t^3/3 t^4/4 -1/t 1 0 0] ; % en kilo Joules
 calcS = [log(t) t t^2/2 t^3/3 -1/(2*t^2) 0 1 0] ;
 
@@ -87,18 +87,18 @@ eq2= K_r2 == (ksi2*(3*ksi1 + ksi2)) ...
     /((ksi1 - ksi2)*(n_H2O - ksi1 - ksi2)) ;
 
 % donnee a l'entree du reformage secondaire
-eq3= n_CH4 - ksi1 == (7/442)*m_NH3 ;
+eq3= n_CH4 - ksi1 == (7/442)*m_NH3*1e6 ;
 
 % donnee a la sortie du reformage secondaire
-eq4= 3*ksi1 + ksi2 == (9/221)*m_NH3 ;
+eq4= 4*ksi1 == (9/221)*m_NH3*1e6 ;
 
 % resoudre le systeme de 4 equations a 4 inconnues 
 [n_CH4,n_H2O,ksi1,ksi2] = ... 
     solve(eq1, eq2, eq3, eq4, n_CH4, n_H2O, ksi1, ksi2);
 
 % masses
-m_CH4= 16*n_CH4 ;
-m_H2O= 18*n_H2O ;
+m_CH4= 16*n_CH4/1e6 ;
+m_H2O= 18*n_H2O/1e6 ;
 m_O2 = 32*((7/884)* m_NH3) ; 
 m_N2 = 28*((1/34)* m_NH3) ;
 m_Ar = 40*((1/2652)* m_NH3) ;
@@ -118,12 +118,13 @@ disp(['Quantite de Ar en tonnes par jour : ', ...
 % out = [m_CH4 m_H2O m_O2 m_N2 m_Ar] ;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Nombre de tubes (pression à l'entrée = 31 bars)
+% Nombre de tubes 
 
-p_tubes = 31e5 ;
-r_tubes = 5e-2 ;
-v_tubes = 2 ;
-tubes = (((n_CH4+n_H2O)*1e6/(24*3600))*R*T)/...
+p_tubes = 31e5 ; % pression a l'entree
+r_tubes = 5e-2 ; % rayon des tubes
+v_tubes = 2 ;    % vitesse superficielle
+
+tubes = (((n_CH4+n_H2O)/(24*3600))*R*T)/...
     (pi*r_tubes^2*v_tubes*p_tubes) ;
 
 disp(['Nombre de tubes : ', ...
