@@ -100,16 +100,11 @@ m_N2 = 28*((1/34)* m_NH3) ;
 m_Ar = 40*((1/2652)* m_NH3) ;
 
 
-disp(['Quantite de CH4 en tonnes par jour : ', ...
-    num2str(roundn(m_CH4,-2))])
-disp(['Quantite de H2O en tonnes par jour : ', ... 
-    num2str(roundn(m_H2O,-2))])
-disp(['Quantite de O2 en tonnes par jour : ', ...
-    num2str(roundn(m_O2,-2))])
-disp(['Quantite de N2 en tonnes par jour : ', ...
-    num2str(roundn(m_N2,-2))])
-disp(['Quantite de Ar en tonnes par jour : ', ...
-    num2str(roundn(m_Ar,-2))])
+fprintf('Quantite de CH4 en tonnes par jour : %.2f \n', m_CH4) ;
+fprintf('Quantite de H20 en tonnes par jour : %.2f \n', m_H2O) ;
+fprintf('Quantite de O2 en tonnes par jour : %.2f \n', m_O2) ;
+fprintf('Quantite de N2 en tonnes par jour : %.2f \n', m_N2) ;
+fprintf('Quantite de Ar en tonnes par jour : %.2f \n', m_Ar) ;
 
 % out = [m_CH4 m_H2O m_O2 m_N2 m_Ar] ;
 
@@ -123,9 +118,7 @@ v_tubes = 2 ;    % vitesse superficielle
 tubes = (((n_CH4+n_H2O)/(24*3600))*R*T)/...
     (pi*r_tubes^2*v_tubes*p_tubes) ;
 
-disp(['Nombre de tubes : ', ...
-    num2str(ceil(double(tubes)))])
-
+fprintf('Nombre de tubes : %d \n', ceil(double(tubes))) ;
 
 end
 
