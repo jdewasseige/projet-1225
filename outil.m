@@ -105,15 +105,15 @@ m_Ar = 40*((1/2652)* m_NH3) ;
 
 
 disp(['Quantite de CH4 en tonnes par jour : ', ...
-    num2str(roundn(double(m_CH4),-2))])
+    num2str(round(double(m_CH4)))])
 disp(['Quantite de H2O en tonnes par jour : ', ... 
-    num2str(roundn(double(m_H2O),-2))])
+    num2str(round(double(m_H2O)))])
 disp(['Quantite de O2 en tonnes par jour : ', ...
-    num2str(roundn(double(m_O2),-2))])
+    num2str(round(double(m_O2)))])
 disp(['Quantite de N2 en tonnes par jour : ', ...
-    num2str(roundn(double(m_N2),-2))])
+    num2str(round(double(m_N2)))])
 disp(['Quantite de Ar en tonnes par jour : ', ...
-    num2str(roundn(double(m_Ar),-2))])
+    num2str(round(double(m_Ar)))])
 
 % out = [m_CH4 m_H2O m_O2 m_N2 m_Ar] ;
 
