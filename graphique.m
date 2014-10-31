@@ -15,11 +15,11 @@ ylabel('pH [/]');
 
 disp('Nous observons 5 points sur le graphique de la figure 1, correspondant aux résultats suivants :');
 disp('Le pH est donné par : pH = -log[H2SO4]');
-disp('Lorsque [H_{2}SO_{4}] = 10^-5 mol/l, le pH vaut 5.');
-disp('Lorsque [H_{2}SO_{4}] = 10^-3 mol/l, le pH vaut 3.');
-disp('Lorsque [H_{2}SO_{4}] = 10^-2 mol/l, le pH vaut 2.');
-disp('Lorsque [H_{2}SO_{4}] = 0.1 mol/l, le pH vaut 1.');
-disp('Lorsque [H_{2}SO_{4}] = 1 mol/l, le pH vaut 0.');
+disp('Lorsque [H2SO4] = 10^-5 mol/l, le pH vaut 5.');
+disp('Lorsque [H2SO4] = 10^-3 mol/l, le pH vaut 3.');
+disp('Lorsque [H2SO4] = 10^-2 mol/l, le pH vaut 2.');
+disp('Lorsque [H2SO4] = 0.1 mol/l, le pH vaut 1.');
+disp('Lorsque [H2SO4] = 1 mol/l, le pH vaut 0.');
 
 % on considere HSO4-, un acide faible
 V = [(1e-5)^2/0.0126,(1e-3)^2/0.0126,(1e-2)^2/0.0126,(1e-1)^2/0.0126,(1e-0)^2/0.0126];
@@ -30,16 +30,16 @@ w = -log10(sqrt(0.0126*v));
 figure();
 plot(v,w,'b',V,W,'b.','Markersize',15);
 
-title('Évolution du pH en fonction de la concentration molaire [mol/l] de H_{2}SO^{-}_{4}');
-xlabel('Concentration molaire de H_{2}SO^{-}_{4} [mol/l]');
+title('Évolution du pH en fonction de la concentration molaire [mol/l] de HSO^{-}_{4}');
+xlabel('Concentration molaire de HSO^{-}_{4} [mol/l]');
 ylabel('pH [/]');
 
 disp('Nous observons 5 points sur le graphique de la figure 2 correspondant aux résultats suivants :');
-disp('Le pH est donné par : pH = -log(sqrt(0.0126*[H2SO4])');
-disp('Lorsque [H_{2}SO_{4}] = 7.9365e-09 mol/l, le pH vaut 5.');
-disp('Lorsque [H_{2}SO_{4}] = 7.9365e-05 mol/l, le pH vaut 3.');
-disp('Lorsque [H_{2}SO_{4}] = 0.0079 mol/l, le pH vaut 2.');
-disp('Lorsque [H_{2}SO_{4}] = 0.7937 mol/l, le pH vaut 1.');
-disp('Lorsque [H_{2}SO_{4}] = 79.3651 mol/l, le pH vaut 0.');
+disp('Le pH est donné par : pH = -log(sqrt(0.0126*[HSO4-])');
+disp('Lorsque [HSO4-] = 7.9365e-09 mol/l, le pH vaut 5.');
+disp('Lorsque [HSO4-] = 7.9365e-05 mol/l, le pH vaut 3.');
+disp('Lorsque [HSO4-] = 0.0079 mol/l, le pH vaut 2.');
+disp('Lorsque [HSO4-] = 0.7937 mol/l, le pH vaut 1.');
+disp('Lorsque [HSO4-] = 79.3651 mol/l, le pH vaut 0.');
 
 end
