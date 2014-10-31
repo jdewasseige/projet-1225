@@ -1,7 +1,7 @@
 \documentclass[a4paper, oneside, 12pt]{article}
 
 \usepackage{../custom}
-%\usepackage{float}
+\usepackage{float}
 
 \addbibresource{biblio.bib}
 
@@ -31,6 +31,7 @@ des variables que sont la température et la quantité d'ammoniac produite
 sur le bilan de matière.
 
 \section{Bilan de matière}
+\label{sec:bilan_matiere}
 
 Une partie de la t\^ache 1 consiste à réaliser un outil de gestion
 pour pouvoir déterminer les quantités de matières première nécessaires,
@@ -45,7 +46,7 @@ que l'ordre des réactions durant tout le processus.
 Un flow-sheet simplifié de l'ensemble du processus détaillant chacune
 des réactions se trouve à la section \ref{sec:flow}.
 
-\subsection{Quantité d'air à introduire en fonction de la production d'azote}
+\subsection{Quantité d'air}
 
 Nous connaissons la masse d'ammoniac à produire par jour, 
 et par conséquent son nombre de moles ($n_{\ce{NH3}} = m_{\ce{NH3}}/M_{\ce{NH3}}$).
@@ -54,27 +55,27 @@ de façon à montrer la relation par rapport au paramètre qui varie.
 
 À partir de la réaction suivante,
 
-\begin{equation}
+\begin{equation*}
 	\ce{\frac{3}{2} \, H2 + \frac{1}{2} \, N2 -> NH3} 
-	\label{eq:ammoniac}
-\end{equation}
+\end{equation*}
 
 on détermine les quantités de \ce{H2} et de \ce{N2} nécessaires.
 
 \begin{align}
-	n_{\ce{H2}} = \frac{3}{34} \, m_{\ce{NH3}} \\
-	n_{\ce{N2}} = \frac{1}{34} \, m_{\ce{NH3}}
+	n_{\ce{H2}} = \frac{3}{34} \, m_{\ce{NH3}} 
+	\label{eq:moles_H2} \\
+	n_{\ce{N2}} = \frac{1}{34} \, m_{\ce{NH3}} \nonumber
 \end{align}
 
 Or la seule source d'azote est lorsque l'air entre dans le réacteur secondaire.
 En connaissant les proportions de l'azote, de l'oxygène et de l'argon dans 
 l'air, on peut facilement obtenir les quantités de \ce{O2} et de \ce{Ar}.
 
-\begin{align}
+\begin{align*}
 	n_{air} = \frac{1}{0.78} \, n_{\ce{N2}} = \frac{25}{663} \, m_{\ce{NH3}} \\
 	n_{\ce{O2}} = 0.21 \, n_{air} = \frac{7}{884} \, m_{\ce{NH3}} \\
-	n_{\ce{Ar}} = 0.01 \, n_{air} = \frac{1}{2652} \, m_{\ce{NH3}}
-\end{align}
+	n_{\ce{Ar}} = 0.01 \, n_{air} = \frac{1}{2652} \, m_{\ce{NH3}} 
+\end{align*}
 
 \subsection{Quantité de méthane et d'eau}
 
@@ -86,10 +87,9 @@ Afin de ne pas oublier à quelle réaction est associée chaque quantité,
 on notera \textit{rp} (resp. \textit{rs}) pour réformage primaire (resp. secondaire)
 et \textit{wgs} pour Water-Gas-Shift.
 
-\begin{equation}
+\begin{equation*}
 	\ce{2CH4 + O2 -> 2CO + 4H2}
-	\label{eq:ref_sec}
-\end{equation}
+\end{equation*}
 
 Dès lors, 
 
@@ -101,7 +101,13 @@ Dès lors,
 	\label{eq:moles2_ref_sec}
 \end{align}
 
-Comme les deux premières réactions sont à l'équilibre,
+Interessons nous maintenant au réformage primaire.
+\begin{align*}
+	&\ce{CH4 + H2O <-> CO + 3H2} \\
+	&\ce{CO + H2O <-> CO2 + H2}
+\end{align*}
+
+Comme les deux réactions sont à l'équilibre,
 il va falloir déterminer leurs constantes d'équilibres sans
 oublier qu'elles s'influencent mutuellement.
 C'est ici qu'intervient le paramètre $T$. On va donc commencer
@@ -135,7 +141,7 @@ On en déduit donc les valeurs des enthalpies et entropies
 	+ \int_{T1}^{T2} C_p \, \dif{T} \\ 
 				 &= \Delta H_{f, T1}^{\circ} 
 	+ A \, t + B \, \frac{t^2}{2}  + C \,  \frac{t^3}{3} 
-	+ D \, \frac{t^4}{4} + \frac{E}{t} + K_{1} \\		 
+	+ D \, \frac{t^4}{4} - \frac{E}{t} + K_{1} \\		 
 	S_{T2}^{\circ}  &= S_{T1}^{\circ} + \int_{T1}^{T2} 
 	\frac{C_p}{T} \, \dif{T} \\
 			&= S_{T1}^{\circ} + A \, \ln{t} 
@@ -147,16 +153,16 @@ Afin de ne pas trop alourdir ce document, les détails des calculs sont ignorés
 
 On détermine ensuite l'enthalpie libre de Gibbs via la relation 
 
-\begin{equation}
+\begin{equation*}
 	\Delta G_{reaction}^{\circ} = \Delta H_{reaction}^{\circ} 
 	- T \, \Delta S_{reaction}^{\circ}
-\end{equation}
+\end{equation*}
 
 et finalement la constante d'équilibre 
 
-\begin{equation}
+\begin{equation*}
 	K(T) = \exp{\left(\frac{- \Delta G}{R \, T}\right)}
-\end{equation}
+\end{equation*}
 
 \paragraph{Calcul des pressions partielles à l'équilibre}
 
@@ -207,12 +213,12 @@ On a tout d'abord les deux liées aux activités et constantes $K$, que nous dé
 \end{align}
 
 Les deux suivantes s'appuyent sur le fait que si une mole d'un composé $X$ est
-produite à une réaction $\alpha$, une mole de ce même réactif sera disponible 
+produite à une réaction $\alpha$, une mole de ce même composé sera disponible 
 dans la réaction suivante.
 
 On a pu voir dans le tableau \ref{tab:reaction1_primaire} qu'il reste après 
 équilibre exactement $n_{\ce{CH4}} - \xi_1$ moles de \ce{CH4}, qui seront 
-entièrement consommée pendant le réformage secondaire. 
+entièrement consommées pendant le réformage secondaire. 
 Par l'équation \ref{eq:moles1_ref_sec}, on a que 
 
 \begin{equation}
@@ -228,7 +234,8 @@ Pour finir, on remarque que
 
 on vient de voir (tableau \ref{tab:reaction2_primaire})
 que $n_{\ce{H2}, rp} = 3 \, \xi_1 + \xi_2$, nous connaissons égalemment
-$n_{\ce{H2}, rs}$ (équation \ref{eq:moles2_ref_sec}), on a ensuite 
+$n_{\ce{H2}}$ (équation \ref{eq:moles_H2})
+et $n_{\ce{H2}, rs}$ (équation \ref{eq:moles2_ref_sec}), on a ensuite 
 
 \begin{align*}
 	n_{\ce{H2}, wgs} = n_{\ce{CO}, total} 
@@ -281,25 +288,33 @@ méthane et de l'eau dans le reformateur primaire.
 
 Soit $x$ le nombre de tubes, nous avons l'équation suivante :
 \[
-V'_{(m^3/s)} = A_{(m^2)}. c'_{(m/s)} .x
+	\dot{V} = A \, \dot{c} \, x
 \]
 
-Avec $V'$ le débit; $A$ la section d'un tuyau 
-et $c'$ la vitesse superficielle à l'entrée du réacteur.
+Avec $\dot{V}$ le débit, $A$ la section d'un tuyau 
+et $\dot{c}$ la vitesse superficielle à l'entrée du réacteur.
 Le volume peut être calculé grace à la loi des gaz parfaits
 \[
-V=\frac{nRT}{P}
+	V = \frac{n R T}{p}
 \]
 
-Si l'on concidère notre calcul en un espace de temps d'1 seconde. 
-La simplification des deux formules ci-dessus nous amène à
+Si l'on considère notre calcul en un temps d'une seconde, 
+la simplification des deux formules ci-dessus nous amène à
 \[
-x=\frac{nRT}{AcP}
+	x = \frac{n R T}{A \dot{c} \, p}
 \]
 
-Ou les seules inconnues sont les nombre de môles de produit rentrant, 
-c'est a dire de $CH_{4}$ et de $H_{2}O$. Ce que nous avons pu déterminer grace au 
-programme MATLAB sachant que 1500 T d'ammoniac était demandée à la sortie.
+Or nous savons que la vitesse superficielle à l'entrée des tubes 
+vaut $2 \si{\meter\per\second}$,
+que leurs diamètre est de $1 \si{\centi\meter}$ (on pourra donc 
+connaître la section d'un tube par $A = \pi \, r^2$),
+et qu'il y a une pression de $31 \si{\bar}$ à l'entrée.
+Les seules inconnues sont donc la température et les nombres de moles
+de produit entrant, c'est-à-dire de \ce{CH4} et de \ce{H2O},
+que nous avons déterminé dans la section \ref{sec:bilan_matiere}.
+
+Prenons l'exemple, pour une quantité d'ammoniac de $1500 \si{\tonne}$.
+
 \begin{align*}
 	n_{CH_{4}} = 7,56 \si{\kilo\per\second} / 0,016 \si{\kilo\per\mole} 
 	= 472,18 \si{\mole\per\second} \\
