@@ -1,6 +1,7 @@
+% Groupe 1125
+
 function out = electrolyse();
 
-% Groupe 1125
 % Annexe 3 - Preparation du laboratoire d'electrolyse.
 % Cette fonction calcule les quantites necessaires de NaOH(5M) 
 % pour avoir un certain pH (11,12,13).
@@ -9,17 +10,15 @@ function out = electrolyse();
 % Elle affiche ensuite un graphique representant
 % [H3O+](eq)/[H2SO4](initial) en fonction du pH.
 
-% Pour obtenir les résultats, les méthodes de calcul et le graphe demandés,
-% il suffit d'exécuter electrolyse().
-
 pH1 = [11 12 13];
 
 result1 = zeros(1,3);
 
 for i=1:3
     result1(i) = 1e-14/10^-pH1(i);
-    fprintf('Pour un pH = %d, il faut %.3f ml de NaOH(5M). \n', pH1(i), result1(i)*200);
+    
 end
+
 
 pH2 = [0 1 2 3 5];
 
@@ -33,7 +32,7 @@ end
 x = linspace(0,14,1000); % pH en abscisses
 
 for i=1:length(x)
-    y(i) = ((10.^-x(i)) + 0.0252)/((10.^-x(i)) + 0.0126); % [H3O+]/[H2SO4] en fct du pH
+    y(i) = ((10.^-x(i)) + 0.0252)/((10.^-x(i)) + 0.0126);
 end
 
 plot(x,y,'b');
@@ -54,8 +53,8 @@ Ka = 0.0126;
 
 syms x ksi positive real
 
-eq1 = Ka == (x + ksi)/(x - ksi)*ksi; % equation obtenue avec le tableau de reaction
-eq2 = pH == -log10(x + ksi); % pH = -log(H3O+)
+eq1 = Ka == (x + ksi)/(x - ksi)*ksi;
+eq2 = pH == -log10(x + ksi);
 
 [x,ksi] = solve(eq1,eq2,x,ksi);
 
