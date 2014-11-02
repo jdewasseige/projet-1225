@@ -1,7 +1,7 @@
-% Groupe 1125
+% Groupe 1125 - Il suffit d'executer la fonction 'electrolyse()' pour 
+%               pour obtenir les informations demandees.
 
 function out = electrolyse();
-
 % Annexe 3 - Preparation du laboratoire d'electrolyse.
 % Cette fonction calcule les quantites necessaires de H2SO4(5M)
 % pour avoir un certain pH.
@@ -25,14 +25,13 @@ end
 
 plot(x,y,'b');
 
-title('Évolution de [H_{3}O^{+}]_{équilibre}/[H_{2}SO_{4}]_{initial} en fonction du pH');
+title('evolution de [H3O+](equilibre) / [H2SO4](initial) en fonction du pH');
 xlabel('pH');
-ylabel('[H_{3}O^{+}]_{équilibre}/[H_{2}SO_{4}]_{initial}');
+ylabel('[H3O+](eq) / [H2SO4](i)');
 
 end 
 
 function out = calcH2SO4(pH);
-
 % Resolution du systeme d'equations a deux inconnues
 % pour determiner la quantite initiale de H2SO4 ainsi
 % que la quantite a l'equilibre de H3O+.
