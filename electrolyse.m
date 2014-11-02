@@ -1,3 +1,5 @@
+% Groupe 1125
+
 function out = electrolyse();
 
 % Annexe 3 - Preparation du laboratoire d'electrolyse.
@@ -15,8 +17,11 @@ for i=1:5
     fprintf('Pour un pH = %d, il faut %.3f ml de H2SO4(5M). \n', pH(i), result(i,1)*200);
 end
 
-x = linspace(0,14,100); % pH en abscisse
-y = (10.^-x + 0.0252)/(10.^-x + 0.0126); % [H3O+]/[H2SO4] en fct du pH
+x = linspace(0,14,100); % pH en abscisses
+
+for i=1:length(x)
+    y(i) = ((10.^-x(i)) + 0.0252)/((10.^-x(i)) + 0.0126);
+end
 
 plot(x,y,'b');
 
