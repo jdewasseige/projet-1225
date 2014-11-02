@@ -9,32 +9,20 @@ function out = electrolyse();
 pH = [0 1 2 3 5];
 
 result = zeros(5,2);
-X = zeros(1,5);
-Y = zeros(1,5);
 
 for i=1:5
     result(i,:) = calcH2SO4(pH(i));
     fprintf('Pour un pH = %d, il faut %.3f ml de H2SO4(5M). \n', pH(i), result(i,1)*200);
-    Y(i) = [result(i,2)/result(i,1)];
-    X(i) = -log10(result(i,2));
 end
 
-x = linspace(0,14,100);
-var = zeros(100,2);
+x = linspace(0,14,100); % pH en abscisse
+y = (10.^-x + 0.0252)/(10.^-x + 0.0126); % [H3O+]/[H2SO4] en fct du pH
 
-for i= 0:100:14
-    var(i,:) = calcH2SO4(x(i)) ;
-end
-    
-for i =1:100
-    y(i) = var(i,2)/var(i,1) ;
-end
+plot(x,y,'b');
 
-plot(x,y,'b',X,Y,'b.','Markersize',15);
-
-title('Évolution du pH en fonction de [H_{3}O^{+}]_{équilibre}/[H_{2}SO_{4}]_{initial}');
-xlabel('[H_{3}O^{+}]_{équilibre}/[H_{2}SO_{4}]_{initial}');
-ylabel('pH');
+title('Évolution de [H_{3}O^{+}]_{équilibre}/[H_{2}SO_{4}]_{initial} en fonction du pH');
+xlabel('pH');
+ylabel('[H_{3}O^{+}]_{équilibre}/[H_{2}SO_{4}]_{initial}');
 
 end 
 
@@ -57,24 +45,5 @@ n_H2SO4 = double(x);
 n_H3O = double(x + ksi);
 
 out = [n_H2SO4 n_H3O];
-
-end
-
-function out = calcpH(a);
-
-% Resolution du systeme de trois equations a trois inconnues
-% pour determiner le pH à partir de a = [H3O+]/[H2SO4].
-
-Ka = 0.0126;
-
-syms x ksi pH positive real
-
-eq1 = Ka == (x + ksi)/(x - ksi)*ksi;
-eq2 = pH == -log10(x + ksi);
-eq3 = a == (x + ksi)/x;
-
-[x,ksi,pH] = solve(eq1,eq2,eq3,x,ksi,pH);
-
-out = pH;
 
 end
