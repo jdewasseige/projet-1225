@@ -15,12 +15,20 @@ Y = zeros(1,5);
 for i=1:5
     result(i,:) = calcH2SO4(pH(i));
     fprintf('Pour un pH = %d, il faut %.3f ml de H2SO4(5M). \n', pH(i), result(i,1)*200);
-    X(i) = [result(i,2)/result(i,1)];
-    Y(i) = -log10(result(i,2));
+    Y(i) = [result(i,2)/result(i,1)];
+    X(i) = -log10(result(i,2));
 end
 
-x = linspace (0,1,1000);
-y = calcpH(x);
+x = linspace(0,14,100);
+var = zeros(100,2);
+
+for i= 0:100:14
+    var(i,:) = calcH2SO4(x(i)) ;
+end
+    
+for i =1:100
+    y(i) = var(i,2)/var(i,1) ;
+end
 
 plot(x,y,'b',X,Y,'b.','Markersize',15);
 
