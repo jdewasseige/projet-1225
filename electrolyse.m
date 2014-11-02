@@ -9,8 +9,8 @@ function out = electrolyse();
 % Elle affiche ensuite un graphique representant
 % [H3O+](eq)/[H2SO4](initial) en fonction du pH.
 %
-% Pour obtenir les résultats, les méthodes de calcul et le graphe demandés,
-% il suffit d'exécuter electrolyse().
+% Pour obtenir les resultats, les methodes de calcul et le graphe demandes,
+% il suffit d'executer electrolyse().
 
 pH1 = [11 12 13];
 result1 = zeros(1,3);
