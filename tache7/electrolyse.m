@@ -17,7 +17,7 @@ pH1 = [11 12 13];
 result1 = zeros(1,3);
 
 for i=1:3
-    result1(i) = 1e-14/10^-pH1(i);
+    result1(i) = 1e-14/10^-pH1(i); % pH = -log(10^-14/[OH-])
     fprintf('Pour un pH = %d, il faut %.3f ml de NaOH(5M). \n', pH1(i), result1(i)*200);
 end
 
@@ -27,7 +27,7 @@ pH2 = [0 1 2 3 5];
 result2 = zeros(5,2);
 
 for i=1:5
-    result2(i,:) = calcH2SO4(pH2(i));
+    result2(i,:) = calcH2SO4(pH2(i)); % la fonction calcH2SO4 est à la fin
     fprintf('Pour un pH = %d, il faut %.3f ml de H2SO4(5M). \n', pH2(i), result2(i,1)*200);
 end
 
@@ -37,7 +37,7 @@ for i=1:length(x)
     y(i) = ((10.^-x(i)) + 0.0252)/((10.^-x(i)) + 0.0126); % [H3O+]/[H2SO4] en fct du pH
 end
 
-plot(x,y,'b');
+plot(x,y,'b'); % graphe
 
 title('Evolution de [H3O+](equilibre) / [H2SO4](initial) en fonction du pH');
 xlabel('pH');
