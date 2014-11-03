@@ -53,16 +53,15 @@ function out = calcH2SO4(pH);
 Ka1 = 1000;
 Ka2 = 0.0126;
 
-syms x ksi1 ksi2 positive real
+syms x ksi positive real
 
-eq1 = Ka1 == (ksi1^2)/(x-ksi1) ; % reaction de H2SO4
-eq2 = Ka2 == (ksi1 + ksi2)/(ksi1 - ksi2)*ksi2; % reaction de HSO4-
-eq3 = pH == -log10(ksi1 + ksi2); % pH = -log(H3O+)
+eq1 = Ka2 == (x + ksi)/(x - ksi)*ksi; % reaction de HSO4-
+eq2 = pH == -log10(x + ksi); % pH = -log(H3O+)
 
-[x,ksi1,ksi2] = solve(eq1,eq2,eq3,x,ksi1,ksi2);
+[x,ksi] = solve(eq1,eq2,x,ksi);
 
 n_H2SO4 = double(x);
-n_H3O = double(ksi1 + ksi2);
+n_H3O = double(x + ksi);
 
 out = [n_H2SO4 n_H3O];
 
