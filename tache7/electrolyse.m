@@ -1,6 +1,7 @@
 function out = electrolyse();
 
 % Groupe 1125
+
 % Annexe 3 - Preparation du laboratoire d'electrolyse.
 % Cette fonction calcule les quantites necessaires de NaOH(5M) 
 % pour avoir un certain pH (11,12,13).
