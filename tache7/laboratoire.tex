@@ -1,0 +1,71 @@
+\documentclass[12pt,oneside]{article}
+
+\input{../custom.sty}
+
+\title{Annexe 3 - Préparation du laboratoire d'électrolyse}
+\author{Groupe 1225}
+\date{Lundi 3 Novembre}
+
+\begin{document}
+
+\maketitle
+
+Les valeurs exactes demandées ainsi que le graphique de l'évolution de l'équilibre
+dans la solution en acide sulfurique en fonction du pH sont obtenus en
+exécutant la fonction \texttt{electrolyse.m}.
+
+\section{Solution à pH acide}
+
+Nous devons déterminer le volume (en \si{\milli\liter}) de \ce{H2SO4} (5M)
+nécessaire pour atteindre un certain pH.
+Il s'agit donc de prendre en compte le fait qu'une fois que tout 
+le \ce{H2SO4} sera transformé en \ce{HSO4-}, celui-ci à son tour contribuera
+à l'augmentation du pH étant donné que c'est un acide faible.
+
+Les deux réactions sont les suivantes
+
+\begin{align*}
+	\ce{H2SO4 + H2O <-> HSO4- + H3O+} \\
+	\ce{HSO4- + H2O <-> SO4^{2-} + H3O+}
+\end{align*}
+
+On connait le pH de la solution, $K_{a1}$\footnote{On observe que malgré le fait 
+que $K_{a1}$ soit très grand, la réaction n'est pas totalement complète et il est
+donc important de calculer l'équilibre pour la première fonction de \ce{H2SO4}.}
+et $K_{a2}$ qui sont les constantes d'équilibre associées respectivement 
+à la première et la seconde réaction.
+
+On obtient donc un système de trois équations où les trois inconnues
+sont $x$ le nombre de moles initial de \ce{H2SO4}, $\xi_1$ et $\xi_2$
+les degrés d'avancement des réactions.
+
+\begin{align*}
+	K_{a1} &= \frac{\xi_1^2}{x - \xi_1} \\
+	K_{a2} &= \frac{\xi_2 \, (\xi_1 + \xi_2)}{\xi_1 - \xi_2} \\
+	\text{pH} &= - \log_{10}{(\xi_1 + \xi_2)} 
+\end{align*}
+
+Ce système est résolu dans \texttt{electrolyse.m}.
+
+\section{Solution à pH basique}
+
+Nous devons à nouveau déterminer le volume (en \si{\milli\liter}) 
+de \ce{NaOH} (5M) nécessaire pour atteindre un certain pH.
+Cette partie est beaucoup plus simple étant donné que l'hydroxide de sodium
+est une base forte et n'a qu'une seule fonction basique.
+
+Par la relation suivante
+
+\[
+	[\ce{OH-}] \cdot [\ce{H3O+}] = 10^{-14} 
+\]
+On trouve très facilement que 
+
+\[
+	V_{\ce{NaOH}} = \frac{10^{-14}}{10^{- \text{pH}}} \cdot 200 
+	\quad \text{(en \si{\milli\liter})}
+\]
+
+
+
+\end{document}
