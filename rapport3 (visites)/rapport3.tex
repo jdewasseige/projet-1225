@@ -1,0 +1,64 @@
+\documentclass[a4paper, oneside, 12pt]{article}
+
+\usepackage{../custom}
+
+\title{Rapport des activités de terrain}
+\author{Groupe 1225}
+\date{12 Novembre 2014}
+
+\begin{document}
+
+\maketitle
+
+\section{Biométhanisation à Tenneville}
+
+\section{Unités-pilotes R\&D Total-Fina à Feluy}
+
+\section{Production de dihydrogène par électrolyse}
+
+L'électrolyse de l'eau est un procédé qui permet de décompose celle-ci en dioxygène et en dihydroègne, tous deux à l'état gazeux.
+
+\begin{equation*}
+	\ce{H2O_{(g)} \rightleftharpoons  \frac{1}{2} \, O2_{(g)} + H2_{(g)}} 
+\end{equation*}
+
+Afin de produire du dihydrogène gazeux en quantités décentes, l'électrolyse de l'eau demande énormément d'énergie électrique (sous forme de courant). De plus,le rendement de la réaction d'électrolyse de l'eau ne dépasse en général jamais les 50\%, et améliorer celui-ci demanderait une trop grande tension électrique.
+
+Sur base des expérimentations effectuées en laboratoire, nous observons que plus le milieu de la réaction est acide plus son degré d'avancement augmente. Il est donc préférable de réaliser cette réaction dans un milieu dont le pH est proche de zéro.
+
+De plus, nous remarquons que pour un même volume de dihydrogène produit, plus l'intensité du courant est élevée, plus le temps nécessaire à la production du dihydrogène est faible. En fait, le courant et le temps sont inversément proportionnels. Nous pouvons écrire la relation suivante : 
+
+\begin{equation*}
+	It = constante
+\end{equation*}
+
+où I est l'intensité du courant électrique, et t, le temps écoulé. Cela dit bien que lorsqu'on augmente le courant, le temps diminue dans un rapport identique.
+
+Si nous devions produire le dihydrogène dont nous avons besoin en utilisant la réaction d'électrolyse de l'eau, il faudrait tout d'abord veiller à ce que le pH soit le plus faible possible. Ensuite, nous devrions calculer l'intensité du courant nécessaire pour obtenir le débit de dihydrogène voulu.
+
+Par exemple, si nous voulons une production de 1500 tonnes d'ammoniac par jour (en prenant une température de 1000 K pour le reformeur primaire), nous savons grâce à notre outil de calcul qu'il faut par conséquent 266,32 tonnes de dihydrogène par jour. Cela nous donne un débit massique de 184,944 kg/minute.
+
+Ensuite, à l'aide des résultats obtenus lors du laboratoire, nous savons qu'avec un courant de 1 A, nous produisons 8 ml de dihydrogène par minute. Considérons maintenant que le dihydrogène se comporte comme un gaz parfait, nous pouvons appliquer :
+
+\begin{equation*}
+	pV = mR^{*}T
+\end{equation*}
+
+et donc caluler la masse de dihydrogène, sachant que la réaction se déroule sous des conditons standards de température (298,15 K) et de pression (1 bar). Nous obtenons ainsi qu'en faisant circuler un courant de 1 A, nous produisons $6,4547.10^{-7}$ kg/min de dihydrogène.
+
+Pour atteindre un débit massique de 184,8 kg/min, il faut donc un courant électrique de $2,865.10^8 A$. A partir de la résistance totale du système au sein duquel se déroule la réaction d'électrolyse, qui est de 14 $\Omega$, nous pouvons calculer la puissance électrique nécessaire : 
+
+\begin{equation*}
+	P = RI^{2}
+\end{equation*}
+
+Elle est donc égale à $1,15.10^{9}$ GigaWatts.
+
+Nous remarquons effectivement que l'électrolyse de l'eau demande beaucoup trop d'énergie pour produire de dont nous avons besoin. C'est pour cela que l'électrolyse est très peu utilisée à l'échelle industrielle. Il est donc préférable dans notre cas de se contenter du vaporeformage, malgré le fait qu'il émette du dioxyde de carbone.
+
+\section{Production d'ammoniac Yara à Tertre}
+
+\section{Atelier créativité}
+
+\end{document}
+
