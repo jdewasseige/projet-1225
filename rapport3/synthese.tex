@@ -1,0 +1,27 @@
+\begin{tikzpicture}
+[node distance = 7em]
+
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+    text width=10em, text centered, rounded corners, minimum height=3em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=2cm,
+    minimum height=1em]
+    
+\node [block] (compresseur) {Compresseur/Synthèse};
+\node [cloud, right = 4em of compresseur] (input) {Input};
+\node [block, below = 3em of compresseur] (cooler) {Refroidisseur};
+\node [block, right = 7em of cooler] (separation) {Separation};
+\node [cloud, above = 3em of separation] (output) {Output};
+
+\path [line] (input) -- node[anchor = south] {\ce{N2} \ce{H2}}
+	(compresseur);
+\path [line,dashed] (compresseur) -- node[anchor = east] {\ce{NH3_{(g)}} \ce{NH3_{(l)}}} 
+	(cooler);
+\path [line,dashed] (cooler) -- node[anchor = north] {\ce{NH3_{(g)}} \ce{NH3_{(l)}}} 
+	(separation);
+\path [line,dashed] (separation) -- node[anchor = west] {\ce{NH3_{(l)}}}
+	(compresseur);
+\path [line] (separation) -- node[anchor = west] {\ce{NH3_{(g)}}} 
+	(output);
+\end{tikzpicture}
+

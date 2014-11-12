@@ -1,6 +1,7 @@
 \documentclass[a4paper, oneside, 12pt]{article}
 
 \usepackage{../custom}
+\usepackage{float}
 
 \title{Rapport des activités de terrain}
 \author{Groupe 1225}
@@ -45,10 +46,11 @@ Quelques chiffres :
 	\item Production de gaz : $55\%$ de \ce{CH4}, $44\%$ de \ce{CO2} + autres gaz
 \end{itemize}
 
-\section{Visite du centre Total Research Technology Feluy}
+\section{Visite du centre Total Research Technoloigy Feluy}
 
 \subsection{Catalyse}
- 
+\label{subsec:catalyse}
+
 L'utilisation d'un catalyseur est essentielle pour de nombreuses réactions industrielles 
 effectuées aujourd'hui. De nombreuses réactions ne seraient même pas possibles sans 
 l'utilisation d'un catalyseur.
@@ -69,7 +71,7 @@ deux structures ayant des applications différentes.
  
 Trouver le bon catalyseur est donc essentiel dans la chimie moderne.
  
-\subsection{Unités Piliotes}
+\subsection{Unités Pilotes}
  
 Le développement de nouveaux procédés ou catalyseurs commence tout d'abord en laboratoire,
 ou de microréacteurs permettent de tester la viabilité des nouveaux développements.
@@ -156,6 +158,47 @@ utilisée à l'échelle industrielle. Il est donc préférable dans notre cas de
 du vaporeformage, malgré le fait qu'il émette du dioxyde de carbone.
 
 \section{Visite du plant de Yara à Tertre}
+
+Le plant de Yara fabrique des engrais et produit lui-même son propre ammoniac nécessaire
+pour créer ces engrais. Avoir une production locale d'ammoniac permet non seulement 
+d'éviter des coûts important mais aussi d'éviter le transport de celui-ci car 
+il est toxique dans certaine conditions.
+
+Tout d'abord le réacteur où est synthétisé l'ammoniac est à une pression de $130 \si{\bar}$.
+Comme décrit dans la section \ref{subsec:catalyse}, l'utilisation de catalyseurs dans la
+production du méthane est fondamentale. Un catalyseur est utilisé lorsque la barrière 
+énergétique pour qu'une réaction se produise est trop haute, il va diminuer l'énergie 
+d'activation sans modifier le chemin réacionnel.
+
+Le diagramme de la figure \ref{fig:synthese} présente le fonctionnement simplifié des 
+réacteurs de synthèse d'ammoniac. Il est important de préciser que le \emph{input} est
+tout d'abord composé d'hydrogène et d'azote mais aussi de résidus de méthane, d'argon 
+et d'hélium. Ceux-ci sont éliminés via différentes techniques de séparation (ex: par 
+des membranes semi-perméables). 
+
+\begin{figure}[h!]
+	\begin{center}
+		\input{synthese.tex}
+	\end{center}
+	\caption{Fonctionnement simplifié de la synthèse d'ammoniac.}
+	\label{fig:synthese}
+\end{figure}
+
+Une autre information importante concerne la quantité d'énergie nécessaire pour produire
+une tonne d'ammoniac. Théoriquement on devrait avoir besoin de $20 \si{\giga\joule/\tonne}$
+pour l'ensemble du processus, on observe cependant qu'il nous faut 
+pratiquement $30 \si{\giga\joule/\tonne}$. On remarque donc qu'une partie 
+importante de l'énergie est perdue à travers les différentes transformations, 
+ces pertes peuvent provenir par exemple d'une qualité non-optimale (d'un point de vue 
+de rendement) des réacteurs ou de tuyauteries peu isolantes thermiquement.
+
+Le dernier point essentiel de la visite concerne la partie impact environnemental 
+de la société. On compte environ $1000$ tonnes par jour de \ce{CO2} produit, une moitié
+dite impure sera rejetée dans l'atmosphère tandis que l'autre moitié, dite pure, 
+sera reliquéfiée pour ensuite être revendue (utile pour la production de bière par exemple).
+On notera aussi le rejet de composés très polluants tels que le \ce{NO2} et le \ce{NOx} 
+qui proviennent des fumées du reformage primaire à cause d'un manque d'efficacité
+du brûleur.
 
 \section{Atelier créatif (conduite de brainstorming)}
 
