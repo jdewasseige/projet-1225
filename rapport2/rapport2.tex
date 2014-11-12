@@ -72,9 +72,9 @@ En connaissant les proportions de l'azote, de l'oxygène et de l'argon dans
 l'air, on peut facilement obtenir les quantités de \ce{O2} et de \ce{Ar}.
 
 \begin{align*}
-	n_{air} = \frac{1}{0.78} \, n_{\ce{N2}} = \frac{25}{663} \, m_{\ce{NH3}} \\
-	n_{\ce{O2}} = 0.21 \, n_{air} = \frac{7}{884} \, m_{\ce{NH3}} \\
-	n_{\ce{Ar}} = 0.01 \, n_{air} = \frac{1}{2652} \, m_{\ce{NH3}} 
+	n_{\text{air}} = \frac{1}{0.78} \, n_{\ce{N2}} = \frac{25}{663} \, m_{\ce{NH3}} \\
+	n_{\ce{O2}} = 0.21 \, n_{\text{air}} = \frac{7}{884} \, m_{\ce{NH3}} \\
+	n_{\ce{Ar}} = 0.01 \, n_{\text{air}} = \frac{1}{2652} \, m_{\ce{NH3}} 
 \end{align*}
 
 \subsection{Quantité de méthane et d'eau}
@@ -154,15 +154,15 @@ Afin de ne pas trop alourdir ce document, les détails des calculs sont ignorés
 On détermine ensuite l'enthalpie libre de Gibbs via la relation 
 
 \begin{equation*}
-	\Delta G_{reaction}^{\circ} = \Delta H_{reaction}^{\circ} 
-	- T \, \Delta S_{reaction}^{\circ}
+	\Delta G_{\text{reaction}}^{\circ} = \Delta H_{\text{reaction}}^{\circ} 
+	- T \, \Delta S_{\text{reaction}}^{\circ}
 \end{equation*}
 
 et finalement la constante d'équilibre 
 
-\begin{equation*}
-	K(T) = \exp{\left(\frac{- \Delta G}{R \, T}\right)}
-\end{equation*}
+\[ 
+K(T) = \exp{\left(\frac{- \Delta G}{R \, T}\right)} 
+\]
 
 \paragraph{Calcul des pressions partielles à l'équilibre}
 
@@ -238,7 +238,7 @@ $n_{\ce{H2}}$ (équation \ref{eq:moles_H2})
 et $n_{\ce{H2}, rs}$ (équation \ref{eq:moles2_ref_sec}), on a ensuite 
 
 \begin{align*}
-	n_{\ce{H2}, wgs} = n_{\ce{CO}, total} 
+	n_{\ce{H2}, wgs} = n_{\ce{CO}, \text{total}} 
 	&= n_{\ce{CO}, rp} + n_{\ce{CO}, rs} \quad &\text{(voir flow-sheet)} \\
 	&= \xi_1 - \xi_2 + \frac{7}{442} \, m_{\ce{NH3}} 
 	\quad &\text{(voir tableau \ref{tab:reaction2_primaire} et eq \ref{eq:moles1_ref_sec})}
@@ -293,7 +293,10 @@ Soit $x$ le nombre de tubes, nous avons l'équation suivante :
 
 Avec $\dot{V}$ le débit, $A$ la section d'un tuyau 
 et $\dot{c}$ la vitesse superficielle à l'entrée du réacteur.
-Le volume peut être calculé grace à la loi des gaz parfaits
+Le volume peut être calculé grace à la loi des gaz parfaits,
+on considère donc que \ce{H2O} se comporte comme un gaz parfait,
+pour plus de précision on pourra éventuellement utiliser l'équation
+d'état de van der Waals.
 \[
 	V = \frac{n R T}{p}
 \]
@@ -306,8 +309,8 @@ la simplification des deux formules ci-dessus nous amène à
 
 Or nous savons que la vitesse superficielle à l'entrée des tubes 
 vaut $2 \si{\meter\per\second}$,
-que leurs diamètre est de $1 \si{\centi\meter}$ (on pourra donc 
-connaître la section d'un tube par $A = \pi \, r^2$),
+que leurs diamètre est de $1 \si{\centi\meter}$ 
+(la section d'un tube est $A = \pi r^2$),
 et qu'il y a une pression de $31 \si{\bar}$ à l'entrée.
 Les seules inconnues sont donc la température et les nombres de moles
 de produit entrant, c'est-à-dire de \ce{CH4} et de \ce{H2O},
@@ -322,56 +325,71 @@ Prenons l'exemple, pour une quantité d'ammoniac de $1500 \si{\tonne}$.
 	= 1052,22 \si{\mole\per\second}
 \end{align*}
 
-Grâce aux autres valeurs données dans l'énoncé nous pouvons calculer le nombre de tubes nécessaire 
+Grâce aux autres valeurs données dans l'énoncé 
+nous pouvons calculer le nombre de tubes nécessaire 
 
 \[
-x = \frac{(n_{CH_{4}}+n_{H_{2}O})8,314.1080}{\pi(0,05^2).2.(31.10^5)} = 281,1
+	x = \frac{(n_{CH_{4}}+n_{H_{2}O}) \cdot 8,314 \cdot1080}
+	{\pi(0,05^2) \cdot 2 \cdot (31.10^5)} = 281,1
 \]
 
-Il faut donc 282 tuyaux pour assurer l'approvionnnement des composés dans le reformateur primaire.
+Il faut donc 282 tuyaux pour assurer l'approvionnnement 
+des composés dans le reformateur primaire.
 
-\section{Bilan énergétique de la partie réformateur primaire-four}
+La fonction \texttt{getTubesNumber.m} donne le
+nombre de tubes requis en fonction des paramètres de départ (la masse d'ammoniac 
+à produire et la température du réformeur primaire).
 
-Afin de connaître les quantités de \ce{CH4} et de \ce{O2} à introduire dans le four 
-afin de garder le réformateur primaire à température constante nous devons étudier 
-les réactions ayant lieu dans ce réformateur. Les calculs exposés dans cette section 
-sont fait pour une température dans le réformateur de 1080K et pour une production 
-journalière d'ammoniac de 1500T. Bien sur ces résultats sont facilement transposables
-à d'autres données grace au code MATLAB.
+\section{Bilan énergétique de la partie réformeur primaire-four}
 
-Tout d'abord nous allons calculer les enthalpies des différentes réactions qui nous intéressent:
+La première réaction - le craquage du méthane - qui se produit dans le réformeur primaire,
+est une réaction endothermique. Nous devons donc lui fournir de l'énergie sous 
+forme de chaleur, ce r\^ole va être rempli par le four. 
+La réaction de combustion qui a lieu dans le four est la suivante
 
-\begin{itemize}
-\item{\ce{CH4 + H2O <=> CO + 3H2} \\
-$\Delta H_{reac1} (1080)=\int_{298.15}^{1080} Cp$ $dT = 226,94 kJ/mol$ (endothermique)}
-\item{\ce{CO + H2O <=> CO2 + H2} \\
-En appliquant la même formule on obtient: $\Delta H_{reac2} (1080) = -35,55 kJ/mol$ (exothermique)}
-\item{\ce{CH4 + 2O2 -> CO2 + 2H2O} \\
-En appliquant la même formule on obtient: $\Delta H_{reac3} (1080) = -803,56 kJ/mol$ (exothermique)}
-\end{itemize}
-
-
-Après quelques calculs, on trouve que $478,17$ moles de \ce{CH4} sont injectées 
-par seconde dans le réformateur primaire, mais que seules $42.5\%$ de ces moles 
-y "réagissent vraiment" (le reste va au secondaire).
-Pour la 2ème réaction du réformateur primaire, seules 13,5\% des moles "réagissent vraiment". 
-De là, on peut calculer le bilan énergétique dans le réformateur primaire: 
 \[
-\Delta U = (478,17 * 0,425) * (\Delta H_{reac1} (1080) + \Delta H_{reac2} (1080) * 0,135)
-= 45143,94 \si{\kilo\joule\per\second}
+	\ce{CH4 + 2O2 -> CO2 + 2H2O}
 \]
-On sait que $\Delta H_{reac3} (1080) = -803,56 kJ/mol$, on peut en déduire le nombre de 
-moles/s de \ce{CH4} dont on a besoin pour compenser le $\Delta U$ du réformateur primaire. 
 
-On obtient: n = 56,18 moles/s.
-On sait que le rendement énergétique du four est de 75\%.
-On aura donc besoin de 74,9 moles/s de \ce{CH4}, soit 1,2kg/s pour approvisionner le four. 
+Afin de connaître les quantités de méthane et d'oxygène qu'il faut
+introduire dans le four, nous devons étudier les bilans énergétiques
+des réactions ayant lieu dans ce réformateur. Les calculs exposés dans cette section 
+sont fait pour une température dans le réformateur de $1080 \si{\kelvin}$
+et pour une production journalière d'ammoniac de $1500 \si{\tonne}$. 
+Bien sur ces résultats sont facilement transposables
+à d'autres données à l'aide de notre outil de gestion.
 
+Il faut tout d'abord calculer la chaleur nécessaire dans le réformeur primaire.
+La différence d'enthalpie de réaction du craquage du méthane vaut $+225.7 \si{\kilo\joule}$
+à $1000 \si{\kelvin}$, et celle de la deuxième réaction
+vaut $-34.8 \si{\kilo\joule}$ à la même température.
+La première est fortement endothermique tandis que la deuxième est exothermique.
+Il faut fournir une quantité de chaleur $Q$ pour que la réaction endothermique
+puisse avoir lieu, tout en tenant compte que le rendement énergétique de 
+la réaction de combustion du four vaut $\eta = 0.75$.
+Le nombre de moles qui vont réagir dans les réactions du réformeur primaire 
+sont $\xi_1$ et $\xi_2$ (tableaux \ref{tab:reaction1_primaire} 
+et \ref{tab:reaction2_primaire}).
+
+On a donc que 
+\[
+	Q = n_{\ce{CH4},\text{four}} \cdot \Delta_r H_{\text{four}} \cdot \eta
+\]
+
+et 
+\[
+	-Q = \xi_1 \cdot \Delta_r H_{rp,1} + \xi_2 \cdot \Delta_r H_{rp,2}
+\]
+
+On obtient une équation à résoudre pour obtenir $n_{\ce{CH4},\text{four}}$, et on a ensuite
+la quantité d'oxygène qu'il faut insérer $n_{\ce{O2},\text{four}} = 2 \cdot n_{\ce{CH4},\text{four}}$.
+
+Ce bilan énergétique est modélisé dans \texttt{getHovenMasses.m}.
 
 \section{Flow-sheet}
 \label{sec:flow}
 
-\begin{figure}
+\begin{figure}[h!]
 	\begin{center}
 		\input{flow.tex}
 	\end{center}

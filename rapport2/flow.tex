@@ -20,7 +20,8 @@
 \node [cloud, above = 3em of primaire] (CH4) {\ce{CH4}};
 \node [block, below of=primaire] (secondaire) {Reformage secondaire ($\simeq 1200K$)\\
 	\ce{2CH4 + O2 -> 2CO + 4H2}};
-\node [cloud, right = 1em of secondaire] (air) {Air ($21\% \ce{O2} 78\% \ce{N2} 1\% \			ce{Ar}$)};
+\node [cloud, right = 1em of secondaire] (air) {Air ($21\% \ce{O2} 78\% \ce{N2} 
+	1\% \ce{Ar}$)};
 \node [block, below of=secondaire] (wgs) {Water-Gas-Shift ($\simeq 500-700K$)
 	\ce{CO + H2O -> CO2 + H2}};
 \node [block, below of=wgs] (abso) {Absorbtion du \ce{CO2} et compression};	
@@ -33,7 +34,8 @@
 \node [decision, right = 2em of synthese] (argon) {\ce{Ar}};
 
 
-\path [line] (primaire) -- node[anchor = east] {\ce{H2} \ce{CH4} \ce{CO2} \ce{CO} \ce{H2O}}(s	econdaire);
+\path [line] (primaire) -- node[anchor = east] {\ce{H2} \ce{CH4} \ce{CO2} \ce{CO} \ce{H2O}}
+	(secondaire);
 \path [line] (four) -- node[anchor = south] {\textbf{E}}(primaire);
 \path [line,dashed] (CH4) -- (four);
 \path [line,dashed] (CH4) -- (primaire);
