@@ -1,0 +1,147 @@
+\documentclass[a4paper, oneside, 12pt]{article}
+
+\usepackage{../custom}
+
+\title{Rapport des activités de terrain}
+\author{Groupe 1225}
+\date{12 Novembre 2014}
+
+\begin{document}
+
+\maketitle
+
+\section{Visite de la station de biométhanisation de l’AIVE
+à Tenneville}
+
+\section{Visite du centre Total Research Technology Feluy}
+
+\subsection{Catalyse}
+ 
+L'utilisation d'un catalyseur est essentielle pour de nombreuses réactions industrielles effectuées aujourd'hui. De nombreuses réactions ne seraient même pas possibles sans l'utilisation d'un catalyseur.
+ 
+Un catalyseur réduit l'énergie d'activation d'une réaction en affaiblissant les liens électroniques des molécules devant réagir, ou en affaiblissant les liens entre les molécules des réactifs. Certains catalyseurs sont en pratique ``consommés'' durant la réaction (ex: emprisonnés dans les molécules) et d'autres ne sont simplement pas affectés par les réactions. 
+
+Dans de nombreuses réactions, les catalyseurs ont également d'autres rôles. Suivant le catalyseur utilisé, certaines réactions seront favorisées au détriment d'autres (il faut donc trouver un catalyseur favorisant la réaction voulue). Le catalyseur peut également déterminer la structure des molécules obtenues lors d'une cristallisation. Suivant le catalyseur utilisé lors de la synthèse de polyéthylène, on obtiendra une poudre fine ou de plus gros grains, deux structures ayant des applications différentes.
+ 
+Trouver le bon catalyseur est donc essentiel dans la chimie moderne.
+ 
+\subsection{Unités Pilotes}
+ 
+Le développement de nouveaux procédés ou catalyseurs commence tout d'abord en laboratoire, ou de microréacteurs permettent de tester la viabilité des nouveaux développements. Si un catalyseur ou un procédé est considéré comme intéressant, il va ensuite être testé dans une unité pilote. 
+
+Différentes réactions demandent différents réacteurs, et le réacteur idéal pour une nouvelle réaction est déterminé en laboratoire.
+ 
+Les unités pilotes sont des réacteurs industriels réduits utilisés pour tester de nouvelles réactions ou de nouveaux procédés. Les unités pilotes sont beaucoup plus modulables que les unités industrielles. Celles-ci vont permettre de détecter d'éventuels problèmes qui sont passés inaperçus lors des tests en laboratoires, ainsi que de déterminer les conditions idéales pour l'utilisation des nouvelles réactions. Si un nouveau produit (nouvelle structure ou autre) est considéré comme intéressant, les unités pilotes vont permettre de produire une quantité limitée de ce nouveau produit afin de fournir des échantillons à des partenaires commerciaux. Elles évitent ainsi de devoir reconfigurer des plants de grande taille.
+
+\section{Laboratoire d’électrolyse}
+
+L'électrolyse de l'eau est un procédé qui permet de décomposer celle-ci en dioxygène 
+et en dihydroègne, tous deux à l'état gazeux.
+
+\begin{equation*}
+	\ce{H2O_{(g)} \rightleftharpoons \frac{1}{2} \, O2_{(g)} + H2_{(g)}} 
+\end{equation*}
+
+Afin de produire du dihydrogène gazeux en quantités décentes, l'électrolyse de l'eau 
+demande énormément d'énergie électrique (sous forme de courant). De plus, le rendement
+de la réaction d'électrolyse de l'eau ne dépasse en général jamais les $50\%$, 
+et améliorer celui-ci demanderait une trop grande tension électrique.
+
+Sur base des expérimentations effectuées en laboratoire, nous observons que plus 
+le milieu de la réaction est acide plus son degré d'avancement augmente. Il est donc
+préférable de réaliser cette réaction dans un milieu où le pH est proche de zéro.
+
+
+\begin{equation*}
+	It = \text{constante}
+\end{equation*}
+
+où I est l'intensité du courant électrique, et t, le temps écoulé.
+Cela dit bien que lorsqu'on augmente le courant, le temps diminue dans un rapport identique.
+
+Si nous devions produire le dihydrogène dont nous avons besoin en utilisant la 
+réaction d'électrolyse de l'eau, il faudrait tout d'abord veiller à ce que le pH soit le
+plus faible possible. Ensuite, nous devrions calculer l'intensité du courant nécessaire
+pour obtenir le débit de dihydrogène voulu.
+
+Par exemple, si nous voulons une production de $1500 \si{\tonne}$ d'ammoniac par 
+jour (en prenant une température de $1000 \si{\kelvin}$ pour le reformeur primaire),
+nous savons grâce à notre outil de calcul qu'il faut $266,32 \si{\tonne}$ de dihydrogène
+par jour. Cela nous donne un débit massique de $184,944 \, \si{\kilo\gram/\minute}$.
+
+Ensuite, à l'aide des résultats obtenus lors du laboratoire, nous savons qu'avec 
+un courant de $1 \si{\ampere}$, nous produisons $8 \, \si{\milli\liter}$ de dihydrogène
+par minute. Considérons maintenant que le dihydrogène se comporte comme un gaz parfait,
+nous pouvons appliquer :
+
+\begin{equation*}
+	pV = mR^{*}T
+\end{equation*}
+
+et donc caluler la masse de dihydrogène, sachant que la réaction se déroule sous 
+des conditons standards de température ($298,15 \si{\kelvin}$) et de pression ($1 \si{\bar}$).
+Nous obtenons ainsi qu'en faisant circuler un courant de $1 \si{\ampere}$,
+nous produisons $6,4547.10^{-7} \, \si{\kilo\gram/\minute}$ de dihydrogène.
+
+Pour atteindre un débit massique de $184,944 \, \si{\kilo\gram/\minute}$,
+il faut donc un courant électrique de $2,865.10^8 \si{\ampere}$. À partir de la résistance
+totale du système au sein duquel se déroule la réaction d'électrolyse,
+qui est de $14 \, \si{\ohm}$, nous pouvons calculer la puissance électrique nécessaire : 
+
+\begin{equation*}
+	P = RI^{2}
+\end{equation*}
+
+Elle est donc égale à $1,15 \, \si{\giga\watt}$.
+
+Nous remarquons effectivement que l'électrolyse de l'eau demande beaucoup trop d'énergie
+pour produire ce dont nous avons besoin. C'est pour cela que l'électrolyse est très peu 
+utilisée à l'échelle industrielle. Il est donc préférable dans notre cas de se contenter
+du vaporeformage, malgré le fait qu'il émette du dioxyde de carbone.
+
+\section{Visite du plant de Yara à Tertre}
+
+\section{Atelier créatif (conduite de brainstorming)}
+
+Comment faire preuve d'inventivité et d'originalité dans un projet tel que le nôtre ?
+Tel était le thème de cet atelier où l'on nous a présenté le cheminement 
+à suivre afin de mettre un maximum à profit la créativité de chacun.
+
+Dans notre cas, la créativité est avant tout l'art de trouver des solutions 
+originales et efficaces à un problème bien posé. 
+La première partie du travail consiste donc à reformuler la problématique de façon 
+à être capable de diverger et de trouver un angle nouveau sous lequel analyser le problème. 
+Pour cela, il est conseillé de faire un schéma sur lequel on pourra retrouver différents
+éléments comme par exemple les services attendus, la position géographique, 
+ce qui se situe à proximité de l’usine,etc.
+
+Cette représentation permet d'avoir une vue d'ensemble sur le travail qui 
+devra être effectué et facilite donc l'organisation. Il est important de pousser tout
+le monde à sortir de sa ``zone de confort'' et de confronter les idées de chacun.
+Vient ensuite le retour à la réalité: il faut analyser les idées, choisir celles qui 
+sont réalisables pour que le projet se précise enfin. De nombreux exercices ont été 
+proposés afin de nous mettre en situation. 
+
+Nous pouvons à présent faire bénéficier le reste du groupe de notre expérience et tenter
+de suivre cette approche. Il est nécessaire de faire un résumé de tout cela pour essayer 
+de convaincre et de prouver la viabilité de l'ébauche. Pour cela, on fait la liste 
+de quatre choses: les besoins du client, la promesse, les raisons d'y croire, 
+et un slogan pour accrocher. On continue l'argumentation avec des analogies,
+des choses factuelles (brevets,...) ou inspirantes, etc. Le projet pourra alors
+enfin être mis en place!
+
+Une présentation sur le développement durable a aussi été faite afin de nous sensibiliser
+et nous inviter à essayer d'y participer. 
+En effet, notre système industriel actuel - où la recherche du profit occupe une position
+centrale - est voué à l'échec, car il mène à des crises dans de nombreux domaines.
+C'est pourquoi la société doit se remettre en question et évoluer pour atteindre
+l'idéal d'un système organique, où l'humanité travaillerait ensemble pour un but commun. 
+
+Dans notre cas, cela se résume à se préoccuper de l'écologie mais pas uniquement:
+il serait intéressant de collaborer avec d'autres sociétés au niveau de l'importation
+des ressources et de l'exportation nos déchets. Ces derniers pourraient être utiles
+à d'autres et nous pourrions ainsi trouver des ententes profitables pour tous,
+s'approchant d'un système cyclique.
+
+\end{document}
+
