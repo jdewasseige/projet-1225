@@ -46,7 +46,7 @@ Quelques chiffres :
 	\item Production de gaz : $55\%$ de \ce{CH4}, $44\%$ de \ce{CO2} + autres gaz
 \end{itemize}
 
-\section{Visite du centre Total Research Technoloigy Feluy}
+\section{Viisite du centre Total Research Technoloigy Feluy}
 
 \subsection{Catalyse}
 \label{subsec:catalyse}
@@ -91,9 +91,10 @@ les unités pilotes vont permettre de produire une quantité limitée de ce nouv
 produit afin de fournir des échantillons à des partenaires commerciaux.
 Elles évitent ainsi de devoir reconfigurer des plants de grande taille.
 
-\section{Laboratoire d’électrolyse}
+\section{Laboratoire d’électrolysie}
 
-L'électrolyse de l'eau est un procédé qui permet de décomposer celle-ci en dioxygène et en dihydroègne, tous deux à l'état gazeux.
+L'électrolyse de l'eau est un procédé qui permet de décomposer 
+celle-ci en dioxygène et en dihydroègne, tous deux à l'état gazeux.
 
 \begin{equation*}
 	\ce{H2O_{(g)} \rightleftharpoons \frac{1}{2} \, O2_{(g)} + H2_{(g)}} 
@@ -108,51 +109,83 @@ Sur base des expérimentations effectuées en laboratoire, nous observons que pl
 le milieu de la réaction est acide, plus son degré d'avancement augmente. Il est donc
 préférable de réaliser cette réaction dans un milieu où le pH est proche de zéro.
 
-De plus, nous remarquons que pour un même volume de dihydrogène produit, plus l’intensité du courant est élevée, plus le temps nécessaire à la production du dihydrogène est faible. En fait, le courant et le temps sont inversément proportionnels. Nous pouvons écrire la relation suivante :
-
+De plus, nous remarquons que pour un même volume de dihydrogène produit, 
+plus l’intensité du courant est élevée, plus le temps nécessaire à la production
+du dihydrogène est faible. En fait, le courant et le temps sont inversément proportionnels.
+Nous pouvons écrire la relation suivante :
 
 \begin{equation*}
 	It = \text{constante}
 \end{equation*}
 
-où I est l'intensité du courant électrique, et t, le temps écoulé.Cela dit bien que lorsqu'on augmente le courant, le temps diminue dans un rapport identique.
+où I est l'intensité du courant électrique, et t, le temps écoulé. 
+Cela dit bien que lorsqu'on augmente le courant, le temps diminue dans un rapport identique.
 
-Si nous devions produire le dihydrogène dont nous avons besoin en utilisant la réaction d'électrolyse de l'eau, il faudrait tout d'abord veiller à ce que le pH soit le
-plus faible possible. Ensuite, nous devrions calculer l'intensité du courant nécessaire pour obtenir le débit de dihydrogène voulu.
+Si nous devions produire le dihydrogène dont nous avons besoin en utilisant la réaction 
+d'électrolyse de l'eau, il faudrait tout d'abord veiller à ce que le pH soit le
+plus faible possible. Ensuite, nous devrions calculer l'intensité du courant 
+nécessaire pour obtenir le débit de dihydrogène voulu.
 
-Par exemple, si nous voulons une production de $1500 \si{\tonne}$ d'ammoniac par jour (en prenant une température de $1000 \si{\kelvin}$ pour le reformeur primaire),nous savons grâce à notre outil de calcul qu'il faut $266,32 \si{\tonne}$ de dihydrogène par jour. Cela nous donne un débit massique de $184,944 \, \si{\kilo\gram/\minute}$.
+Par exemple, si nous voulons une production de $1500 \si{\tonne}$ d'ammoniac 
+par jour (en prenant une température de $1000 \si{\kelvin}$ pour le reformeur primaire), 
+nous savons grâce à notre outil de calcul qu'il faut $266,32 \si{\tonne}$ de dihydrogène 
+par jour. Cela nous donne un débit massique de $184,944 \, \si{\kilo\gram/\minute}$.
 
-Ensuite, à l'aide des résultats obtenus lors du laboratoire, nous savons qu'avec un courant de $1 \si{\ampere}$, nous produisons $8 \, \si{\milli\liter}$ de dihydrogène par minute. Considérons maintenant que le dihydrogène se comporte comme un gaz parfait,nous pouvons appliquer :
+Ensuite, à l'aide des résultats obtenus lors du laboratoire, nous savons qu'avec 
+un courant de $1 \si{\ampere}$, nous produisons $8 \, \si{\milli\liter}$ de dihydrogène 
+par minute. Considérons maintenant que le dihydrogène se comporte comme un gaz parfait, 
+nous pouvons appliquer :
 
 \begin{equation*}
 	pV = mR^{*}T
 \end{equation*}
 
-et donc calculer la masse de dihydrogène, sachant que la réaction se déroule sous des conditions standards de température ($298,15 \si{\kelvin}$) et de pression ($1 \si{\bar}$). Nous obtenons ainsi qu'en faisant circuler un courant de $1 \si{\ampere}$,nous produisons $6,4547.10^{-7} \, \si{\kilo\gram/\minute}$ de dihydrogène.
+et donc calculer la masse de dihydrogène, sachant que la réaction se déroule 
+sous des conditions standards de température ($298,15 \si{\kelvin}$) et de 
+pression ($1 \si{\bar}$). Nous obtenons ainsi qu'en faisant circuler un courant 
+de $1 \si{\ampere}$, nous produisons $6,4547\e{-7} \, \si{\kilo\gram/\minute}$ de dihydrogène.
 
-Pour atteindre un débit massique de $184,944 \, \si{\kilo\gram/\minute}$, il faut donc un courant électrique de $2,865.10^8 \si{\ampere}$. À partir de la résistance
-totale du système au sein duquel se déroule la réaction d'électrolyse, qui est de $14 \, \si{\ohm}$, nous pouvons calculer la puissance électrique nécessaire : 
+Pour atteindre un débit massique de $184,944 \, \si{\kilo\gram/\minute}$, 
+il faut donc un courant électrique de $2,865\e{8} \si{\ampere}$. 
+À partir de la résistance totale du système au sein duquel se déroule 
+la réaction d'électrolyse, qui est de $14 \, \si{\ohm}$, nous pouvons calculer
+la puissance électrique nécessaire : 
 
 \begin{equation*}
 	P = RI^{2}
 \end{equation*}
 
-Elle est donc égale à $1,15.10^9 \, \si{\giga\watt}$.
+Elle est donc égale à $1,15\e{9} \, \si{\giga\watt}$.
 
-Ce résultat est impropable, nous en concluons que nous ne pouvons tout simplement pas appliquer les résultats obtenus en laboratoire à grande échelle. Le milieu que nous avions mis en place pour la réaction d'électrolyse au laboratoire n'est pas comparable avec les réacteurs industriels.
+Ce résultat est impropable, nous en concluons que nous ne pouvons tout simplement pas 
+appliquer les résultats obtenus en laboratoire à grande échelle. Le milieu que nous 
+avions mis en place pour la réaction d'électrolyse au laboratoire n'est pas 
+comparable avec les réacteurs industriels.
 
-Cependant, nous pouvons nous accorder sur le fait que l'électrolyse de l'eau demande beaucoup trop d'énergie pour produire ce dont nous avons besoin. C'est pour cela que l'électrolyse est très peu 
-utilisée à l'échelle industrielle. Il est donc préférable dans notre cas de se contenter du vaporeformage, malgré le fait qu'il émette du dioxyde de carbone.
+Cependant, nous pouvons nous accorder sur le fait que l'électrolyse de l'eau demande 
+beaucoup trop d'énergie pour produire ce dont nous avons besoin. 
+C'est pour cela que l'électrolyse est très peu utilisée à l'échelle industrielle. 
+Il est donc préférable dans notre cas de se contenter du vaporeformage, 
+malgré le fait qu'il émette du dioxyde de carbone.
 
 \section{Visite du plant de Yara à Tertre}
 
-Le plant de Yara fabrique des engrais et produit lui-même son propre ammoniac nécessaire pour créer ces engrais. Avoir une production locale d'ammoniac permet non seulement 
-d'éviter des coûts importants mais aussi d'éviter le transport de celui-ci car il peut s'avérer être toxique.
+Le plant de Yara fabrique des engrais et produit lui-même son propre ammoniac nécessaire
+pour créer ces engrais. Avoir une production locale d'ammoniac permet non seulement 
+d'éviter des coûts importants mais aussi d'éviter le transport de celui-ci car il 
+peut s'avérer être toxique.
 
-Tout d'abord, le réacteur où est synthétisé l'ammoniac est à une pression de $130 \si{\bar}$. Comme décrit dans la section \ref{subsec:catalyse}, l'utilisation de catalyseurs dans la production du méthane est fondamentale. Un catalyseur est utilisé lorsque la barrière énergétique pour qu'une réaction se produise est trop haute. Il va alors diminuer l'énergie d'activation sans modifier le chemin réactionnel.
+Tout d'abord, le réacteur où est synthétisé l'ammoniac est à une pression de $130 \si{\bar}$.
+Comme décrit dans la section \ref{subsec:catalyse}, l'utilisation de catalyseurs dans la
+production du méthane est fondamentale. Un catalyseur est utilisé lorsque la 
+barrière énergétique pour qu'une réaction se produise est trop haute. Il va alors 
+diminuer l'énergie d'activation sans modifier le chemin réactionnel.
 
-Le diagramme de la figure \ref{fig:synthese} présente le fonctionnement simplifié des réacteurs de synthèse d'ammoniac. Il est important de préciser que le \emph{input} est tout d'abord composé d'hydrogène et d'azote mais aussi de résidus de méthane, d'argon et d'hélium. Ceux-ci sont éliminés via différentes techniques de séparation (ex: par 
-des membranes semi-perméables). 
+Le diagramme de la figure \ref{fig:synthese} présente le fonctionnement simplifié 
+des réacteurs de synthèse d'ammoniac. Il est important de préciser que le \emph{input}
+est tout d'abord composé d'hydrogène et d'azote mais aussi de résidus de méthane, 
+d'argon et d'hélium. Ceux-ci sont éliminés via différentes techniques 
+de séparation (ex: par des membranes semi-perméables). 
 
 \begin{figure}[h!]
 	\begin{center}
