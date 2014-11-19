@@ -1,4 +1,4 @@
-function out = outil(T, m_NH3)
+function out = main(T, m_NH3)
 % Outil de gestion du plant de formation d'ammoniac
 % a partir de methane.
 % 
@@ -42,7 +42,7 @@ K_r2 = exp(-dG_r2/(R*T)) ;
 % resolution des equations pour trouver le 
 % nombre de moles de CH4 et de H2O 
 
-syms ksi1 ksi2 n_CH4 n_H2O positive
+syms ksi1 ksi2 n_CH4 n_H2O positive 
 
 % equilibre des pressions reaction 1 reformage primaire
 eq1= K_r1 == (p_tot^2 *(ksi1 - ksi2)*(3*ksi1 + ksi2)^3)...
