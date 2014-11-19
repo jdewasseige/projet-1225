@@ -58,14 +58,14 @@ m_N2 = M.n2*((1/34)* m_NH3) ;
 m_Ar = M.ar*((1/2652)* m_NH3) ;
 
 
-fprintf('\n In REF1 - Quantite de CH4 en tonnes par jour : %.2f \n', m_CH4) ;
+fprintf('\nIn REF1 - Quantite de CH4 en tonnes par jour : %.2f \n', m_CH4) ;
 fprintf('In REF1 - Quantite de H20 en tonnes par jour : %.2f \n', m_H2O) ;
 
-fprintf('In REF2 - Quantite de O2 (REF 2) en tonnes par jour : %.2f \n', m_O2) ;
-fprintf('In REF2 - Quantite de N2 (REF 2) en tonnes par jour : %.2f \n', m_N2) ;
-fprintf('In REF2 - Quantite de Ar (REF 2) en tonnes par jour : %.2f \n', m_Ar) ;
+fprintf('In REF2 - Quantite de O2 en tonnes par jour : %.2f \n', m_O2) ;
+fprintf('In REF2 - Quantite de N2 en tonnes par jour : %.2f \n', m_N2) ;
+fprintf('In REF2 - Quantite de Ar en tonnes par jour : %.2f \n', m_Ar) ;
 
-
+%printMassesDetails(m_NH3,n_CH4,n_H2O,ksi1,ksi2);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Nombre de tubes 
 
@@ -79,11 +79,15 @@ fprintf('\nNombre de tubes : %d \n \n', ceil(double(tubes))) ;
 oven_masses = getHovenMasses(ksi1,ksi2,dH.r1,dH.r2);
 m_CH4_four = oven_masses(1) ;
 m_O2_four  = oven_masses(2) ;
+%m_CO2_four  = oven_masses(3) ;
 
-fprintf('Quantite de CH4 (FOUR) en tonnes par jour : %.2f \n', m_CH4_four) ;
-fprintf('Quantite de O2 (FOUR) en tonnes par jour : %.2f \n', m_O2_four) ;
+fprintf('In Four - Quantite de CH4 en tonnes par jour : %.2f \n', m_CH4_four) ;
+fprintf('In Four - Quantite de O2  en tonnes par jour : %.2f \n', m_O2_four) ;
+%fprintf('Out Four - Quantite de CO2 (FOUR) en tonnes par jour : %.2f \n', m_CO2_four) ;
+
 
 %out = oven_masses(3);
 
 end
 
+    

@@ -14,15 +14,14 @@ for i = 1:11
         t = 1200 - 1;
     end
     
-result = main(t, 1500);
+    result = main(t, 1500);
 
-x(i) = result(1)/1500;
-y(i) = t;
+    x(i) = result(1)/1500;
+    y(i) = t;
 
-fprintf('Rejet de C02 (FOUR) en tonnes par jour : %.2f pour : %.2f degrés K \n', result(1), y(i)) ;
+    fprintf('Rejet de C02 (FOUR) en tonnes par jour : %.2f pour : %.2f degrés K \n', result(1), y(i)) ;
 
-t = t + 50;
-
+    t = t + 50;
 end
 
 plot(y, x)
