@@ -16,32 +16,15 @@ myAssert((T >= 700 && T <=1200),0, strcat('La temperature fournie', ...
     ' est en dehors de l''intervalle couvert par coefficients de Shomate.'));
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Constantes d'equilibres des reactions du reformeur primaire
+K = getEqConstantsRef(T) ;
 
-% Calcul des enthalpies et entropies standards a la temperature T
-values = getDeltaH_and_S(T);
-dH = values(1);
-dS = values(2);
-
-% reaction1
-dH.r1 = dH.co + 3*dH.h2 - dH.h2o - dH.ch4 ;
-dS.r1 = dS.co + 3*dS.h2 - dS.h2o - dS.ch4 ;
-dG_r1 = dH.r1 - T*dS.r1 ;
-% reaction2
-dH.r2 = dH.co2 + dH.h2 - dH.h2o - dH.co ;
-dS.r2 = dS.co2 + dS.h2 - dS.h2o - dS.co ;
-dG_r2 = dH.r2 - T*dS.r2 ;
-
-% constantes d'eq K
-R = 8.3144621 ;
+% Pression dans le reformeur primaire
 p_tot = 26e5 ;
-p_st = 1e5 ;
-
-K_r1 = exp(-dG_r1/(R*T)) ;
-K_r2 = exp(-dG_r2/(R*T)) ;
 
 % resolution des equations pour trouver le 
 % nombre de moles de CH4 et de H2O 
-moles = solveG(m_NH3,p_tot,K_r1,K_r2) ;
+moles = solveG(m_NH3,p_tot,K.r1,K.r2) ;
 n_CH4 = moles(1) ;
 n_H2O = moles(2) ;
 ksi1  = moles(3) ;
@@ -75,6 +58,12 @@ fprintf('\nNombre de tubes : %d \n \n', ceil(double(tubes))) ;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Bilan energetique
+
+dH_and_dS = getDeltaH_and_S(T) ;
+dH = dH_and_dS(1) ;
+
+dH.r1 = dH.co + 3*dH.h2 - dH.h2o - dH.ch4 ;
+dH.r2 = dH.co2 + dH.h2 - dH.h2o - dH.co ;
 
 oven_masses = getHovenMasses(ksi1,ksi2,dH.r1,dH.r2);
 m_CH4_four = oven_masses(1) ;
