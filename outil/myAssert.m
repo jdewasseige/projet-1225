@@ -10,7 +10,7 @@ function out = myAssert(bool,stop,message)
 %        - message : message d'erreur
 
 if ~bool && ~stop
-    fprintf(strcat('*!*!* \t',message, '\t *!*!* \n'));
+    fprintf(strcat('*!* \t',message, '\t *!* \n'));
 else
     assert(bool,message)
 end
