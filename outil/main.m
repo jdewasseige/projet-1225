@@ -79,9 +79,11 @@ fprintf('\nNombre de tubes : %d \n \n', ceil(double(tubes))) ;
 oven_masses = getHovenMasses(ksi1,ksi2,dH.r1,dH.r2);
 m_CH4_four = oven_masses(1) ;
 m_O2_four  = oven_masses(2) ;
+m_CO2_four = oven_masses(3);
 
 fprintf('Quantite de CH4 (FOUR) en tonnes par jour : %.2f \n', m_CH4_four) ;
-fprintf('Quantite de O2 (FOUR) en tonnes par jour : %.2f \n\n', m_O2_four) ;
+fprintf('Quantite de O2 (FOUR) en tonnes par jour : %.2f \n', m_O2_four) ;
+fprintf('Quantite de C02 (FOUR) en tonnes par jour : %.2f \n', m_CO2_four) ;
 
 end
 
