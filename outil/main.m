@@ -100,7 +100,7 @@ m_O2_four  = oven_masses(2) ;
 fprintf('Quantite de CH4 (FOUR) en tonnes par jour : %.2f \n', m_CH4_four) ;
 fprintf('Quantite de O2 (FOUR) en tonnes par jour : %.2f \n', m_O2_four) ;
 
-out = oven_masses(3)
+%out = oven_masses(3);
 
 end
 
