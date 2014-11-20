@@ -2,7 +2,7 @@
 
 \input{../custom.sty}
 
-\title{Tache 4 : Mini-HAZOP du noeud autour du réacteur de synthèse d'ammoniac}
+\title{Tache 4 : Mini-\textsc{hazop} du noeud autour du réacteur de synthèse d'ammoniac}
 \author{Groupe 1225}
 \date{20 Novembre 2014}
 
@@ -12,30 +12,71 @@
 
 \section*{Question 1}
 
-Hydrogène : Extrêmement inflammable, danger d'explosion. En présence élevée dans l'air, peut provoquer une environnement déficient en oxygène et donc provoquer la suffocation. 
+\begin{itemize}
+	\item{Hydrogène} : Extrêmement inflammable, danger d'explosion. 
+En présence élevée dans l'air, peut provoquer un environnement déficient en oxygène et 
+donc provoquer la suffocation. 
 
-Des métaux communs sont des catalyseurs pour la réaction de combustion.
+	\item{Argon} : Agent asphyxiant simple : Peut entrainer des maux de têtes, 
+		voir la suffocation et la mort en concentrations élevées. 
+		Si présent sous forme liquide, danger de gelure en cas de contacte 
+		avec la peau ou les yeux.
 
-Argon : Agent asphyxiant simple : Peut entrainer des maux de têtes, voir la suffocation et la mort en concentrations élevées. Si présent sous forme liquide, danger de gelure en cas de contacte avec la peau ou les yeux.
+	\item{\ce{CO2}} : Si grandes quantités relachées en milieu confiné ou mal aéré, 
+		risque d'asphyxie.
 
-CO2 : Si grandes quantités relachées en milieu confiné ou mal aéré, risque d'asphyxie.
+	\item{\ce{CO}} : Intoxication en milieu fermé (remplace l'oxygène dans les 
+		globules rouges). Peut causer la mort en réduisant l'approvisionnement 
+		en oxygène du cerveau.
 
-CO : Intoxication en milieu fermé (remplace l'oxygène dans les globules rouges). Peut causer la mort en réduisant l'approvisionnement en oxygène du cerveau.
+	\item{Méthane} : Risques d'asphyxie, danger d'explosion extrême.
 
-Methane : Risques d'asphyxie, danger d'explosion extrême.
+	\item{Ammoniac} : Risque de combustion. Danger d'explosion si présence de Chlorine.
 
-Ammoniac : Risque de combustion. Danger d'explosion si présence de Chlorine.
+	\item{Oxygène} : Favorise la combustion d'autres composés.
 
-Oxygène : Favorise la combustion d'autres composés.
-
-Eau : Danger de brulure car eau à haute température. Explosion de vapeur d'eau si de l'eau froide entre en contact avec un liquide chaud dont la température est fort suppérieur à la température d'ébullition de l'eau et l'eau froide rentrent en contact.
+	\item{\ce{H2O}} : Danger de brulure si à haute température. 
+		Explosion de vapeur d'eau si de l'eau froide entre en contact avec un 
+		liquide chaud dont la température est fort suppérieur à la température 
+		d'ébullition de l'eau et l'eau froide rentrent en contact.
+\end{itemize}
 
 \section*{Question 2}
 
 \section*{Question 3}
 
 \section*{Question 4}
+% Pourquoi n’y a-t-il pas de soupape de sécurité ou de disque de rupture (les deux types 
+% de dispositifs servent à protéger un équipement ou une ligne contre les surpressions) 
+% sur le réacteur de synthèse du NH3 ?
+
+Un disque de rupture est un dispositif de sécurité qui sert à protéger les installations 
+contre les surpressions.
+La réaction de synthèse de l'ammoniac est la suivante
+
+\[
+	\ce{N2_{(g)} + 3H2_{(g)} <=> 2NH3_{(g)}}
+\]
+
+On remarque immédiatement qu'il y a une diminution du nombre de moles de gaz (d'un facteur 2) 
+lorsque de l'ammoniac est produit. La loi des gazs parfait nous indique que la pression
+exercée par un gaz est directement proportionnelle à son nombre de moles.
+Une surpression n'est pas envisageable pour cette réaction, 
+il n'y a donc pas besoin de disque de rupture sur ce réacteur.
 
 \section*{Question 5}
+% Pourquoi y a-t-il des disques de rupture sur l’échangeur 124-MC ?
+
+L'échangeur 124-C est un dispositif permettant de transférer de la chaleur d'un fluide
+vers un autre, sans que ceux-ci ne se mélangent.
+On a donc un flux \emph{chaud} et un flux \emph{froid}. Le flux froid va recevoir de 
+l'énergie thermique et sa température va augmenter, il faut alors prévoir des disques 
+de rupture au cas où la température dépasse une certaine limite qui produirait une 
+supression du gaz et pourrait endommager, voire déchirer, la paroi.
+Théoriquement, le flux chaud n'a pas besoin de disque de rupture parce que le gaz qu'il 
+transporte ne peut que diminuer de volume. Cependant, on peut toujours considérer le cas
+d'un apport soudain et imprévu de chaleur comme une explosion extérieure, qui produirait
+une augmentation de température et par conséquent de pression. 
+Il devient alors nécessaire d'avoir des disques de rupture dans les deux sens de l'échangeur.
 
 \end{document}
