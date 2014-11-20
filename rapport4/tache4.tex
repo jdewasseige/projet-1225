@@ -2,7 +2,7 @@
 
 \input{../custom.sty}
 
-\title{Tache 4 : Mini-HAZOP du noeud autour du réacteur de synthèse d'ammoniac}
+\title{Tache 4 : Mini-\textsc{hazop} du noeud autour du réacteur de synthèse d'ammoniac}
 \author{Groupe 1225}
 \date{20 Novembre 2014}
 
@@ -13,26 +13,57 @@
 \section*{Question 1}
 
 6 gaz sont présents dans le réacteur. Certains ne présentent que peu de danger, d'autres peuvent provoquer d'importants dégats en cas de combustion.
-
-- L'hydrogène est un gaz extrêmement inflammable et peut provoquer de grosses explosions en cas de combustion. C'est le principal danger lié à sa présence.
+\begin{itemize}
+\item L'hydrogène est un gaz extrêmement inflammable et peut provoquer de grosses explosions en cas de combustion. C'est le principal danger lié à sa présence.
 En cas d'accumulation d'hydrogène dans une pièce ou un batiment, sa présence peut provoquer un environnement déficient en oxygène et donc provoquer la suffocation.
 
-- L'argon est présent naturellement dans l'air et n'est dangereux qu'en quantités importantes. Il peut alors provoquer la suffocation.
+\item  L'argon est présent naturellement dans l'air et n'est dangereux qu'en quantités importantes. Il peut alors provoquer la suffocation.
 
-- L'azote est également naturellement présent dans l'air et n'est pas plus dangereux que l'argon.
+\item  L'azote est également naturellement présent dans l'air et n'est pas plus dangereux que l'argon.
 
-- L'ammoniac est inflammable et peut donc provoquer une explosion en cas d'accumulation et de combustion.
+\item  L'ammoniac est inflammable et peut donc provoquer une explosion en cas d'accumulation et de combustion.
 
-- L'helium peut provoquer l'asphyxie en cas de concentration trop élevée.
+\item  L'helium peut provoquer l'asphyxie en cas de concentration trop élevée.
 
-- Le méthane est inflammable et présente un danger d'explosion en cas d'accumulation et de combustion. Il y a également un risque d'asphyxie en cas d'accumulation simple.
+\item  Le méthane est inflammable et présente un danger d'explosion en cas d'accumulation et de combustion. Il y a également un risque d'asphyxie en cas d'accumulation simple.
+\end{itemize}
 
 \section*{Question 2}
 
 \section*{Question 3}
 
 \section*{Question 4}
+% Pourquoi n’y a-t-il pas de soupape de sécurité ou de disque de rupture (les deux types 
+% de dispositifs servent à protéger un équipement ou une ligne contre les surpressions) 
+% sur le réacteur de synthèse du NH3 ?
+
+Un disque de rupture est un dispositif de sécurité qui sert à protéger les installations 
+contre les surpressions.
+La réaction de synthèse de l'ammoniac est la suivante
+
+\[
+	\ce{N2_{(g)} + 3H2_{(g)} <=> 2NH3_{(g)}}
+\]
+
+On remarque immédiatement qu'il y a une diminution du nombre de moles de gaz (d'un facteur 2) 
+lorsque de l'ammoniac est produit. La loi des gazs parfait nous indique que la pression
+exercée par un gaz est directement proportionnelle à son nombre de moles.
+Une surpression n'est pas envisageable pour cette réaction, 
+il n'y a donc pas besoin de disque de rupture sur ce réacteur.
 
 \section*{Question 5}
+% Pourquoi y a-t-il des disques de rupture sur l’échangeur 124-MC ?
+
+L'échangeur 124-C est un dispositif permettant de transférer de la chaleur d'un fluide
+vers un autre, sans que ceux-ci ne se mélangent.
+On a donc un flux \emph{chaud} et un flux \emph{froid}. Le flux froid va recevoir de 
+l'énergie thermique et sa température va augmenter, il faut alors prévoir des disques 
+de rupture au cas où la température dépasse une certaine limite qui produirait une 
+supression du gaz et pourrait endommager, voire déchirer, la paroi.
+Théoriquement, le flux chaud n'a pas besoin de disque de rupture parce que le gaz qu'il 
+transporte ne peut que diminuer de volume. Cependant, on peut toujours considérer le cas
+d'un apport soudain et imprévu de chaleur comme une explosion extérieure, qui produirait
+une augmentation de température et par conséquent de pression. 
+Il devient alors nécessaire d'avoir des disques de rupture dans les deux sens de l'échangeur.
 
 \end{document}
