@@ -1,2 +1,2 @@
-NAME=tache4
+NAME=rapport4
 include ../.root.mk
