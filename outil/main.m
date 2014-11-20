@@ -59,13 +59,9 @@ fprintf('\nNombre de tubes : %d \n \n', ceil(double(tubes))) ;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Bilan energetique
 
-dH_and_dS = getDeltaH_and_S(T) ;
-dH = dH_and_dS(1) ;
+T_four = 1300 ; 
 
-dH.r1 = dH.co + 3*dH.h2 - dH.h2o - dH.ch4 ;
-dH.r2 = dH.co2 + dH.h2 - dH.h2o - dH.co ;
-
-oven_masses = getHovenMasses(ksi1,ksi2,dH.r1,dH.r2);
+oven_masses = getHovenMasses(ksi1,ksi2,T,T_four);
 m_CH4_four = oven_masses(1) ;
 m_O2_four  = oven_masses(2) ;
 %m_CO2_four  = oven_masses(3) ;
