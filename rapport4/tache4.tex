@@ -58,16 +58,18 @@ se rompt, libérant le gaz, mais évitant la destruction des tuyauteries.
 Prenons maintenant le cas où un problème survient au niveau du réacteur de synthèse 
 de l'ammoniac. La réaction de synthèse
 
-\begin{equation*}
-	\ce{3 \, H2_{(g)} + N2_{(g)} <=> {2} \, NH3_{(g)}} 
-\end{equation*}
+\begin{equation}
+	\ce{\frac{3}{2} H2_{(g)} + \frac{1}{2} N2_{(g)} <=> NH3_{(g)}}
+	\label{eq:synthesis}
+\end{equation}
 
-est une réaction exothermique. Elle dégage donc beaucoup de chaleur, 
-qu'il faut traiter afin d'éviter une hausse trop importante de la température au sein 
-du réacteur. C'est là qu'intervienent les gaz de synthèse \ce{H2 \, et \, N2} 
-qui sont à $180\si{\celsius}$. En les faisant circuler dans les parois du réacteur, 
-ceux-ci vont absorber une partie de la chaleur produite par la réaction de formation 
-de l'ammoniac. Nous nous apercevons donc que s'il y a une défaillance au niveau du système 
+est une réaction exothermique ($-45.9\si{\kilo\joule}$ à $298\si{\kelvin}$). 
+Elle dégage donc beaucoup de chaleur, qu'il faut traiter afin d'éviter 
+une hausse trop importante de la température au sein du réacteur. 
+En faisant circuler les gaz de synthèse \ce{H2 \, et \, N2},  
+qui sont à $180\si{\celsius}$, dans les parois du réacteur, 
+ceux-ci vont absorber une partie de la chaleur produite par la réaction. 
+Nous nous apercevons donc que s'il y a une défaillance au niveau du système 
 de refroidissement, par exemple si l'entrée des gaz de synthèse est bouchée, 
 la température du réacteur va augmenter brusquement. Etant donné que le volume est fixe, 
 la pression va augmenter proportionnellement à la température, 
@@ -85,12 +87,7 @@ Nous limitons de cette manière fortement les dommages occasionnés.
 
 Un disque de rupture est un dispositif de sécurité qui sert à protéger les installations 
 contre les surpressions.
-La réaction de synthèse de l'ammoniac est la suivante
-
-\[
-	\ce{N2_{(g)} + 3H2_{(g)} <=> 2NH3_{(g)}}
-\]
-
+La réaction de synthèse de l'ammoniac est la réaction \ref{eq:synthesis}.
 On remarque immédiatement qu'il y a une diminution du nombre de moles de gaz (d'un facteur 2) 
 lorsque de l'ammoniac est produit. La loi des gazs parfait nous indique que la pression
 exercée par un gaz est directement proportionnelle à son nombre de moles.
