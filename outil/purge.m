@@ -10,9 +10,9 @@ R=8.3145;
 H_and_S=getDeltaH_and_S(750);
 dH=H_and_S(1);
 dS=H_and_S(2);
-dH=2*dH.nh3-dH.n2-3*dH.h2;
-dS=2*dS.nh3-dS.n2-3*dS.h2;
-dG=dH-T*dS;
+dHr=2*dH.nh3-dH.n2-3*dH.h2;
+dSr=2*dS.nh3-dS.n2-3*dS.h2;
+dGr=dH-T*dS;
 K= exp(-dG/(R*750));
 
 n_NH3=m_NH3*10^6/17;
