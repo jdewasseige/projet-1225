@@ -12,11 +12,75 @@
 
 \section{Démarrage}
 
-Lors de la première tâche, nous analysions l'installation dans son ensemble, mais de manière excessivement simplifiée. Dans cette section, nous nous concentrerons sur l'explicitation de la dernière étape pour ensuite la simuler sur le logiciel $ASPEN PLUS$. Nous ne désirons plus la considérer comme une boîte noire, et l'avons donc découpée en un certain nombre de processus intermédiaires.
-Le gaz composé d'$N_2$, d'$H_2$ et d'$Ar$ passe par un réchauffeur et par un compresseur pour atteindre respectivement la température et la pression voulue. Il va ensuite dans le réacteur où se déroule la réaction. Le produit est refroidit dans une installation prévue à cette fin, pour arriver enfin dans un séparateur où on extrait l'ammoniac.
-Il semblait intéressant de créer un circuit de recyclage pour réutiliser le mélange de $N_2$ et de $H_2$ issu du processus (la réaction n'est pas complète et il reste donc des réactifs). Malheureusement, il y existe également de l'argon qu'on ne peut séparer du reste. En effet, sa température d'ébullition est bien trop proche de celle des autres composés et les moyens à mettre en œuvre en seraient très couteux et/ou à faible rendement. 
-Notre groupe a donc décidé de faire une purge dans le circuit de recyclage afin d'éviter que l'argon ne s'accumule. Cette purge ne doit pas être trop grande sinon la quantité perdue des réactifs serait conséquente. La condition à respecter est donc d'avoir un flux entrant d'Argon égal à celui de sortie:
+Lors de la première tâche, nous analysions l'installation dans son ensemble, mais de manière excessivement simplifiée. Dans cette section, nous nous concentrerons sur l'explicitation de la dernière étape pour ensuite la simuler sur le logiciel $ASPEN PLUS$. Nous ne désirons plus la considérer comme une boîte noire, et l'avons donc découpée en un certain nombre de processus intermédiaires.\\
+Le gaz composé d'$N_2$, d'$H_2$ et d'$Ar$ passe par un réchauffeur et par un compresseur pour atteindre respectivement la température et la pression voulue. Il va ensuite dans le réacteur où se déroule la réaction. Le produit est refroidit dans une installation prévue à cette fin, pour arriver enfin dans un séparateur où on extrait l'ammoniac.\\
+Il semblait intéressant de créer un circuit de recyclage pour réutiliser le mélange de $N_2$ et de $H_2$ issu du processus (la réaction n'est pas complète et il reste donc des réactifs). Malheureusement, il y existe également de l'argon qu'on ne peut séparer du reste. En effet, sa température d'ébullition est bien trop proche de celle des autres composés et les moyens à mettre en œuvre en seraient très couteux et/ou à faible rendement. \\
+Notre groupe a donc décidé de faire une purge dans le circuit de recyclage afin d'éviter que l'argon ne s'accumule. Cette purge ne doit pas être trop grande sinon la quantité perdue des réactifs serait conséquente. La condition à respecter est donc d'avoir un flux entrant d'argon égal à celui de sortie. Les calculs permettant de trouver la quantité parfaite à purger sont détaillés dans la sous-section suivante.\\
+Voici à quoi ressemble l'installation sur $ASPEN$:
+[INSERER PRINTSCREEN]
 
+\section{La purge}
 
+Dans les calculs qui suivent, nous cherchons x, qui n'est autre que la fraction recherchée du recyclage qui doit être purgée. Nous nous référerons au schéma pour ce qu'il en est des notations. Rappelons qu'il est aisé de trouver les débits d'entrée des réactifs et de sortie de l'ammoniac grâce à notre outil de calcul.\\
+
+\includegraphics{Etape_finale_simplifiée.jpg} 
+
+Comme dit précédemment, une purge optimale doit permettre un débit de sortie d'argon égal à celui d'entrée dans le système. On peut écrire ça sous la forme:
+
+\begin{equation}
+\dot{n}_{Ar,in}=\dot{n}_{Ar,purge}=[Ar]_{purge} \dot{n}_{purge}
+\end{equation}
+
+Ceci est donc le bilan total d'argon. Il est possible de faire d'autres bilans afin de nous donner d'autres relations utiles.\\
+
+$\bullet$ Bilan molaire à la purge:
+\begin{equation}
+\dot{n}_{purge}=x \dot{n}_{recyclage}
+\end{equation}
+
+$\bullet$ Bilan molaire au séparateur:
+\begin{equation}
+\dot{n}_{out}=\dot{n}_{recyclage}+\dot{n}_{NH_3,out}
+\end{equation}
+
+$\bullet$ Bilan d'argon au séparateur:
+\begin{equation}
+[Ar]_{out} \dot{n}_{out}=[Ar]_{recyclage} \dot{n}_{recyclage}
+\end{equation}
+
+$\bullet$ Bilan molaire total:
+\begin{equation}
+\dot{n}_{in} - 2\xsi=\dot{n}_{NH_3,out} + \dot{n}_{purge}
+\end{equation}
+
+avec $\xsi$ étant l'avancement, c'est à dire le nombre de moles de $N_2$ ayant réagit. Faisons attention de noter qu'on ne considère que les réactifs venant du circuit $in$. Cela est résumé dans le tableau suivant. On analyse le débit de moles à l'entrée du réacteur pour les différents composés, ainsi qu'à la sortie (on considère que l'équilibre a été atteint).
+\begin{table}
+	\centering
+	\begin{tabular}{l|c|c|c|c}
+		$\ce{N2}$ & $\ce{H2}$ & $\ce{Ar}$ & $\ce{NH3}$ & $n_{total}$ \\
+		\hline
+		$n_{\ce{N2},in}$ & $n_{\ce{H2},in}$ & $n_{\ce{Ar},in}$ & $0$  & $n_{in}$\\
+		$n_{\ce{N2},in}-\xsi$ & $n_{\ce{H2},in}-3\xsi$ & $n_{\ce{Ar},in}$ & $2\xsi$  & $n_{in}-2\xsi$\\
+	\end{tabular}
+	\caption{Réaction dans le réacteur}
+	\label{tab:reaction1_primaire}
+\end{table}
+La réaction se déroule à $750K$ et il est facile de calculer K en trouvant $\Delta G_{réaction}$ au préalable. Nous pouvons faire cela en utilisant notre outil de calcul:\\
+$$\Delta G_{réaction}(750)=\Delta H_{réaction}(750)-750*\Delta S_{réaction}(750)$$
+$$K=exp(frac{-\Delta G}{R*750})$$
+L'expression de la constante d'équilibre K est également: \\
+$$K=frac{{[NH_3]_{out}}^2}{[N_2]_{out}{[H_2]_{out}}^3}=frac{{n_{NH_3,out}}^2}{n_{N_2,out}*{n_{H_2,out}}^3}*{n_{total,out}}^2$$\\
+Comme $n_{H_2}=3*n_{N_2}$ (éléments en quantité stœchiométrique), on a donc $K==frac{{n_{NH_3,out}}^2}{27{n_{N_2,out}}^4}*{n_{total,out}}^2$. En injectant les quantités de composés du tableaux, fonctions de $\xsi$, on obtient:\\
+$$K=\frac{{2\xsi}^2}{27{{n_{N2}-\xsi}^4} {n_{total}-2\xsi}^2$$
+Nous pouvons par exemple résoudre cela avec $MATLAB$. Connaissant $\xsi$, on trouve \dot{n}_{purge} grâce à l'équation(5). Nous obtenons directement $[Ar]_{purge}$ en injectant le résultat dans la première équation. $[Ar]_{purge}$ est égal à $[Ar]_{recyclage}$ car la purge n'altère par la concentration.\\
+
+Nous disposons de la quantité d'ammoniac produite (un paramètre) et pouvons donc maintenant connaitre la quantité totale de réactifs restants après réaction. Rappelons que les quantité utilisées plus haut ne prenaient pas en compte le recyclage. Reprenons l'expression de K: \\
+$$K==frac{{n_{NH_3,out}}^2}{27{n_{N_2,out}}^4}*{n_{total,out}}^2$$
+$n_{total,out}=4n_{N_2,out}+n_{Ar,out}$ avec $n_{Ar,out}=n{Ar,in}+n{Ar,recyclage}=n{Ar,in}+[Ar]_{recyclage}n{total,recyclage}\underset{(3)}=n{Ar,in}+[Ar]_{recyclage}(n{total,out}-n_{NH_3,out}$.\\
+Nous avons donc 2 équation pour trouver les 2 inconnues $n_{N_2,out}$ et $n_{total,out)$. Nous pouvons à nouveau résoudre cela par $MATLAB$. A présent, il suffit d'utiliser l'équation (3) pour trouver \dot{n}_{recyclage}. Comme nous le dit l'équation (2), le rapport de \dot{n}_{purge} et de \dot{n}_{recyclage} nous donne enfin x! Ces calculs fastidieux nous permettent donc enfin de trouver la fraction à prélever dans le circuit de recyclage. Le même cheminement est suivi dans le programme "purge.m" disponible en annexe. Il nous permet de trouver x en prenant compte des paramètres T et m_{NH_3}. Pour un couple de paramètre (T=1080,m_{NH_3}) par exemple, nous obtenons x=[METTRE LA VALEUR TROUVEE PAR LE PROGRAMME...]\\
+
+\section{Validation du modèle}
+Le logiciel $ASPEN$ propose de nombreuses modélisations du comportement des fluides, plus ou moins fidèles selon les composés et les conditions dans lesquels on les observe. Notre recherche s'est limitée aux modèle à haute pression. Après en avoir fait l'étude en comparant les bases de données de chacun d'eux, nous nous sommes arrêtes sur le modèle REFPROP, acronyme pour REFerence fluid PROPerties. Ce dernier est actuellement le modèle le plus précis existant. Il implémente les équations d'état de Helmholtz, Benedict-Webb-Rubin et du modèle ECS et utilise également des valeurs expérimentales. Il fonctionne parfaitement pour les fluides purs et les mélanges. Il s'étend en particulier sur un grand nombre de composés, dont tous ceux utilisés dans notre usine fictive. Pour toutes ces raisons, ce modèle nous a semblé être parfait dans le cadre de ce problème.\\
+[AJOUTER LES RESULTATS DONNES PAR LA SIMULATION]
 \end{document}
 
