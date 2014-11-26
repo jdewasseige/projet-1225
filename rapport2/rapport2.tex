@@ -111,7 +111,7 @@ Comme les deux réactions sont à l'équilibre,
 il va falloir déterminer leurs constantes d'équilibres sans
 oublier qu'elles s'influencent mutuellement.
 C'est ici qu'intervient le paramètre $T$. On va donc commencer
-par calculer les $\Delta G^{\circ}_{reaction}$ afin de conna\^itre les constantes
+par calculer les $\Delta_r G^{\circ}$ afin de conna\^itre les constantes
 d'équilibres $K(T)$, pour finalement déterminer les quantités des différents composés
 à l'équilibre.
 
@@ -132,36 +132,36 @@ on ajoute un degré de précision en posant
 
 les valeurs des différents coefficients\footnote{Il faut ajouter deux autres 
 coefficients F et G à cause des constantes d'intégrations pour les
-enthalpies et entropies.} se trouvent \cite{shomate} dans le fichier \texttt{outil.m}.
+enthalpies et entropies.} se trouvent \cite{shomate} dans le fichier \texttt{getCoefficients.m}.
 On en déduit donc les valeurs des enthalpies et entropies
-à partir de l'équation \ref{eq:shomate} dans 
+à partir de l'équation \ref{eq:shomate} dans \texttt{getDeltaH\_and\_S.m}  
 
 \begin{align*}
-	\Delta H_{f, T2}^{\circ} &= \Delta H_{f, T1}^{\circ} 
-	+ \int_{T1}^{T2} C_p \, \dif{T} \\ 
-				 &= \Delta H_{f, T1}^{\circ} 
+	\Delta_f H_{T2}^{\circ} &= \Delta_f H_{T1}^{\circ} 
+	+ \int_{T1}^{T2} C_{p,m} \, \dif{T} \\ 
+				 &= \Delta_f H_{T1}^{\circ} 
 	+ A \, t + B \, \frac{t^2}{2}  + C \,  \frac{t^3}{3} 
 	+ D \, \frac{t^4}{4} - \frac{E}{t} + K_{1} \\		 
 	S_{T2}^{\circ}  &= S_{T1}^{\circ} + \int_{T1}^{T2} 
-	\frac{C_p}{T} \, \dif{T} \\
+	\frac{C_{p,m}}{T} \, \dif{T} \\
 			&= S_{T1}^{\circ} + A \, \ln{t} 
 	+ B \, t + C \, \frac{t^2}{2} 
 	+ D \, \frac{t^3}{3} - \frac{E}{2 t^{2}} + K_{2} 
 \end{align*}
 
-Afin de ne pas trop alourdir ce document, les détails des calculs sont ignorés.
+Afin de ne pas trop alourdir ce document, les détails des calculs sont ignorés. 
 
 On détermine ensuite l'enthalpie libre de Gibbs via la relation 
 
 \begin{equation*}
-	\Delta G_{\text{reaction}}^{\circ} = \Delta H_{\text{reaction}}^{\circ} 
-	- T \, \Delta S_{\text{reaction}}^{\circ}
+	\Delta_r G^{\circ} = \Delta_r H^{\circ} 
+	- T \, \Delta_r S^{\circ}
 \end{equation*}
 
 et finalement la constante d'équilibre 
 
 \[ 
-K(T) = \exp{\left(\frac{- \Delta G}{R \, T}\right)} 
+K(T) = \exp{\left(\frac{- \Delta_r G}{R \, T}\right)} 
 \]
 
 \paragraph{Calcul des pressions partielles à l'équilibre}
@@ -253,7 +253,7 @@ Ce qui nous donne
 
 Nous résolvons le système de 4 équations 
 (\ref{eq:systeme1}, \ref{eq:systeme2}, \ref{eq:systeme3}, \ref{eq:systeme4})
-dans \texttt{outil.m}.
+dans \texttt{solveG.m}.
 
 \section{Fonctionnement de l'outil de calcul}
 
@@ -389,7 +389,7 @@ Ce bilan énergétique est modélisé dans \texttt{getHovenMasses.m}.
 \section{Flow-sheet}
 \label{sec:flow}
 
-La figure \ref{fig:flow} présente un flow-sheet simplifié du processus de production
+La figure \ref{fig:flow} présente un flow-sheet simplifié du processus 
 de production d'ammoniac que nous étudions.
 
 \begin{figure}[h!]
