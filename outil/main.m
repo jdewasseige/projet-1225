@@ -1,4 +1,4 @@
-function out = main(T, m_NH3)
+function out = main(T, m_nh3)
 % Outil de gestion du plant de formation d'ammoniac
 % a partir de methane.
 % 
@@ -16,43 +16,28 @@ myAssert((T >= 700 && T <=1200),0, strcat('La temperature fournie', ...
     ' est en dehors de l''intervalle couvert par coefficients de Shomate.'));
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Constantes d'equilibres des reactions du reformeur primaire
-K = getEqConstantsRef(T) ;
-
 % Pression dans le reformeur primaire
 p_tot = 26e5 ;
 
-% resolution des equations pour trouver le 
-% nombre de moles de CH4 et de H2O 
-moles = solveG(m_NH3,p_tot,K.r1,K.r2) ;
-n_CH4 = moles(1) ;
-n_H2O = moles(2) ;
-ksi1  = moles(3) ;
-ksi2  = moles(4) ;
-
-% Masses molaires
-M = getMolarMasses();
-
+moles = solveG(m_nh3,T,p_tot) ;
+n_ch4 = moles(1);
+n_h2o = moles(2);
+ksi1  = moles(3);
+ksi2  = moles(4);
 % masses
-m_CH4= M.ch4*n_CH4/1e6 ;
-m_H2O= M.h2o*n_H2O/1e6 ;
-m_O2 = M.o2*((7/884)* m_NH3) ; 
-m_N2 = M.n2*((1/34)* m_NH3) ;
-m_Ar = M.ar*((1/2652)* m_NH3) ;
+m = getMassesDetails(m_nh3,T,p_tot) ;
 
+fprintf('\nIn REF1 - Quantite de CH4 en tonnes par jour : %.2f \n', m.ch4_in) ;
+fprintf('In REF1 - Quantite de H20 en tonnes par jour : %.2f \n', m.h2o_in) ;
+fprintf('In REF2 - Quantite de O2 en tonnes par jour : %.2f \n', m.o2_ref2) ;
+fprintf('In REF2 - Quantite de N2 en tonnes par jour : %.2f \n', m.n2_ref2) ;
+fprintf('In REF2 - Quantite de Ar en tonnes par jour : %.2f \n', m.ar_ref2) ;
 
-fprintf('\nIn REF1 - Quantite de CH4 en tonnes par jour : %.2f \n', m_CH4) ;
-fprintf('In REF1 - Quantite de H20 en tonnes par jour : %.2f \n', m_H2O) ;
-
-fprintf('In REF2 - Quantite de O2 en tonnes par jour : %.2f \n', m_O2) ;
-fprintf('In REF2 - Quantite de N2 en tonnes par jour : %.2f \n', m_N2) ;
-fprintf('In REF2 - Quantite de Ar en tonnes par jour : %.2f \n', m_Ar) ;
-
-%printMassesDetails(m_NH3,n_CH4,n_H2O,ksi1,ksi2);
+printMassesDetails(m);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Nombre de tubes 
 
-tubes = getTubesNumber(n_CH4,n_H2O,T) ;
+tubes = getTubesNumber(n_ch4,n_h2o,T) ;
 
 fprintf('\nNombre de tubes : %d \n \n', ceil(double(tubes))) ;
 
