@@ -6,7 +6,7 @@ function out = myAssert(bool,stop,message)
 %
 % input  - bool    : condition qui doit etre verifiee
 %        - stop    : 0 (resp. 1) on continue (resp. arrete) l'execution
-%                    en affichant un $message
+%                    en affichant un 'message'
 %        - message : message d'erreur
 
 if ~bool && ~stop
