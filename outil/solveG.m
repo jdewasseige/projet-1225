@@ -1,17 +1,20 @@
-function out = solveG(m_NH3,p_tot,K_r1,K_r2)
+function out = solveG(m_NH3,T,p_tot)
 
 R = 8.3144621 ;
 p_st = 1e5 ;
 
+% Constantes d'equilibres des reactions du reformeur primaire
+K = getEqConstantsRef(T) ;
+
 syms ksi1 ksi2 n_CH4 n_H2O positive
 
 % Equilibre des pressions - reaction 1 du reformage primaire.
-eq1= K_r1 == (p_tot^2 *(ksi1 - ksi2)*(3*ksi1 + ksi2)^3)...
+eq1= K.r1 == (p_tot^2 *(ksi1 - ksi2)*(3*ksi1 + ksi2)^3)...
     /(p_st^2 *(n_CH4 + n_H2O + 2*ksi1)^2 *(n_CH4 - ksi1)* ...
     (n_H2O - ksi1 - ksi2)) ;
 
 % Equilibre des pressions - reaction 2 (WGS) du reformage primaire.
-eq2= K_r2 == (ksi2*(3*ksi1 + ksi2)) ...
+eq2= K.r2 == (ksi2*(3*ksi1 + ksi2)) ...
     /((ksi1 - ksi2)*(n_H2O - ksi1 - ksi2)) ;
 
 % Donnee a l'entree du reformage secondaire.

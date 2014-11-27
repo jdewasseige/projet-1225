@@ -20,7 +20,8 @@ K= exp(-dG/(R*T_reac));
 %On cherche xsi (uniquement pour le circuit "in"!!!) grâce à K
 syms xsi_s;
 xsi=solve(((2*xsi_s)^2)*((n_in-2*xsi_s)^2)/(27*(n_N2_in-xsi_s)^4)-K/p_reac, xsi_s); %Ce système a plusieurs solutions!
-xsi=xsi(3); %On prend la solution qui a du sens
+xsi=double(xsi(3)); %On prend la solution qui a du sens
+
 %On peut obtenir les deux valeurs suivantes grâce à nos bilans du départ
 n_purge=n_in-2*xsi-n_NH3_out;
 A_purge=n_Ar_in/n_purge;
@@ -29,13 +30,14 @@ A_purge=n_Ar_in/n_purge;
 %circuit de recyclage.
 syms n_N2_out_s;
 n_N2_out=solve(((((n_NH3_out)^2)*((4*n_N2_out_s+n_Ar_in-A_purge*n_NH3_out)/(1-A_purge))^2)/(27*(n_N2_out_s)^4))-K/p_reac, n_N2_out_s);
-n_N2_out=n_N2_out(1);
+n_N2_out=double(n_N2_out(1));
 n_out=(4*n_N2_out+n_Ar_in-A_purge*n_NH3_out)/(1-A_purge);
 n_rec=n_out-n_NH3_out;
 x=abs(n_purge/n_rec) %La fraction recherchée
 
 m_rec=((n_rec-(A_purge*n_rec))/4)*(28+6)+A_purge*n_rec*40
 m_purge=m_rec*x
+
 end
 
 
