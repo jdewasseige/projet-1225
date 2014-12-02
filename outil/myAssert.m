@@ -1,4 +1,4 @@
-function out = newAssert(bool,stop,message)
+function out = myAssert(bool,stop,message)
 % Cette fonction est une variante de la fonction 'assert'.
 % Elle permet de continuer l'execution du programme si l'argument
 % 'stop' est faux, tout en affichant un message pour prevenir 
