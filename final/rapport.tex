@@ -2,12 +2,19 @@
 
 \usepackage{../custom}
 
+\usepackage[backend=biber]{biblatex}
+\addbibresource{biblio.bib}
+
 \begin{document}
 
 \input{titlepage}
 
+\tableofcontents
+
 \chapter{Introduction}
+%\input{intro}
 \chapter{Page de synthèse}
+%\input{syntese}
 
 \appendix
 \chapter{Rapports précédents}
@@ -15,8 +22,8 @@
 \section{T\^ache 1}
 %\input{../rapport1/rapport1}
 
-\section{T\^ache 2}
-%\input{../rapport2/rapport2}
+\section{T\^acihe 2}
+%\input{../tache2/tache2}
 
 \section{T\^ache 3}
 % cedric
@@ -28,14 +35,18 @@
 %\input{../tache5/tache5}
 
 \section{T\^ache 7}
-%\input{../tache7/tache7}
+%\input{../rapport3/rapport3}
+
+\section{T\^ache 8}
+%\input{../tache8/tache8}
 
 \chapter{Outil de gestion}
-
-\chapter{\texttt{Aspen +}}
+%\input{../outil/readme/readme}
+\chapter{Aspen +}
 
 \chapter{Support de présentation}
 
 
+\printbibliography
 \end{document}
 
