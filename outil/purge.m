@@ -1,9 +1,9 @@
 function out = purge(T, m_NH3, T_reac, p_reac)
 
 %On obtient les différents flux molaires.
-n_N2_in   = (1/34)*m_NH3;
+n_N2_in   = (1/34)*m_NH3*1000;
 n_H2_in   = 3*n_N2_in;
-n_Ar_in   = (1/2652)*m_NH3;
+n_Ar_in   = (1/2652)*m_NH3*1000;
 n_in      = n_N2_in+n_H2_in+n_Ar_in;
 n_NH3_out = m_NH3/17;
 
