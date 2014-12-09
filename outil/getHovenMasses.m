@@ -29,6 +29,7 @@ m_o2_four  = (2*n_ch4_four * M.o2)/1e6 ;
 m_co2_four = (n_ch4_four * M.co2)/1e6 ; 
 m_h2o_four = (2*n_ch4_four * M.h2o)/1e6 ;
 
+
 out = [m_ch4_four, m_o2_four, m_co2_four, m_h2o_four] ;
 
 end

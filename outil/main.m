@@ -1,9 +1,11 @@
-function out = main(T, m_nh3)
+function out = main(m_nh3,T,print)
 % Outil de gestion du plant de formation d'ammoniac
 % a partir de methane.
 % 
-% in - T     = temperature en KELVIN reacteur
-%    - m_NH3 = masse d'ammoniac en tonnes par jour
+% in - T     : temperature en KELVIN reacteur
+%    - m_NH3 : masse d'ammoniac en tonnes par jour
+%    - print : mettre a 0 pour ne pas afficher les resultats
+%              (ils sont affiches par defaut)
 % 
 % out- m_CH4 = masse de methane en tonnes par jour
 %    - m_H2O = masse d'eau en tonnes par jour
@@ -12,51 +14,62 @@ function out = main(T, m_nh3)
 %    - m_Ar  = masse d'argon en tonnes par jour
 %    - nombre de tubes
 
+if nargin < 3
+    print = 1
+end
+
 myAssert((T >= 700 && T <=1200),0, strcat('La temperature fournie', ...
     ' est en dehors de l''intervalle couvert par coefficients de Shomate.'));
+% if ~(T >= 700 && T <=1200)
+%     error('hellooo');
+% end
+% assert((T >= 700 && T <=1200),'hello');
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Pression dans le reformeur primaire
-p_tot = 26e5 ;
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Details des flux massiques de l'ensemble du procede 
 
-moles = solveG(m_nh3,T,p_tot) ;
-n_ch4 = moles(1);
-n_h2o = moles(2);
-ksi1  = moles(3);
-ksi2  = moles(4);
-% masses
+p_tot = 26e5 ; % pression dans le reformeur primaire 
+
 m = getMassesDetails(m_nh3,T,p_tot) ;
 
-fprintf('\nIn REF1 - Quantite de CH4 en tonnes par jour : %.2f \n', m.ch4_in) ;
-fprintf('In REF1 - Quantite de H20 en tonnes par jour : %.2f \n', m.h2o_in) ;
-fprintf('In REF2 - Quantite de O2 en tonnes par jour : %.2f \n', m.o2_ref2) ;
-fprintf('In REF2 - Quantite de N2 en tonnes par jour : %.2f \n', m.n2_ref2) ;
-fprintf('In REF2 - Quantite de Ar en tonnes par jour : %.2f \n', m.ar_ref2) ;
-
-printMassesDetails(m);
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Nombre de tubes 
-
-tubes = getTubesNumber(n_ch4,n_h2o,T) ;
-
-fprintf('\nNombre de tubes : %d \n \n', ceil(double(tubes))) ;
+if print
+    printMassesDetails(m);
+end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Bilan energetique
 
 T_four = 1300 ; 
 
+moles = solveG(m_nh3,T,p_tot); % equilibre dans le reformeur primaire
+n_ch4 = moles(1);
+n_h2o = moles(2);
+ksi1  = moles(3);
+ksi2  = moles(4); 
+
 oven_masses = getHovenMasses(ksi1,ksi2,T,T_four);
-m_CH4_four = oven_masses(1) ;
-m_O2_four  = oven_masses(2) ;
-%m_CO2_four  = oven_masses(3) ;
+m.ch4_four = oven_masses(1) ;
+m.o2_four  = oven_masses(2) ;
+m.co2_four  = oven_masses(3) ;
+m.h2o_four  = oven_masses(4) ;
 
-fprintf('In Four - Quantite de CH4 en tonnes par jour : %.2f \n', m_CH4_four) ;
-fprintf('In Four - Quantite de O2  en tonnes par jour : %.2f \n', m_O2_four) ;
-%fprintf('Out Four - Quantite de CO2 (FOUR) en tonnes par jour : %.2f \n', m_CO2_four) ;
+if print 
+    fprintf('\nFour (en tonnes par jour) \n');
+    fprintf('IN  - CH4 : %.2f \n', m.ch4_four) ;
+    fprintf('IN  - O2  : %.2f \n', m.o2_four) ;
+    fprintf('OUT - CO2 : %.2f \n', m.co2_four) ;
+end
 
+out = m;
 
-%out = oven_masses(3);
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Nombre de tubes 
+
+tubes = getTubesNumber(n_ch4,n_h2o,T) ;
+
+if print
+    fprintf('\nNombre de tubes : %d \n\n', ceil(double(tubes))) ;
+end
 
 end
 
