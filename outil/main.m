@@ -1,21 +1,23 @@
-function out = main(m_nh3,T,print)
+function masses = main(m_nh3,T,print,out)
 % Outil de gestion du plant de formation d'ammoniac
 % a partir de methane.
 % 
 % in - T     : temperature en KELVIN reacteur
 %    - m_NH3 : masse d'ammoniac en tonnes par jour
-%    - print : mettre a 0 pour ne pas afficher les resultats
+%    - print : mettre a 0 pour ne pas afficher les masses detaillees
 %              (ils sont affiches par defaut)
+%    - out   : mettre a 1 pour renvoyer les masses detaillees
 % 
-% out- m_CH4 = masse de methane en tonnes par jour
-%    - m_H2O = masse d'eau en tonnes par jour
-%    - m_O2  = masse d'oxygene en tonnes par jour
-%    - m_N2  = masse de nitrogen en tonnes par jour
-%    - m_Ar  = masse d'argon en tonnes par jour
+% out- m_CH4 : masse de methane en tonnes par jour
+%    - m_H2O : masse d'eau en tonnes par jour
+%    - m_O2  : masse d'oxygene en tonnes par jour
+%    - m_N2  : masse de nitrogen en tonnes par jour
+%    - m_Ar  : masse d'argon en tonnes par jour
 %    - nombre de tubes
 
 if nargin < 3
-    print = 1
+    print = 1 ;
+    out   = 0 ;
 end
 
 myAssert((T >= 700 && T <=1200),0, strcat('La temperature fournie', ...
@@ -60,7 +62,9 @@ if print
     fprintf('OUT - CO2 : %.2f \n', m.co2_four) ;
 end
 
-out = m;
+if out 
+    masses = m;
+end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Nombre de tubes 

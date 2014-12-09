@@ -21,7 +21,7 @@ out_co2_four = zeros(1,n);
 
 for i=1:n
     fprintf('T = %.0f K \n',T(i));
-    m = main(101,T(i),0);
+    m = main(10,T(i),0,1);
     
     in_ch4_proc(i)  = m.ch4_in ;
     in_ch4_four(i)  = m.ch4_four ;
@@ -44,7 +44,7 @@ subplot(2,1,1);
 plot(T,in_ch4_proc,T,in_h2o,T,in_air,T,out_nh3,T,out_ar,T,out_h2o_proc,T,out_co2_proc);
 
 hold on;
-title('Analyse parametrique pour 101 tonnes d''ammoniac')
+title('Analyse parametrique pour 10 tonnes d''ammoniac')
 ylabel('Masses (tonnes)')
 xlabel('Temperature (K)')
 legend('in ch4','in h2o','in air','out nh3','out ar','out h2o','out co2');
@@ -54,7 +54,7 @@ subplot(2,1,2);
 plot(T,in_ch4_four,T,in_o2_four,T,out_h2o_four,T,out_co2_four);
 
 hold on;
-title('Analyse parametrique du four pour 101 tonnes d''ammoniac')
+title('Analyse parametrique du four pour 10 tonnes d''ammoniac')
 ylabel('Masses (tonnes)')
 xlabel('Temperature (K)')
 legend('in ch4','in o2','out h2o','out co2');
