@@ -54,7 +54,7 @@ m.co2_four  = oven_masses(3) ;
 m.h2o_four  = oven_masses(4) ;
 
 if print 
-    fprintf('\nFour (en tonnes par jour) \n');
+    fprintf('\nFour (en tonnes par jour) \n');
     fprintf('IN  - CH4 : %.2f \n', m.ch4_four) ;
     fprintf('IN  - O2  : %.2f \n', m.o2_four) ;
     fprintf('OUT - CO2 : %.2f \n', m.co2_four) ;

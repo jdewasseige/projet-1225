@@ -1,24 +1,25 @@
 function analyseParametrique
 
+n = 10; 
 
-T = linspace(900,1100,10);
+T = linspace(900,1100,n);
 
-in_ch4_proc  = zeros(1,10);
-in_ch4_four  = zeros(1,10);
-in_o2_four = zeros(1,10);
+in_ch4_proc  = zeros(1,n);
+in_ch4_four  = zeros(1,n);
+in_o2_four = zeros(1,n);
 
-in_h2o  = zeros(1,10);
-in_air  = zeros(1,10);
-out_nh3 = zeros(1,10);
-out_ar  = zeros(1,10);
+in_h2o  = zeros(1,n);
+in_air  = zeros(1,n);
+out_nh3 = zeros(1,n);
+out_ar  = zeros(1,n);
 
-out_h2o_proc = zeros(1,10);
-out_h2o_four = zeros(1,10);
+out_h2o_proc = zeros(1,n);
+out_h2o_four = zeros(1,n);
 
-out_co2_proc = zeros(1,10);
-out_co2_four = zeros(1,10);
+out_co2_proc = zeros(1,n);
+out_co2_four = zeros(1,n);
 
-for i=1:10
+for i=1:n
     fprintf('T = %.0f K \n',T(i));
     m = main(101,T(i),0);
     
