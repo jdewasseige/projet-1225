@@ -22,7 +22,7 @@ out_co2_four = zeros(1,n);
 for i=1:n
     fprintf('T = %.0f K \n',T(i));
     m = main(101,T(i),0);
-    
+  
     in_ch4_proc(i)  = m.ch4_in ;
     in_ch4_four(i)  = m.ch4_four ;
     

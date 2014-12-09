@@ -24,8 +24,8 @@ for i = 1:9
   
     result = getHovenMasses(ksi1,ksi2,T,T_four);
 
-    h2o(i) = (result(4) + m.h2o_sep)/1500;
-    y(i) =  (m.co2_sep + result(3))/1500 ;
+    h2o(i) = (result(4) + m.h2o_sep);
+    y(i) =  (m.co2_sep + result(3)) ;
     x(i) = T;
 
     fprintf('Rejet de C02 en tonnes par jour : %.2f pour : %.2f degrés K \n', m.co2_sep + result(3), x(i)) ;
