@@ -14,7 +14,7 @@ for i = 1:11
         t = 1200 - 1;
     end
     
-    result = main(t, 1500);
+    result = main(1500,t);
 
     x(i) = result(1)/1500;
     y(i) = t;
