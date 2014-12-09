@@ -2,34 +2,60 @@ function environnement()
 % Outil permettant l'analyse des données environnementales pour la tâche 3
 % du projet
 
-x = zeros(1,11); 
-y = zeros(1,11);
+x = zeros(1,9); 
+y = zeros(1,9);
+h2o = zeros(1,9);
 
 
-t = 700;
+p_tot = 26e5 ;
+m_nh3 = 1500;
+T_four = 1300; 
 
-for i = 1:11
+
+T = 700;
+
+for i = 1:9
     
-    if t == 1200 
-        t = 1200 - 1;
-    end
+    moles = solveG(m_nh3,T,p_tot) ;
+    ksi1  = moles(3);
+    ksi2  = moles(4);
     
-    result = main(t, 1500);
+    m = getMassesDetails(m_nh3,T,p_tot) ;
+  
+    result = getHovenMasses(ksi1,ksi2,T,T_four);
 
-    x(i) = result(1)/1500;
-    y(i) = t;
+    h2o(i) = (result(4) + m.h2o_sep)/1500;
+    y(i) =  (m.co2_sep + result(3))/1500 ;
+    x(i) = T;
 
-    fprintf('Rejet de C02 (FOUR) en tonnes par jour : %.2f pour : %.2f degrés K \n', result(1), y(i)) ;
+    fprintf('Rejet de C02 en tonnes par jour : %.2f pour : %.2f degrés K \n', m.co2_sep + result(3), x(i)) ;
+    fprintf('Rejet de H2O en tonnes par jour : %.2f pour : %.2f degrés K \n', result(4) + m.h2o_sep, x(i)) ;
 
-    t = t + 50;
+    T = T + 50;
 end
 
-plot(y, x)
+figure();
+
+subplot(2,1,1); 
+
+plot(x, y)
 
 hold on;
 
 title('CO2/Temp')
 ylabel('CO2 rejection/ NH3 production')
+xlabel('Temperature')
+
+hold off;
+
+subplot(2,1,2);
+
+plot(x, h2o);
+
+hold on;
+
+title('H2O/Temp')
+ylabel('H2O rejection/ NH3 production')
 xlabel('Temperature')
 
 hold off;
