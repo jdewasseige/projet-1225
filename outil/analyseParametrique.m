@@ -1,6 +1,6 @@
 function analyseParametrique
 
-n = 10; 
+n = 5; 
 
 T = linspace(900,1100,n);
 
@@ -21,7 +21,6 @@ out_co2_four = zeros(1,n);
 
 for i=1:n
     fprintf('T = %.0f K \n',T(i));
-
     m = main(10,T(i),0,1);
     
     in_ch4_proc(i)  = m.ch4_in ;
