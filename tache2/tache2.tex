@@ -26,35 +26,11 @@ Le produit est refroidit dans une installation prévue à cette fin,
 pour arriver enfin dans un séparateur où on extrait l'ammoniac.
 
 Il semblait intéressant de créer un circuit de recyclage pour réutiliser 
-le mélange de $N_2$ et de $H_2$ issus du processus (la réaction n'est pas complète 
+le mélange de \ce{N_2} et de \ce{H_2} issus du processus (la réaction n'est pas complète 
 et il reste donc des réactifs). Malheureusement, il y existe également de l'argon 
 qu'on ne peut séparer du reste. En effet, sa température d'ébullition est bien trop 
 proche de celle des autres composés et les moyens à mettre en œuvre en seraient 
 très couteux et/ou à faible rendement.
-
-Notre groupe a donc décidé de faire une purge dans le circuit de recyclage 
-afin d'éviter que l'argon ne s'accumule. Cette purge ne doit pas être trop 
-grande sinon la quantité perdue des réactifs serait conséquente. 
-La condition à respecter est donc d'avoir un flux entrant d'argon égal à celui de sortie:
-Lors de la première tâche, nous analysions l'installation dans son ensemble, 
-mais de manière excessivement simplifiée. Dans cette section, 
-nous nous concentrerons sur l'explicitation de la dernière étape pour 
-ensuite la simuler sur le logiciel $Aspen Plus$. 
-Nous ne désirons plus la considérer comme une boîte noire, 
-et l'avons donc découpée en un certain nombre de processus intermédiaires.
-
-Le gaz composé d'$N_2$, d'$H_2$ et d'$Ar$ passe par un réchauffeur et 
-par un compresseur pour atteindre respectivement la température et la pression voulue. 
-Il va ensuite dans le réacteur où se déroule la réaction. 
-Le produit est refroidit dans une installation prévue à cette fin, 
-pour arriver enfin dans un séparateur où on extrait l'ammoniac. 
-
-Il semblait intéressant de créer un circuit de recyclage pour réutiliser 
-le mélange de $N_2$ et de $H_2$ issu du processus (la réaction n'est pas complète 
-et il reste donc des réactifs). 
-Malheureusement, il y existe également de l'argon qu'on ne peut séparer du reste. 
-En effet, sa température d'ébullition est bien trop proche de celle des autres composés et 
-les moyens à mettre en œuvre en seraient très couteux et/ou à faible rendement. 
 
 Notre groupe a donc décidé de faire une purge dans le circuit de recyclage 
 afin d'éviter que l'argon ne s'accumule. Cette purge ne doit pas être trop grande 
@@ -68,7 +44,7 @@ Voici à quoi ressemble l'installation sur $ASPEN$:
 
 \section{La purge}
 
-Dans les calculs qui suivent, nous cherchons x qui n'est autre que la fraction du recyclage 
+Dans les calculs qui suivent, nous cherchons $x$ qui n'est autre que la fraction du recyclage 
 qui doit être purgée. Nous nous référerons au schéma pour ce qu'il en est des notations. 
 Rappelons qu'il est aisé de trouver les débits d'entrée des réactifs 
 et de sortie de l'ammoniac grâce à notre outil de calcul.
@@ -127,18 +103,13 @@ ainsi qu'à la sortie (on considère que l'équilibre a été atteint).
 \end{table}
 
 La réaction se déroule à $750K$ et 
-il est facile de calculer K en trouvant $\Delta G_{réaction}$ au préalable. 
-Nous pouvons faire cela en utilisant notre outil de calcul: 
-
-\[ 
-\Delta G_{\text{réaction}}(T_{réacteur}) = 
-\Delta H_{réaction}(T_{réacteur})-T_\cdot \Delta S_{réaction}(T_{réacteur})-RT_{réacteur}\log(p_{réacteur})
-\]
+il est facile de calculer $K en trouvant $\Delta G_{réaction}$ au préalable. 
+Nous pouvons faire cela en utilisant notre outil de calcul.
 
 \[
 K=\exp(\frac{-\Delta G}{R\cdot 750})\]
 
-L'expression de la constante d'équilibre K est également: 
+L'expression de la constante d'équilibre $K_p$ est également: 
 
 \[
 K_p=\frac{{[NH_3]_{out}}^2}{[N_2]_{out}{[H_2]_{out}}^3} = 
