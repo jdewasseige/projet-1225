@@ -1,0 +1,36 @@
+\begin{tikzpicture}
+[node distance = 7em]
+
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+    text width=6em, text centered, rounded corners, minimum height=3em]
+\tikzstyle{block2} = [rectangle, draw, fill=red!60, 
+    text width=6em, text centered, minimum height=2em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=2cm,
+    minimum height=1em]
+    
+\node [block2] (reac) {$N_2(g) + 3H_2(g) \rightarrow 2NH_3(g)$};
+\node [cloud, right = 3em of reac] (one) {};
+\node [cloud, above = 2em of reac] (two) {};
+\node [cloud, left = 3em of reac] (three) {};
+\node [block, right = 2em of one] (NH3) {$NH_3(l)$};
+\node [block, above = 2em of two] (purge) {$N_2(g)$, $H_2(g)$, $Ar(g)$};
+\node [block, left = 2em of three] (in) {$N_2(g)$, $H_2(g)$, $Ar(g)$};
+
+\path [line] (reac) -- node[anchor = south] {out}
+	(one);
+\path [line] (one) |- node[anchor = west] {recyclage}
+	(two);
+\path [line] (two) -| node[anchor = south] {} 
+	(three);
+\path [line] (three) -- node[anchor = west] {} 
+	(reac);
+\path [line] (one) -- node[anchor = west] {} 
+	(NH3);
+\path [line] (two) -- node[anchor = west] {purge} 
+	(purge);
+\path [line] (in) -- node[anchor = south] {in} 
+	(three);
+
+\end{tikzpicture}
+
