@@ -165,15 +165,15 @@ K=\exp(\frac{-\Delta G}{R \cdot T})\]
 L'expression de la constante d'équilibre $K_p$ est également: 
 
 \[
-K_p=\frac{{[NH_3]_{out}}^2}{[N_2]_{out}{[H_2]_{out}}^3} \cdot p = 
-\frac{{n_{NH_3,out}}^2}{n_{N_2,out}\cdot {n_{H_2,out}}^3}\cdot {n_{total,out}}^2\cdot p
+K_p=\frac{{[NH_3]_{out}}^2}{[N_2]_{out}{[H_2]_{out}}^3} \cdot p^{-2} = 
+\frac{{n_{NH_3,out}}^2}{n_{N_2,out}\cdot {n_{H_2,out}}^3}\cdot {n_{total,out}}^2\cdot p^{-2}
 \]
 
 Comme $n_{H_2}=3\cdot n_{N_2}$ (éléments en quantité stœchiométrique), on a donc 
-$K=\frac{{n_{NH_3,out}}^2}{27{n_{N_2,out}}^4}\cdot {n_{total,out}}^2\cdot p$. En injectant les 
+$K=\frac{{n_{NH_3,out}}^2}{27{n_{N_2,out}}^4}\cdot {n_{total,out}}^2\cdot p^{-2}$. En injectant les 
 quantités des composés du tableaux, fonctions de $\xi$, on obtient:
 
-\[ K=\frac{{2\xi}^2}{27{{n_{\ce{N2}}-\xi}^4}}\cdot ({n_{total}-2\xi})^2 \cdot p \]
+\[ K=\frac{({2\xi})^2}{27 \cdot ({{n_{\ce{N2,in}}-\xi})^4}}\cdot ({n_{total,in}-2\xi})^2 \cdot p^{-2} \]
 
 Nous pouvons par exemple résoudre cela avec \texttt{MATLAB}. 
 Connaissant $\xi$, on trouve $\dot{n}_{purge}$ grâce à l'équation \ref{eq:bilan_mol_tot}. 
@@ -186,15 +186,15 @@ et pouvons donc maintenant connaitre la quantité totale de réactifs restants a
 Rappelons que les quantité utilisées plus haut ne prenaient pas en compte le recyclage. 
 Reprenons l'expression de K: 
 
-\[ K=\frac{{n_{NH_3,out}}^2}{27{n_{N_2,out}}^4}\cdot {n_{total,out}}^2\cdot p \]
+\[ K=\frac{{n_{NH_3,out}}^2}{27{n_{N_2,out}}^4}\cdot {n_{total,out}}^2\cdot p^{-2} \]
 
-Or nous savons que $\dot{n_{total,out}}=4\dot{n_{N_2,out}}+\dot{n_{Ar,out}}+\dot{n_{\ce{NH3},out}}$ 
+Or nous savons que $\dot{n}_{total,out}=4\dot{n}_{N_2,out}+\dot{n}_{Ar,out}+\dot{n}_{\ce{NH3},out}$ 
 où $\dot{n}_{Ar,out}$ est successivement:
-\[\dot{n}_{Ar,out}=\dot{n}_{Ar,in}+\dot{n}_{Ar,recyclage}\]
+\[\dot{n}_{Ar,out}=\dot{n}_{Ar,recyclage}\]
 
-\[ \dot{n}_{Ar,out}=\dot{n}_{Ar,in}+[Ar]_{recyclage}\dot{n}_{total,recyclage} \]
+\[ \dot{n}_{Ar,out}=[Ar]_{recyclage}\dot{n}_{total,recyclage} \]
 
-\[ \dot{n}_{Ar,out}\underset{(3)}=\dot{n}_{Ar,in}+[Ar]_{recyclage}(\dot{n}_{total,out}-\dot{n}_{NH_3,out}) \].
+\[ \dot{n}_{Ar,out}\underset{(3)}=[Ar]_{recyclage}(\dot{n}_{total,out}-\dot{n}_{NH_3,out}) \].
 
 Nous avons donc 2 équations pour trouver les 2 inconnues $n_{N_2,out}$ et $n_{total,out}$. 
 Nous pouvons à nouveau résoudre cela par \texttt{MATLAB}. 
