@@ -96,9 +96,9 @@ et de sortie de l'ammoniac grâce à notre outil de calcul.
 
 \begin{figure}[h!]
 	\begin{center}
-		\input{flow_etape_finale.tex}
+		\input{etape_finale_simplifiee.tex}
 	\end{center}
-	\caption{Schéma simplifié de l'étape finale.}
+	\caption{Schéma simplifié de l'étape finale}
 	\label{fig:schema}
 \end{figure}
 
@@ -143,7 +143,7 @@ Cela est résumé dans le tableau suivant.
 On analyse le débit de moles à l'entrée du réacteur pour les différents composés, 
 ainsi qu'à la sortie (on considère que l'équilibre a été atteint).
 
-\begin{table}[!h]
+\begin{table}
 	\centering
 	\begin{tabular}{l|c|c|c|c}
 		$\ce{N2}$ & $\ce{H2}$ & $\ce{Ar}$ & $\ce{NH3}$ & $n_{total}$ \\
@@ -210,7 +210,10 @@ Le même cheminement est suivi dans le programme \texttt{purge} disponible dans 
 Le logiciel \texttt{Aspen Plus} propose de nombreuses modélisations du comportement des fluides, 
 plus ou moins fidèles selon les composés et les conditions dans lesquels on les observe. 
 Notre recherche s'est limitée aux modèles à haute pression. 
-Après en avoir fait l'étude en comparant les bases de données de chacun d'eux, nous avons sélectionné un petit nombre de candidats susceptibles de fournir les meilleurs résultats pour lancer une simulation de notre installation, 
+Après en avoir fait l'étude en comparant les bases de données de chacun d'eux, nous avons gardé 3 candidats: \texttt{RK-Aspen},\texttt{PSRK} et \texttt{SRK}. Tous trois basés sur les équations de Soave-Redlich-Kwong, ils modélisent correctement les gaz légers et non polaires comme ceux auxquels nous avons affaire ici. Ces modèles sont également les seuls à être capables de faire des prédictions correctes à une pression supérieure à 150 bar. Cependant, le modèle SRK promet de garder sa précision dans des conditions quasi critiques, ce qui n'est pas le cas des deux autres. La pression dans notre circuit pouvant avoisiner les 270 bar, c'est ce dernier que nous avons donc choisi pour faire des simulations approfondies.
+Lors de nos tests, nous avons arbitrairement fixé la température et la pression des réactifs entrants respectivement à 25°C et 1 bar. En effet, leurs valeurs exactes nous sont inconnues et n'ont de toute manière aucun impact sur le fonctionnement du circuit grâce à la présence du réchauffeur et du compresseur.
+Notre outil de calcul
+
 Nous avons fixé nos paramètres à des valeurs vraisemblables et observé le comportement suivi dans le programme pour vérifier que nous obtenons une quantité de $\ce{NH3}$ vérifiant nos prévisions pour une certaine quantité de réactifs. 
 [AJOUTER LES RESULTATS DONNES PAR LA SIMULATION]
 
