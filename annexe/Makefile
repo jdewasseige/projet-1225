@@ -1,2 +1,2 @@
-NAME=rapport1
+NAME=annexe-gr25
 include ../.root.mk
