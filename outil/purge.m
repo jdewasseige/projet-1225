@@ -1,7 +1,7 @@
 function out = purge(m_NH3, T, p)
 
-%On obtient les diffï¿½rents flux molaires journaliers.
-n_NH3_out = (10^6*m_NH3)/17.0305;
+%On obtient les différents flux molaires journaliers.
+n_NH3_out = m_NH3*10^6/17.0305;
 n_N2_in = n_NH3_out/2;
 n_H2_in = 3*n_N2_in;
 n_Ar_in = (1/2652)*m_NH3*10^6;

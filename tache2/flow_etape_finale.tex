@@ -1,0 +1,38 @@
+\begin{tikzpicture}
+[node distance = 7em]
+
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+    text width=7em, text centered, rounded corners, minimum height=3em]
+\tikzstyle{block2} = [rectangle, draw, fill=red!60, 
+    text width=6em, text centered, minimum height=2em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=2cm,
+    minimum height=1em]
+
+
+\node [cloud] (input) {Input};
+\node [block, right = 15em of input] (compresseur) {Compresseur\\Synthèse};
+\node [block, below = 6em of compresseur] (separation) {Refroidisseur\\Séparation};
+\node [block2,left = 13em of separation] (purge) {Purge};
+\node [cloud, below = 5em of purge] (residu) {Résidus};
+\node [cloud, below = 4em of separation] (output) {Output};
+
+\path [line] (input) -- node[anchor = south] {\ce{N2} \ce{H2} \ce{Ar}}
+	(compresseur);
+\path [line,dashed] (compresseur) -- node[anchor = west] { \ce{Ar} \ce{NH3_{(g)}} \ce{NH3_{(l)}}} 
+	node[anchor = east] {\ce{N2} \ce{H2}} 
+	(separation);
+\path [line,dashed] (separation) -- node[anchor = north] {\ce{NH3_{(g)}} 
+	\ce{H2} \ce{N2} \ce{Ar}} 
+	(purge);
+\path [line,dashed] (purge) -- node[anchor = east] {\ce{Ar} 
+	\ce{N2} \ce{H2} $\quad$}
+	node[anchor = west]{$\quad$ \ce{NH3_{(g)}}} 
+	(compresseur);
+\path [line] (purge) -- node[anchor = east] {\ce{NH3_{(g)}}}
+	node[anchor = west] { \ce{N2} \ce{H2} \ce{Ar}}
+	(residu);
+\path [line] (separation) -- node[anchor = east] {\ce{NH3_{(l)}}} 
+	(output);
+\end{tikzpicture}
+
