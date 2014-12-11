@@ -84,14 +84,20 @@ La condition à respecter est donc d'avoir un flux entrant d'argon égal à celu
 Les calculs permettant de trouver la quantité parfaite à purger 
 sont détaillés dans la sous-section suivante.
 
-Voici à quoi ressemble l'installation sur \texttt{Aspen Plus}:
+Le flowsheet de notre installation correspondant à la modélisation 
+du réacteur de synthèse sur \texttt{Aspen+} 
+se trouve dans la figure \ref{fig:flow_aspen}.
+Afin d'apporter plus de précision, nous avons également réalisé un petit 
+flowsheet de la même partie du procédé qui détaille le parcours des 
+différents réactifs et leurs états à travers le processus.
+Le diagramme se trouve dans la figure \ref{fig:flow_synthese}.
 
 \begin{figure}[h!]
 	\begin{center}
-		\includegraphics[scale=0.35]{Flowsheet_ASPEN.jpg}
+		\includegraphics[scale=0.45,angle=90]{Flowsheet_ASPEN.jpg}
 	\end{center}
-	\caption{Flowsheet de la réaction finale sur Aspen Plus}
-	\label{fig:flowsheet}
+	\caption{Flowsheet de la réaction finale sur \texttt{Aspen+}.}
+	\label{fig:flow_aspen}
 \end{figure}
 
 \subsection{La purge}
@@ -104,16 +110,12 @@ Nous nous référerons au schéma pour ce qu'il en est des notations.
 Rappelons qu'il est aisé de trouver les débits d'entrée des réactifs 
 et de sortie de l'ammoniac grâce à notre outil de calcul.
 
-%!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-%Y aurait moyen de bouger le flowsheet un peu vers la gauche?????????????
-%!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 \begin{figure}[h!]
 	\begin{center}
 		\input{flow_synthese}
 	\end{center}
 	\caption{Schéma simplifié de l'étape finale}
-	\label{fig:schema}
+	\label{fig:flow_synthese}
 \end{figure}
 
 Comme dit précédemment, une purge optimale doit permettre un débit 
