@@ -10,13 +10,8 @@ end
 plot(x,y);
 hold on;
 str = sprintf('Fraction du recyclage à purger en fonction de la pression, à une température de %d K', T);
-<<<<<<< HEAD
 title(str)
 ylabel('Fraction X du recyclage à purger')
-=======
-title(str) 
-ylabel('X')
->>>>>>> 33d26b9f5941987a5fac11701e9c1e9e1af7b2b4
 ylim([0 1])
 xlim([p1 p2])
 xlabel('Pression (bar)')
