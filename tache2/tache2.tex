@@ -85,17 +85,28 @@ Les calculs permettant de trouver la quantité parfaite à purger
 sont détaillés dans la sous-section suivante.
 
 Voici à quoi ressemble l'installation sur \texttt{Aspen Plus}:
-[INSERER PRINTSCREEN]
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.35]{Flowsheet_ASPEN.jpg}
+	\end{center}
+	\caption{Flowsheet de la réaction finale sur Aspen Plus}
+	\label{fig:flowsheet}
+\end{figure}
 
 \subsection{La purge}
 
-Dans les calculs qui suivent, nous cherchons $x$ qui n'est autre que 
+Dans les calculs qui suivent, nous cherchons $X$ qui n'est autre que 
 la fraction du recyclage qui doit être purgée. 
 Nous négligeons l'imperfection du séparateur et faisons donc l'hypothèse 
 que l'ammoniac sortant est pur, ce qui est bien sur impossible. 
 Nous nous référerons au schéma pour ce qu'il en est des notations. 
 Rappelons qu'il est aisé de trouver les débits d'entrée des réactifs 
 et de sortie de l'ammoniac grâce à notre outil de calcul.
+
+%!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+%Y aurait moyen de bouger le flowsheet un peu vers la gauche?????????????
+%!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 \begin{figure}[h!]
 	\begin{center}
@@ -110,7 +121,7 @@ de sortie d'argon égal à celui d'entrée dans le système.
 On peut écrire ça sous la forme:
 
 \begin{equation}
-\dot{n}_{\ce{Ar},\text{in}}=\dot{n}_{\ce{Ar},purge}=[\ce{Ar}]_{\text{purge}} \dot{n}_{\text{purge}}
+\dot{n}_{\ce{Ar},\text{in}}=\dot{n}_{\ce{Ar},purge}=x_{\ce{Ar},\text{purge}} \dot{n}_{\text{purge}}
 \end{equation}
 
 Ceci est donc le bilan total d'argon. 
@@ -118,7 +129,7 @@ Il est possible de faire d'autres bilans afin de nous donner d'autres relations 
 
 $\bullet$ Bilan molaire à la purge:
 \begin{equation}
-\dot{n}_{\text{purge}} = x \cdot \dot{n}_{\text{recyclage}}
+\dot{n}_{\text{purge}} = X \cdot \dot{n}_{\text{recyclage}}
 \label{eq:bilan_mol_purge}
 \end{equation}
 
@@ -130,7 +141,7 @@ $\bullet$ Bilan molaire au séparateur:
 
 $\bullet$ Bilan d'argon au séparateur:
 \begin{equation}
-[Ar]_{\text{out}} \dot{n}_{\text{out}}=[Ar]_{\text{recyclage}} \dot{n}_{\text{recyclage}}
+x_{Ar,\text{out}} \dot{n}_{\text{out}}=x_{\ce{Ar},\text{recyclage}} \dot{n}_{\text{recyclage}}
 \end{equation}
 
 $\bullet$ Bilan molaire total:
@@ -168,7 +179,7 @@ K=\exp{\left(\frac{-\Delta G}{R \cdot T}\right)}\]
 L'expression de la constante d'équilibre $K_p$ est également: 
 
 \[
-K_p=\frac{{[\ce{NH3}]_{\text{out}}}^2}{[\ce{N2}]_{\text{out}}{[\ce{H2}]_{\text{out}}}^3} \cdot p^{-2} = 
+K_p=\frac{{x_{\ce{NH3},\text{out}}}^2}{x_{\ce{N2},\text{out}}{x_{\ce{H2},\text{out}}}^3} \cdot p^{-2} = 
 \frac{{n_{\ce{NH3},\text{out}}}^2}{n_{\ce{N2},out}\cdot {n_{\ce{H2},out}}^3}\cdot {n_{\text{total,out}}}^2\cdot p^{-2}
 \]
 
@@ -187,9 +198,9 @@ K =
 Nous pouvons par exemple résoudre cela avec \texttt{MATLAB}. 
 Connaissant $\xi$, on trouve $\dot{n}_{\text{purge}}$
 grâce à l'équation \ref{eq:bilan_mol_tot}. 
-Nous obtenons directement $[\ce{Ar}]_{\text{purge}}$ en injectant 
+Nous obtenons directement $x_{\ce{Ar},\text{purge}}$ en injectant 
 le résultat dans la première équation. 
-$[\ce{Ar}]_{\text{purge}}$ est égal à $[\ce{Ar}]_{\text{recyclage}}$ 
+$x_{\ce{Ar},\text{purge}}$ est égal à $x_{\ce{Ar},\text{recyclage}}$ 
 car la purge n'altère par la concentration.
 
 Nous disposons de la quantité d'ammoniac produite (un paramètre) 
@@ -210,11 +221,11 @@ où $\dot{n}_{\ce{Ar},out}$ est successivement:
 
 \[\dot{n}_{\ce{Ar},out}=\dot{n}_{\ce{Ar},\text{recyclage}}\]
 
-\[ \dot{n}_{\ce{Ar},out}=[\ce{Ar}]_{\text{recyclage}}\dot{n}_{\text{total,recyclage}} \]
+\[ \dot{n}_{\ce{Ar},out}=x_{\ce{Ar},\text{recyclage}}\dot{n}_{\text{total,recyclage}} \]
 
 \[ 
 \dot{n}_{\ce{Ar},out}\underset{(3)} = 
-[\ce{Ar}]_{\text{recyclage}}(\dot{n}_{\text{total,out}}-\dot{n}_{\ce{NH3},\text{out}}) 
+x_{\ce{Ar},\text{recyclage}}(\dot{n}_{\text{total,out}}-\dot{n}_{\ce{NH3},\text{out}}) 
 \]
 
 Nous avons donc 2 équations pour trouver 
@@ -224,7 +235,7 @@ A présent, il suffit d'utiliser l'équation \ref{eq:bilan_mol_sep}
 pour trouver $\dot{n}_{\text{recyclage}}$. 
 Comme nous le dit l'équation \ref{eq:bilan_mol_purge}, 
 le rapport de $\dot{n}_{\text{purge}}$ 
-et de $\dot{n}_{\text{recyclage}}$ nous donne enfin $x$! 
+et de $\dot{n}_{\text{recyclage}}$ nous donne enfin $X$! 
 Ces calculs fastidieux nous permettent donc enfin de trouver la fraction à prélever 
 dans le circuit de recyclage. 
 Le même cheminement est suivi dans le programme \texttt{purge} 
