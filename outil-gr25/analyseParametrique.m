@@ -1,6 +1,6 @@
 function analyseParametrique
 
-n = 10; 
+n = 5; 
 
 T = linspace(900,1100,n);
 

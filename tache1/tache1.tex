@@ -44,7 +44,7 @@ On les notera respectivement $T$ et $m_{\ce{NH3}}$.
 supposons que le lecteur sait quelle réaction a lieu à quel moment ainsi 
 que l'ordre des réactions durant tout le processus.
 Un flow-sheet simplifié de l'ensemble du processus détaillant chacune
-des réactions se trouve à la section \ref{sec:flow}.
+des réactions se trouve à la section \ref{sec:flowsheet}.
 
 \subsection{Quantité d'air}
 
@@ -132,9 +132,9 @@ on ajoute un degré de précision en posant
 
 les valeurs des différents coefficients\footnote{Il faut ajouter deux autres 
 coefficients F et G à cause des constantes d'intégrations pour les
-enthalpies et entropies.} se trouvent \cite{shomate} dans le fichier \texttt{getCoefficients.m}.
+enthalpies et entropies.} se trouvent \cite{shomate} dans \texttt{getCoefficients}.
 On en déduit donc les valeurs des enthalpies et entropies
-à partir de l'équation \ref{eq:shomate} dans \texttt{getDeltaH\_and\_S.m}  
+à partir de l'équation \ref{eq:shomate} dans \texttt{getDeltaH\_and\_S}  
 
 \begin{align*}
 	\Delta_f H_{T2}^{\circ} &= \Delta_f H_{T1}^{\circ} 
@@ -163,6 +163,9 @@ et finalement la constante d'équilibre
 \[ 
 K(T) = \exp{\left(\frac{- \Delta_r G}{R \, T}\right)} 
 \]
+
+Les constantes d'équilibre des deux réactions du réformage primaire 
+sont calculées dans \texttt{getEqConstantsRef}.
 
 \paragraph{Calcul des pressions partielles à l'équilibre}
 
@@ -253,7 +256,7 @@ Ce qui nous donne
 
 Nous résolvons le système de 4 équations 
 (\ref{eq:systeme1}, \ref{eq:systeme2}, \ref{eq:systeme3}, \ref{eq:systeme4})
-dans \texttt{solveG.m}.
+dans \texttt{solveG}.
 
 \section{Fonctionnement de l'outil de calcul}
 
@@ -336,7 +339,7 @@ nous pouvons calculer le nombre de tubes nécessaire
 Il faut donc 282 tuyaux pour assurer l'approvionnnement 
 des composés dans le reformateur primaire.
 
-La fonction \texttt{getTubesNumber.m} donne le
+La fonction \texttt{getTubesNumber} donne le
 nombre de tubes requis en fonction des paramètres de départ (la masse d'ammoniac 
 à produire et la température du réformeur primaire).
 
@@ -384,21 +387,25 @@ et
 On obtient une équation à résoudre pour obtenir $n_{\ce{CH4},\text{four}}$, et on a ensuite
 la quantité d'oxygène qu'il faut insérer $n_{\ce{O2},\text{four}} = 2 \cdot n_{\ce{CH4},\text{four}}$.
 
-Ce bilan énergétique est modélisé dans \texttt{getHovenMasses.m}.
+Ce bilan énergétique est modélisé dans \texttt{getHovenMasses}.
 
 \section{Flow-sheet}
-\label{sec:flow}
+\label{sec:flowsheet}
 
-La figure \ref{fig:flow} présente un flow-sheet simplifié du processus 
+La figure \ref{fig:flowsheet} présente un flow-sheet simplifié du processus 
 de production d'ammoniac que nous étudions.
 
 \begin{figure}[h!]
 	\begin{center}
-		\input{flow.tex}
+		\input{flowsheet.tex}
 	\end{center}
 	\caption{Flow-sheet simplifié.}
-	\label{fig:flow}
+	\label{fig:flowsheet}
 \end{figure}
+\input{refroidissement}
+
+\appendix
+\input{bilan_massique}
 
 \printbibliography
 

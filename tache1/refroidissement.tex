@@ -1,47 +1,3 @@
-\documentclass[a4paper, oneside, 12pt]{article}
-
-\usepackage{../custom}
-
-\title{Rapport 1}
-\author{Groupe 1225}
-\date{\today}
-
-\begin{document}
-
-\maketitle
-
-\section{Bilan de matière}
-
-Nous faisons l'hypothèse que la réaction est parfaite, 
-c'est-à-dire que tous les réactifs sont consommés 
-et que l'on obtient uniquement le produit.
-
-Il faut déterminer la quantité de dihydrogène (\ce{H2}) et d'azote (\ce{N2}) 
-nécéssaire pour produire $1000 \si{\tonne}$ d'ammoniac (\ce{NH3}).
-
-\begin{equation}
-	\ce{\frac{3}{2} \, H2 + \frac{1}{2} \, N2 -> NH3} 
-	\label{eq:ammoniac}
-\end{equation}
-
-La masse molaire de l'ammoniac vaut $17 \si{\gram\per\mole}$,
-il faut donc en produire $5.88\e{7} \si{\mole}.$
-
-On obtient les nombres de moles de réactifs à partir de la réaction pondérée. 
-
-\begin{align*}
-	m_{\ce{H2}}  = \frac{3}{2} \, n_{\ce{NH3}} \cdot M_{m, \ce{H2}} 
-	= 1.765\e{8} \si{\gram} \\
-	m_{\ce{N2}} = \frac{1}{2} \, n_{\ce{NH3}} \cdot M_{m, \ce{N2}} 
-	= 8.235\e{8} \si{\gram}
-\end{align*}
-
-Les masses de \ce{H2} et de \ce{N2} valent donc 
-respectivement $176.5 \si{\tonne}$ et $823.5 \si{\tonne}$.
-Le bilan de masse est correct : si on fait la somme des masses des réactifs,
-on retrouve la même masse produite.
-
-
 \section{Débit d'eau nécessaire}
 
 Afin de maintenir les réacteurs à température constante, 
@@ -49,7 +5,10 @@ on refroidit ceux-ci avec de l'eau.
 Il faut tout d'abord calculer la chaleur dégagée par jour par les réacteurs,
 pour ensuite déterminer la quantité d'eau nécessaire pour absorber cette chaleur,
 sachant que l'eau entre à $25 \si{\degreeCelsius}$ et 
-est évacuée à $90 \si{\degreeCelsius}$. 
+est évacuée à $90 \si{\degreeCelsius}$.
+Les calculs suivants sont présentés pour une quantité d'ammoniac de $1000\si{\tonne}$ par jour, 
+la fonction \texttt{refroidissement} permet d'avoir le débit nécessaire (en litres par seconde) 
+en fonction de la quantité de \ce{NH3} désirée.
 
 \paragraph{In}
 
@@ -148,6 +107,3 @@ on trouve que
 
 Il faut donc $11703 \si{\tonne}$ d'eau par jour, 
 ou encore 136 litres par seconde.
-
-\end{document}
-
