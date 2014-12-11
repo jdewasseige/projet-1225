@@ -66,14 +66,14 @@ pour ensuite la simuler sur le logiciel \texttt{Aspen Plus}.
 Nous ne désirons plus la considérer comme une boîte noire, et l'avons donc découpée 
 en un certain nombre de processus intermédiaires. 
 
-Le gaz composé d'\ce{N2}, d'\ce{H2} et d'\ce{Ar} passe par un réchauffeur et par un compresseur 
-pour atteindre respectivement la température et la pression voulue. 
+Le gaz composé d'\ce{N2}, d'\ce{H2} et d'\ce{Ar} passe par un réchauffeur 
+et par un compresseur pour atteindre respectivement la température et la pression voulue. 
 Il va ensuite dans le réacteur où se déroule la réaction.
 Le produit est refroidit dans une installation prévue à cette fin, 
 pour arriver enfin dans un séparateur où on extrait l'ammoniac.
 
 Il semblait intéressant de créer un circuit de recyclage pour réutiliser 
-le mélange de \ce{N_2} et de \ce{H_2} issus du processus (la réaction n'est pas complète 
+le mélange de \ce{N2} et de \ce{H2} issus du processus (la réaction n'est pas complète 
 et il reste donc des réactifs). Malheureusement, il y existe également de l'argon 
 qu'on ne peut séparer du reste. En effet, sa température d'ébullition est bien trop 
 proche de celle des autres composés et les moyens à mettre en œuvre en seraient 
@@ -89,14 +89,17 @@ Voici à quoi ressemble l'installation sur \texttt{Aspen Plus}:
 
 \subsection{La purge}
 
-Dans les calculs qui suivent, nous cherchons $x$ qui n'est autre que la fraction du recyclage 
-qui doit être purgée. Nous négligeons l'imperfection du séparateur et faisons donc l'hypothèse que l'ammoniac sortant est pur, ce qui est bien sur impossible. Nous nous référerons au schéma pour ce qu'il en est des notations. 
+Dans les calculs qui suivent, nous cherchons $x$ qui n'est autre que 
+la fraction du recyclage qui doit être purgée. 
+Nous négligeons l'imperfection du séparateur et faisons donc l'hypothèse 
+que l'ammoniac sortant est pur, ce qui est bien sur impossible. 
+Nous nous référerons au schéma pour ce qu'il en est des notations. 
 Rappelons qu'il est aisé de trouver les débits d'entrée des réactifs 
 et de sortie de l'ammoniac grâce à notre outil de calcul.
 
 \begin{figure}[h!]
 	\begin{center}
-		\input{etape_finale_simplifiee.tex}
+		\input{flow_synthese}
 	\end{center}
 	\caption{Schéma simplifié de l'étape finale}
 	\label{fig:schema}
@@ -107,7 +110,7 @@ de sortie d'argon égal à celui d'entrée dans le système.
 On peut écrire ça sous la forme:
 
 \begin{equation}
-\dot{n}_{Ar,in}=\dot{n}_{Ar,purge}=[Ar]_{purge} \dot{n}_{purge}
+\dot{n}_{\ce{Ar},\text{in}}=\dot{n}_{\ce{Ar},purge}=[\ce{Ar}]_{\text{purge}} \dot{n}_{\text{purge}}
 \end{equation}
 
 Ceci est donc le bilan total d'argon. 
@@ -115,35 +118,35 @@ Il est possible de faire d'autres bilans afin de nous donner d'autres relations 
 
 $\bullet$ Bilan molaire à la purge:
 \begin{equation}
-\dot{n}_{purge} = x \cdot \dot{n}_{recyclage}
+\dot{n}_{\text{purge}} = x \cdot \dot{n}_{\text{recyclage}}
 \label{eq:bilan_mol_purge}
 \end{equation}
 
 $\bullet$ Bilan molaire au séparateur:
 \begin{equation}
-\dot{n}_{out}=\dot{n}_{recyclage}+\dot{n}_{NH_3,out}
+\dot{n}_{\text{out}}=\dot{n}_{\text{recyclage}}+\dot{n}_{\ce{NH3},\text{out}}
 \label{eq:bilan_mol_sep}
 \end{equation}
 
 $\bullet$ Bilan d'argon au séparateur:
 \begin{equation}
-[Ar]_{out} \dot{n}_{out}=[Ar]_{recyclage} \dot{n}_{recyclage}
+[Ar]_{\text{out}} \dot{n}_{\text{out}}=[Ar]_{\text{recyclage}} \dot{n}_{\text{recyclage}}
 \end{equation}
 
 $\bullet$ Bilan molaire total:
 
 \begin{equation}
-	\dot{n}_{in} - 2\xi=\dot{n}_{NH_3,out} + \dot{n}_{purge}
+	\dot{n}_{in} - 2\xi=\dot{n}_{\ce{NH3},\text{out}} + \dot{n}_{\text{purge}}
 	\label{eq:bilan_mol_tot}
 \end{equation}
 
-avec $\xi$ étant l'avancement, c'est à dire le nombre de moles de $N_2$ ayant réagit. 
+avec $\xi$ étant l'avancement, c'est à dire le nombre de moles de \ce{N2} ayant réagit. 
 Faisons attention de noter qu'on ne considère que les réactifs venant du circuit $in$. 
 Cela est résumé dans le tableau suivant. 
 On analyse le débit de moles à l'entrée du réacteur pour les différents composés, 
 ainsi qu'à la sortie (on considère que l'équilibre a été atteint).
 
-\begin{table}
+\begin{table}[h!]
 	\centering
 	\begin{tabular}{l|c|c|c|c}
 		$\ce{N2}$ & $\ce{H2}$ & $\ce{Ar}$ & $\ce{NH3}$ & $n_{total}$ \\
@@ -156,65 +159,108 @@ ainsi qu'à la sortie (on considère que l'équilibre a été atteint).
 \end{table}
 
 La réaction se déroule à une certaine température T et à une pression p. 
-Il est facile de calculer $K$ en trouvant $\Delta G_{r}$ au préalable. 
+Il est facile de calculer $K$ en trouvant $\Delta_r G$ au préalable. 
 Nous pouvons faire cela en utilisant notre outil de calcul.
 
 \[
-K=\exp(\frac{-\Delta G}{R \cdot T})\]
+K=\exp{\left(\frac{-\Delta G}{R \cdot T}\right)}\]
 
 L'expression de la constante d'équilibre $K_p$ est également: 
 
 \[
-K_p=\frac{{[NH_3]_{out}}^2}{[N_2]_{out}{[H_2]_{out}}^3} \cdot p^{-2} = 
-\frac{{n_{NH_3,out}}^2}{n_{N_2,out}\cdot {n_{H_2,out}}^3}\cdot {n_{total,out}}^2\cdot p^{-2}
+K_p=\frac{{[\ce{NH3}]_{\text{out}}}^2}{[\ce{N2}]_{\text{out}}{[\ce{H2}]_{\text{out}}}^3} \cdot p^{-2} = 
+\frac{{n_{\ce{NH3},\text{out}}}^2}{n_{\ce{N2},out}\cdot {n_{\ce{H2},out}}^3}\cdot {n_{\text{total,out}}}^2\cdot p^{-2}
 \]
 
-Comme $n_{H_2}=3\cdot n_{N_2}$ (éléments en quantité stœchiométrique), on a donc 
-$K=\frac{{n_{NH_3,out}}^2}{27{n_{N_2,out}}^4}\cdot {n_{total,out}}^2\cdot p^{-2}$. En injectant les 
-quantités des composés du tableaux, fonctions de $\xi$, on obtient:
+Comme $n_{\ce{H2}}=3\cdot n_{\ce{N2}}$ (éléments en quantité stœchiométrique), 
+on a donc 
+$K=\frac{{n_{\ce{NH3},\text{out}}}^2}{27{n_{\ce{N2},out}}^4} \cdot
+{n_{\text{total,out}}}^2\cdot p^{-2}$. 
+En injectant les quantités des composés du tableaux, fonctions de $\xi$, on obtient:
 
-\[ K=\frac{({2\xi})^2}{27 \cdot ({{n_{\ce{N2,in}}-\xi})^4}}\cdot ({n_{total,in}-2\xi})^2 \cdot p^{-2} \]
+\[ 
+K = 
+\frac{({2\xi})^2}{27 \cdot ({{n_{\ce{N2,in}}-\xi})^4}} \cdot
+({n_{total,in}-2\xi})^2 \cdot p^{-2} 
+\]
 
 Nous pouvons par exemple résoudre cela avec \texttt{MATLAB}. 
-Connaissant $\xi$, on trouve $\dot{n}_{purge}$ grâce à l'équation \ref{eq:bilan_mol_tot}. 
-Nous obtenons directement $[Ar]_{purge}$ en injectant 
-le résultat dans la première équation. $[Ar]_{purge}$ est égal à $[Ar]_{recyclage}$ 
+Connaissant $\xi$, on trouve $\dot{n}_{\text{purge}}$
+grâce à l'équation \ref{eq:bilan_mol_tot}. 
+Nous obtenons directement $[\ce{Ar}]_{\text{purge}}$ en injectant 
+le résultat dans la première équation. 
+$[\ce{Ar}]_{\text{purge}}$ est égal à $[\ce{Ar}]_{\text{recyclage}}$ 
 car la purge n'altère par la concentration.
 
 Nous disposons de la quantité d'ammoniac produite (un paramètre) 
 et pouvons donc maintenant connaitre la quantité totale de réactifs restants après réaction. 
 Rappelons que les quantité utilisées plus haut ne prenaient pas en compte le recyclage. 
-Reprenons l'expression de K: 
+Reprenons l'expression de $K$: 
 
-\[ K=\frac{{n_{NH_3,out}}^2}{27{n_{N_2,out}}^4}\cdot {n_{total,out}}^2\cdot p^{-2} \]
+\[ 
+K = 
+\frac{{n_{\ce{NH3},\text{out}}}^2}{27{n_{\ce{N2},out}}^4} \cdot 
+{n_{\text{total,out}}}^2\cdot p^{-2}
+\]
 
-Or nous savons que $\dot{n}_{total,out}=4\dot{n}_{N_2,out}+\dot{n}_{Ar,out}+\dot{n}_{\ce{NH3},out}$ 
-où $\dot{n}_{Ar,out}$ est successivement:
-\[\dot{n}_{Ar,out}=\dot{n}_{Ar,recyclage}\]
+Or nous savons que $\dot{n}_{\text{total,out}} = 
+4\dot{n}_{\ce{N2},out}+\dot{n}_{\ce{Ar},out}+\dot{n}_{\ce{NH3},out}$ 
 
-\[ \dot{n}_{Ar,out}=[Ar]_{recyclage}\dot{n}_{total,recyclage} \]
+où $\dot{n}_{\ce{Ar},out}$ est successivement:
 
-\[ \dot{n}_{Ar,out}\underset{(3)}=[Ar]_{recyclage}(\dot{n}_{total,out}-\dot{n}_{NH_3,out}) \].
+\[\dot{n}_{\ce{Ar},out}=\dot{n}_{\ce{Ar},\text{recyclage}}\]
 
-Nous avons donc 2 équations pour trouver les 2 inconnues $n_{N_2,out}$ et $n_{total,out}$. 
+\[ \dot{n}_{\ce{Ar},out}=[\ce{Ar}]_{\text{recyclage}}\dot{n}_{\text{total,recyclage}} \]
+
+\[ 
+\dot{n}_{\ce{Ar},out}\underset{(3)} = 
+[\ce{Ar}]_{\text{recyclage}}(\dot{n}_{\text{total,out}}-\dot{n}_{\ce{NH3},\text{out}}) 
+\]
+
+Nous avons donc 2 équations pour trouver 
+les 2 inconnues $n_{\ce{N2},out}$ et $n_{\text{total,out}}$. 
 Nous pouvons à nouveau résoudre cela par \texttt{MATLAB}. 
-A présent, il suffit d'utiliser l'équation \ref{eq:bilan_mol_sep} pour trouver $\dot{n}_{recyclage}$. 
-Comme nous le dit l'équation \ref{eq:bilan_mol_purge}, le rapport de $\dot{n}_{purge}$ 
-et de $\dot{n}_{recyclage}$ nous donne enfin x! 
+A présent, il suffit d'utiliser l'équation \ref{eq:bilan_mol_sep} 
+pour trouver $\dot{n}_{\text{recyclage}}$. 
+Comme nous le dit l'équation \ref{eq:bilan_mol_purge}, 
+le rapport de $\dot{n}_{\text{purge}}$ 
+et de $\dot{n}_{\text{recyclage}}$ nous donne enfin $x$! 
 Ces calculs fastidieux nous permettent donc enfin de trouver la fraction à prélever 
 dans le circuit de recyclage. 
-Le même cheminement est suivi dans le programme \texttt{purge} disponible dans notre outil de gestion.
+Le même cheminement est suivi dans le programme \texttt{purge} 
+disponible dans notre outil de gestion.
 
 \subsection{Validation du modèle}
 
-Le logiciel \texttt{Aspen Plus} propose de nombreuses modélisations du comportement des fluides, 
-plus ou moins fidèles selon les composés et les conditions dans lesquels on les observe. 
+Le logiciel \texttt{Aspen Plus} propose de nombreuses 
+modélisations du comportement des fluides, 
+plus ou moins fidèles selon les composés et 
+les conditions dans lesquels on les observe. 
 Notre recherche s'est limitée aux modèles à haute pression. 
-Après en avoir fait l'étude en comparant les bases de données de chacun d'eux, nous avons gardé 3 candidats: \texttt{RK-Aspen},\texttt{PSRK} et \texttt{SRK}. Tous trois basés sur les équations de Soave-Redlich-Kwong, ils modélisent correctement les gaz légers et non polaires comme ceux auxquels nous avons affaire ici. Ces modèles sont également les seuls à être capables de faire des prédictions correctes à une pression supérieure à 150 bar. Cependant, le modèle SRK promet de garder sa précision dans des conditions quasi critiques, ce qui n'est pas le cas des deux autres. La pression dans notre circuit pouvant avoisiner les 270 bar, c'est ce dernier que nous avons donc choisi pour faire des simulations approfondies.
-Lors de nos tests, nous avons arbitrairement fixé la température et la pression des réactifs entrants respectivement à 25°C et 1 bar. En effet, leurs valeurs exactes nous sont inconnues et n'ont de toute manière aucun impact sur le fonctionnement du circuit grâce à la présence du réchauffeur et du compresseur.
-Notre outil de calcul
 
-Nous avons fixé nos paramètres à des valeurs vraisemblables et observé le comportement suivi dans le programme pour vérifier que nous obtenons une quantité de $\ce{NH3}$ vérifiant nos prévisions pour une certaine quantité de réactifs. 
+Après en avoir fait l'étude en comparant les bases de données de chacun d'eux, 
+nous avons gardé 3 candidats: \texttt{RK-Aspen}, \texttt{PSRK} et \texttt{SRK}. 
+Tous trois basés sur les équations de Soave-Redlich-Kwong, 
+ils modélisent correctement les gaz légers et non polaires 
+comme ceux auxquels nous avons affaire ici. 
+Ces modèles sont également les seuls à être capables de faire 
+des prédictions correctes à une pression supérieure à $150\si{\bar}$. 
+Cependant, le modèle SRK promet de garder sa précision dans des conditions 
+quasi critiques, ce qui n'est pas le cas des deux autres. 
+La pression dans notre circuit pouvant avoisiner les $270\si{\bar}$, 
+c'est ce dernier que nous avons donc choisi pour faire des simulations approfondies.
+Lors de nos tests, nous avons arbitrairement fixé la température et 
+la pression des réactifs entrants respectivement à $25\si{\degreeCelsius}$ et $1\si{\bar}$.
+
+En effet, leurs valeurs exactes nous sont inconnues et n'ont de toute manière 
+aucun impact sur le fonctionnement du circuit grâce à la présence du réchauffeur 
+et du compresseur.
+Notre outil de calcul ??????
+
+Nous avons fixé nos paramètres à des valeurs vraisemblables 
+et observé le comportement suivi dans le programme pour vérifier 
+que nous obtenons une quantité de \ce{NH3} vérifiant nos prévisions 
+pour une certaine quantité de réactifs. 
 [AJOUTER LES RESULTATS DONNES PAR LA SIMULATION]
 
 \printbibliography
