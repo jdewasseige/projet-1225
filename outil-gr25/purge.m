@@ -24,7 +24,7 @@ xi=double(xi(2)); %On prend la solution qui a du sens
 
 %On peut obtenir les deux valeurs suivantes grâce à nos bilans du départ
 n_purge=n_in-2*xi-n_NH3_out;
-A_purge=n_Ar_in/n_purge
+A_purge=n_Ar_in/n_purge ;
 
 %On utilise K pour la réaction totale et on obtient la masse totale dans le
 %circuit de recyclage.
@@ -33,9 +33,9 @@ n_N2_out=solve((((n_NH3_out)^2) * ((4*n_N2_out_s+n_NH3_out+n_Ar_in-(A_purge*n_NH
 n_N2_out=double(n_N2_out(1));
 n_out=sqrt(K*(p^2)*27*n_N2_out^4/(n_NH3_out^2));
 n_rec=n_out-n_NH3_out;
-x=abs(n_purge/n_rec) %La fraction recherchée
+x=abs(n_purge/n_rec);%La fraction recherchée
 
-m_rec=((n_rec-(A_purge*n_rec))/4)*(28+6)+A_purge*n_rec*40
-m_purge=m_rec*x
+m_rec=((n_rec-(A_purge*n_rec))/4)*(28+6)+A_purge*n_rec*40;
+m_purge=m_rec*x;
 
 end
