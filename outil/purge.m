@@ -31,7 +31,7 @@ A_purge=n_Ar_in/n_purge;
 syms n_N2_out_s;
 n_N2_out=solve((((n_NH3_out)^2) * ((4*n_N2_out_s+n_NH3_out-(A_purge*n_NH3_out)/(1-A_purge))^2) / (27*p^2*(n_N2_out_s)^4))-K, n_N2_out_s)
 n_N2_out=double(n_N2_out(1));
-n_out=sqrt(K*(p^2)*27*n_N2_out^4/(n_NH3_out^2))
+n_out=sqrt(K*(p^2)*27*n_N2_out^4/(n_NH3_out^2));
 n_rec=n_out-n_NH3_out;
 x=abs(n_purge/n_rec) %La fraction recherchée
 
