@@ -13,42 +13,47 @@
 \maketitle
 
 % Quelle est la pression normale de stockage ?
-\paragraph{Q1} La pression normale de stockage est de $7.5 \barg$ à $20\si{\celsius}$ 
+\paragraph{Q1} La pression normale de stockage est de $7.8 \barg$ à $20\si{\celsius}$ 
 (température normale de stockage).
 
 % Quelle sera la pression de stockage en été (30°C) ?
-\paragraph{Q2} La pression de stockage en été est de $10 \barg$ à $30\si{\celsius}$.
+\paragraph{Q2} La pression de stockage en été est de $10.625 \barg$ à $30\si{\celsius}$.
 
 % Quel sera la pression maximale de tarage de la soupape de sécurité ?
 \paragraph{Q3} La pression maximale de tarage de la soupape de sécurité vaut 
-\[ 105\% \cdot p_{\text{design}} = 16.8\si{\bar} = 15.79\barg \]
+\[ 121\% \cdot p_{\text{design}} = 18.15\barg \]
 
 % Dimensionner la soupape pour cette pression de tarage.
 %     -	Quelle sera la pression durant la décharge ?
 %     -	Quelle sera la température du liquide durant la décharge via la soupape ?
 %     -	Quelle sera la taille de la soupape nécessaire ?
 \paragraph{Q4} 
-La pression durant la décharge sera de $20.071 \barg$. 
-Cette pression est fort élevée car nous considérons ici le cas de feu. 
+La pression durant la décharge sera de $19.16325 \si{\bar}$. 
+Cette pression est fort élevée car nous considérons le cas d'un incendie au niveau du réservoir. 
 La température du gaz durant la décharge sera de $50\si{\celsius}$. 
-Nous aurons besoin d'une soupape d'une section de $26.85\si{\milli\meter\squared}$ 
-ou $4.161 \, \text{inch}^2$. $PSV : 4N6$.
+Nous aurons besoin d'une soupape d'une section de $730\si{\milli\meter\squared}$ 
+ou $1.13 \, \text{sqinch}$. Ceci correspond à une PSV de type $2J3$
+\[ C = 0.03948 * \sqrt(1.33 * (2 / 2.33)^(2.33 / 0.33)) \]
+\[ W = 43200 * 1 * 143.634^(0.82) \]
+\[ A = (W / (C * 0.975 * 20.071 * 1 * 1)) * \sqrt(323.15/17) \]
 
 % Si la pression de design de l’équipement était de 20 barg, 
 % quel serait l’effet d’augmenter la pression de tarage de 5 bar et de la porter à 20 barg  ?
 \paragraph{Q5} 
-Pression de design à $20\barg$. Nous pouvons donc réduire la taille de la soupape. 
-Elle devra faire $20.4\si{\milli\meter\squared}$ ou $3.16 \, \text{inch}^2$ $PSV : 4M6$.
+Si la pression de design est à $20\barg$, nous pouvons augmenter la pression de tarage à \[ 121\% \cdot p_{\text{design}} = 24.2\barg \]
+Nous recalculons A avec la pression et température plus élevée, et obtenons que la soupape doit avoir une section de $590\si{\milli\meter\squared}$
+ce qui nous donne $0.9118 \, \text{sqinch}$. Ceci correspond à une PSV de type $2J3$ comme celle trouvée précédemment. Il n'y a donc pas d'intérêt
+à augmenter la pression de design dans ces conditions.
 
 % Pour la première pression de tarage, quelle est l’influence d’isoler thermiquement 
 % le tank avec un isolant tel que le coefficient d’échange avec l’extérieur 
 % soit réduit à une valeur de 10 W/m2.K ? 
 \paragraph{Q6}
-Isolement thermique de la cuve. 
+Nous isolons la cuve avec un isolant réduisant le coefficient d'échange de la cuve avec l'extérieur à 
+$10 \si{\watt}/\si{\meter\squared}*\si{\kelvin}$
 On réduit donc le facteur environnemental à $F = 0.15$. 
-On peut donc encore réduire la taille de la soupape de sécurité. 
-Nous aurons besoin d'une soupape de sécurité d'aire $2.71\si{\milli\meter\squared}$. 
-Ceci nous fait $3.16 \, \text{inch}^2$ et une PSV de 2G3.
+Notre $W$ va donc être fortement réduit, et nous pouvons donc réduire la taille de la soupape à 
+$110\si{\milli\meter\squared}$ ou $0.17 \, \text{sqinch}$. Cette PSV est du type $1E2$. L'ajout de l'isolant réduit donc fortement la taille de
+la soupape requise.
 
 \end{document}
-
