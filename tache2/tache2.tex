@@ -258,6 +258,7 @@ ils modélisent correctement les gaz légers et non polaires
 comme ceux auxquels nous avons affaire ici. 
 Ces modèles sont également les seuls à être capables de faire 
 des prédictions correctes à une pression supérieure à $150\si{\bar}$. 
+Nous avons donc effectué quelques tests sur chacun des trois et nous avons obtenus des résultats assez similaires.
 Cependant, le modèle SRK promet de garder sa précision dans des conditions 
 quasi critiques, ce qui n'est pas le cas des deux autres. 
 La pression dans notre circuit pouvant avoisiner les $270\si{\bar}$, 
@@ -266,15 +267,31 @@ Lors de nos tests, nous avons arbitrairement fixé la température et
 la pression des réactifs entrants respectivement à $25\si{\degreeCelsius}$ et $1\si{\bar}$.
 
 En effet, leurs valeurs exactes nous sont inconnues et n'ont de toute manière 
-aucun impact sur le fonctionnement du circuit grâce à la présence du réchauffeur 
+aucun impact sur le fonctionnement du circuit grâce à la présence des échangeurs de chaleur 
 et du compresseur.
 Notre outil de calcul ??????
 
 Nous avons fixé nos paramètres à des valeurs vraisemblables 
 et observé le comportement suivi dans le programme pour vérifier 
 que nous obtenons une quantité de \ce{NH3} vérifiant nos prévisions 
-pour une certaine quantité de réactifs. 
-[AJOUTER LES RESULTATS DONNES PAR LA SIMULATION]
+pour une certaine quantité de réactifs. \\
+Tout d'abord nous avons fixé les conditions de réaction standart à $270\si{\bar}$ et 
+750K. Nous avons également choisi de mettre un certain flux de \ce{H2} \ce{N2} et \ce{Ar} 
+dont nous connaissions le flux théorique de \ce{NH3} de sortie grâce au tableaux de données 
+recu à la tâche 1. Nous avons également fixé le pourcentage standart de purge à 5\% pour nos tests. \\
+Pour les conditions décrites ci dessus, nous avons obtenu après simulation un flux de \ce{NH3} légerement 
+inférieur à nos attentes, ce qui s'explique par le fait que dans les résultats attendus, nous avions 
+négligé les pertes au niveau du separateur ainsi que le fait que la réaction ne soit pas tout à fait complète. \\
+Après ceci nous avons essayer de faire varier certains paramètres afin de voir si les resultats obtenus 
+étaient en adéquation avec nos attentes. Nous avons commencé par diminuer la température et comme nous l'avions prédit, 
+la quantité d'amonique produite augmente. Un test avec une température supérieure à 750 nous a confirmé ceci. \\
+Nous avons ensuite vérifié si nos attentes concernant la pression étaient respectées. Et en effet, lorque 
+nous avons augmenté la pression, la quantité de \ce{NH3} produite a augmentée (et inversement en la diminuant). 
+Cependant, ces variations n'étaient pas de très grande ampleur. Pour finir nous avons fait varier les valeurs de 
+pourcentage de purge. Il s'est averé que en dessous de 4\% notre simulation ne convergeait pas et nous avions des érreurs.
+Ensuite, plus nous augmentions le pourcentage plus la production de \ce{NH3} diminuait. Ces résultats nous semble logique puisque 
+le fait d'augmenter le pourcentage de purge augmente les pertes de matières premières.  
+
 
 \printbibliography
 \end{document}
