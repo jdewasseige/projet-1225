@@ -2,8 +2,8 @@
 
 \usepackage{../custom}
 
-\usepackage[backend=biber]{biblatex}
-\addbibresource{biblio.bib}
+%\usepackage[backend=biber]{biblatex}
+%\addbibresource{biblio.bib}
 
 \title{Tâche 8}
 \author{Groupe 1225}
@@ -15,29 +15,86 @@
 
 \section*{Enjeux environnementaux liés à la production d'ammoniac}
 
-La production d'hydrogène dans le reformage primaire lors de la réaction
+La production de \ce{H2} dans le reformage primaire lors de la réaction
 
 \begin{equation*}
 	\ce{CH4_{(g)} + H2O_{(g)} <=> CO_{(g)} + 3 \, H2_{(g)}} 
 \end{equation*}
 
-fait intervenir du méthange gazeux sur deux plans : il en faut en produits de réaction, 
+fait intervenir du méthange gazeux sur deux plans : il en faut comme produits de réaction, 
 mais également dans le four pour que celui-ci puisse approvisionner la réaction en énergie, étant donné que celle-ci est endothermique. 
 
-Le méthane n'est a priori pas un composé très polluant à créer. C'est un hydrocarbure simple à produire à l'aide de processus naturels, notamment la biométhanisation. 
-Cependant, c'est un gaz à effet de serre, avec des propriétés environ 9 fois plus fortes que le \ce{CO2}. 
-<<<<<<< HEAD
+Le méthane n'est pratiquement pas polluant au niveau de sa fabrication. En effet, c'est un hydrocarbure relativement simple à produire à l'aide de processus naturels, notamment la biométhanisation. 
+Cependant, c'est un gaz à effet de serre encore plus fort que le \ce{CO2}.
 S'il arrive qu'il y ait une fuite dans la premier réacteur ou dans le four, la libération de méthane pourrait engendrer une forte pollution de l'air.
 
-\subsection{Alternatives pour produire de l'hydrogène}
+Au niveau du four, suite à la combustion du méthane : 
 
-L'électrolyse est un procédé de fabrication d'hydrogène très couteux en énergie électrique. 
+\begin{equation*}
+	\ce{CH4_{(g)} + 2 \, O2_{(g)} \rightarrow CO2_{(g)} + 2 \, H2O_{(g)}} 
+\end{equation*}
 
+nous constatons un rejet de \ce{H2O} et de \ce{CO2}, tous deux étant des gaz à effet de serre. La vapeur d'eau ne restant pas longtemps dans l'atmosphère, sa contribution au réchauffement climatique est donc négligeable. Par contre, le dioxyde de carbone pose plus de problèmes. 
 
-=======
-Si il arrive qu'il y ait une fuite dans la premier réacteur ou dans le four, la libération de méthane pourrait engendrer une forte pollution de l'air.\cite{electrolyse}
->>>>>>> origin/master
+Lors de la synthèse de \ce{H2} dans les reformages primaire et secondaire, et dans le réacteur Water-Gas-Shift : 
 
-\printbibliography
+\begin{equation*}
+	\ce{CH4_{(g)} + H2O_{(g)} <=> CO_{(g)} + 3 \, H2_{(g)}} 
+\end{equation*}
+
+\begin{equation*}
+	\ce{CO_{(g)} + H2O_{(g)} <=> CO2_{(g)} + H2_{(g)}} 
+\end{equation*}
+
+\begin{equation*}
+	\ce{2 \, CH4_{(g)} + O2_{(g)} \rightarrow {2} \, CO_{(g)} + 4 \, H2_{(g)}} 
+\end{equation*}
+
+\begin{equation*}
+	\ce{CO_{(g)} + H2O_{(g)} \rightarrow CO2_{(g)} + H2_{(g)}} 
+\end{equation*}
+
+nous rejetons du \ce{CO2} supplémentaire en grandes quantités. Typiquement, pour produire 1500t de \ce{NH3} avec le procédé Haber, nous rejetons 1947,145t de \ce{CO2}.
+
+Nous remarquons que l'intégralité du rejet de \ce{CO2} provient directement ou indirectement de la production de \ce{H2}, le \ce{N2} étant extrait directement depuis l'air ambiant.
+
+Le procédé de Haber est assez néfaste pour l'environnement. La production de \ce{H2} entraîne le dégagement de quantités importantes de \ce{CO2} dans l'atmosphère.
+Nous allons analyser plusieurs pistes possibles pour tenter d'améliorer l'impact environnemental.
+
+\section*{Alternatives au vaporeformage}
+
+Plusieurs solutions (réactions toutes endothermiques) sont possibles afin de remplacer le vaporeformage.
+
+La gazéification à l'eau permet de synthétiser de l'hydrogène gazeux à partir de matières carbonnées et de vapeur d'eau.
+L'apport énergétique doit être sous forme de chaleur.
+
+\begin{equation*}
+	\ce{C_{(g)} + H2O_{(g)} \rightarrow CO_{(g)} + H2_{(g)}} 
+\end{equation*}
+
+\begin{equation*}
+	\ce{CO_{(g)} + H2O_{(g)} <=> CO2_{(g)} + H2_{(g)}} 
+\end{equation*}
+
+L'électrolyse de l'eau permet notamment de produire de l'hydrogène en transformant de l'énergie électrique en énergie chimique.
+L'apport énergétique doit être sous forme électrique.
+
+\begin{equation*}
+	\ce{H2O_{(g)} <=> \frac{1}{2} \, O2_{(g)} + H2_{(g)}} 
+\end{equation*}
+
+Nous allons ici nous intéresser plus en détails au cas de l'électrolyse de l'eau. 
+
+D'après nos résultats en laboratoire sur la réaction d'électrolyse, il ne faudrait pas moins de 5,7 GW pour produire 266,32t de \ce{H2} par jour, c'est-à-dire la quantité d'hydrogène nécessaire à la fabrication de 1500t de \ce{NH3} par jour. L'électrolyse est un procédé qui consomme énormément d'énergie électrique. Comme nous allons le voir ci-dessous, il n'est intéressant que si l'électricité provient de sources d'énergie renouvelables dégageant très peu de dioxyde carbone, telle que l'énergie éolienne ou encore hydraulique.
+
+En considérant les rejets standards de \ce{CO2} par kWh électrique en Belgique, qui sont de 290 g/kWh, nous calculons une émission de dioxyde de carbone de l'ordre de 39 672t par jour pour produire 1500t d'ammoniac. Nous obtenons donc une émission de \ce{CO2} deux fois supérieure à celle calculée avec le vaporeformage.
+
+Ce résultat est évident puisque nous avons pris en compte les émissions standards de \ce{CO2} par kWh.
+Par contre, si nous décidons de produire notre électricité à l'aide de sources écologiques, nous allons considérablement diminuer notre émission de \ce{CO2}, en passant de 290
+g/kWh à seulement 5 g/kWh, valeur standard pour les énergies éolienne et hydraulique. Dans ce cas-là, le rejet de \ce{CO2} pour produit les 5,7 GW nécessaires ne sera que de 684t par jour, contre 1947,145 pour le vaporeformage. 
+\newline
+
+On remarque finalement que le procédé d'électrolyse de l'eau est nettement préférable d'un point de vue environnemental au vaporeformage, mais entraîne à côté de cela un coût plus important pour la production d'hydrogène, en raison des besoins considérables en énergie électrique.
+
 \end{document}
 
