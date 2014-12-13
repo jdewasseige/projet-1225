@@ -94,7 +94,7 @@ Le diagramme se trouve dans la figure \ref{fig:flow_synthese}.
 
 \begin{figure}[h!]
 	\begin{center}
-		\includegraphics[scale=0.45,angle=90]{Flowsheet_ASPEN.jpg}
+		\includegraphics[scale=0.45,angle=90]{img_aspen/Flowsheet_ASPEN.jpg}
 	\end{center}
 	\caption{Flowsheet de la réaction finale sur \textsc{Aspen Plus}.}
 	\label{fig:flow_aspen}
@@ -114,7 +114,7 @@ et de sortie de l'ammoniac grâce à notre outil de calcul.
 	\begin{center}
 		\input{flow_synthese}
 	\end{center}
-	\caption{Schéma simplifié de l'étape finale}
+	\caption{Schéma simplifié de l'étape finale.}
 	\label{fig:flow_synthese}
 \end{figure}
 
@@ -167,7 +167,7 @@ ainsi qu'à la sortie (on considère que l'équilibre a été atteint).
 		$n_{\ce{N2},in}$ & $n_{\ce{H2},in}$ & $n_{\ce{Ar},in}$ & $0$  & $n_{in}$\\
 		$n_{\ce{N2},in}-\xi$ & $n_{\ce{H2},in}-3\xi$ & $n_{\ce{Ar},in}$ & $2\xi$  & $n_{in}-2\xi$\\
 	\end{tabular}
-	\caption{Réaction dans le réacteur}
+	\caption{Réaction dans le réacteur.}
 	\label{tab:reaction1_primaire}
 \end{table}
 
@@ -310,9 +310,13 @@ Nous avons ensuite augmenté le pourcentage
 et observé une diminution de la production de \ce{NH3}. 
 Ces résultats sont logiques puisque l'augmentation du pourcentage 
 de purge est évidemment la cause de pertes de matières premières. 
-La quantité de produits en est donc altérée.  \\
-Tous les résultats obtenus lors de nos simulations sont disponibles en annexe.
+La quantité de produits en est donc altérée.
 
+Tous les résultats obtenus lors de nos simulations 
+sont disponibles dans l'annexe~\ref{sec:aspen_simulation}.
+
+\appendix
+\input{aspen_simulation}
 
 \printbibliography
 \end{document}
