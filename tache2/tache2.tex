@@ -56,13 +56,13 @@ K = \exp{\left( \frac{- \Delta_r H^{\circ} + T \, \Delta_r S^{\circ}}{R T}\right
 
 \paragraph{Limite sur la pression imposée par les matériaux du réacteur}
 
-\section{Modélisation par Aspen +}
+\section{Modélisation par \textsc{Aspen Plus}}
 \subsection{Démarrage}
 
 Lors de la première tâche, nous analysions l'installation dans son ensemble, 
 mais de manière excessivement simplifiée. 
 Dans cette section, nous nous concentrerons sur l'explicitation de la dernière étape 
-pour ensuite la simuler sur le logiciel \texttt{Aspen Plus}. 
+pour ensuite la simuler sur le logiciel \textsc{Aspen Plus}. 
 Nous ne désirons plus la considérer comme une boîte noire, et l'avons donc découpée 
 en un certain nombre de processus intermédiaires. 
 
@@ -85,7 +85,7 @@ Les calculs permettant de trouver la quantité parfaite à purger
 sont détaillés dans la sous-section suivante.
 
 Le flowsheet de notre installation correspondant à la modélisation 
-du réacteur de synthèse sur \texttt{Aspen+} 
+du réacteur de synthèse sur \textsc{Aspen Plus} 
 se trouve dans la figure \ref{fig:flow_aspen}.
 Afin d'apporter plus de précision, nous avons également réalisé un petit 
 flowsheet de la même partie du procédé qui détaille le parcours des 
@@ -96,7 +96,7 @@ Le diagramme se trouve dans la figure \ref{fig:flow_synthese}.
 	\begin{center}
 		\includegraphics[scale=0.45,angle=90]{Flowsheet_ASPEN.jpg}
 	\end{center}
-	\caption{Flowsheet de la réaction finale sur \texttt{Aspen+}.}
+	\caption{Flowsheet de la réaction finale sur \textsc{Aspen Plus}.}
 	\label{fig:flow_aspen}
 \end{figure}
 
@@ -197,7 +197,7 @@ K =
 ({n_{total,in}-2\xi})^2 \cdot p^{-2} 
 \]
 
-Nous pouvons par exemple résoudre cela avec \texttt{MATLAB}. 
+Nous pouvons par exemple résoudre cela avec \textsc{matlab}. 
 Connaissant $\xi$, on trouve $\dot{n}_{\text{purge}}$
 grâce à l'équation \ref{eq:bilan_mol_tot}. 
 Nous obtenons directement $x_{\ce{Ar},\text{purge}}$ en injectant 
@@ -232,7 +232,7 @@ x_{\ce{Ar},\text{recyclage}}(\dot{n}_{\text{total,out}}-\dot{n}_{\ce{NH3},\text{
 
 Nous avons donc 2 équations pour trouver 
 les 2 inconnues $n_{\ce{N2},out}$ et $n_{\text{total,out}}$. 
-Nous pouvons à nouveau résoudre cela par \texttt{MATLAB}. 
+Nous pouvons à nouveau résoudre cela par \textsc{matlab}. 
 A présent, il suffit d'utiliser l'équation \ref{eq:bilan_mol_sep} 
 pour trouver $\dot{n}_{\text{recyclage}}$. 
 Comme nous le dit l'équation \ref{eq:bilan_mol_purge}, 
@@ -245,7 +245,7 @@ disponible dans notre outil de gestion.
 
 \subsection{Validation du modèle}
 
-Le logiciel \texttt{Aspen Plus} propose de nombreuses 
+Le logiciel \textsc{Aspen Plus} propose de nombreuses 
 modélisations du comportement des fluides, 
 plus ou moins fidèles selon les composés et 
 les conditions dans lesquels on les observe. 
@@ -258,7 +258,8 @@ ils modélisent correctement les gaz légers et non polaires
 comme ceux auxquels nous avons affaire ici. 
 Ces modèles sont également les seuls à être capables de faire 
 des prédictions correctes à une pression supérieure à $150\si{\bar}$. 
-Nous avons donc effectué quelques tests sur chacun des trois et nous avons obtenus des résultats assez similaires.
+Nous avons donc effectué quelques tests sur chacun des trois 
+et nous avons obtenus des résultats assez similaires.
 Cependant, le modèle SRK promet de garder sa précision dans des conditions 
 quasi critiques, ce qui n'est pas le cas des deux autres. 
 La pression dans notre circuit pouvant avoisiner les $270\si{\bar}$, 
@@ -270,25 +271,44 @@ En effet, leurs valeurs exactes nous sont inconnues et n'ont de toute manière
 aucun impact sur le fonctionnement du circuit, grâce à la présence des échangeurs de chaleur 
 et du compresseur.
 
-Tout d'abord, nous avons fixé les conditions dans le réacteur à $270\si{\bar}$ et 750K. 
+Tout d'abord, nous avons fixé les conditions dans le réacteur à $270\si{\bar}$ 
+et $750\si{\kelvin}$. 
 Nous avons également choisi de mettre un certain flux de \ce{H2}, \ce{N2}, et d' \ce{Ar} 
-pour lesquels nous connaissions le flux théorique correspondant de \ce{NH3} à la sortie, grâce au tableau de données reçu à la tâche 1. 
-Nous avons également fixé le pourcentage du recyclage à purger à 5\% pour nos tests.
-Ce taux permet à la simulation de converger, contrairement à ce que prévoyait notre outil de calcul où la purge devait être plus conséquente. 
+pour lesquels nous connaissions le flux théorique correspondant de \ce{NH3} à la sortie,
+grâce au tableau de données reçu à la tâche~1. 
+Nous avons également fixé le pourcentage du recyclage à purger à $5\%$ pour nos tests.
+Ce taux permet à la simulation de converger, contrairement à ce que prévoyait 
+notre outil de calcul où la purge devait être plus conséquente. 
 Cela est du au grand nombre d'hypothèses simplificatrices utilisées. 
-La loi des gaz parfaits donne par exemple des résultats très peu précis dans de telles conditions de température et de pression. De plus, dans des conditions réelles, une séparation parfaite est impossible et une partie de l'\ce{Ar} part avec le \ce{NH3}.
-Cependant, la variation des paramètres lors des tests ont provoqué le type de changements prévu pour la purge minimale à accomplir : elle augmente avec la pression et diminue avec la température. \\
-Pour les conditions décrites ci-dessus, nous avons obtenu après simulation un flux de \ce{NH3} légèrement inférieur à nos attentes. 
-Cela s'explique à nouveau par le fait que pour les résultats attendus, nous avions négligé les pertes au niveau du séparateur et considéré la réaction complète. \\
-Par la suite, nous avons essayé de faire varier certains paramètres afin de voir si les résultats obtenus 
-étaient en adéquation avec nos attentes. 
+La loi des gaz parfaits donne par exemple des résultats très peu précis 
+dans de telles conditions de température et de pression. 
+De plus, dans des conditions réelles, 
+une séparation parfaite est impossible et une partie du \ce{NH3} part avec l'\ce{Ar}.
+Cependant, la variation des paramètres lors des tests ont provoqué 
+le type de changements prévu pour la purge minimale à accomplir : 
+elle augmente avec la pression et diminue avec la température.
+
+Pour les conditions décrites ci-dessus, 
+nous avons obtenu après simulation un flux de \ce{NH3} légèrement inférieur à nos attentes. 
+Cela s'explique à nouveau par le fait que pour les résultats attendus, 
+nous avions négligé les pertes au niveau du séparateur et considéré la réaction complète.
+Par la suite, nous avons essayé de faire varier certains paramètres afin 
+de voir si les résultats obtenus étaient en adéquation avec nos prédictions. 
 Nous avons commencé par diminuer la température et comme nous l'avions prédit, 
-la quantité produite d'ammoniac a augmentée. Un test avec une température supérieure à 750 nous a confirmé cela. \\
-Nous avons ensuite vérifié que nos attentes concernant la pression étaient respectées. Et en effet, lorsque 
-nous avons augmenté la pression, la quantité produite de \ce{NH3} a faiblement augmenté.\\
-Pour finir, nous avons fait varier les valeurs du 
-pourcentage de la purge. Il s'est avéré que notre simulation ne convergeait pas en dessous de 4\% et nous avions des erreurs.
-Nous avons ensuite augmenté le pourcentage et observé une diminution de la production de \ce{NH3}. Ces résultats sont logiques puisque l'augmentation du pourcentage de purge est évidemment la cause de pertes de matières premières. La quantité de produits en est donc altérée.  
+la quantité produite d'ammoniac a augmentée. 
+Un test avec une température supérieure à $750\si{\kelvin}$ nous a confirmé cela. 
+Nous avons ensuite vérifié que nos attentes concernant la pression étaient respectées. 
+Et en effet, lorsque nous avons augmenté la pression, 
+la quantité produite de \ce{NH3} a faiblement augmenté.
+
+Pour finir, nous avons fait varier les valeurs du pourcentage de la purge.
+Il s'est avéré que notre simulation ne convergeait pas en dessous de $4\%$ 
+et nous avions des erreurs.
+Nous avons ensuite augmenté le pourcentage 
+et observé une diminution de la production de \ce{NH3}. 
+Ces résultats sont logiques puisque l'augmentation du pourcentage 
+de purge est évidemment la cause de pertes de matières premières. 
+La quantité de produits en est donc altérée.  
 
 
 \printbibliography
