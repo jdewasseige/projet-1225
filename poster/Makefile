@@ -1,2 +1,2 @@
-NAME=synthèse-gr25
+NAME=synthese-gr25
 include ../.root.mk
