@@ -6,7 +6,7 @@ function simulation(m_NH3_th,T,p,x)
 % Prend comme parametres: - m_NH3_th la masse de NH3 [tonnes/jour] prevue
 %                         - T la temperature dans le reacteur
 %                         - p la pression dans le reacteur
-%                         - x la faction du recyclage à purger
+%                         - x la faction du recyclage a purger
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 n_NH3_th = m_NH3_th*10^6/17.0305;
