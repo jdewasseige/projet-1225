@@ -241,9 +241,34 @@ et de $\dot{n}_{\text{recyclage}}$ nous donne enfin $X$!
 Ces calculs fastidieux nous permettent donc enfin de trouver la fraction à prélever 
 dans le circuit de recyclage. 
 Le même cheminement est suivi dans le programme \texttt{purge} 
-disponible dans notre outil de gestion. Nous pouvons voir dans la figure %\ref
-l'évolution des prédictions faites à 270 bar en fonction de la température.
-%METTRE GRAPHE 
+disponible dans notre outil de gestion. Nous verrons plus loin que ces calculs donnent
+des résultats assez loin de la réalité. La fraction minimale a purger est toujours
+bien moindre. Cela est du au grand nombre d'hypothèses simplificatrices utilisées. 
+La loi des gaz parfaits donne par exemple des résultats très peu précis 
+dans de telles conditions de température et de pression. 
+De plus, dans des conditions réelles, une séparation parfaite est impossible 
+et une partie du \ce{NH3} part avec l'\ce{Ar}.
+Cependant, le programme nous donne le type de fonction que la fraction minimale de purge
+suit lorsque l'on modifie les paramètres: elle augmente peu avec la pression et diminue
+de manière plus conséquente avec la température. Nous pouvons voir cela dans les figures
+\ref{fig:purge1} et \ref{fig:purge2}.
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.3]{purge1.png}
+	\end{center}
+	\caption{Fraction de purge en fonction de la température.}
+	\label{fig:purge1}
+\end{figure}
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.3]{purge2.png}
+	\end{center}
+	\caption{Fraction de purge en fonction de la pression.}
+	\label{fig:purge1}
+\end{figure}
+
 
 \subsection{Validation du modèle}
 
@@ -278,17 +303,7 @@ et $750\si{\kelvin}$.
 Nous avons également choisi de mettre un certain flux de \ce{H2}, \ce{N2}, et d' \ce{Ar} 
 pour lesquels nous connaissions le flux théorique correspondant de \ce{NH3} à la sortie,
 grâce au tableau de données reçu à la tâche~1. 
-Nous avons également fixé le pourcentage du recyclage à purger à $5\%$ pour nos tests.
-Ce taux permet à la simulation de converger, contrairement à ce que prévoyait 
-notre outil de calcul où la purge devait être plus conséquente. 
-Cela est du au grand nombre d'hypothèses simplificatrices utilisées. 
-La loi des gaz parfaits donne par exemple des résultats très peu précis 
-dans de telles conditions de température et de pression. 
-De plus, dans des conditions réelles, 
-une séparation parfaite est impossible et une partie du \ce{NH3} part avec l'\ce{Ar}.
-Cependant, la variation des paramètres lors des tests ont provoqué 
-le type de changements prévu pour la purge minimale à accomplir : 
-elle augmente avec la pression et diminue avec la température.
+Nous avons également fixé le pourcentage du recyclage à purger à $5\%$ pour nos tests.\\
 
 Pour les conditions décrites ci-dessus, 
 nous avons obtenu après simulation un flux de \ce{NH3} légèrement inférieur à nos attentes. 
