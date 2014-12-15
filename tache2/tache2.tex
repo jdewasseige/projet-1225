@@ -184,7 +184,7 @@ L'expression de la constante d'équilibre $K_p$ est également:
 K_p=\frac{{x_{\ce{NH3},\text{out}}}^2}{x_{\ce{N2},\text{out}}{x_{\ce{H2},\text{out}}}^3} \cdot p^{-2} = 
 \frac{{n_{\ce{NH3},\text{out}}}^2}{n_{\ce{N2},out}\cdot {n_{\ce{H2},out}}^3}\cdot {n_{\text{total,out}}}^2\cdot p^{-2}
 \]
-
+si on utilise la loi des gaz parfait et plus précisément celle de Dalton. Faisons attention que c'est une hypothèse simplificatrice forte. 
 Comme $n_{\ce{H2}}=3\cdot n_{\ce{N2}}$ (éléments en quantité stœchiométrique), 
 on a donc 
 $K=\frac{{n_{\ce{NH3},\text{out}}}^2}{27{n_{\ce{N2},out}}^4} \cdot
@@ -329,6 +329,54 @@ La quantité de produits en est donc altérée.
 
 Tous les résultats obtenus lors de nos simulations 
 sont disponibles dans l'annexe~\ref{sec:aspen_simulation}.
+
+\subsection{Simulation itérative sur \textsc{Matlab}}
+
+Nous pouvions maintenant comparer les résultats
+avec ceux de notre propre simulation réalisée sur
+textsc{Matlab}. Son fonctionnement est simple:
+elle calcule - pour une série d'itérations - 
+les différents flux à la sortie du réacteur 
+et dans le recyclage grâce à l'avancement de
+la réaction. On utilise ensuite ces informations 
+de manière récursive pour connaître le débit de 
+réactifs entrants au prochain pas de temps. Si 
+la différence entre le flux d'argon actuel et 
+de l'itération précédente passe en dessous d'un 
+certain seuil, on considère que le système s'est 
+stabilisé: il a convergé.
+
+Malgré l'imprécision de notre modèle (utilisation
+de la loi des gaz parfaits) et la simplification
+de l'installation, nos résultats sont 
+remarquablement proches de ceux obtenus. Il n'y
+a qu'une divergence marquée lorsque l'on travaille 
+avec une haute température. A titre d'illustration, 
+la figure \ref{tab:sim} nous donne la comparaison 
+de résultats venant des deux simulations:
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{l|c|c}
+		Paramètres choisis & \textsc{Aspen} & \textsc{Matlab}\\
+		\hline
+		$m_{\ce{NH3}, parfait}$=1500t/jour, & $n_{\ce{NH3}}$=942,94mol/s, & $n_{\ce{NH3}}$=937,795mol/s,\\
+		T=750K, p=270bar, x=5\%             &   &  \\
+		\hline
+		$m_{\ce{NH3}, parfait}$=1500t/jour, & $n_{\ce{NH3}}$=1011,06mol/s, & $n_{\ce{NH3}}$=999,335mol/s,\\
+		T=500K, p=270bar, x=5\%             &   &  \\
+		\hline
+		$m_{\ce{NH3}, parfait}$=1500t/jour, & $n_{\ce{NH3}}$=929,115mol/s, & $n_{\ce{NH3}}$=931,36mol/s,\\
+		T=750K, p=220bar, x=5\%             &   &  \\
+		\hline
+		$m_{\ce{NH3}, parfait}$=1500t/jour, & $n_{\ce{NH3}}$=883,132mol/s, & $n_{\ce{NH3}}$=869,733mol/s,\\
+		T=750K, p=270bar, x=10\%             &   &  \\
+		\hline
+
+	\end{tabular}
+	\caption{Comparaison des simulations}
+	\label{tab:sim}
+\end{table}
 
 \appendix
 \input{aspen_simulation}
