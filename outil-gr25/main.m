@@ -1,4 +1,4 @@
-function masses = main(m_nh3,T,print,out)
+function masses = main(m_nh3,T,p_ref1,var,print,out)
 % Outil de gestion du plant de formation d'ammoniac
 % a partir de methane.
 % 
@@ -15,7 +15,7 @@ function masses = main(m_nh3,T,print,out)
 %    - m_Ar  : masse d'argon en tonnes par jour
 %    - nombre de tubes
 
-if nargin < 3
+if nargin < 5
     print = 1 ;
     out   = 0 ;
 end
@@ -30,12 +30,18 @@ myAssert((T >= 700 && T <=1200),0, strcat('La temperature fournie', ...
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Details des flux massiques de l'ensemble du procede 
 
-p_tot = 26e5 ; % pression dans le reformeur primaire 
+p_ref1 = p_ref1*1e5 ; % conversion [bar] en [Pa]
 
-m = getMassesDetails(m_nh3,T,p_tot) ;
+if var=='t' 
+    m = getMassesDetails(m_nh3,T,p_ref1) ;
+else
+    m = getMolesDetails(m_nh3,T,p_ref1) ;
+end
 
 if print
-    printMassesDetails(m);
+    fprintf('\nQuantite de NH3 : %d [t]| Temperature REF1 : %d [K]| Pression REF1 : %d [bar]\n',...
+    m_nh3,T,p_ref1/1e5);
+    printMassesDetails(m,var);
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -43,7 +49,7 @@ end
 
 T_four = 1300 ; 
 
-moles = solveG(m_nh3,T,p_tot); % equilibre dans le reformeur primaire
+moles = solveG(m_nh3,T,p_ref1); % equilibre dans le reformeur primaire
 n_ch4 = moles(1);
 n_h2o = moles(2);
 ksi1  = moles(3);
@@ -56,10 +62,7 @@ m.co2_four  = oven_masses(3) ;
 m.h2o_four  = oven_masses(4) ;
 
 if print 
-    fprintf('\nFour (en tonnes par jour) \n');
-    fprintf('IN  - CH4 : %.2f \n', m.ch4_four) ;
-    fprintf('IN  - O2  : %.2f \n', m.o2_four) ;
-    fprintf('OUT - CO2 : %.2f \n', m.co2_four) ;
+    printHovenMasses(m,var);
 end
 
 if out 
