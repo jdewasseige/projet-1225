@@ -1,4 +1,4 @@
-function interfaceGestion
+function startOutil
 
 % print en mol/s 
 % print en tonnes/jour
@@ -83,7 +83,7 @@ uicontrol('style','pushbutton',...
     'position',[0.6 0.25 0.25 0.06],...
     'string','Print flux [tonnes/jour]',...  
     'fontsize',13',...
-    'callback',@printMasses);
+    'callback',{@printMasses,'t'});
 
 % printMoles
 uicontrol('style','pushbutton',...
@@ -91,7 +91,7 @@ uicontrol('style','pushbutton',...
     'position',[0.6 0.15 0.25 0.06],...
     'string','Print flux [moles/s]',... 
     'fontsize',13',...
-    'callback',@printMoles);
+    'callback',{@printMasses,'m'});
 
 % informations
 action=uicontrol ( 'style' , ' text' , 'units',...
@@ -109,34 +109,21 @@ uicontrol('style','pushbutton',...
 
 %%%%%%%%%% FONCTIONS %%%%%%%%%%
 
-function printMoles(~,~)
-    pause(3); 
-    set(action,'String','Flux en moles/s : done');
-end
-
-function printMasses(~,~)
-    % printAll
-uicontrol('style','pushbutton',...
-    'units','normalized',...
-    'position',[0.5 0.4 0.3 0.06],...
-    'string','Details',...   
-    'fontsize',13',...
-    'callback',@printAll,...
-    'tag','bouton+');
-    
-end
-
-function printAll(~,~)
+function printMasses(~,~,var)
     m_nh3 = str2double(get(mNH3,'string'));
     T     = str2double(get(tRef1,'string'));
     p_ref1= str2double(get(pRef1,'string'));
-    
-    main(m_nh3,T,p_ref1);
-    set(action,'String','Flux en tonnes/jour : done');
+    main(m_nh3,T,p_ref1,var);
+    if var=='t'
+        set(action,'String','Flux en tonnes/jour : done');
+    else
+        set(action,'String','Flux en moles/secondes : done'); 
+    end
 end
 
 function analyseParam(~,~)
-    analyseParametrique;
+    p_ref1= str2double(get(pRef1,'string'));  
+    analyseParametrique(p_ref1);
     set(action,'String','Analyse parametrique : done');
 end
 
@@ -151,7 +138,7 @@ function purgeTheorique(~,~)
 end
 
 function stopAll(~,~)
-    close all
+    close 'Outil de gestion du plan d''ammoniac'
 end
 
 
