@@ -1,0 +1,68 @@
+\documentclass[a4paper,oneside,11pt]{article}
+
+\usepackage{../../custom}
+
+\title{\textsc{readme} de l'outil de gestion}
+\author{Groupe 1225}
+\date{\today}
+
+\newcommand{\fun}[1]{\texttt{#1}}
+
+\begin{document}
+
+\maketitle
+
+\section{Utilisation}
+
+Lancer la fonction \fun{startOutil}.
+
+\paragraph{Remarque} Il se peut que pour certaines valeurs de $m_\ce{NH3}$,
+une erreur de type ``\textit{Could not extract individual solutions. 
+Returning a MuPAD set object.}'' survienne lors de l'appel à \fun{main}. 
+Pour palier à ce problème il suffit de changer la valeur 
+de $m_\ce{NH3}$ d'une unité.
+
+\section{Fonctionnement}
+
+Voici une liste de l'ensemble des fonctions utilisées dans notre 
+outil de gestion.
+
+\begin{itemize}
+	\item \fun{airePSV}
+	\item \fun{analyseParametrique}
+	\item \fun{environnement}
+	\item \fun{getCoefficients} 
+	\item \fun{getDeltaH\_and\_S}
+	\item \fun{getEqConstantsRef} 
+	\item \fun{getHovenMasses}
+	\item \fun{getMassesDetails}
+	\item \fun{getMolarMasses}
+	\item \fun{getTubesNumber}
+	\item \fun{main}
+	\item \fun{printHovenDetails}
+	\item \fun{printMassesDetails}
+	\item \fun{purge}
+	\item \fun{purgeP}
+	\item \fun{purgeT}
+	\item \fun{refroidissement}
+	\item \fun{simulation}
+	\item \fun{solveG}
+	\item \fun{startOutil}
+\end{itemize}
+
+
+\paragraph{Limite de validité}
+Les coefficients utilisés dans les équations de Shomate ne sont 
+cependant valables que pour une certaine gamme de températures 
+(on retrouve les températures acceptables pour chaque composé 
+en commentaire dans le fichier \fun{getCoefficients}). 
+On peut donc s'attendre à une certaine erreur sur les résultats 
+si l'utilisateur entre une température non réaliste. 
+
+Afin de palier à ce soucis, nous avons créé une fonction \fun{myAssert}. 
+Celle-ci est une variante de la fonction \fun{Assert} 
+et permet d'afficher un message d'avertissement, 
+tout en continuant l'éxécution du programme.
+
+
+\end{document}
