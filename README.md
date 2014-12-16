@@ -7,14 +7,13 @@ Ce repo contient les différents travaux réalisés dans le cadre du projet 3 (L
 
 TODO
 =====
-* texte analyse parametrique
-* interaction command line
-* comparaison aspen+ avec notre outil de gestion
-* ajout description detaillee sur chaque fonction de l'outil
-* ajout calcul et fonction pour dimensionnement des vannes de sécurité (TIM)
-* ajout étude electrolyse (environnement) tache 8 (ARNAUD)
-* comparaison des différentes méthodes d'aspen+ (DAVID)
-* ajout screenshot aspen tache 2 + screenshot aspen en annexe
+* tache1: texte analyse parametrique
+* tache2: comparaison aspen+ avec notre outil de gestion
+* tache2: ajout description detaillee sur chaque fonction de l'outil
+* tache2: comparaison des différentes méthodes d'aspen plus (DAVID)
+* tache2: explication limite de température par le catalyseur 
++ limite de pression par les matériaux
+* tache8: ajout étude electrolyse (environnement) (ARNAUD)
+* relecture tache 1,2,4,5,7
 * !!! ajouter toutes les sources
-
-
+* améliorer le poster
