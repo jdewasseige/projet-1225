@@ -15,9 +15,9 @@ else
     x.h2o_four = m.h2o_four/M.h2o * tonnesDay_to_gramSecond;
 end
     
-fprintf('IN  - CH4 : %.2f \n', x.ch4_four) ;
-fprintf('IN  - O2  : %.2f \n', x.o2_four) ;
-fprintf('OUT - CO2 : %.2f \n', x.co2_four) ;
-fprintf('OUT - CO2 : %.2f \n', x.h2o_four) ;
+fprintf('IN  - ch4 : %.2f \n', x.ch4_four) ;
+fprintf('IN  - o2  : %.2f \n', x.o2_four) ;
+fprintf('OUT - co2 : %.2f \n', x.co2_four) ;
+fprintf('OUT - h2o : %.2f \n', x.h2o_four) ;
 
 end
