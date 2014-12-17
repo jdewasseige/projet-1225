@@ -19,7 +19,7 @@ dS=dS.nh3-dS.n2/2-3*dS.h2/2;
 dG=dH-T*dS+R*T*log(p); %ATTENTION on utilise la loi des gaz parfaits pour la contribution de la pression (tr�s approximative)
 K= exp(-dG/(R*T));
 
-syms n_rec_s n_purge_s xi_s x_N2_s;
+syms n_rec_s n_purge_s xi_s x_N2_s positive;
 
 eq1 = n_purge_s==n_in-4*xi_s;
 eq2= (n_in+n_rec_s-n_purge_s)*(1-n_purge_s/n_rec_s) == n_rec_s;
