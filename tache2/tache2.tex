@@ -1,18 +1,3 @@
-\documentclass[a4paper, oneside, 12pt]{article}
-
-\usepackage{../custom}
-
-\usepackage[backend=biber]{biblatex}
-\addbibresource{../biblio.bib}
-
-\title{Tâche 2}
-\author{Groupe 1225}
-\date{\today}
-
-\begin{document}
-
-\maketitle
-
 \section{Analyse des conditions optimales du réacteur de synthèse d'ammoniac}
 
 Jusqu'ici nous avons considéré la dernière étape du procédé - la synthèse d'ammoniac -
@@ -26,7 +11,7 @@ jusqu'à l'établissement d'un nouvel équilibre.}. \cite{chatelier}
 La réaction de synthèse l'ammoniac est la suivante
 \[\ce{N2_{(g)} + 3H2_{(g)} <=> 2NH3_{(g)} } \]
 
-\paragraph{Pression}
+\subsection{Pression}
 
 On voit tout de suite que le nombre de moles de gaz de réactifs est supérieur 
 au nombre de moles de gaz des produits, 
@@ -41,7 +26,7 @@ et dans notre cas, favorisera la production de \ce{NH3}.
 \[
 K = \frac{p_{eq,\ce{NH3}}^2}{p_{eq,\ce{H2}}^3 \cdot p_{eq,\ce{N2}} \cdot p_{\text{total}}^2}
 \]
-\paragraph{Température}
+\subsection{Température}
 
 La réaction de synthèse est une réaction fortement exothermique 
 (à $700\si{\kelvin}$, $\Delta_r H^{\circ} = -52.6\si{\kilo\joule}$).
@@ -52,7 +37,7 @@ il faut donc faire une \emph{diminution} de la température.
 K = \exp{\left( \frac{- \Delta_r H^{\circ} + T \, \Delta_r S^{\circ}}{R T}\right)}
 \]
 
-\paragraph{Limite sur la température imposée par le catalyseur}
+\subsection{Limite sur la température imposée par le catalyseur}
 
 Après quelques recherches sur internet \cite{catalyseur}, nous avons découvert que les catalyeurs utilisés
 pour le production d'ammoniac en mileu industriel contenaient principalement du fer (type \ce{Fe3O4}). 
@@ -63,7 +48,7 @@ Cependant le catalyseur ne se comporte pas de la m\^eme manière à toutes les t
 cas, le catalyseur n'est pas efficace à basse température. C'est la raison pour laquelle il ne faut pas effectuer
 cette reaction à basse température comme le suggerait nos premières observations.
 
-\paragraph{Limite sur la pression imposée par les matériaux du réacteur}
+\subsection{Limite sur la pression imposée par les matériaux du réacteur}
 
 \section{Modélisation par \textsc{Aspen Plus}}
 \subsection{Démarrage}
@@ -103,7 +88,7 @@ Le diagramme se trouve dans la figure \ref{fig:flow_synthese}.
 
 \begin{figure}[h!]
 	\begin{center}
-		\includegraphics[scale=0.45,angle=90]{img_aspen/flowsheet.jpg}
+		\includegraphics[scale=0.45,angle=90]{../tache2/img_aspen/flowsheet.jpg}
 	\end{center}
 	\caption{Flowsheet de la réaction finale sur \textsc{Aspen Plus}.}
 	\label{fig:flow_aspen}
@@ -121,7 +106,7 @@ et de sortie de l'ammoniac grâce à notre outil de calcul.
 
 \begin{figure}[h!]
 	\begin{center}
-		\input{flow_synthese}
+		\input{../tache2/flow_synthese}
 	\end{center}
 	\caption{Schéma simplifié de l'étape finale.}
 	\label{fig:flow_synthese}
@@ -177,7 +162,7 @@ ainsi qu'à la sortie (on considère que l'équilibre a été atteint).
 		$n_{\ce{N2},in}-\xi$ & $n_{\ce{H2},in}-3\xi$ & $n_{\ce{Ar},in}$ & $2\xi$  & $n_{in}-2\xi$\\
 	\end{tabular}
 	\caption{Réaction dans le réacteur.}
-	\label{tab:reaction1_primaire}
+	\label{tab:reaction_purge_eq}
 \end{table}
 
 La réaction se déroule à une certaine température T et à une pression p. 
@@ -198,7 +183,8 @@ Comme $n_{\ce{H2}}=3\cdot n_{\ce{N2}}$ (éléments en quantité stœchiométriqu
 on a donc 
 $K=\frac{{n_{\ce{NH3},\text{out}}}^2}{27{n_{\ce{N2},out}}^4} \cdot
 {n_{\text{total,out}}}^2\cdot p^{-2}$. 
-En injectant les quantités des composés du tableaux, fonctions de $\xi$, on obtient:
+En injectant les quantités des composés du tableau~\ref{tab:reaction_purge_eq},
+fonctions de $\xi$, on obtient:
 
 \[ 
 K = 
@@ -264,7 +250,7 @@ de manière plus conséquente avec la température. Nous pouvons voir cela dans 
 
 \begin{figure}[h!]
 	\begin{center}
-		\includegraphics[scale=0.3]{purge1.png}
+		\includegraphics[scale=0.3]{../tache2/purge1.png}
 	\end{center}
 	\caption{Fraction de purge en fonction de la température.}
 	\label{fig:purge1}
@@ -272,7 +258,7 @@ de manière plus conséquente avec la température. Nous pouvons voir cela dans 
 
 \begin{figure}[h!]
 	\begin{center}
-		\includegraphics[scale=0.3]{purge2.png}
+		\includegraphics[scale=0.3]{../tache2/purge2.png}
 	\end{center}
 	\caption{Fraction de purge en fonction de la pression.}
 	\label{fig:purge2}
@@ -387,9 +373,5 @@ de résultats venant des deux simulations:
 	\label{tab:sim}
 \end{table}
 
-\appendix
-\input{aspen_simulation}
-
-\printbibliography
-\end{document}
+\input{../tache2/aspen_simulation}
 

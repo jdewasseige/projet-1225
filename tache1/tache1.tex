@@ -1,24 +1,9 @@
-\documentclass[a4paper, oneside, 12pt]{article}
+%\part{Rapport~1}
 
-\usepackage{../custom}
+\input{../tache1/bilan_massique}
+\input{../tache1/refroidissement}
 
-\usepackage[backend=biber]{biblatex}
-\addbibresource{../biblio.bib}
-
-\title{Rapport 2}
-\author{Groupe 1225}
-\date{\today}
-
-\begin{document}
-
-\maketitle
-
-\part{Rapport~1}
-
-\input{bilan_massique}
-\input{refroidissement}
-
-\part{Rapport~2}
+%\part{Rapport~2}
 
 \section{Introduction}
 
@@ -266,32 +251,6 @@ Nous résolvons le système de 4 équations
 (\ref{eq:systeme1}, \ref{eq:systeme2}, \ref{eq:systeme3}, \ref{eq:systeme4})
 dans \texttt{solveG}.
 
-\section{Fonctionnement de l'outil de calcul}
-
-L'outil de calcul a été réalisé en matlab et prends en considération 
-deux variables : la température du réacteur primaire (en K) et la quantité 
-d'ammoniac (en tonnes) que l'on souhaite produire en 24h. 
-
-Nous commençons tout d'abord par calculer les enthalpies (incl. Gibbs) 
-et entropies des réactions du réacteur primaire (vaporeformage).
-Nous calculons ensuite les constantes d'équilibres pour les deux réactions. 
-Avec les hypothèses posées sur les réactions (toutes sont complètes 
-exceptées celles s'effectuant dans le réacteur primaire),
-et avec la masse désirée de \ce{NH3}, nous calculons les masses 
-nécessaires de \ce{H2}, \ce{N2}. Puisque l'azote est fourni
-par l'air, nous déterminons la masse de \ce{O2} fournie (ainsi que la masse de \ce{Ar}, 
-mais l'argon est un gaz noble et n'intervient pas dans la réaction). 
-
-Avec les hypothèses et la masse de \ce{O2}, nous déterminons la quantité de \ce{CH4} 
-utilisé dans le réacteur secondaire et donc la production de \ce{H2} dans ce réacteur. 
-Nous savons désormais déterminer la quantité de \ce{H2} à produire dans 
-le réacteur primaire, et grâce à la constante d'équilibre déterminée plus tôt, 
-nous pouvons déterminer la quantité de \ce{CH4} nécessaire pour les deux réactions.
-L'outil nous permet également de calculer la quantité minimum de \ce{H2O} à fournir
-pour que toutes les équations se passent comme prévu. 
-
-Il est à noter que l'outil nous fourni des valeurs en tonnes par jour.
-
 \section{Tubes}
 
 Nous recherchons le nombre de tubes nécaissaire à l'acheminement du 
@@ -403,6 +362,19 @@ les quantités à introduire (\ce{O2}) et celles rejetées (\ce{CO2} et \ce{H2O}
 On en déduit ensuite facilement la quantité d'air à introduire.
 Ce bilan énergétique est modélisé dans \texttt{getHovenMasses}.
 
+\input{../tache1/analyseParametrique}
+
+\section{Fonctionnement de l'outil de calcul}
+
+Pour démarrer l'outil de gestion, il suffit de lancer la fonction \texttt{startOutil}
+dans la ligne de commande \textsc{matlab}.
+Ceci va lancer l'interface graphique et il ne reste plus qu'à introduire
+la quantité d'ammoniac (en tonnes par jour), la température (en kelvin) et
+la pression (en bar) du réformeur primaire dans les cases appropriées.
+
+Les détails du fonctionnement de l'outil se trouvent
+dans le \textsc{readme} associé au dossier de l'outil de gestion.
+
 \section{Flow-sheet}
 \label{sec:flowsheet}
 
@@ -411,11 +383,9 @@ de production d'ammoniac que nous étudions.
 
 \begin{figure}
 	\begin{center}
-		\input{flowsheet.tex}
+		\input{../tache1/flowsheet.tex}
 	\end{center}
 	\caption{Flow-sheet simplifié.}
 	\label{fig:flowsheet}
 \end{figure}
 
-\printbibliography
-\end{document}

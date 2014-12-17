@@ -5,7 +5,7 @@
 \usepackage[backend=biber]{biblatex}
 %\addbibresource{../biblio.bib}
 
-\title{Tâche 8}
+\title{Oral sur les tâches 3 et 8}
 \author{Groupe 1225}
 \date{\today}
 
@@ -15,9 +15,16 @@
 
 \section*{Enjeux environnementaux liés à la production d'ammoniac}
 
+---> Présentation du mindmap.
+
+---> Présentation des gaz à effet de serre.
+
+Nous choisissons comme cause d'impact le rejet de \ce{CO2}.
+\newline
+
 La production de \ce{H2} dans le reformage primaire lors de la réaction
 \[ \ce{CH4_{(g)} + H2O_{(g)} <=> CO_{(g)} + 3 \, H2_{(g)}} \]
-fait intervenir du méthange gazeux sur deux plans : il en faut comme produits de réaction,
+fait intervenir du méthange gazeux sur deux plans : il en faut en produits de réaction,
 mais également dans le four pour que celui-ci puisse approvisionner la réaction en énergie,
 étant donné que celle-ci est endothermique. 
 
@@ -25,7 +32,7 @@ Le méthane n'est pratiquement pas polluant au niveau de sa fabrication.
 En effet, c'est un hydrocarbure relativement simple à produire à l'aide 
 de processus naturels, notamment la biométhanisation. 
 Cependant, c'est un gaz à effet de serre encore plus fort que le \ce{CO2}.
-S'il arrive qu'il y ait une fuite dans la premier réacteur ou dans le four, 
+S'il y a une fuite au niveau du premier réacteur ou dans le four, 
 la libération de méthane pourrait engendrer une forte pollution de l'air.
 
 Au niveau du four, suite à la combustion du méthane : 
@@ -33,7 +40,8 @@ Au niveau du four, suite à la combustion du méthane :
 nous constatons un rejet de \ce{H2O} et de \ce{CO2}, 
 tous deux étant des gaz à effet de serre. 
 La vapeur d'eau ne restant pas longtemps dans l'atmosphère,
-sa contribution au réchauffement climatique est donc négligeable. %\cite{gaz_effet_de_serre}
+sa contribution au réchauffement climatique est donc négligeable. 
+%\cite{gaz_effet_de_serre}
 Par contre, le dioxyde de carbone pose plus de problèmes. 
 
 Lors de la synthèse de \ce{H2} dans les reformages primaire et secondaire, 
@@ -59,7 +67,7 @@ Le procédé de Haber est assez néfaste pour l'environnement.
 La production de \ce{H2} entraîne le dégagement de quantités 
 importantes de \ce{CO2} dans l'atmosphère.
 Nous allons analyser plusieurs pistes possibles pour tenter 
-d'améliorer l'impact environnemental.
+de diminuer les quantités de dioxyde de carbone libérées dans l'atmosphère et ainsi réduire l'impact du procédé sur l'environnement.
 
 \section*{Alternatives au vaporeformage}
 
@@ -68,13 +76,26 @@ sont possibles afin de remplacer le vaporeformage.
 
 La gazéification à l'eau permet de synthétiser de l'hydrogène 
 gazeux à partir de matières carbonnées et de vapeur d'eau.
-L'apport énergétique doit être sous forme de chaleur. %\cite{hydrogene}
+L'apport énergétique est sous forme de chaleur. 
+%\cite{hydrogene}
 
 \[ \ce{C_{(g)} + H2O_{(g)} -> CO_{(g)} + H2_{(g)}} \]
 
 \[ \ce{CO_{(g)} + H2O_{(g)} <=> CO2_{(g)} + H2_{(g)}} \]
 
-L'électrolyse de l'eau permet notamment de produire de l'hydrogène 
+Ce procédé est plus compliqué à réaliser que le vaporeformage. Egalement plus coûteux, il n'est intéressant que lorsque les prix du pétrole augmentent. La gazéification à l'eau rejette aussi beaucoup de \ce{CO2}.
+\newline
+
+La production de biohydrogène à l'aide d'algues est un procédé en cours de développement. Au sein des bioréacteurs, lorsque les algues sont privées de soufre, la photosynthèse ne crée plus de l'oxygène mais de l'hydrogène.
+Ce procédé est très intéressant à réaliser mais n'est encore qu'à ses débuts et comporte plusieurs problèmes de réalisation à l'échelle industrielle. Le faible rendement de la réaction (de l'ordre de 7-10 \%), son coût élevé pour produire de grandes quantités de \ce{H2}, ou encore la nécessité de disposer d'une grande surface de cultures font que ce procécé n'est pas encore adapté à l'échelle industrielle.
+\newline
+
+Une autre variante de ce procédé est la production de biohydrogène à l'aide de bactéries. Celles-ci décomposent les hydrocarbures présents dans les eaux usées, formant ainsi du \ce{H2} et du \ce{CO2} (pouvant être isolé facilement). Les inconvénients sont identiques à ceux de la production à l'aide d'algues. Le procédé requiert une importante surface d'électrodes.
+
+Un autre sorte de bactéries, la Cyanothece 51142 est capable de fixer l'azote en présente de \ce{O2} et de produire ainsi du \ce{H2}. Le seul souci est qu'il n'exite pas encore de solution pour transporter cet hydrogène.
+\newline
+
+L'électrolyse de l'eau permet de produire de l'hydrogène 
 en transformant de l'énergie électrique en énergie chimique.
 L'apport énergétique doit être sous forme électrique.
 
@@ -93,7 +114,8 @@ l'électricité provient de sources d'énergie renouvelables dégageant
 très peu de dioxyde carbone, telle que l'énergie éolienne ou encore hydraulique.
 
 En considérant les rejets standards de \ce{CO2} par \si{\kilo\watt\hour} électrique 
-en Belgique, qui sont de $290\si{\gram/\kilo\watt\hour}$ %\cite{co2_europe},
+en Belgique, qui sont de $290\si{\gram/\kilo\watt\hour}$ 
+%\cite{co2_europe},
 nous calculons une émission de dioxyde de carbone de l'ordre de $39 \, 672\si{\tonne}$
 par jour pour produire $1500\si{\tonne}$ d'ammoniac. 
 Nous obtenons donc une émission de \ce{CO2} deux fois 
@@ -115,6 +137,8 @@ En conclusion, on remarque que le procédé d'électrolyse de l'eau
 est nettement préférable d'un point de vue environnemental au vaporeformage, 
 mais entraîne à côté de cela un coût plus important pour la production d'hydrogène,
 en raison des besoins considérables en énergie électrique.
+
+Par ailleurs, nous pouvons encore réduire l'impact environnemental en récupérant le \ce{CO2} rejeté par le procédé.
 
 %\printbibliography
 \end{document}

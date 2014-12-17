@@ -20,7 +20,8 @@
 
 \documentclass[landscape,a0paper,fontscale=0.285]{baposter} % Adjust the font scale/size here
 
-
+\usepackage{lipsum}
+\graphicspath{{images/}{../images/}}
 
 \usepackage{menukeys} % for \keys
 \usepackage{pifont}
@@ -54,6 +55,9 @@
 
 \definecolor{lightblue}{rgb}{0.145,0.6666,1} % Defines the color used for content box headers
 
+
+
+
 \begin{document}
 
 \begin{poster}
@@ -81,14 +85,23 @@ linewidth=1pt % Width of the border lines around content boxes
 %
 {\includegraphics[height=4em]{UCL.jpg}} 
 {\bf\textsc{PROJET 3 : Amoniac et le g\'enie des proc\'ed\'es}\vspace{0.5em}} 
-{\textsc{\small Cédric de Bellefroid - Cyril Denos - David Dispas  - Cassian Libeer  - Tim Malengreau - Arnaud Paquet - John de Wasseige}} 
+{\textsc{\small Cédric de Bellefroid - Cyril Denos - David Dispas  - Cassian Libeer  - Timothée Malengreau - Arnaud Paquet - John de Wasseige}} 
 {\includegraphics[height=4em]{groupe.png}} 
 
 %----------------------------------------------------------------------------------------
 %	BLOC 1 : RESUME
 %----------------------------------------------------------------------------------------
 
-\headerbox{Résumé}{name=resume,column=1,row=0}{
+
+%\background{
+   %   \begin{tikzpicture}[remember picture,overlay]%
+      %\draw (current page.north west)+(-2em,2em) node[anchor=north west]
+      %{\includegraphics[height=2\textheight]{photousine}};
+      %\end{tikzpicture}%
+      %}
+      
+      
+\headerbox{Résumé}{name=resume,column=0,row=0}{
 
 % tkiz ball item
 \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
@@ -110,7 +123,7 @@ linewidth=1pt % Width of the border lines around content boxes
 \item[\circled{\Large 4}] Mini-HAZOP et soupape\newline \textbf{ Tâche 4} et \textbf{ Tâche 5}\\
 \item[\circled{\Large 5}] Visites et ateliers\\
 \item[\circled{\Large 6}] Etude environementale et améliorations \newline \textbf{ Tâche 3} et \textbf{ Tâche 8}\\
-\item[\circled{\Large 7}] Synthèse rapport final et présentation
+\item[\circled{\Large 7}] Synthèse, rapport final et présentation
 
  
   
@@ -128,7 +141,7 @@ linewidth=1pt % Width of the border lines around content boxes
 % BLOC 2 : TACHE 1
 %----------------------------------------------------------------------------------------
 
-\headerbox{Tâche 1}{name=tache1,column=0,row=0}{
+\headerbox{Tâche 1}{name=tache1,column=1,row=0}{
 
 
 \textbf{ Procédé Haber-Bosch - Flow-sheet simplifié}\\
@@ -153,6 +166,7 @@ linewidth=1pt % Width of the border lines around content boxes
 \textbf{Dimmensionnement d'une soupape de sécurité}\\
 
 \underline {Sans Isolation}\\
+
 Pression normale de stockage : $7.8 barg$ à $20\ensuremath{^\circ}C$ \\
 
 Pression maximale de tarage : $18.15barg$\\
@@ -160,15 +174,45 @@ Pression maximale de tarage : $18.15barg$\\
 Pression durant la décharge : $19$ $bar$. \\
 
 \textbf{Section soupape} = $730mm^{2}$ \\
-PSV correspondant de type $2J3$\\
  
 \underline{Avec isolation}\\
 
-Coefficient d'échange avec l'extérieur  $10\frac{W}{m^{2}K}$. \\
+Coefficient d'échange avec l'extérieur :  $10\frac{W}{m^{2}K}$ et facteur environementale passe de $1$ à $0.15$\\
 
-Facteur envorinementale passe de $1$ à $0.15$\\
+\textbf{Section soupape} = $110mm^{2}$. \\
+\\
+\\
 
-\textbf{Section soupape} = $110{\milli\meter\squared}$. 
+
+
+\textbf{Mini-HAZOP}
+
+\underline{Scénarios}
+\begin{itemize}
+\item Fuite de gaz
+\item Problème réacteur
+\item Blackout
+\item ...
+\end{itemize}
+
+\underline{Conséquences}
+
+\begin{itemize}
+\item Incendie
+\item Fuite
+\item Explosion
+\item ...
+\end{itemize}
+
+\underline{Mise en place de systèmes de sécurité} : \\
+Soupapes, disques de ruptures, ...
+
+
+%\begin{itemize}
+%\item Soupape de sécurité
+%\item Disque de rupture
+%\item ...
+%\end{itemize}
 
 
 %Plusieurs scénarios catastrophoques ont été imaginés dans le mini-HAZOP; une fuite de gaz, problème dans un réacteur à réaction exomthermique, coupure de courant. Plusieurs possiblités sont parfois possibles pour éviter tout sur accident, il s'agit bien souvent de controler le gaz en jeu, ou la chaleur produite par certaines réactions et donc la surpression. Des soupapes de sécurité sont alors ajoutés la ou nécaissaire. La difficulté réside dans le dimmensionnement de ces appareils. En effet placer un dispositif trop petit ou avec une pression de tarage trop faible présente un danger, mais l'inverse peut l'etre aussi. D'ou l'importance de connaitre tous les facteurs qui interviennent dans le calcul du dimmensionnement des soupapes.\newline
@@ -193,25 +237,33 @@ Facteur envorinementale passe de $1$ à $0.15$\\
 \begin{multicols}{2}
 \vspace{1em}
 
+
+Calculs réalisés pour une production de 1500 $Tonnes/Jour$  de $NH_{3}$ à $1000$ $K$)\\
+
 \textbf{Emissions}\\
+
+$CO_{2}$ : $1950$  $Tonnes/Jour$ \\
+
+$T\ensuremath{^\circ} _{\text{réf1}} \searrow$   :   $CO_{2}\searrow$\\
 \\
-$CO_{2}$ : $1950$  $\frac{Tonnes}{Jour}$ \\
+$H_{2}O$   :   $1940$ $Tonnes/Jour$\\
 
-$T\ensuremath{^\circ} _{\text{réformateur primaire}} \searrow$ : $CO_{2}\searrow$\\
+$H_{2}O\searrow$   :   $T\ensuremath{^\circ} _{\text{réf1}} \nearrow$\\
 \\
-$H_{2}0$ : $Xtonnes?$\\
-
-$H_{2}0\searrow$ : $T\ensuremath{^\circ} _{refermateur primaire} \nearrow$\\
-
-
 \textbf{Fuites Potentielles}\\
-\\
 $CH_{4}$ :
-Impact =  $25$ X $CO_{2}$\\
+Impact =  $25$ x $CO_{2}$\\
 
-$NH_{3}$ : impact environnemental + santé   \\
+$NH_{3}$ : Impact environnemental + Santé   \\
 
-$Ar$ : santé 
+$Ar$ : Santé \\
+
+
+\textbf{Améliorations}\\
+
+Diminution des émissions de $CO_{2}$ $\rightarrow $ éléctrolyse 
+
+\[ H_{2}O(g) \leftrightarrow \frac{1}{2}  O_{2}(g) + H_{2}(g) \]
 
 
 \end{multicols}
@@ -226,6 +278,8 @@ $Ar$ : santé
 %----------------------------------------------------------------------------------------
 
 \headerbox{Tâche 2}{name=tache2,column=0,span=2,below=tache1}{ % This block's bottom aligns with the bottom of the conclusion block
+
+\textbf{Etape de synthèse de l'ammoniac détaillée (Aspen Plus)}\\
 
 
 \begin{center}
