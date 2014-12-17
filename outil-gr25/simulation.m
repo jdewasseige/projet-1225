@@ -1,4 +1,4 @@
-function simulation(m_NH3_th,T,p,x)
+function eff = simulation(m_NH3_th,T,p,x)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Ce programme realise une simulation de la deniere etape de notre
 % installation. On y utilise la loi des gaz parfaits et on estime
@@ -84,8 +84,8 @@ if(T>800)
 fprintf('Attention! Le modele donne des resultats errones a une telle temperature (> 800 K)! \n \n');
 end
 fprintf(' A l equilibre, le flux sortant de NH3 est de %f mol/s \n', n_NH3/(60*60*24));
-fac_err=n_NH3/n_NH3_th;
-fprintf('Cela represente une difference de facteur %f compare a la prediction pour une reaction complete et une installation parfaite \n \n', fac_err);
+eff=n_NH3/n_NH3_th;
+fprintf('Cela represente une difference de facteur %f compare a la prediction pour une reaction complete et une installation parfaite \n \n', eff);
 fprintf(' Le flux d Ar dans le reacteur est de %f mol/sec \n', n_Ar_in_and_rec/(60*60*24))
 fprintf(' Le flux total dans le recyclage est de %f mol/sec \n', n_in_and_rec/(60*60*24));
 fprintf(' Le flux total dans la purge est de %f mol/sec \n \n', n_in_and_rec*x/(60*60*24));

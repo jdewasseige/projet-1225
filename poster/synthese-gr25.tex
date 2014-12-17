@@ -20,8 +20,12 @@
 
 \documentclass[landscape,a0paper,fontscale=0.285]{baposter} % Adjust the font scale/size here
 
-\usepackage[utf8]{inputenc} 
 
+
+\usepackage{menukeys} % for \keys
+\usepackage{pifont}
+
+\usepackage[utf8]{inputenc} 
 \usepackage{graphicx} % Required for including images
 \graphicspath{{figures/}} % Directory in which figures are stored
 
@@ -75,43 +79,64 @@ linewidth=1pt % Width of the border lines around content boxes
 %	TITLE SECTION 
 %----------------------------------------------------------------------------------------
 %
-{\includegraphics[height=4em]{UCL.jpg}} % First university/lab logo on the left
-{\bf\textsc{PROJET 3 : Amoniac et le g\'enie des proc\'ed\'es}\vspace{0.5em}} % Poster title
-{\textsc{\small Cédric de Bellefroid - Cyril Denos - David Despas  - Cassian Libeer  - Tim Malengreau - Arnaud Paquet - John de Wasseige}} % Author names and institution
-{\includegraphics[height=4em]{groupe.png}} % Second university/lab logo on the right
+{\includegraphics[height=4em]{UCL.jpg}} 
+{\bf\textsc{PROJET 3 : Amoniac et le g\'enie des proc\'ed\'es}\vspace{0.5em}} 
+{\textsc{\small Cédric de Bellefroid - Cyril Denos - David Dispas  - Cassian Libeer  - Tim Malengreau - Arnaud Paquet - John de Wasseige}} 
+{\includegraphics[height=4em]{groupe.png}} 
 
 %----------------------------------------------------------------------------------------
 %	BLOC 1 : RESUME
 %----------------------------------------------------------------------------------------
 
-\headerbox{Résumé}{name=resume,column=0,row=0}{
+\headerbox{Résumé}{name=resume,column=1,row=0}{
 
-La première étape fut de comprendre le procédé chimique de la formation de l'amoniac. La réalisation  d'un flow sheet simplifié (\textbf{Tâche 2}) expliquant les différentes réactions a permis le calcul du bilan de matière du procédé complet (\textbf{Tâche 1})\\
+% tkiz ball item
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[circle,ball color=purple, shade, 
+ color=white,inner sep=1.2pt] (char) {\tiny #1};}}
 
-La production d'amoniac à grande échelle demande de grossed infrastructures. Qui dit grosses infrastructures dit systèmes de sécurités optimales et impact environementale.\\
+% tkiz rounded item
+\newcommand*\rounded[1]{\tikz[baseline=(char.base)]{
+            \node[draw=none,ball color=purple, shade, 
+ color=white, rounded corners=3.5pt, inner sep=2.5pt] (char) {\scriptsize #1};}}
+ 
+ \textbf{			Etapes du projet}
+ 
+  \begin{enumerate}
 
-Ces sujets ont été développés au cours de ce projet, les \textbf{tâches 4} et\textbf{ 5} ont été consacrés au calcul du dimensionement d'une soupape de sécurité et d'un mini HAZOP.\\
+\item[\circled{\Large 1}] Compréhension du problème\\
+\item[\circled{\Large 2}] Flow-sheet simplifié et bilan de matière\newline  \textbf{ Tâche 1}\\
+\item[\circled{\Large 3}] Modélisation de la synthèse d'ammoniac avec Aspen+\newline \textbf{ Tâche 2}\\
+\item[\circled{\Large 4}] Mini-HAZOP et soupape\newline \textbf{ Tâche 4} et \textbf{ Tâche 5}\\
+\item[\circled{\Large 5}] Visites et ateliers\\
+\item[\circled{\Large 6}] Etude environementale et améliorations \newline \textbf{ Tâche 3} et \textbf{ Tâche 8}\\
+\item[\circled{\Large 7}] Synthèse rapport final et présentation
 
-Les \textbf{tâches 3} porte sur une étude des différents gaz participants à l'effet de serre. La \textbf{tâche 8} est elle consacrée aux améliorations possible pour une telle infrastructure afin de limiter l'impact environementale.
+ 
+  
+    \end{enumerate}
 
 
-\vspace{0.3em} % When there are two boxes, some whitespace may need to be added if the one on the right has more content
+%La première étape fut de comprendre le procédé chimique de la formation de l'amoniac. La réalisation  d'un flow sheet simplifié (\textbf{Tâche 2}) expliquant les différentes réactions a permis le calcul du bilan de matière du procédé complet (\textbf{Tâche 1})\\
+%La production d'amoniac à grande échelle demande de grossed infrastructures. Qui dit grosses infrastructures dit systèmes de sécurités optimales et impact environementale.\\
+%Ces sujets ont été développés au cours de ce projet, les \textbf{tâches 4} et\textbf{ 5} ont été consacrés au calcul du dimensionement d'une soupape de sécurité et d'un mini HAZOP.\\
+%Les \textbf{tâches 3} porte sur une étude des différents gaz participants à l'effet de serre. La \textbf{tâche 8} est elle consacrée aux améliorations possible pour une telle infrastructure afin de limiter l'impact environementale.
+
 }
 
 %----------------------------------------------------------------------------------------
-% BLOC 2 : TACHE 2
+% BLOC 2 : TACHE 1
 %----------------------------------------------------------------------------------------
 
-\headerbox{Tâche 2}{name=tache2,column=1,row=0}{
+\headerbox{Tâche 1}{name=tache1,column=0,row=0}{
 
 
-Synthèse de l'ammoniac par le procédé Haber-Bosch : Flow-sheet simplifié
+\textbf{ Procédé Haber-Bosch - Flow-sheet simplifié}\\
 
 
 \vspace{1em}
 \begin{center}
 \includegraphics[width=1\linewidth]{PROC}
-%%\captionof{figure}{Figure caption}
 \end{center}
 
 }
@@ -125,17 +150,33 @@ Synthèse de l'ammoniac par le procédé Haber-Bosch : Flow-sheet simplifié
 \headerbox{Tâche 4 + 5}{name=tache45,column=2,span=2,row=0}{
 \begin{multicols}{2}
 
-Plusieurs scénarios catastrophoques ont été imaginés dans le mini-HAZOP; une fuite de gaz, problème dans un réacteur à réaction exomthermique, coupure de courant. Plusieurs possiblités sont parfois possibles pour éviter tout sur accident, il s'agit bien souvent de controler le gaz en jeu, ou la chaleur produite par certaines réactions et donc la surpression. Des soupapes de sécurité sont alors ajoutés la ou nécaissaire. La difficulté réside dans le dimmensionnement de ces appareils. En effet placer un dispositif trop petit ou avec une pression de tarage trop faible présente un danger, mais l'inverse peut l'etre aussi. D'ou l'importance de connaitre tous les facteurs qui interviennent dans le calcul du dimmensionnement des soupapes.\newline
+\textbf{Dimmensionnement d'une soupape de sécurité}\\
+
+\underline {Sans Isolation}\\
+Pression normale de stockage : $7.8 barg$ à $20\ensuremath{^\circ}C$ \\
+
+Pression maximale de tarage : $18.15barg$\\
+
+Pression durant la décharge : $19$ $bar$. \\
+
+\textbf{Section soupape} = $730mm^{2}$ \\
+PSV correspondant de type $2J3$\\
+ 
+\underline{Avec isolation}\\
+
+Coefficient d'échange avec l'extérieur  $10\frac{W}{m^{2}K}$. \\
+
+Facteur envorinementale passe de $1$ à $0.15$\\
+
+\textbf{Section soupape} = $110{\milli\meter\squared}$. 
 
 
-Ces calculs font intervenir des paramètres tel que la pression, la température, le type de gaz, le type de réservoir etc. Avec les données de l'énnoncé voici les résultats :\\
-La pression maximale de tarage de la soupape de sécurité vaut 
-\[ 105\% \cdot p_{\text{design}} = 16.8bar = 15.79barg \]
-La pression durant la décharge sera de $20.071 barg$. Cette pression est fort élevée car nous considérons ici le cas de feu. 
-La température du gaz durant la décharge sera de $50{\celsius}$. 
-Nous aurons besoin d'une soupape d'une section de $26.85{\milli\meter\squared}$.\\
-\\
-Si l'on isole thermiquement le tank tel que le coefficient d'échange avec l'extérieur soit réduit à une valeur de $10\frac{W}{m^{2}K}$. Le facteur envorinementale passe de $1$ à $0.15$ et la taille de la soupape peut être réduite à $2.71{\milli\meter\squared}$. 
+%Plusieurs scénarios catastrophoques ont été imaginés dans le mini-HAZOP; une fuite de gaz, problème dans un réacteur à réaction exomthermique, coupure de courant. Plusieurs possiblités sont parfois possibles pour éviter tout sur accident, il s'agit bien souvent de controler le gaz en jeu, ou la chaleur produite par certaines réactions et donc la surpression. Des soupapes de sécurité sont alors ajoutés la ou nécaissaire. La difficulté réside dans le dimmensionnement de ces appareils. En effet placer un dispositif trop petit ou avec une pression de tarage trop faible présente un danger, mais l'inverse peut l'etre aussi. D'ou l'importance de connaitre tous les facteurs qui interviennent dans le calcul du dimmensionnement des soupapes.\newline
+%Ces calculs font intervenir des paramètres tel que la pression, la température, le type de gaz, le type de réservoir etc. Avec les données de l'énnoncé voici les résultats :\\
+%La pression maximale de tarage de la soupape de sécurité vaut 
+%\[ 105\% \cdot p_{\text{design}} = 16.8bar = 15.79barg \]
+%La pression durant la décharge sera de $20.071 barg$. Cette pression est fort élevée car nous considérons ici le cas de feu. 
+%La température du gaz durant la décharge sera de $50{\celsius}$. 
 
 
 \end{multicols}
@@ -151,44 +192,46 @@ Si l'on isole thermiquement le tank tel que le coefficient d'échange avec l'ext
 
 \begin{multicols}{2}
 \vspace{1em}
-Dans notre schéma de production nous émettons en moyenne 1950 tonnes de $CO_{2}$  par jour.
-%%Ce qui représente l’équivalent de 1/10 du dioxyde de carbone rejeté en moyenne par jour par l’ensemble des voitures en Europe.
-Au plus la température du réformateur primaire dimnue, au moins les rejets de CO2 sont élevés. \newline
 
-Le dégagement de vapeur d'eau $H_{2}0$  diminue fortement lorsque la température du réformateur primaire augmente. Le prix de production de l’ammoniac : Choix a faire entre la diminution des coûts de production et l’impact écologique des émissions de $CO_{2}$.  \newline
+\textbf{Emissions}\\
+\\
+$CO_{2}$ : $1950$  $\frac{Tonnes}{Jour}$ \\
 
-Le $CH_{4}$ est un puissant gaz à effet de serre, il a un impact 25 fois plus puissant que le $CO_{2}$ . Nous ne rejetons pas directement du méthane mais une fuite pourrait augmenter dramatiquement les émissions de gaz à effet de serre. \newline
+$T\ensuremath{^\circ} _{\text{réformateur primaire}} \searrow$ : $CO_{2}\searrow$\\
+\\
+$H_{2}0$ : $Xtonnes?$\\
+
+$H_{2}0\searrow$ : $T\ensuremath{^\circ} _{refermateur primaire} \nearrow$\\
 
 
- Comme pour le méthane, une fuite de $NH_{3}$ peut vite entrainer un rejet important. En plus de son impact environnemental, ces rejets sont néfastes pour l’homme.  \newline
+\textbf{Fuites Potentielles}\\
+\\
+$CH_{4}$ :
+Impact =  $25$ X $CO_{2}$\\
 
-L'argon $({Ar})$ rejeté ne provoque aucuns dommages environnementaux connus, mais comporte cependant un risque pour la santé car il s’évapore très rapidement et entraine la saturation de l’air avec un risque sérieux dans les espaces confinés. \newline
+$NH_{3}$ : impact environnemental + santé   \\
 
+$Ar$ : santé 
 
 
 \end{multicols}
 \begin{center}
 \includegraphics[width=0.6\linewidth]{usine}
-%%\captionof{figure}{Figure caption}
 \end{center}
 
 }
 
 %----------------------------------------------------------------------------------------
-%	BLOC 5 : TACHE 1
+%	BLOC 5 : TACHE 2
 %----------------------------------------------------------------------------------------
 
-\headerbox{Tâche 1}{name=tache1,column=0,below=resume}{ % This block's bottom aligns with the bottom of the conclusion block
+\headerbox{Tâche 2}{name=tache2,column=0,span=2,below=tache1}{ % This block's bottom aligns with the bottom of the conclusion block
 
 
-Bilan de matiere
-\begin{itemize}\compresslist
-\item 
-\item 
-\item 
+\begin{center}
+\includegraphics[width=1\linewidth]{flowsheet}
+\end{center}
 
-\end{itemize}
-L'outil de calcul a été réalisé en matlab et prends en considération deux variables : la température du réacteur primaire (en K) et la quantité d'ammoniac (en tonnes) que l'on souhaite produire en 24h.
 
 
 }
