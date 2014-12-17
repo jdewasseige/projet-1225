@@ -11,12 +11,12 @@ Ce second rapport est une extension et une amélioration du rapport rendu
 en S2 et a pour but d'étudier plus en détail la production d'ammoniac. 
 Il comprend un flow sheet qui permet de voir les flux de matières en 
 les différentes étapes de la synthèse par le procédé Haber-Bosh. 
-Il comprend aussi un calcul détaillé des aspects énergétiques dans le réformateur primaire.
+Il comprend aussi un calcul détaillé des aspects énergétiques dans le reformeur primaire.
 S’y trouve ensuite une explication du fonctionnement de l’outil de calcul
 réalisé sur \textsc{matlab} (ainsi que l'outis de calcul en annexe).
 Celui-ci permet le calcul des flux entrants et sortants en fonction 
 de la quantité d'ammoniac voulue dans la journée ainsi que de la 
-température dans le réformateur primaire. Il calcule également les aspects énergétiques 
+température dans le reformeur primaire. Il calcule également les aspects énergétiques 
 lors des différentes étapes. 
 Et enfin ce rapport se termine par une analyse de l'effet du changement 
 des variables que sont la température et la quantité d'ammoniac produite 
@@ -73,10 +73,10 @@ l'air, on peut facilement obtenir les quantités de \ce{O2} et de \ce{Ar}.
 
 Il nous reste maintenant à déterminer les quantités de \ce{CH4} et de \ce{H2O}.
 On voit que la seule réaction nécessitant de l'oxygène est celle du 
-réformage secondaire. Ceci nous permet de conna\^itre toutes les quantités 
+reformeur secondaire. Ceci nous permet de conna\^itre toutes les quantités 
 associées à cette réaction. 
 Afin de ne pas oublier à quelle réaction est associée chaque quantité, 
-on notera \textit{rp} (resp. \textit{rs}) pour réformage primaire (resp. secondaire)
+on notera \textit{rp} (resp. \textit{rs}) pour reformeur primaire (resp. secondaire)
 et \textit{wgs} pour Water-Gas-Shift.
 
 \begin{equation*}
@@ -93,7 +93,7 @@ Dès lors,
 	\label{eq:moles2_ref_sec}
 \end{align}
 
-Interessons nous maintenant au réformage primaire.
+Interessons nous maintenant au reformeur primaire.
 \begin{align*}
 	&\ce{CH4 + H2O <-> CO + 3H2} \\
 	&\ce{CO + H2O <-> CO2 + H2}
@@ -157,7 +157,7 @@ et finalement la constante d'équilibre
 K(T) = \exp{\left(\frac{- \Delta_r G}{R \, T}\right)} 
 \]
 
-Les constantes d'équilibre des deux réactions du réformage primaire 
+Les constantes d'équilibre des deux réactions du reformeur primaire 
 sont calculées dans la fonction \texttt{getEqConstantsRef}.
 
 \paragraph{Calcul des pressions partielles à l'équilibre}
@@ -175,7 +175,7 @@ permettent de conna\^itre les quantités des réactifs et des produits à l'équ
 		$p_{eq}$ & $n_{\ce{CH4}} - \xi_1$ & $n_{\ce{H2O}} - \xi_1$ & 
 		$\xi_1$ & $3 \, \xi_1$ & $n_{\ce{CH4}} + n_{\ce{H2O}} + 2 \, \xi_1 $\\
 	\end{tabular}
-	\caption{Première réaction du réformage primaire à l'équilibre}
+	\caption{Première réaction du reformeur primaire à l'équilibre}
 	\label{tab:reaction1_primaire}
 \end{table}
 
@@ -189,7 +189,7 @@ permettent de conna\^itre les quantités des réactifs et des produits à l'équ
 		$p_{eq}$ & $\xi_1 - \xi_2$ & $n_{\ce{H2O}} - \xi_1 - \xi_2$ & 
 		$\xi_2$ & $3 \, \xi_1 + \xi_2$ & $n_{\ce{H2O}} + 3 \, \xi_1 $\\
 	\end{tabular}
-	\caption{Deuxième réaction du réformage primaire à l'équilibre}
+	\caption{Deuxième réaction du reformeur primaire à l'équilibre}
 	\label{tab:reaction2_primaire}
 \end{table}
 
@@ -214,7 +214,7 @@ dans la réaction suivante.
 
 On a pu voir dans le tableau \ref{tab:reaction1_primaire} qu'il reste après 
 équilibre exactement $n_{\ce{CH4}} - \xi_1$ moles de \ce{CH4}, qui seront 
-entièrement consommées pendant le réformage secondaire. 
+entièrement consommées pendant le reformeur secondaire. 
 Par l'équation \ref{eq:moles1_ref_sec}, on a que 
 
 \begin{equation}
@@ -287,7 +287,7 @@ de produit entrant, c'est-à-dire de \ce{CH4} et de \ce{H2O},
 que nous avons déterminé dans la section \ref{sec:bilan_matiere}.
 
 Prenons l'exemple, pour une quantité d'ammoniac de $1500 \si{\tonne}$ 
-(toujours avec une température du réformeur primaire de $1000\si{\kelvin}$
+(toujours avec une température du reformeur primaire de $1000\si{\kelvin}$
 et une pression à l'entrée de $28\si{\bar}$).
 
 \begin{align*}
@@ -308,11 +308,11 @@ des composés dans le reformateur primaire.
 
 La fonction \texttt{getTubesNumber} donne le
 nombre de tubes requis en fonction des paramètres de départ (la masse d'ammoniac 
-à produire, la température du réformeur primaire ainsi que la pression de celui-ci).
+à produire, la température du reformeur primaire ainsi que la pression de celui-ci).
 
-\section{Bilan énergétique de la partie réformeur primaire-four}
+\section{Bilan énergétique de la partie reformeur primaire-four}
 
-La première réaction - le craquage du méthane - qui se produit dans le réformeur primaire,
+La première réaction - le craquage du méthane - qui se produit dans le reformeur primaire,
 est une réaction endothermique. Nous devons donc lui fournir de l'énergie sous 
 forme de chaleur, ce r\^ole va être rempli par le four. 
 La réaction de combustion qui a lieu dans le four est la suivante
@@ -323,13 +323,13 @@ La réaction de combustion qui a lieu dans le four est la suivante
 
 Afin de connaître les quantités de méthane et d'oxygène qu'il faut
 introduire dans le four, nous devons étudier les bilans énergétiques
-des réactions ayant lieu dans ce réformateur. Les calculs exposés dans cette section 
-sont fait pour une température dans le réformateur de $1080 \si{\kelvin}$
+des réactions ayant lieu dans ce reformeur. Les calculs exposés dans cette section 
+sont fait pour une température dans le reformeur de $1080 \si{\kelvin}$
 et pour une production journalière d'ammoniac de $1500 \si{\tonne}$. 
 Bien sur ces résultats sont facilement transposables
 à d'autres données à l'aide de notre outil de gestion.
 
-Il faut tout d'abord calculer la chaleur nécessaire dans le réformeur primaire.
+Il faut tout d'abord calculer la chaleur nécessaire dans le reformeur primaire.
 La différence d'enthalpie de réaction du craquage du méthane vaut $+225.7 \si{\kilo\joule}$
 à $1000 \si{\kelvin}$, et celle de la deuxième réaction
 vaut $-34.8 \si{\kilo\joule}$ à la même température.
@@ -337,7 +337,7 @@ La première est fortement endothermique tandis que la deuxième est exothermiqu
 Il faut fournir une quantité de chaleur $Q$ pour que la réaction endothermique
 puisse avoir lieu, tout en tenant compte que le rendement énergétique de 
 la réaction de combustion du four vaut $\eta = 0.75$.
-Le nombre de moles qui vont réagir dans les réactions du réformeur primaire 
+Le nombre de moles qui vont réagir dans les réactions du reformeur primaire 
 sont $\xi_1$ et $\xi_2$ (tableaux \ref{tab:reaction1_primaire} 
 et \ref{tab:reaction2_primaire}).
 
@@ -370,7 +370,7 @@ Pour démarrer l'outil de gestion, il suffit de lancer la fonction \texttt{start
 dans la ligne de commande \textsc{matlab}.
 Ceci va lancer l'interface graphique et il ne reste plus qu'à introduire
 la quantité d'ammoniac (en tonnes par jour), la température (en kelvin) et
-la pression (en bar) du réformeur primaire dans les cases appropriées.
+la pression (en bar) du reformeur primaire dans les cases appropriées.
 
 Les détails du fonctionnement de l'outil se trouvent
 dans le \textsc{readme} associé au dossier de l'outil de gestion.
