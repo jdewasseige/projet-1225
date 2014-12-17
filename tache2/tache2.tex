@@ -1,3 +1,5 @@
+
+
 \section{Analyse des conditions optimales du réacteur de synthèse d'ammoniac}
 
 Jusqu'ici nous avons considéré la dernière étape du procédé - la synthèse d'ammoniac -
@@ -102,10 +104,10 @@ Le diagramme se trouve dans la figure \ref{fig:flow_synthese}.
 Dans les calculs qui suivent, nous cherchons $X$ qui n'est autre que 
 la fraction du recyclage qui doit être purgée. 
 Nous négligeons l'imperfection du séparateur et faisons donc l'hypothèse 
-que l'ammoniac sortant est pur, ce qui est bien sur impossible. 
-Nous nous référerons au schéma pour ce qu'il en est des notations. 
-Rappelons qu'il est aisé de trouver les débits d'entrée des réactifs 
-et de sortie de l'ammoniac grâce à notre outil de calcul.
+que l'ammoniac sortant est pur, ce qui est bien sur impossible. Le système
+est considéré à l'équilibre et les flux sont donc constants. 
+Nous nous référerons au flowsheet pour ce qu'il en est des notations et
+faisons l'hypothèse que nous connaissons le flux entrant de réactifs.
 
 \begin{figure}[h!]
 	\begin{center}
@@ -138,10 +140,10 @@ $\bullet$ Bilan molaire au séparateur:
 \label{eq:bilan_mol_sep}
 \end{equation}
 
-$\bullet$ Bilan d'argon au séparateur:
-\begin{equation}
-x_{Ar,\text{out}} \dot{n}_{\text{out}}=x_{\ce{Ar},\text{recyclage}} \dot{n}_{\text{recyclage}}
-\end{equation}
+%$\bullet$ Bilan d'argon au séparateur:
+%\begin{equation}
+%x_{Ar,\text{out}} \dot{n}_{\text{out}}=x_{\ce{Ar},\text{recyclage}} \dot{n}_{\text{recyclage}}
+%\end{equation}
 
 $\bullet$ Bilan molaire total:
 
@@ -151,18 +153,18 @@ $\bullet$ Bilan molaire total:
 \end{equation}
 
 avec $\xi$ étant l'avancement, c'est à dire le nombre de moles de \ce{N2} ayant réagit. 
-Faisons attention de noter qu'on ne considère que les réactifs venant du circuit $in$. 
-Cela est résumé dans le tableau suivant. 
+Cela est résumé dans le tableau \ref{tab:reaction_purge_eq}. 
 On analyse le débit de moles à l'entrée du réacteur pour les différents composés, 
-ainsi qu'à la sortie (on considère que l'équilibre a été atteint).
+ainsi qu'à la sortie (on considère que l'équilibre a été atteint). 
+Les indices $rec$ et $pur$ font respectivement référence au recyclage et à la purge. 
 
 \begin{table}[h!]
 	\centering
 	\begin{tabular}{l|c|c|c|c}
 		$\ce{N2}$ & $\ce{H2}$ & $\ce{Ar}$ & $\ce{NH3}$ & $n_{total}$ \\
 		\hline
-		$n_{\ce{N2},in}$ & $n_{\ce{H2},in}$ & $n_{\ce{Ar},in}$ & $0$  & $n_{in}$\\
-		$n_{\ce{N2},in}-\xi$ & $n_{\ce{H2},in}-3\xi$ & $n_{\ce{Ar},in}$ & $2\xi$  & $n_{in}-2\xi$\\
+		$n_{\ce{N2},in}$ + $n_{\ce{N2},rec-pur}$ & $n_{\ce{H2},in}$ +$n_{\ce{H2},rec-pur}$ & $n_{\ce{Ar},in}$ + $n_{\ce{Ar},rec-pur}$ & $0$  & $n_{in}$+$n_{rec-pur}$\\
+		$n_{\ce{N2},in}$ + $n_{\ce{N2},rec-pur}$ - $\xi$ & $n_{\ce{H2},in}$ +$n_{\ce{H2},rec-pur}$ -$3 \xi$ & $n_{\ce{Ar},in}$ + $n_{\ce{Ar},rec-pur}$ & $2 \xi$  & $n_{in}$+$n_{rec-pur}$-$2 \xi$\\
 	\end{tabular}
 	\caption{Réaction dans le réacteur.}
 	\label{tab:reaction_purge_eq}
@@ -191,56 +193,35 @@ fonctions de $\xi$, on obtient:
 
 \[ 
 K = 
-\frac{({2\xi})^2}{27 \cdot ({{n_{\ce{N2,in}}-\xi})^4}} \cdot
-({n_{total,in}-2\xi})^2 \cdot p^{-2} 
+\frac{({2\xi})^2}{27 \cdot ({{n_{\ce{N2,in}}+x_{\ce{N2},rec}(n_{rec}-n_{pur})-\xi})^4}} \cdot
+({n_{in}+n_{rec}-n_{pur}-2\xi})^2 \cdot p^{-2} 
 \]
 
-Nous pouvons par exemple résoudre cela avec \textsc{matlab}. 
-Connaissant $\xi$, on trouve $\dot{n}_{\text{purge}}$
-grâce à l'équation \ref{eq:bilan_mol_tot}. 
-Nous obtenons directement $x_{\ce{Ar},\text{purge}}$ en injectant 
-le résultat dans la première équation. 
-$x_{\ce{Ar},\text{purge}}$ est égal à $x_{\ce{Ar},\text{recyclage}}$ 
-car la purge n'altère par la concentration.
+Rappelons que $x_{i,rec}=x_{i,pur}$ car la purge n'altère pas la concentration.
+Nous appliquons cela pour simplifier l'expression de l'azote venant du circuit
+de recyclage.
+Les quatre inconnues suivantes sont présentes dans cette équation: $n_{rec}$, $n_{pur}$, $x_{N2,rec}$ et $\xi$
+Nous avons donc besoin de trois autres équations reliant ces dernières pour pouvoir 
+résoudre un système à solution unique.
+Une première est obtenue avec l'équation \ref{eq:bilan_mol_tot} où on remplace $n_{\ce{NH3},out}$ par
+$2 \xi$ (voir tableau \ref{tab:reaction_purge_eq}).
+\[n_{pur}=n_{in}-4 \xi \]
+On trouve une deuxième grâce à l'équation \ref{eq:bilan_mol_sep} où on remplace à nouveau $n_{\ce{NH3},out}$ et où $n_{out}=n_{in}+n_{rec}-n_{pur}-2\xi$:
+\[ n_{rec}=n_{in}+n_{rec}-n_{pur}-4\xi \]
+Une dernière provient du bilan obtenu de l'azote dans la boucle que forme le recyclage.
+L'azote qui n'a pas réagit a subit une purge:
+\[ n_{N2,rec}- n_{N2,pur}=x_{\ce{N2},rec}(n_{rec}- n_{pur})=(n_{\ce{N2},in}+x_{\ce{N2},rec}(n_{rec}- n_{pur})-\xi)(1-X) \]
+On injecte la valeur de X en fonction de $n_{rec}$ et $n_{pur}$ donnée par l'équation \ref{eq:bilan_mol_purge}.
+Nous avons maintenant tout le nécessaire pour résoudre le problème! Une manière simple de faire cela est d'utiliser les calcul symbolique de \textsc{Matlab}. La quantité réelle d'ammoniac produite est égale à $2 \xi$ et nous pouvons calculer le rendement en divisant ce résultat par la quantité produite prévue dans le cas d'une réaction hypothétiquement parfaite.\\
+La fraction parfaite $X$ du recyclage à purger est obtenue grâce à l'équation \ref{eq:bilan_mol_purge}:
 
-Nous disposons de la quantité d'ammoniac produite (un paramètre) 
-et pouvons donc maintenant connaitre la quantité totale de réactifs restants après réaction. 
-Rappelons que les quantité utilisées plus haut ne prenaient pas en compte le recyclage. 
-Reprenons l'expression de $K$: 
+\begin{equation}
+\dot{n}_{\text{purge}} = X \cdot \dot{n}_{\text{recyclage}}
+\end{equation}
 
-\[ 
-K = 
-\frac{{n_{\ce{NH3},\text{out}}}^2}{27{n_{\ce{N2},out}}^4} \cdot 
-{n_{\text{total,out}}}^2\cdot p^{-2}
-\]
-
-Or nous savons que $\dot{n}_{\text{total,out}} = 
-4\dot{n}_{\ce{N2},out}+\dot{n}_{\ce{Ar},out}+\dot{n}_{\ce{NH3},out}$ 
-
-où $\dot{n}_{\ce{Ar},out}$ est successivement:
-
-\[\dot{n}_{\ce{Ar},out}=\dot{n}_{\ce{Ar},\text{recyclage}}\]
-
-\[ \dot{n}_{\ce{Ar},out}=x_{\ce{Ar},\text{recyclage}}\dot{n}_{\text{total,recyclage}} \]
-
-\[ 
-\dot{n}_{\ce{Ar},out}\underset{(3)} = 
-x_{\ce{Ar},\text{recyclage}}(\dot{n}_{\text{total,out}}-\dot{n}_{\ce{NH3},\text{out}}) 
-\]
-
-Nous avons donc 2 équations pour trouver 
-les 2 inconnues $n_{\ce{N2},out}$ et $n_{\text{total,out}}$. 
-Nous pouvons à nouveau résoudre cela par \textsc{matlab}. 
-A présent, il suffit d'utiliser l'équation \ref{eq:bilan_mol_sep} 
-pour trouver $\dot{n}_{\text{recyclage}}$. 
-Comme nous le dit l'équation \ref{eq:bilan_mol_purge}, 
-le rapport de $\dot{n}_{\text{purge}}$ 
-et de $\dot{n}_{\text{recyclage}}$ nous donne enfin $X$! 
-Ces calculs fastidieux nous permettent donc enfin de trouver la fraction à prélever 
-dans le circuit de recyclage. 
 Le même cheminement est suivi dans le programme \texttt{purge} 
 disponible dans notre outil de gestion. Nous verrons plus loin que ces calculs donnent
-des résultats assez loin de la réalité. La fraction minimale a purger est toujours
+des résultats assez loin de la réalité. La fraction minimale réelle a purger est toujours
 bien moindre. Cela est du au grand nombre d'hypothèses simplificatrices utilisées. 
 La loi des gaz parfaits donne par exemple des résultats très peu précis 
 dans de telles conditions de température et de pression. 
@@ -379,4 +360,3 @@ de résultats venant des deux simulations:
 \end{table}
 
 \input{../tache2/aspen_simulation}
-
