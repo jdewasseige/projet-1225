@@ -10,6 +10,9 @@ jusqu'à l'établissement d'un nouvel équilibre.}. \cite{chatelier}
 
 La réaction de synthèse l'ammoniac est la suivante
 \[\ce{N2_{(g)} + 3H2_{(g)} <=> 2NH3_{(g)} } \]
+Nous allons analyser dans les lignes qui suivent les effets de la température, de la pression ainsi que
+de la présence d'un catalyseur sur cette réaction. Nous verrons également les limites qui nous sont
+imposées par la physique des matériaux utilisés. 
 
 \subsection{Pression}
 
@@ -60,10 +63,10 @@ pour ensuite la simuler sur le logiciel \textsc{Aspen Plus}.
 Nous ne désirons plus la considérer comme une boîte noire, et l'avons donc découpée 
 en un certain nombre de processus intermédiaires. 
 
-Le gaz composé d'\ce{N2}, d'\ce{H2} et d'\ce{Ar} passe par un réchauffeur 
+Le gaz entrant, composé d'\ce{N2}, d'\ce{H2} et d'\ce{Ar}, passe par un réchauffeur 
 et par un compresseur pour atteindre respectivement la température et la pression voulue. 
 Il va ensuite dans le réacteur où se déroule la réaction.
-Le produit est refroidit dans une installation prévue à cette fin, 
+Le produit est refroidit dans une installation prévue à cette effet, 
 pour arriver enfin dans un séparateur où on extrait l'ammoniac.
 
 Il semblait intéressant de créer un circuit de recyclage pour réutiliser 
@@ -74,7 +77,7 @@ proche de celle des autres composés et les moyens à mettre en œuvre en seraie
 très couteux et/ou à faible rendement.
 
 Notre groupe a donc décidé de faire une purge dans le circuit de recyclage afin d'éviter que l'argon ne s'accumule. Cette purge ne doit pas être trop grande sinon la quantité perdue des réactifs serait conséquente. 
-La condition à respecter est donc d'avoir un flux entrant d'argon égal à celui de sortie. 
+La condition à respecter est donc d'avoir un flux entrant d'argon égal à celui de sortie lorsque la réaction est en "régime", c'est à dire après un nombre conséquent d'itérations. 
 Les calculs permettant de trouver la quantité parfaite à purger 
 sont détaillés dans la sous-section suivante.
 
@@ -242,7 +245,7 @@ bien moindre. Cela est du au grand nombre d'hypothèses simplificatrices utilis�
 La loi des gaz parfaits donne par exemple des résultats très peu précis 
 dans de telles conditions de température et de pression. 
 De plus, dans des conditions réelles, une séparation parfaite est impossible 
-et une partie du \ce{NH3} part avec l'\ce{Ar}.
+et une partie du \ce{Ar} part avec le \ce{NH3}.
 Cependant, le programme nous donne le type de fonction que la fraction minimale de purge
 suit lorsque l'on modifie les paramètres: elle augmente peu avec la pression et diminue
 de manière plus conséquente avec la température. Nous pouvons voir cela dans les figures
@@ -267,6 +270,8 @@ de manière plus conséquente avec la température. Nous pouvons voir cela dans 
 
 \subsection{Validation du modèle}
 
+Nous avons alors voulu confirmer nos résultats avec un logiciel 
+qui nous permettrait de simuler notre réaction. 
 Le logiciel \textsc{Aspen Plus} propose de nombreuses 
 modélisations du comportement des fluides, 
 plus ou moins fidèles selon les composés et 
