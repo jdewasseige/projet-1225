@@ -1,6 +1,6 @@
 function analyseParametrique(p_ref1)
 
-fprintf('Pression reformeur primaire : %d [bar]\n',p_ref1);
+fprintf('\nPression reformeur primaire : %d [bar]\n',p_ref1);
 n = 5; 
 
 T = linspace(900,1100,n);
@@ -41,7 +41,7 @@ for i=1:n
 
 end 
 
-figure('name','Analyse Parametrique','position',[30 500 630 500])
+figure('name','Analyse Parametrique','position',[50 500 630 500])
 subplot(2,1,1);
 plot(T,in_ch4_proc,T,in_h2o,T,in_air,T,out_nh3,T,out_ar,T,out_h2o_proc,T,out_co2_proc);
 

@@ -13,6 +13,13 @@
 
 \maketitle
 
+\part{Rapport~1}
+
+\input{bilan_massique}
+\input{refroidissement}
+
+\part{Rapport~2}
+
 \section{Introduction}
 
 Ce second rapport est une extension et une amélioration du rapport rendu 
@@ -320,29 +327,29 @@ Les seules inconnues sont donc la température et les nombres de moles
 de produit entrant, c'est-à-dire de \ce{CH4} et de \ce{H2O},
 que nous avons déterminé dans la section \ref{sec:bilan_matiere}.
 
-Prenons l'exemple, pour une quantité d'ammoniac de $1500 \si{\tonne}$.
+Prenons l'exemple, pour une quantité d'ammoniac de $1500 \si{\tonne}$ 
+(toujours avec une température du réformeur primaire de $1000\si{\kelvin}$
+et une pression à l'entrée de $28\si{\bar}$).
 
 \begin{align*}
-	n_{CH_{4}} = 7,56 \si{\kilo\per\second} / 0,016 \si{\kilo\per\mole} 
-	= 472,18 \si{\mole\per\second} \\
-	n_{H_{2}O} = 18,94 \si{\kilo\per\second}/ 0,016 \si{\kilo\per\mole}
-	= 1052,22 \si{\mole\per\second}
+	n_{\ce{CH4}} = 451.70 \si{\mole\per\second} \\
+	n_{\ce{H2O}} = 936.95 \si{\mole\per\second}
 \end{align*}
 
 Grâce aux autres valeurs données dans l'énoncé 
 nous pouvons calculer le nombre de tubes nécessaire 
 
 \[
-	x = \frac{(n_{CH_{4}}+n_{H_{2}O}) \cdot 8,314 \cdot1080}
-	{\pi(0,05^2) \cdot 2 \cdot (31.10^5)} = 281,1
+ x = \frac{(n_{\ce{CH4}}+n_{\ce{H2O}}) \cdot 8,314 \cdot 1000}
+	{\pi (0,05^2) \cdot 2 \cdot (31.10^5)} = 237.1
 \]
 
-Il faut donc 282 tuyaux pour assurer l'approvionnnement 
+Il faut donc $238$ tuyaux pour assurer l'approvionnnement 
 des composés dans le reformateur primaire.
 
 La fonction \texttt{getTubesNumber} donne le
 nombre de tubes requis en fonction des paramètres de départ (la masse d'ammoniac 
-à produire et la température du réformeur primaire).
+à produire, la température du réformeur primaire ainsi que la pression de celui-ci).
 
 \section{Bilan énergétique de la partie réformeur primaire-four}
 
@@ -386,8 +393,14 @@ et
 \]
 
 On obtient une équation à résoudre pour obtenir $n_{\ce{CH4},\text{four}}$, et on a ensuite
-la quantité d'oxygène qu'il faut insérer $n_{\ce{O2},\text{four}} = 2 \cdot n_{\ce{CH4},\text{four}}$.
+les quantités à introduire (\ce{O2}) et celles rejetées (\ce{CO2} et \ce{H2O})
+\begin{align*}
+	n_{\ce{O2},\text{four}} &= 2 \cdot n_{\ce{CH4},\text{four}} \\
+	n_{\ce{CO2},\text{four}} &= n_{\ce{CH4},\text{four}} \\
+	n_{\ce{H2O},\text{four}} &= 2 \cdot n_{\ce{CH4},\text{four}}
+\end{align*}
 
+On en déduit ensuite facilement la quantité d'air à introduire.
 Ce bilan énergétique est modélisé dans \texttt{getHovenMasses}.
 
 \section{Flow-sheet}
@@ -396,18 +409,13 @@ Ce bilan énergétique est modélisé dans \texttt{getHovenMasses}.
 La figure \ref{fig:flowsheet} présente un flow-sheet simplifié du processus 
 de production d'ammoniac que nous étudions.
 
-\begin{figure}[h!]
+\begin{figure}
 	\begin{center}
 		\input{flowsheet.tex}
 	\end{center}
 	\caption{Flow-sheet simplifié.}
 	\label{fig:flowsheet}
 \end{figure}
-\input{refroidissement}
-
-\appendix
-\input{bilan_massique}
 
 \printbibliography
-
 \end{document}
