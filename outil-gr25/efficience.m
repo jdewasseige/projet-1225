@@ -1,24 +1,28 @@
 function purge3D
 
-n=5
+n=10
 t=linspace(600,800,n);
 p=linspace(150,400,n);
 s=zeros(n,n);
 for i=1:n
 for j=1:n
-results=(purge(1500,t(i),p(j),0.05));
+results=purge2(1500,t(i),p(j));
 eff=results(2);
-e(i,j)=eff;
+s(i,j)=eff;
 end
 end
-plot(t,p,e)
+
+figure
+contourf(p,t,s)
 
 hold on;
-title('Rendement du réacteur en fonction de la température et de la pression');
-xlim([600 800])
-xlabel('Température (K)')
-ylim([150 400])
-ylabel('Pression (bar)')
-zlim([0 1])
+title('Rendement du reacteur en fonction de la temperature et de la pression');
+%xlim([600 800])
+ylabel('Temperature (K)')
+%ylim([150 400])
+xlabel('Pression (bar)')
+%zlm([0 1])
 zlabel('Rendement')
+hold off;
+
 end

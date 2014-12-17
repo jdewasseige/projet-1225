@@ -1,4 +1,4 @@
-﻿function [x, eff] = purge(m_NH3, T, p)
+function a = purge(m_NH3, T, p)
 
 %On obtient les diff�rents flux molaires journaliers..
 n_NH3_out_th = m_NH3*10^6/17.0305;
@@ -26,10 +26,8 @@ eq2= (n_in+n_rec_s-n_purge_s)*(1-n_purge_s/n_rec_s) == n_rec_s;
 eq3 = (x_N2_s*n_purge_s*(n_rec_s-n_purge_s)/n_rec_s) == (n_N2_in-xi_s)*(1-n_purge_s/n_rec_s);
 eq4 = ((2*xi_s)^2)*(n_in+n_rec_s-n_purge_s-2*xi_s)^2/(27*p^2*(n_N2_in+x_N2_s*(n_rec_s-n_purge_s)-xi_s)^4) == K;
 
-[n_rec n_purge xi x_N2_out] = solve(eq1, eq2, eq3, eq4, n_rec_s, n_purge_s, xi_s, x_N2_s)
+[n_rec n_purge xi x_N2_out] = solve(eq1, eq2, eq3, eq4, n_rec_s, n_purge_s, xi_s, x_N2_s);
 
-x=n_purge/n_rec;%La fraction recherchee
-
-eff=2*xi/n_NH3_out_th;
+a = [n_purge/n_rec 2*xi/n_NH3_out_th] %La fraction recherchee
 
 end
