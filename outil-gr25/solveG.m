@@ -3,7 +3,10 @@ function out = solveG(m_NH3,T,p_tot)
 R = 8.3144621 ;
 p_st = 1e5 ;
 
+m_NH3 = m_NH3/1000; % passage en kilogrammes
+
 % Constantes d'equilibres des reactions du reformeur primaire
+
 K = getEqConstantsRef(T) ;
 
 syms ksi1 ksi2 n_CH4 n_H2O positive
@@ -29,6 +32,6 @@ eq4= 4*ksi1 == (9/221)*m_NH3*1e6 ;
 
 
 % On renvoit des megamoles.
-out = double(vpa([n_CH4,n_H2O,ksi1,ksi2])) ;
+out = double(vpa([n_CH4,n_H2O,ksi1,ksi2]*1000)) ;
 
 end
