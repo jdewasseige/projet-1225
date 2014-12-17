@@ -1,7 +1,7 @@
 function simulation(m_NH3_th,T,p,x)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Ce programme realise une simulation de la deniere etape de notre
-% installation. On y utilise la loi des gaz parfait et on estime
+% installation. On y utilise la loi des gaz parfaits et on estime
 % l'avancement de la reaction pour trouver les flux a l'equilibre.
 % Prend comme parametres: - m_NH3_th la masse de NH3 [tonnes/jour] prevue
 %                         - T la temperature dans le reacteur
