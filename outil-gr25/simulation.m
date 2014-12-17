@@ -9,11 +9,11 @@ function eff = simulation(m_NH3_th,T,p,x)
 %                         - x la faction du recyclage a purger
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-n_NH3_th = m_NH3_th*10^6/17.0305;
-n_N2_in = n_NH3_th/2;
-n_H2_in = 3*n_N2_in;
-n_Ar_in = (1/2652)*m_NH3_th*10^6;
-n_in = n_N2_in+n_H2_in+n_Ar_in;
+n_NH3_th = m_NH3_th*10^6/17.0305 ;
+n_N2_in = n_NH3_th/2 ;
+n_H2_in = 3*n_N2_in ;
+n_Ar_in = (1/2652)*m_NH3_th*10^6 ;
+n_in = n_N2_in+n_H2_in+n_Ar_in ;
 
 %On cherche K (a temperature T)
 R=8.3145;
