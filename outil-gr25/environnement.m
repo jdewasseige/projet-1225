@@ -4,61 +4,57 @@ function environnement()
 
 n = 6;
 
-x = zeros(1,n); 
-y = zeros(1,n);
-h2o = zeros(1,n);
+co2 = zeros(1,n);
+h2o_in = zeros(1,n);
+h2o_out = zeros(1,n);
+ch4 = zeros(1,n);
 
-p_tot = 26e5 ;
-m_nh3 = 10;
+p_tot = 26;
+m_nh3 = 100;
 T_four = 1300; 
 
-T = linspace(700,1100,n);
+T = linspace(750,1100,n);
 
 fprintf('\nRejet des gazs a effet de serre en tonnes/jour \n');
 
 for i = 1:n
     fprintf('T = %d [K] \t',T(i));
     
-    moles = solveG(m_nh3,T(i),p_tot) ;
-    ksi1  = moles(3);
-    ksi2  = moles(4);
-    
-    m = getMassesDetails(m_nh3,T(i),p_tot) ;
-  
-    result = getHovenMasses(ksi1,ksi2,T(i),T_four);
+    m = main(m_nh3,T(i),p_tot,'t',0,1)
 
-    h2o(i) = (result(4) + m.h2o_sep);
-    y(i) =  (m.co2_sep + result(3)) ;
-    x(i) = T(i);
+    h2o_in(i) = m.h2o_in;
+    h2o_out(i) = (m.h2o_four + m.h2o_sep);
+    co2(i) =  (m.co2_sep + m.co2_four) ;
+    ch4(i) = m.ch4_four;
 
-    fprintf('CO2 : %.2f \t', m.co2_sep + result(3)) ;
-    fprintf('H2O : %.2f \n', result(4) + m.h2o_sep) ;
+    fprintf('CO2 : %.2f \t', co2(i)) ;
+    fprintf('H2O : %.2f \n', h2o_out(i)) ;
 
 end
 
 figure('name','Analyse Environnementale','position',[20 500 630 500])
 
-subplot(2,1,1); 
-plot(x, y)
+subplot(2,2,1); 
+plot(T, co2)
 hold on;
 title('CO2/Temp')
-ylabel('CO2 rejection/ NH3 production')
+ylabel('CO2 rejection')
 xlabel('Temperature')
 hold off;
 
-subplot(2,1,2);
-plot(x, h2o);
+subplot(2,2,3);
+plot(T,h2o_out,'b',T,h2o_in,'g');
 hold on;
 title('H2O/Temp')
-ylabel('H2O rejection/ NH3 production')
+ylabel('H2O rejection')
 xlabel('Temperature')
 hold off;
 
-subplot(2,1,2);
-plot(x, h2o);
+subplot(2,2,2);
+plot(T, ch4);
 hold on;
-title('CH4/Temp')
-ylabel('CH4 rejection/ NH3 production')
+title('CH4 utilise dans le four')
+ylabel('CH4')
 xlabel('Temperature')
 hold off;
 

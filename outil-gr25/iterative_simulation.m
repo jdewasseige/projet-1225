@@ -1,4 +1,4 @@
-function eff = simulation(m_NH3_th,T,p,x)
+function eff = iterative_simulation(m_NH3_th,T,p,x)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Ce programme realise une simulation de la deniere etape de notre
 % installation. On y utilise la loi des gaz parfaits et on estime
