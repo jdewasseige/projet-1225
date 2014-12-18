@@ -1,9 +1,10 @@
 function purge3D
 
-n=5;
+n=10;
 
 t=linspace(600,800,n);
 p=linspace(150,400,n);
+
 s=zeros(n,n);
 
 for i=1:n
@@ -15,12 +16,12 @@ for i=1:n
 end
 
 figure
-contourf(p,t,s)
+contourf(p,t,s);
 
 hold on;
-title('Rendement du reacteur en fonction de la temperature et de la pression');
-xlabel('Pression (bar)') ;
-ylabel('Temperature (K)');
+title('Rendement du reacteur de synthese en fonction de la pression et de la temperature');
+xlabel('Pression [bar]') ;
+ylabel('Temperature [K]');
 zlabel('Rendement');
 hold off;
 
