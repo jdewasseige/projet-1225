@@ -1,5 +1,5 @@
 function tubes = getTubesNumber(n_CH4,n_H2O,T)
-% Cette fonction calcule le nombre de tubes necessaires 
+%GETTUBESNUMBER - Cette fonction calcule le nombre de tubes necessaires 
 % pour amener le methane et l'eau dans le reformeur primaire.
 %
 % input  - n_CH4 : nombres de mol de methane

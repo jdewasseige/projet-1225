@@ -1,5 +1,6 @@
 function m = getMassesDetails(m_nh3,T,p_tot)
-
+%GETMASSESDETAILS - Cette fonction renvoit un structure array
+%                   contenant les valeurs des masses du procede.
 M = getMolarMasses ;
 
 moles = solveG(m_nh3,T,p_tot) ;

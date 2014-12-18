@@ -1,5 +1,5 @@
 function K = getEqConstantsRef(T)
-% Cette fonction renvoit un 'structure array' contenant les 
+%GETEQCONSTANTSREF - Cette fonction renvoit un 'structure array' contenant les 
 % constantes d'equilibre des reactions du reformer primaire 
 % qui est a la temperature 'T'.
 

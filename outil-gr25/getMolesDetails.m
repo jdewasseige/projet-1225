@@ -1,5 +1,7 @@
 function n = getMolesDetails(m_nh3,T,p_tot)
-
+%GETMOLESDETAILS - Cette fonction a la meme utilite que la fonction
+%                  getMassesDetails mais renvoit des moles/s 
+%                  plutot que de tonnes/jour.
 M = getMolarMasses ;
 
 ton_to_gram   = 1e6;

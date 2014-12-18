@@ -1,4 +1,7 @@
 function printMassesDetails(x,var)
+%PRINTMASSESDETAILS - Cette fonction affiche les flux detailles
+%                     de l'ensemble du procede, soit en tonnes/jour
+%                     soit en moles/secondes.
 
 if var=='t'
     fprintf('\n \t DETAILS (en tonnes par jour) \t \n');

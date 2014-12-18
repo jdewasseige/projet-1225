@@ -1,0 +1,56 @@
+\documentclass[a4paper,oneside,11pt]{article}
+
+\usepackage{../../custom}
+
+\title{\textsc{readme} de l'outil de gestion}
+\author{Groupe 1225}
+\date{\today}
+
+\newcommand{\fun}[1]{\texttt{#1}}
+
+\begin{document}
+
+\maketitle
+
+\section{Utilisation}
+
+Pour démarrer l’outil de gestion, il suffit de lancer la fonction \texttt{startOutil} 
+dans la ligne de commande \textsc{matlab}. 
+Ceci va lancer l’\emph{interface graphique} 
+et il ne reste plus qu’à introduire la quantité d’ammoniac (en tonnes par jour),
+la température (en kelvin) et la pression (en bar) du reformeur primaire dans les cases appropriées.
+
+\section{Fonctionnement}
+
+Pour comprendre le fonctionnement de l'ensemble de l'outil,
+on utilisera la commande \texttt{help X},
+où \texttt{X} est une des fonctions suivantes.
+
+\begin{itemize}
+	\item \fun{analyseParametrique}
+	\item \fun{efficiencePlot}
+	\item \fun{environnement}
+	\item \fun{equilibriumSimulation}
+	\item \fun{getCoefficients} 
+	\item \fun{getDeltaH\_and\_S}
+	\item \fun{getEqConstantsRef} 
+	\item \fun{getHovenMasses}
+	\item \fun{getMassesDetails}
+	\item \fun{getMolarMasses}
+	\item \fun{getMolesDetails}
+	\item \fun{getTubesNumber}
+	\item \fun{main}
+	\item \fun{printHovenDetails}
+	\item \fun{printMassesDetails}	
+	\item \fun{refroidissement}
+	\item \fun{solveG}
+	\item \fun{startOutil}
+\end{itemize}
+
+\paragraph{Remarque} Il se peut que pour certaines combinaisons de valeurs de $m_\ce{NH3}$,
+et de $T$ une erreur de type ``\textit{Could not extract individual solutions. 
+Returning a MuPAD set object.}'' survienne. 
+Pour palier à ce problème il suffit de changer la valeur 
+de $m_\ce{NH3}$ ou de $T$ d'une unité.
+
+\end{document}

@@ -1,6 +1,6 @@
 function environnement()
-% Outil permettant l'analyse des données environnementales pour la tâche 3
-% du projet
+%ENVIRONNEMENT - Outil permettant l'analyse des donnees 
+%                environnementales pour la tache 3 du projet
 
 n = 6;
 
@@ -13,14 +13,14 @@ p_tot = 26;
 m_nh3 = 100;
 T_four = 1300; 
 
-T = linspace(750,1100,n);
+T = linspace(700,1100,n);
 
-fprintf('\nRejet des gazs a effet de serre en tonnes/jour \n');
+fprintf('\nRejet des gaz a effet de serre en tonnes/jour \n');
 
 for i = 1:n
     fprintf('T = %d [K] \t',T(i));
     
-    m = main(m_nh3,T(i),p_tot,'t',0,1)
+    m = main(m_nh3,T(i),p_tot,'t',0,1);
 
     h2o_in(i) = m.h2o_in;
     h2o_out(i) = (m.h2o_four + m.h2o_sep);

@@ -1,5 +1,5 @@
 function out = getHovenMasses(n_r1,n_r2,T_ref,T_four)
-% Cette fonction calcule les masses en tonnes de methane
+%GETHOVENMASSES - Cette fonction calcule les masses en tonnes de methane
 % et d'oxygene necessaire pour apporter suffisament de chaleur
 % dans le reformeur primaire afin que la reaction endothermique
 % du craquage du methane puisse se produire.

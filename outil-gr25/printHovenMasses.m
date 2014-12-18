@@ -1,5 +1,6 @@
 function printHovenMasses(m,var)
-
+%PRINTHOVENMASSES - Cette fonction permet de donner les quantite
+%                 - d'entree et de sorties (en tonnes/jour) pour le four.
 M = getMolarMasses();
 
 tonnesDay_to_gramSecond = 1e6/(24*60*60);

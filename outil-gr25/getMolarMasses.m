@@ -1,5 +1,5 @@
 function M = getMolarMasses()
-% Cette fonction renvoit un 'structure array' contenant
+%GETMOLARMASSES - Cette fonction renvoit un 'structure array' contenant
 % les masses molaires des composes utilises dans le 
 % processus. 
 

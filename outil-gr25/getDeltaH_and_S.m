@@ -1,6 +1,6 @@
 function out = getDeltaH_and_S(T)
-% Cette fonction renvoit les valeurs des enthalpies et entropies
-% adaptes a la temperature T via les equations de Shomate
+%GETDELTAH_AND_S - Cette fonction renvoit les valeurs des enthalpies 
+% et entropies adaptes a la temperature T via les equations de Shomate
 % des composes invoques dans le processus.
 %
 % input  - T   : temperature en KELVIN

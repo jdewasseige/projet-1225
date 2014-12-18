@@ -1,4 +1,7 @@
 function startOutil
+%STARTOUTIL - Interface graphique de l'outil de gestion
+%             du plant de production d'ammoniac.
+
 
 % creation du cadre
 handles(1)=figure('units','pixels',...
@@ -62,13 +65,13 @@ uicontrol('style','pushbutton',...
     'fontsize',13',...
     'callback',@analyseEnv);
 
-% simulation purge theorique
+% 
 uicontrol('style','pushbutton',... 
     'units','normalized',...
     'position',[0.1 0.18 0.3 0.06],...
-    'string','Simulation purge',...    
+    'string','Reacteur de synthese',...    
     'fontsize',13',...
-    'callback',@purgeTheorique);
+    'callback',@syntheseReac);
 
 % refroidissement
 uicontrol('style','pushbutton',... 
@@ -133,9 +136,9 @@ function analyseEnv(~,~)
     set(action,'String','Analyse environnementale : done');
 end
 
-function purgeTheorique(~,~)
-    pause(3); 
-    set(action,'String','Simulation purge : done');
+function syntheseReac(~,~)
+    efficiencePlot; 
+    set(action,'String','Conditions optimales du reacteur de synthese : done');
 end
 
 function printRefroidissement(~,~)

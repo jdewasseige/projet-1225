@@ -1,5 +1,5 @@
 function cp = getCoefficients(T)
-% Cette fonction renvoit un 'structure array' contenant
+%GETCOEFFICIENTS - Cette fonction renvoit un 'structure array' contenant
 % les coefficients qui vont etre utilises dans 
 % les equations de Shomate pour determiner les 
 % enthalpies et entropies de reactions.

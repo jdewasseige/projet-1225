@@ -1,9 +1,11 @@
 function masses = main(m_nh3,T,p_ref1,var,print,out)
-% Outil de gestion du plant de formation d'ammoniac
+%MAIN - Outil de gestion du plant de formation d'ammoniac
 % a partir de methane.
 % 
 % in - m_NH3 : masse d'ammoniac en tonnes par jour
 %    - T     : temperature en KELVIN reacteur
+%    - p_ref1: pression en BAR dans le reformeur primaire
+%    - var   : 't' (resp. 'm') pour tonnes/jour (resp. moles/s)
 %    - print : mettre a 0 pour ne pas afficher les masses detaillees
 %              (ils sont affiches par defaut)
 %    - out   : mettre a 1 pour renvoyer les masses detaillees

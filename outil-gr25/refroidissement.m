@@ -1,5 +1,5 @@
 function l_H2O = refroidissement(m_NH3)
-% Outil permettant de calculer la quantite d'eau 
+%REFROIDISSEMENT - Outil permettant de calculer la quantite d'eau 
 % necessaire pour refroidir le reacteur responsable
 % de la production d'ammoniac a partir de H2 et de N2.
 %

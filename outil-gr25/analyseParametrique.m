@@ -1,4 +1,7 @@
 function analyseParametrique(p_ref1)
+%ANALYSEPARAMETRIQUE - Cette fonction permet de donner une analye
+%                      parametrique quantitative des entrees et 
+%                      sorties de matieres dans le plant.
 
 fprintf('\nPression reformeur primaire : %d [bar]\n',p_ref1);
 n = 5; 
