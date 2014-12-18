@@ -55,6 +55,29 @@ cette reaction à basse température comme le suggerait nos premières observati
 
 \subsection{Limite sur la pression imposée par les matériaux du réacteur}
 
+\subsection{Conclusion}
+
+Les figures~\ref{fig:efficienceC} et~\ref{fig:efficienceS} confirment 
+nos conclusions quant aux conditions optimales d'opération.
+
+\begin{figure}
+	\centering
+	\begin{subfigure}[b]{1\textwidth}
+		\includegraphics[scale=0.7]{../tache2/img/efficienceSyntheseS.eps}
+		\caption{Plot 3D.}
+		\label{fig:efficienceS}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.8\textwidth}
+		\includegraphics[scale=0.6]{../tache2/img/efficienceSyntheseC.eps}
+		\caption{Courbes de niveau associés au plot 3D.}
+		\label{fig:efficienceC}
+	\end{subfigure} \\
+	\caption{Efficacité du réacteur de synthèse en fonction de la température 
+		et de la pression en tenant compte d'une perte d'une partie des 
+		réactifs (\ce{H2} et \ce{N2}) lors de la purge, nécessaire pour
+		éviter l'accumulation de \ce{Ar}.}
+\end{figure}
+
 \section{Modélisation par \textsc{Aspen Plus}}
 \subsection{Démarrage}
 
@@ -234,7 +257,7 @@ de manière plus conséquente avec la température. Nous pouvons voir cela dans 
 
 \begin{figure}[h!]
 	\begin{center}
-		\includegraphics[scale=0.3]{../tache2/purge1.png}
+		\includegraphics[scale=0.3]{../tache2/img/purge1.png}
 	\end{center}
 	\caption{Fraction de purge en fonction de la température.}
 	\label{fig:purge1}
@@ -242,7 +265,7 @@ de manière plus conséquente avec la température. Nous pouvons voir cela dans 
 
 \begin{figure}[h!]
 	\begin{center}
-		\includegraphics[scale=0.3]{../tache2/purge2.png}
+		\includegraphics[scale=0.3]{../tache2/img/purge2.png}
 	\end{center}
 	\caption{Fraction de purge en fonction de la pression.}
 	\label{fig:purge2}
