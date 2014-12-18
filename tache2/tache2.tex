@@ -98,34 +98,11 @@ Le diagramme se trouve dans la figure \ref{fig:flow_synthese}.
 	\label{fig:flow_aspen}
 \end{figure}
 
-\subsection{Conclusion}
-
-Les figures~\ref{fig:efficienceC} et~\ref{fig:efficienceS} confirment 
-nos conclusions quant aux conditions optimales d'opération.
-
-\begin{figure}
-	\centering
-	\begin{subfigure}[b]{1\textwidth}
-		\includegraphics[scale=0.7]{../tache2/img/efficienceSyntheseS.eps}
-		\caption{Plot 3D.}
-		\label{fig:efficienceS}
-	\end{subfigure}
-	\begin{subfigure}[b]{0.8\textwidth}
-		\includegraphics[scale=0.6]{../tache2/img/efficienceSyntheseC.eps}
-		\caption{Courbes de niveau associés au plot 3D.}
-		\label{fig:efficienceC}
-	\end{subfigure} \\
-	\caption{Efficacité du réacteur de synthèse en fonction de la température 
-		et de la pression en tenant compte d'une perte d'une partie des 
-		réactifs (\ce{H2} et \ce{N2}) lors de la purge, nécessaire pour
-		éviter l'accumulation de \ce{Ar}.}
-\end{figure}
-
 \subsection{Prévisions}
 
-Dans cette sous-section, nous faisons notre propre simulation en considérant
-le système à l'équilibre. Les flux sont donc constants.
-Nous fixons la température et la pression dans le réacteur, ainsi que la fraction X
+Dans cette sous-section, nous faisons notre propre simulation de la dernière étape, en considérant
+le système à l'équilibre. Les flux y sont donc constants. Notre but est ici de calculer le rendement du circuit en terme de production d'ammoniac. Nous cherchons donc la quantité d'\ce{NH3} réellement produite.
+A cette fin, nous fixons la température et la pression dans le réacteur, ainsi que la fraction X
 à purger dans le recyclage.
 Nous négligeons l'imperfection du séparateur et faisons donc l'hypothèse 
 que l'ammoniac sortant est pur, ce qui est bien sur impossible.
@@ -177,10 +154,13 @@ $\bullet$ Bilan molaire total:
 \end{equation}
 
 avec $\xi$ étant l'avancement, c'est à dire le nombre de moles de \ce{N2} ayant réagit. 
-Cela est résumé dans le tableau \ref{tab:reaction_purge_eq}. 
+Cela est résumé dans le tableau \ref{tab:reaction_purge_eq}.
 On analyse le débit de moles à l'entrée du réacteur pour les différents composés, 
 ainsi qu'à la sortie (on considère que l'équilibre a été atteint). 
 Les indices $rec$ et $pur$ font respectivement référence au recyclage et à la purge. 
+On voit tout de suite que le flux des moles d'ammoniac produites est égal à $2 \xi$. Il
+nous faut donc par exemple trouver l'avancement pour obtenir sa valeur. Nous pouvons faire
+cela en partant de l'équation d'équilibre.
 
 \begin{table}[h!]
 	\centering
@@ -224,7 +204,7 @@ K =
 Rappelons que $x_{i,rec}=x_{i,pur}$ car la purge n'altère pas la concentration.
 Nous appliquons cela pour simplifier l'expression de l'azote venant du circuit
 de recyclage.
-Les quatre inconnues suivantes sont présentes dans cette équation: $n_{rec}$, $n_{pur}$, $x_{N2,rec}$ et $\xi$
+Les quatre inconnues suivantes sont présentes dans cette équation: $n_{rec}$, $n_{pur}$, $x_{N2,rec}$ et $\xi$.
 Nous avons donc besoin de trois autres équations reliant ces dernières pour pouvoir 
 résoudre un système à solution unique.
 
@@ -236,9 +216,10 @@ On trouve une deuxième grâce à l'équation \ref{eq:bilan_mol_purge} où on re
 \[ \dot{n}_{\ce{Ar},\text{in}}=(1-4*x_{\ce{N2},purge}) \dot{n}_{\text{purge}} \]
 
 On utilise enfin l'équation \ref{eq:bilan_mol_purge}, 
-ce qui nous donne tout le nécessaire pour résoudre le problème! 
+ce qui nous donne tout le nécessaire pour résoudre le problème! On peut en effet alors
+trouver la valeur des inconnues citées plus haut.
 Une manière simple de faire cela est d'utiliser les calcul symbolique de \textsc{Matlab}. 
-La quantité réelle d'ammoniac produite est égale à $2 \xi$ 
+Comme dit précédemment, la quantité réelle d'ammoniac produite est égale à $2 \xi$ 
 et nous pouvons calculer le rendement en divisant ce résultat
 par la quantité produite prévue dans le cas d'une réaction hypothétiquement parfaite.
 
@@ -247,7 +228,25 @@ disponible dans notre outil de gestion. Ce dernier nous donne le rendement pour 
 certain jeu de paramètres. Un autre programme, \texttt{efficiencePlot}, trace un graphe
 tri-dimensionnel de ces résultats avec une purge fixée, variant avec la température et la
 pression. Comme attendu, le rendement augmente toujours avec la pression et diminue
-de manière plus conséquente avec la température. Les graphes \ref{fig:efficienceC} et \ref{fig:efficienceS} nous montrent cela.
+de manière plus conséquente avec la température. Les graphes \ref{fig:efficienceS} et \ref{fig:efficienceC} nous montrent cela.
+
+\begin{figure}
+	\centering
+	\begin{subfigure}[b]{1\textwidth}
+		\includegraphics[scale=0.7]{../tache2/img/efficienceSyntheseS.eps}
+		\caption{Plot 3D.}
+		\label{fig:efficienceS}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.8\textwidth}
+		\includegraphics[scale=0.6]{../tache2/img/efficienceSyntheseC.eps}
+		\caption{Courbes de niveau associés au plot 3D.}
+		\label{fig:efficienceC}
+	\end{subfigure} \\
+	\caption{Efficacité du réacteur de synthèse en fonction de la température 
+		et de la pression en tenant compte d'une perte d'une partie des 
+		réactifs (\ce{H2} et \ce{N2}) lors de la purge, nécessaire pour
+		éviter l'accumulation de \ce{Ar}.}
+\end{figure}
 
 \subsection{Validation du modèle}
 
@@ -314,7 +313,7 @@ sont disponibles dans l'annexe~\ref{sec:aspen_simulation}.
 \subsection{Simulation itérative sur \textsc{Matlab}}
 
 Nous avons choisi de créer une seconde simulation
-pour comparer les résultats obtenus et comparer
+pour comparer les résultats obtenus ainsi que 
 les conditions menant à la convergence.
 Son fonctionnement est simple:
 elle calcule - pour une série d'itérations - 
