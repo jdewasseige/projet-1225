@@ -232,16 +232,19 @@ Une première est obtenue avec l'équation \ref{eq:bilan_mol_tot} où on remplac
 $2 \xi$ (voir tableau \ref{tab:reaction_purge_eq}).
 \[n_{pur}=n_{in}-4 \xi \]
 
-On trouve une deuxième grâce à l'équation \ref{bilan_mol_purge} où on remplace $x_{Ar,purge}$ par $1-x_{\ce{N2},purge}-x_{\ce{H2},purge}=1-4*x_{\ce{N2},purge}$.
+On trouve une deuxième grâce à l'équation \ref{eq:bilan_mol_purge} où on remplace $x_{Ar,purge}$ par $1-x_{\ce{N2},purge}-x_{\ce{H2},purge}=1-4*x_{\ce{N2},purge}$.
 \[ \dot{n}_{\ce{Ar},\text{in}}=(1-4*x_{\ce{N2},purge}) \dot{n}_{\text{purge}} \]
 
-On utilise enfin l'équation \ref{eq:bilan_mol_purge}, ce qui nous donne tout le nécessaire pour résoudre le problème! 
+On utilise enfin l'équation \ref{eq:bilan_mol_purge}, 
+ce qui nous donne tout le nécessaire pour résoudre le problème! 
 Une manière simple de faire cela est d'utiliser les calcul symbolique de \textsc{Matlab}. 
-La quantité réelle d'ammoniac produite est égale à $2 \xi$ et nous pouvons calculer le rendement en divisant ce résultat par la quantité produite prévue dans le cas d'une réaction hypothétiquement parfaite.\\
+La quantité réelle d'ammoniac produite est égale à $2 \xi$ 
+et nous pouvons calculer le rendement en divisant ce résultat
+par la quantité produite prévue dans le cas d'une réaction hypothétiquement parfaite.
 
-Le même cheminement est suivi dans le programme \texttt{equilibrium_simulation} 
+Le même cheminement est suivi dans le programme \texttt{equilibriumSimulation} 
 disponible dans notre outil de gestion. Ce dernier nous donne le rendement pour un
-certain jeu de paramètres. Un autre programme, \texttt{efficience_plot}, trace un graphe
+certain jeu de paramètres. Un autre programme, \texttt{efficiencePlot}, trace un graphe
 tri-dimensionnel de ces résultats avec une purge fixée, variant avec la température et la
 pression. Comme attendu, le rendement augmente toujours avec la pression et diminue
 de manière plus conséquente avec la température. Les graphes \ref{fig:efficienceC} et \ref{fig:efficienceS} nous montrent cela.

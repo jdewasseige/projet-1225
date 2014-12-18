@@ -1,6 +1,6 @@
 function efficience_plot
 
-n=5;
+n=10;
 
 t=linspace(600,800,n);
 p=linspace(150,400,n);
@@ -15,7 +15,7 @@ for i=1:n
 end
 
 figure
-surf(p,t,s);
+contourf(p,t,s);
 
 hold on;
 title('Rendement du reacteur de synthese en fonction de la pression et de la temperature');
