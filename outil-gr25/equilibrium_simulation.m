@@ -1,4 +1,4 @@
-﻿function efficience = equilibrium(m_NH3, T, p, x)
+﻿function efficience = equilibrium_simulation(m_NH3, T, p, x)
 
 %On obtient les diff�rents flux molaires journaliers..
 n_NH3_out_th = m_NH3*10^6/17.0305;

@@ -1,17 +1,16 @@
-function purge3D
+function efficience_plot
 
 n=10;
 
 t=linspace(600,800,n);
 p=linspace(150,400,n);
+x=0.05;
 
 s=zeros(n,n);
 
 for i=1:n
     for j=1:n
-        results=purge2(1500,t(i),p(j));
-        eff=results(2);
-        s(i,j)=eff;
+        s(i,j)=purge2(1500,t(i),p(j),x);
     end
 end
 
