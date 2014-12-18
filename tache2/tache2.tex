@@ -10,7 +10,7 @@ de \textsc{Le Ch\^atelier} : \enquote{Si l'on tend à modifier les conditions d'
 il réagit de façon à s'opposer, en partie, aux changements qu'on lui impose, 
 jusqu'à l'établissement d'un nouvel équilibre.}. \cite{chatelier}
 
-La réaction de synthèse de l'ammoniac est la suivante
+La réaction de synthèse l'ammoniac est la suivante
 \[\ce{N2_{(g)} + 3H2_{(g)} <=> 2NH3_{(g)} } \]
 Nous allons analyser dans les lignes qui suivent les effets de la température, de la pression ainsi que
 de la présence d'un catalyseur sur cette réaction. Nous verrons également les limites qui nous sont
@@ -46,37 +46,14 @@ K = \exp{\left( \frac{- \Delta_r H^{\circ} + T \, \Delta_r S^{\circ}}{R T}\right
 
 Après quelques recherches sur internet \cite{catalyseur}, nous avons découvert que les catalyeurs utilisés
 pour le production d'ammoniac en mileu industriel contenaient principalement du fer (type \ce{Fe3O4}). 
-Pour une usine produisant des quantités de \ce{NH3} similaire à la nôtre (~1500T/jour), une quantité de 100 tonnes
-de catalyseur a une durée de vie d'environ 10 ans. Etant donné que la réaction de production de l'ammoniac est
-exothermique, on s'attend à ce que la réaction se déplace vers le droite pour une température plus basse et c'est le cas.
+Pour une usine produisant des quantités de \ce{NH3} similaire à la notre (~1500T/jour), une quantité de 100 tonnes
+de catalyseur a une durée de vie d'environ 10 ans. Etant donné que notre la réaction de production de l'ammoniac est
+endothermique, on s'attend à ce que la réaction se déplace vers le droite pour une température plus basse et c'est le cas.
 Cependant le catalyseur ne se comporte pas de la m\^eme manière à toutes les températures. Et il s'avère que dans notre
 cas, le catalyseur n'est pas efficace à basse température. C'est la raison pour laquelle il ne faut pas effectuer
 cette reaction à basse température comme le suggerait nos premières observations.
 
 \subsection{Limite sur la pression imposée par les matériaux du réacteur}
-
-\subsection{Conclusion}
-
-Les figures~\ref{fig:efficienceC} et~\ref{fig:efficienceS} confirment 
-nos conclusions quant aux conditions optimales d'opération.
-
-\begin{figure}
-	\centering
-	\begin{subfigure}[b]{1\textwidth}
-		\includegraphics[scale=0.7]{../tache2/img/efficienceSyntheseS.eps}
-		\caption{Plot 3D.}
-		\label{fig:efficienceS}
-	\end{subfigure}
-	\begin{subfigure}[b]{0.8\textwidth}
-		\includegraphics[scale=0.6]{../tache2/img/efficienceSyntheseC.eps}
-		\caption{Courbes de niveau associés au plot 3D.}
-		\label{fig:efficienceC}
-	\end{subfigure} \\
-	\caption{Efficacité du réacteur de synthèse en fonction de la température 
-		et de la pression en tenant compte d'une perte d'une partie des 
-		réactifs (\ce{H2} et \ce{N2}) lors de la purge, nécessaire pour
-		éviter l'accumulation de \ce{Ar}.}
-\end{figure}
 
 \section{Modélisation par \textsc{Aspen Plus}}
 \subsection{Démarrage}
@@ -101,10 +78,8 @@ qu'on ne peut séparer du reste. En effet, sa température d'ébullition est bie
 proche de celle des autres composés et les moyens à mettre en œuvre en seraient 
 très couteux et/ou à faible rendement.
 
-Notre groupe a donc décidé de faire une purge dans le circuit de recyclage afin d'éviter que l'argon ne s'accumule. Cette purge ne doit pas être trop grande sinon la quantité perdue des réactifs serait conséquente. 
-La condition à respecter est donc d'avoir un flux entrant d'argon égal à celui de sortie lorsque la réaction est en "régime", c'est à dire après un nombre conséquent d'itérations. 
-Les calculs permettant de trouver la quantité parfaite à purger 
-sont détaillés dans la sous-section suivante.
+Notre groupe a donc décidé de faire une purge dans le circuit de recyclage afin d'éviter que l'argon ne s'accumule. Il y a donc une fraction minimale à purger. Mais cette purge ne doit pas être trop grande sinon la quantité perdue des réactifs serait conséquente. 
+La condition à respecter est donc d'avoir un flux entrant d'argon égal à celui de sortie lorsque la réaction est en "régime", c'est à dire après un nombre conséquent d'itérations.
 
 Le flowsheet de notre installation correspondant à la modélisation 
 du réacteur de synthèse sur \textsc{Aspen Plus} 
@@ -122,13 +97,14 @@ Le diagramme se trouve dans la figure \ref{fig:flow_synthese}.
 	\label{fig:flow_aspen}
 \end{figure}
 
-\subsection{La purge}
+\subsection{Prévisions}
 
-Dans les calculs qui suivent, nous cherchons $X$ qui n'est autre que 
-la fraction du recyclage qui doit être purgée. 
+Dans cette sous-section, nous faisons notre propre simulation en considérant
+le système à l'équilibre. Les flux sont donc constants.
+Nous fixons la température et la pression dans le réacteur, ainsi que la fraction X
+à purger dans le recyclage.
 Nous négligeons l'imperfection du séparateur et faisons donc l'hypothèse 
-que l'ammoniac sortant est pur, ce qui est bien sur impossible. Le système
-est considéré à l'équilibre et les flux sont donc constants. 
+que l'ammoniac sortant est pur, ce qui est bien sur impossible.
 Nous nous référerons au flowsheet pour ce qu'il en est des notations et
 faisons l'hypothèse que nous connaissons le flux entrant de réactifs.
 
@@ -140,12 +116,13 @@ faisons l'hypothèse que nous connaissons le flux entrant de réactifs.
 	\label{fig:flow_synthese}
 \end{figure}
 
-Comme dit précédemment, une purge optimale doit permettre un débit 
+Comme dit précédemment, la purge doit permettre un débit 
 de sortie d'argon égal à celui d'entrée dans le système. 
 On peut écrire ça sous la forme:
 
 \begin{equation}
 \dot{n}_{\ce{Ar},\text{in}}=\dot{n}_{\ce{Ar},purge}=x_{\ce{Ar},\text{purge}} \dot{n}_{\text{purge}}
+\label{eq:bilan_tot_argon}
 \end{equation}
 
 Ceci est donc le bilan total d'argon. 
@@ -226,51 +203,24 @@ de recyclage.
 Les quatre inconnues suivantes sont présentes dans cette équation: $n_{rec}$, $n_{pur}$, $x_{N2,rec}$ et $\xi$
 Nous avons donc besoin de trois autres équations reliant ces dernières pour pouvoir 
 résoudre un système à solution unique.
+
 Une première est obtenue avec l'équation \ref{eq:bilan_mol_tot} où on remplace $n_{\ce{NH3},out}$ par
 $2 \xi$ (voir tableau \ref{tab:reaction_purge_eq}).
 \[n_{pur}=n_{in}-4 \xi \]
-On trouve une deuxième grâce à l'équation \ref{eq:bilan_mol_sep} où on remplace à nouveau $n_{\ce{NH3},out}$ et où $n_{out}=n_{in}+n_{rec}-n_{pur}-2\xi$:
-\[ n_{rec}=n_{in}+n_{rec}-n_{pur}-4\xi \]
-Une dernière provient du bilan obtenu de l'azote dans la boucle que forme le recyclage.
-L'azote qui n'a pas réagit a subit une purge:
-\[ n_{N2,rec}- n_{N2,pur}=x_{\ce{N2},rec}(n_{rec}- n_{pur})=(n_{\ce{N2},in}+x_{\ce{N2},rec}(n_{rec}- n_{pur})-\xi)(1-X) \]
-On injecte la valeur de X en fonction de $n_{rec}$ et $n_{pur}$ donnée par l'équation \ref{eq:bilan_mol_purge}.
-Nous avons maintenant tout le nécessaire pour résoudre le problème! Une manière simple de faire cela est d'utiliser les calcul symbolique de \textsc{Matlab}. La quantité réelle d'ammoniac produite est égale à $2 \xi$ et nous pouvons calculer le rendement en divisant ce résultat par la quantité produite prévue dans le cas d'une réaction hypothétiquement parfaite.\\
-La fraction parfaite $X$ du recyclage à purger est obtenue grâce à l'équation \ref{eq:bilan_mol_purge}:
 
-\begin{equation}
-\dot{n}_{\text{purge}} = X \cdot \dot{n}_{\text{recyclage}}
-\end{equation}
+On trouve une deuxième grâce à l'équation \ref{bilan_mol_purge} où on remplace $x_{Ar,purge}$ par $1-x_{\ce{N2},purge}-x_{\ce{H2},purge}=1-4*x_{\ce{N2},purge}$.
+\[ \dot{n}_{\ce{Ar},\text{in}}=(1-4*x_{\ce{N2},purge}) \dot{n}_{\text{purge}} \]
 
-Le même cheminement est suivi dans le programme \texttt{purge} 
-disponible dans notre outil de gestion. Nous verrons plus loin que ces calculs donnent
-des résultats assez loin de la réalité. La fraction minimale réelle à purger est toujours
-bien moindre. Cela est du au grand nombre d'hypothèses simplificatrices utilisées. 
-La loi des gaz parfaits donne par exemple des résultats très peu précis 
-dans de telles conditions de température et de pression. 
-De plus, dans des conditions réelles, une séparation parfaite est impossible 
-et une partie du \ce{Ar} part avec le \ce{NH3}.
-Cependant, le programme nous donne le type de fonction que la fraction minimale de purge
-suit lorsque l'on modifie les paramètres: elle augmente peu avec la pression et diminue
-de manière plus conséquente avec la température. Nous pouvons voir cela dans les figures
-\ref{fig:purge1} et \ref{fig:purge2}.
+On utilise enfin l'équation \ref{eq:bilan_mol_purge}, ce qui nous donne tout le nécessaire pour résoudre le problème! 
+Une manière simple de faire cela est d'utiliser les calcul symbolique de \textsc{Matlab}. 
+La quantité réelle d'ammoniac produite est égale à $2 \xi$ et nous pouvons calculer le rendement en divisant ce résultat par la quantité produite prévue dans le cas d'une réaction hypothétiquement parfaite.\\
 
-\begin{figure}[h!]
-	\begin{center}
-		\includegraphics[scale=0.3]{../tache2/img/purge1.png}
-	\end{center}
-	\caption{Fraction de purge en fonction de la température.}
-	\label{fig:purge1}
-\end{figure}
-
-\begin{figure}[h!]
-	\begin{center}
-		\includegraphics[scale=0.3]{../tache2/img/purge2.png}
-	\end{center}
-	\caption{Fraction de purge en fonction de la pression.}
-	\label{fig:purge2}
-\end{figure}
-
+Le même cheminement est suivi dans le programme \texttt{equilibrium_simulation} 
+disponible dans notre outil de gestion. Ce dernier nous donne le rendement pour un
+certain jeu de paramètres. Un autre programme, \texttt{efficience_plot}, trace un graphe
+tri-dimensionnel de ces résultats avec une purge fixée, variant avec la température et la
+pression. Comme attendu, le rendement augmente toujours avec la pression et diminue
+de manière plus conséquente avec la température. Nous pouvons voir cela dans la figure
 
 \subsection{Validation du modèle}
 
@@ -336,9 +286,10 @@ sont disponibles dans l'annexe~\ref{sec:aspen_simulation}.
 
 \subsection{Simulation itérative sur \textsc{Matlab}}
 
-Nous pouvions maintenant comparer les résultats
-avec ceux de notre propre simulation réalisée sur
-\textsc{Matlab}. Son fonctionnement est simple:
+Nous avons choisi de créer une seconde simulation
+pour comparer les résultats obtenus et comparer
+les conditions menant à la convergence.
+Son fonctionnement est simple:
 elle calcule - pour une série d'itérations - 
 les différents flux à la sortie du réacteur 
 et dans le recyclage grâce à l'avancement de
@@ -350,11 +301,14 @@ de l'itération précédente passe en dessous d'un
 certain seuil, on considère que le système s'est 
 stabilisé: il a convergé.
 
-Malgré l'imprécision de notre modèle (utilisation
-de la loi des gaz parfaits) et la simplification
-de l'installation, nos résultats sont 
-remarquablement proches de ceux obtenus. Il n'y
-a qu'une divergence marquée lorsque l'on travaille 
+Il se trouve que les résultats de nos deux simulations
+sont exactement identiques! Et pour ce qu'il en est
+de la simulation sur \textsc{Aspen Plus}, les résultats sont
+remarquablement proches malgré les imprécisions du modèle
+utilisé. Nous avons en effet considéré que l'installation
+était parfaite et appliqué la loi des gaz parfait.
+
+On remarque cependant une divergence marquée lorsque l'on travaille 
 avec une haute température. A titre d'illustration, 
 la figure \ref{tab:sim} nous donne la comparaison 
 de résultats venant des deux simulations:
