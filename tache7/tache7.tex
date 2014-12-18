@@ -97,30 +97,41 @@ plus l’intensité du courant est élevée, plus le temps nécessaire à la pro
 du dihydrogène est faible. En fait, le courant et le temps sont inversément proportionnels, 
 et nous pouvons écrire la relation suivante :
 
-\begin{equation*}
+\begin{equation}
 	It = \text{constante}
-\end{equation*}
+	\label{eq:courantC}
+\end{equation}
 
 où I est l'intensité du courant électrique, et t, le temps écoulé.
-Lorsqu'on augmente le courant, le temps nécessaire pour produire une certaine quantité d'hydrogène diminue.
-Nous pouvons observer l'évolution du volume de dihydrogène produit en fonction du temps, suivant le courant appliqué, sur le graphe ci-dessous :
+Lorsqu'on augmente le courant, 
+le temps nécessaire pour produire une certaine quantité d'hydrogène diminue.
+Nous pouvons observer sur la figure~\ref{fig:dataElectrolyse} 
+l'évolution du volume de dihydrogène produit en fonction du temps,
+pour un certain courant fixé.
+On retrouve comme prédit dans l'équation~\ref{eq:courantC},
+une évolution linéaire du volume par rapport au temps.
 
 \begin{figure}[h!]
-\begin{center}
-\includegraphics{../tache7/dataElectrolyse.png}
-\end{center}
-\caption{Evolution du volume de H2 produit par l'électrolyse de l'eau en fonction du temps pour un courant donné}
+	\begin{center}
+		\includegraphics[scale=0.8]{../tache7/data/resultatsElectrolyse.eps}
+	\end{center}
+	\caption{Evolution du volume de H2 produit par l'électrolyse 
+		de l'eau en fonction du temps pour un courant fixé.}
+	\label{fig:dataElectrolyse}
 \end{figure}
 
 Calculons maintenant la puissance nécessaire pour produire tout l'hydrogène 
 dont nous avons besoin pour un débit d'ammonicac de 1500 t/j.
 
 En prenant une température de $1000 \si{\kelvin}$ pour le reformeur primaire, 
-nous savons grâce à notre outil de calcul que pour produire 1500 t/j d'ammoniac, il faut $266,32 \si{\tonne}$ de dihydrogène 
+nous savons grâce à notre outil de calcul que pour produire 1500 t/j d'ammoniac, 
+il faut $266,32 \si{\tonne}$ de dihydrogène 
 par jour. Cela nous donne un débit massique de $184,944 \, \si{\kilo\gram/\minute}$.
 
-Nous devons maintenant fixer trois paramètres pour le déroulement de la réaction d'électrolyse : le pH, la température et le courant.
-La réaction d'électrolyse nécessite une puissance moins importante lorsque le pH tend vers 0. Mais un pH nul demande une grande quantité d'acide, nous allons donc nous contenter ici d'un pH = 1.
+Nous devons maintenant fixer trois paramètres pour le déroulement de 
+la réaction d'électrolyse : le pH, la température et le courant.
+La réaction d'électrolyse nécessite une puissance moins importante lorsque le pH tend vers 0. 
+Mais un pH nul demande une grande quantité d'acide, nous allons donc nous contenter ici d'un pH = 1.
 Par souci d'économie d'énergie, nous allons travailler à température ambiante, soit $20\si{\celsius}$.
 Le dernier paramètre est le courant, que nous allons faire varier afin d'obtenir la quantité voulue d'hydrogène.
 Par exemple, en appliquant un courant de $0,5 \si{\ampere}$, nous savons, grâce aux expériences faites en laboratoire, 
