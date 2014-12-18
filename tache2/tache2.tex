@@ -10,7 +10,7 @@ de \textsc{Le Ch\^atelier} : \enquote{Si l'on tend à modifier les conditions d'
 il réagit de façon à s'opposer, en partie, aux changements qu'on lui impose, 
 jusqu'à l'établissement d'un nouvel équilibre.}. \cite{chatelier}
 
-La réaction de synthèse l'ammoniac est la suivante
+La réaction de synthèse de l'ammoniac est la suivante
 \[\ce{N2_{(g)} + 3H2_{(g)} <=> 2NH3_{(g)} } \]
 Nous allons analyser dans les lignes qui suivent les effets de la température, de la pression ainsi que
 de la présence d'un catalyseur sur cette réaction. Nous verrons également les limites qui nous sont
@@ -47,7 +47,8 @@ K = \exp{\left( \frac{- \Delta_r H^{\circ} + T \, \Delta_r S^{\circ}}{R T}\right
 Après quelques recherches sur internet \cite{catalyseur}, nous avons découvert que les catalyeurs utilisés
 pour le production d'ammoniac en mileu industriel contenaient principalement du fer (type \ce{Fe3O4}). 
 Pour une usine produisant des quantités de \ce{NH3} similaire à la notre (~1500T/jour), une quantité de 100 tonnes
-de catalyseur a une durée de vie d'environ 10 ans. Etant donné que notre la réaction de production de l'ammoniac est
+de catalyseur a une durée de vie d'environ 10 ans. Etant donné que notre la réaction de 
+production de l'ammoniac est
 endothermique, on s'attend à ce que la réaction se déplace vers le droite pour une température plus basse et c'est le cas.
 Cependant le catalyseur ne se comporte pas de la m\^eme manière à toutes les températures. Et il s'avère que dans notre
 cas, le catalyseur n'est pas efficace à basse température. C'est la raison pour laquelle il ne faut pas effectuer
@@ -95,6 +96,29 @@ Le diagramme se trouve dans la figure \ref{fig:flow_synthese}.
 	\end{center}
 	\caption{Flowsheet de la réaction finale sur \textsc{Aspen Plus}.}
 	\label{fig:flow_aspen}
+\end{figure}
+
+\subsection{Conclusion}
+
+Les figures~\ref{fig:efficienceC} et~\ref{fig:efficienceS} confirment 
+nos conclusions quant aux conditions optimales d'opération.
+
+\begin{figure}
+	\centering
+	\begin{subfigure}[b]{1\textwidth}
+		\includegraphics[scale=0.7]{../tache2/img/efficienceSyntheseS.eps}
+		\caption{Plot 3D.}
+		\label{fig:efficienceS}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.8\textwidth}
+		\includegraphics[scale=0.6]{../tache2/img/efficienceSyntheseC.eps}
+		\caption{Courbes de niveau associés au plot 3D.}
+		\label{fig:efficienceC}
+	\end{subfigure} \\
+	\caption{Efficacité du réacteur de synthèse en fonction de la température 
+		et de la pression en tenant compte d'une perte d'une partie des 
+		réactifs (\ce{H2} et \ce{N2}) lors de la purge, nécessaire pour
+		éviter l'accumulation de \ce{Ar}.}
 \end{figure}
 
 \subsection{Prévisions}
@@ -220,7 +244,7 @@ disponible dans notre outil de gestion. Ce dernier nous donne le rendement pour 
 certain jeu de paramètres. Un autre programme, \texttt{efficience_plot}, trace un graphe
 tri-dimensionnel de ces résultats avec une purge fixée, variant avec la température et la
 pression. Comme attendu, le rendement augmente toujours avec la pression et diminue
-de manière plus conséquente avec la température. Nous pouvons voir cela dans la figure
+de manière plus conséquente avec la température. Les graphes \ref{fig:efficienceC} et \ref{fig:efficienceS} nous montrent cela.
 
 \subsection{Validation du modèle}
 
