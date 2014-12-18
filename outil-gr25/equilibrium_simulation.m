@@ -1,6 +1,6 @@
-﻿function efficience = equilibrium_simulation(m_NH3, T, p, x)
+function efficience = equilibrium_simulation(m_NH3, T, p, x)
 
-%On obtient les diff�rents flux molaires journaliers..
+%On obtient les diferents flux molaires journaliers..
 n_NH3_out_th = m_NH3*10^6/17.0305;
 n_N2_in = n_NH3_out_th/2;
 n_H2_in = 3*n_N2_in;
@@ -9,7 +9,7 @@ n_in = n_N2_in+n_H2_in+n_Ar_in;
 
 M = getMolarMasses();
 
-%On cherche K (� temp�rature T)
+%On cherche K 
 R=8.3145;
 H_and_S=getDeltaH_and_S(T);
 dH=H_and_S(1);
@@ -19,7 +19,7 @@ dS=dS.nh3-dS.n2/2-3*dS.h2/2;
 dG=dH-T*dS+R*T*log(p); %ATTENTION on utilise la loi des gaz parfaits pour la contribution de la pression (tr�s approximative)
 K= exp(-dG/(R*T));
 
-syms n_rec_s n_purge_s xi_s x_N2_s
+syms n_rec_s n_purge_s xi_s x_N2_s positive
 
 eq1 = n_rec_s==n_in+n_rec_s-n_purge_s-4*xi_s;
 eq2= n_Ar_in==(1-4*x_N2_s)*n_purge_s;
