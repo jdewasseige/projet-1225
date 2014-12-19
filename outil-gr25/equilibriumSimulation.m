@@ -26,7 +26,7 @@ syms n_rec_s n_purge_s xi_s x_N2_s positive
 
 eq1 = n_rec_s==n_in+n_rec_s-n_purge_s-4*xi_s;
 eq2= n_Ar_in==(1-4*x_N2_s)*n_purge_s;
-eq3= n_purge_s==n_rec_s;
+eq3= n_purge_s==x*n_rec_s;
 eq4 = ((2*xi_s)^2)*(n_in+n_rec_s-n_purge_s-2*xi_s)^2/(27*p^2*(n_N2_in+x_N2_s*(n_rec_s-n_purge_s)-xi_s)^4) == K;
 
 [n_rec n_purge xi x_N2] = solve(eq1, eq2, eq3, eq4, n_rec_s, n_purge_s, xi_s, x_N2_s);

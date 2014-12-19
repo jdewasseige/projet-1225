@@ -42,31 +42,62 @@ K = \exp{\left( \frac{- \Delta_r H^{\circ} + T \, \Delta_r S^{\circ}}{R T}\right
 
 \subsection{Limite sur la température imposée par le catalyseur}
 
-Après quelques recherches sur internet \cite{catalyseur}, 
+Après quelques recherches \cite{catalyseur}, 
 nous avons découvert que les catalyseurs utilisés
-pour le production d'ammoniac en milieu industriel 
+pour la production d'ammoniac en milieu industriel 
 contenaient principalement du fer (type \ce{Fe3O4}). 
 
 Pour une usine produisant des quantités de \ce{NH3} similaire à la notre (~$1500$ tonnes/jour), 
-une quantité de $100\si{\tonne}$ de catalyseur a une durée de vie d'environ 10 ans. 
-Étant donné que la réaction de production de l'ammoniac est endothermique,
-on s'attend à ce que la réaction se déplace vers le droite 
-pour une température plus basse et c'est le cas.
-Cependant le catalyseur ne se comporte pas de la m\^eme manière à toutes les températures. 
-Et il s'avère que dans notre cas,
-le catalyseur n'est pas efficace à basse température. 
-C'est la raison pour laquelle il ne faut pas effectuer
-cette réaction à basse température comme le suggéraient nos premières observations.
+une quantité de $100\si{\tonne}$ de catalyseur a une durée de vie d'environ $10$ ans. 
+Cependant le catalyseur ne se comporte pas de la m\^eme manière à toutes les températures,
+et il s'avère que le catalyseur n'est pas efficace à basse température. 
+
+La réaction risque de devenir trop \emph{lente} pour que le système puisse
+atteindre l'équilibre, nous gardons donc la température de $750\si{\kelvin}$
+pour la suite de nos calculs.
 
 \subsection{Limite sur la pression imposée par les matériaux du réacteur}
 
 Comme dit auparavant, une haute pression va de paire avec une plus grande production d'ammoniac.
-Cependant, le cout pour construire une installation est proportionnel à la pression qu'elle pourra
-supporter. 
+Cependant, le cout pour construire une installation est proportionnel 
+à la pression qu'elle pourra supporter. 
 De plus, il est également couteux de maintenir une haute pression. 
-Il y a donc une pression à partir de laquelle les couts demandés par le processus ne sont pas justifiés par rapport aux bénéfices. 
-C'est donc l'aspect économique qui est limitant ici et il faut à nouveau trouver un compromis.
-Nous avons jugé que nous devions choisir une pression située entre 200 et 300 bar.
+Il y a donc une pression à partir de laquelle les couts demandés 
+par le processus ne sont pas justifiés par rapport aux bénéfices. 
+
+C'est l'aspect \emph{économique} qui est limitant ici et il faut à nouveau trouver un compromis.
+Nous avons jugé qu'il est convenable de garder la pression proposée de $270\si{\bar}$ 
+pour la suite de nos calculs.
+
+\subsection{Conclusion}
+
+Nous finissons cette première partie de la t\^ache 2
+avec les graphes~\ref{fig:efficienceSnoPurge} et~\ref{fig:efficienceCnoPurge}. 
+Ceux-ci modélisent le rendement de la réaction en fonction des 
+deux paramètres étudiés $p$ et $T$.
+On remarque tout de suite que la variation de pression a très peu
+d'importance sur le rendement et que c'est principalement
+la température qui va déterminer l'efficacité du réacteur.
+
+Le rendement dans ce cas-ci est défini comme 
+\[ \eta = \frac{n_{\ce{NH3},\text{équilibre}}}{n_{\ce{NH3},\text{réaction complète}}} \]
+
+\begin{figure}
+	\centering
+	\begin{subfigure}[b]{1\textwidth}
+		\includegraphics[scale=0.7]{../tache2/img/efficienceSyntheseSnoPurge.eps}
+		\caption{Plot 3D.}
+		\label{fig:efficienceSnoPurge}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.8\textwidth}
+		\includegraphics[scale=0.6]{../tache2/img/efficienceSyntheseCnoPurge.eps}
+		\caption{Courbes de niveau associés au plot 3D.}
+		\label{fig:efficienceCnoPurge}
+	\end{subfigure} \\
+	\caption{Efficacité du réacteur de synthèse en fonction de la température.
+		Le rendement est ici défini comme le rapport $n_{\ce{NH3},\text{équilibre}}/
+		n_{\ce{NH3},\text{réaction complète}}$.}
+\end{figure}
 
 
 \section{Modélisation par \textsc{Aspen Plus}}
@@ -137,7 +168,8 @@ de sortie d'argon égal à celui d'entrée dans le système.
 On peut écrire cela sous la forme:
 
 \begin{equation}
-\dot{n}_{\ce{Ar},\text{in}}=\dot{n}_{\ce{Ar},purge}=x_{\ce{Ar},\text{purge}} \dot{n}_{\text{purge}}
+\dot{n}_{\ce{Ar},\text{in}} = \dot{n}_{\ce{Ar},\text{purge}} = 
+x_{\ce{Ar},\text{purge}} \cdot \dot{n}_{\text{purge}}
 \label{eq:bilan_tot_argon}
 \end{equation}
 
@@ -172,18 +204,24 @@ avec $\xi$ étant l'avancement, c'est à dire le nombre de moles de \ce{N2} ayan
 Cela est résumé dans le tableau \ref{tab:reaction_purge_eq}.
 On analyse le débit de moles à l'entrée du réacteur pour les différents composés, 
 ainsi qu'à la sortie (on considère que l'équilibre a été atteint). 
-Les indices $rec$ et $pur$ font respectivement référence au recyclage et à la purge. 
+Les indices \textit{rec} et \textit{pur} font respectivement référence au recyclage et à la purge. 
 On voit tout de suite que le flux des moles d'ammoniac produites est égal à $2 \xi$. Il
 nous faut donc par exemple trouver l'avancement pour obtenir sa valeur. Nous pouvons faire
 cela en partant de l'équation d'équilibre.
 
 \begin{table}[h!]
 	\centering
-	\begin{tabular}{l|c|c|c|c}
-		$\ce{N2}$ & $\ce{H2}$ & $\ce{Ar}$ & $\ce{NH3}$ & $n_{total}$ \\
+	\begin{tabular}{c|c|c|c|c}
+		$\ce{N2}$ & $\ce{H2}$ & $\ce{Ar}$ & $\ce{NH3}$ & $n_{\text{total}}$ \\
 		\hline
-		$n_{\ce{N2},in}$ + $n_{\ce{N2},rec-pur}$ & $n_{\ce{H2},in}$ +$n_{\ce{H2},rec-pur}$ & $n_{\ce{Ar},in}$ + $n_{\ce{Ar},rec-pur}$ & $0$  & $n_{in}$+$n_{rec-pur}$\\
-		$n_{\ce{N2},in}$ + $n_{\ce{N2},rec-pur}$ - $\xi$ & $n_{\ce{H2},in}$ +$n_{\ce{H2},rec-pur}$ -$3 \xi$ & $n_{\ce{Ar},in}$ + $n_{\ce{Ar},rec-pur}$ & $2 \xi$  & $n_{in}$+$n_{rec-pur}$-$2 \xi$\\
+		$n_{\ce{N2},\text{in}}$+$n_{\ce{N2},\text{rec-pur}}$ 
+		& $n_{\ce{H2},\text{in}}$+$n_{\ce{H2},\text{rec-pur}}$ & 
+		$n_{\ce{Ar},\text{in}}$+$n_{\ce{Ar},\text{rec-pur}}$ &
+		$0$  & $n_{\text{in}}$+$n_{\text{rec-pur}}$ \\
+		$n_{\ce{N2},\text{in}}$+$n_{\ce{N2},\text{rec-pur}}$ - $\xi$ &
+		$n_{\ce{H2},\text{in}}$+$n_{\ce{H2},\text{rec-pur}}$ - $3\xi$ & 
+		$n_{\ce{Ar},\text{in}}$+$n_{\ce{Ar},\text{rec-pur}}$ & 
+		$2 \xi$  & $n_{\text{in}}$+$n_{\text{rec-pur}}$- $2\xi$\\
 	\end{tabular}
 	\caption{Réaction dans le réacteur.}
 	\label{tab:reaction_purge_eq}
@@ -199,36 +237,39 @@ K=\exp{\left(\frac{-\Delta G}{R \cdot T}\right)}\]
 L'expression de la constante d'équilibre $K_p$ est également: 
 
 \[
-K_p=\frac{{x_{\ce{NH3},\text{out}}}^2}{x_{\ce{N2},\text{out}}{x_{\ce{H2},\text{out}}}^3} \cdot p^{-2} = 
-\frac{{n_{\ce{NH3},\text{out}}}^2}{n_{\ce{N2},out}\cdot {n_{\ce{H2},out}}^3}\cdot {n_{\text{total,out}}}^2\cdot p^{-2}
+K_p=\frac{{x_{\ce{NH3},\text{out}}}^2}{x_{\ce{N2},\text{out}} \cdot
+	{x_{\ce{H2},\text{out}}}^3} \cdot p^{-2} = 
+	\frac{{n_{\ce{NH3},\text{out}}}^2}{n_{\ce{N2},\text{out}} \cdot 
+	{n_{\ce{H2},\text{out}}}^3}\cdot {n_{\text{total,out}}}^2\cdot p^{-2}
 \]
-si on utilise la loi des gaz parfaits et plus précisément celle de Dalton. Faisons attention que c'est une hypothèse simplificatrice forte. 
-Comme $n_{\ce{H2}}=3\cdot n_{\ce{N2}}$ (éléments en quantité stœchiométrique), 
-on a donc 
-$K=\frac{{n_{\ce{NH3},\text{out}}}^2}{27{n_{\ce{N2},out}}^4} \cdot
-{n_{\text{total,out}}}^2\cdot p^{-2}$. 
+si on utilise la loi des gaz parfaits et plus précisément celle de Dalton. 
+On sait aussi que $n_{\ce{H2}}=3\cdot n_{\ce{N2}}$.
 En injectant les quantités des composés du tableau~\ref{tab:reaction_purge_eq},
 fonctions de $\xi$, on obtient:
 
 \[ 
 K = 
-\frac{({2\xi})^2}{27 \cdot ({{n_{\ce{N2,in}}+x_{\ce{N2},rec}(n_{rec}-n_{pur})-\xi})^4}} \cdot
-({n_{in}+n_{rec}-n_{pur}-2\xi})^2 \cdot p^{-2} 
+\frac{({2\xi})^2}{27 \cdot ({{n_{\ce{N2},\text{in}}}+x_{\ce{N2},\text{rec}}
+(n_{\text{rec}}-n_{\text{pur}})-\xi})^4} \cdot
+	({n_{\text{in}}+n_{\text{rec}}-n_{\text{pur}}-2\xi})^2 \cdot p^{-2} 
 \]
 
-Rappelons que $x_{i,rec}=x_{i,pur}$ car la purge n'altère pas la concentration.
+Rappelons que $x_{i,\text{rec}}=x_{i,\text{pur}}$ car la purge n'altère pas la concentration.
 Nous appliquons cela pour simplifier l'expression de l'azote venant du circuit
 de recyclage.
-Les quatre inconnues suivantes sont présentes dans cette équation: $n_{rec}$, $n_{pur}$, $x_{N2,rec}$ et $\xi$.
+Nous devons déterminer les 4 inconnues suivantes : $n_{\text{rec}}$, $n_{\text{pur}}$, 
+$x_{N2,\text{rec}}$ et $\xi$.
 Nous avons donc besoin de trois autres équations reliant ces dernières pour pouvoir 
 résoudre un système à solution unique.
 
 Une première est obtenue avec l'équation \ref{eq:bilan_mol_tot} où on remplace $n_{\ce{NH3},out}$ par
 $2 \xi$ (voir tableau \ref{tab:reaction_purge_eq}).
-\[n_{pur}=n_{in}-4 \xi \]
+\[n_{\text{pur}}=n_{\text{in}} - 4 \xi \]
 
-On trouve une deuxième grâce à l'équation \ref{eq:bilan_mol_purge} où on remplace $x_{Ar,purge}$ par $1-x_{\ce{N2},purge}-x_{\ce{H2},purge}=1-4*x_{\ce{N2},purge}$.
-\[ \dot{n}_{\ce{Ar},\text{in}}=(1-4*x_{\ce{N2},purge}) \dot{n}_{\text{purge}} \]
+On trouve une deuxième grâce à l'équation \ref{eq:bilan_mol_purge} 
+où on remplace $x_{Ar,\text{purge}}$ 
+par $1-x_{\ce{N2},\text{purge}}-x_{\ce{H2},\text{purge}}=1-4\cdot x_{\ce{N2},\text{purge}}$.
+\[ \dot{n}_{\ce{Ar},\text{in}}=(1-4\cdot x_{\ce{N2},\text{purge}}) \dot{n}_{\text{purge}} \]
 
 On utilise enfin l'équation \ref{eq:bilan_mol_purge}, 
 ce qui nous permet de résoudre le problème! On peut en effet alors
@@ -246,6 +287,10 @@ variant avec la température et la pression.
 Comme attendu, le rendement augmente toujours avec la pression et diminue
 de manière plus conséquente avec la température. 
 Les graphes \ref{fig:efficienceS} et \ref{fig:efficienceC} nous montrent cela.
+On remarquera aussi un bien meilleur rendement que lors
+de la simulation sans purge (voir figure~\ref{fig:efficienceSnoPurge}),
+tout en conservant les mêmes variations par rapport à la température 
+et la pression (voir figure~\ref{fig:efficienceCnoPurge}).
 
 \begin{figure}
 	\centering
@@ -359,23 +404,24 @@ de résultats venant des deux simulations:
 \begin{table}[h!]
 	\centering
 	\begin{tabular}{l|c|c}
-		Paramètres choisis & \textsc{Aspen} & \textsc{Matlab}\\
+		Paramètres choisis & $n_{\ce{NH3}}$ - \textsc{Aspen} & $n_{\ce{NH3}}$ - \textsc{Matlab}\\
 		\hline
-		$m_{\ce{NH3}, parfait}$=1500t/jour, & $n_{\ce{NH3}}$=942,94mol/s, & $n_{\ce{NH3}}$=937,795mol/s,\\
-		T=750K, p=270bar, x=5\%             &   &  \\
-		\hline
-		$m_{\ce{NH3}, parfait}$=1500t/jour, & $n_{\ce{NH3}}$=1011,06mol/s, & $n_{\ce{NH3}}$=999,335mol/s,\\
-		T=500K, p=270bar, x=5\%             &   &  \\
-		\hline
-		$m_{\ce{NH3}, parfait}$=1500t/jour, & $n_{\ce{NH3}}$=929,115mol/s, & $n_{\ce{NH3}}$=931,36mol/s,\\
-		T=750K, p=220bar, x=5\%             &   &  \\
-		\hline
-		$m_{\ce{NH3}, parfait}$=1500t/jour, & $n_{\ce{NH3}}$=883,132mol/s, & $n_{\ce{NH3}}$=869,733mol/s,\\
-		T=750K, p=270bar, x=10\%             &   &  \\
-		\hline
+		 T=750K, p=270bar  x=5\% & 942,94mol/s & 937,795mol/s \\
 
+		\hline\hline
+
+		T=500K, p=270bar, x=5\% & 1011,06mol/s & 999,335mol/s \\
+
+		\hline\hline
+
+		T=750K, p=220bar, x=5\% & 929,115mol/s & 931,36mol/s \\
+		
+		\hline\hline
+		
+		T=750K, p=270bar, x=10\% & 883,132mol/s & 869,733mol/s \\
+		\hline
 	\end{tabular}
-	\caption{Comparaison des simulations}
+	\caption{Comparaison des simulations pour $m_{\ce{NH3}, \text{théorique}}=1500$t/jour.}
 	\label{tab:sim}
 \end{table}
 

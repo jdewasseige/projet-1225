@@ -17,7 +17,13 @@ pour un tank contenant de l'ammoniac. Pour celà, nous avons recu quelques infor
 
 Nous avons également à notre disposition deux graphes donnant respectivement 
 les pressions de stockage de l'ammoniac et de l'enthalpie de vaporisation 
-en fonction de la température. 
+en fonction de la température.
+
+\paragraph{Remarque}
+A travers cette section nous utilisons l'unité \barg, 
+qui correspond à la pression supérieur à la pression atmosphérique.
+On a donc:
+\[ p [\barg] = p [\si{\bar}] - 1 \]
 
 % Quelle est la pression normale de stockage ?
 \section{Pression normale de stockage} 
@@ -43,19 +49,17 @@ La pression durant la décharge sera de $19.16325 \si{\bar}$.
 Cette pression est fort élevée car nous considérons le cas d'un incendie au niveau du réservoir. 
 La température du gaz durant la décharge sera de $50\si{\celsius}$. 
 Nous aurons besoin d'une soupape d'une section de $730\si{\milli\meter\squared}$ 
-ou $1.13 \, \text{sqinch}$. Ceci correspond à une PSV de type $2J3$
+ou $1.13 \, \text{inch}^2$. Ceci correspond à une PSV de type $2J3$
 \[ C = 0.03948 \cdot \sqrt{1.33 \cdot \frac{2}{2.33}^{\frac{2.33}{0.33}}} \]
 \[ W = 43200 \cdot 1 \cdot 143.634^{0.82} \]
 \[ A = \frac{W}{C \cdot 0.975 \cdot 20.071 \cdot 1 \cdot 1} \cdot \sqrt{\frac{323.15}{17}} \]
 
-% Si la pression de design de l’équipement était de 20 barg, 
-% quel serait l’effet d’augmenter la pression de tarage de 5 bar et de la porter à 20 barg  ?
 \section{Effet de l'augmentation de la pression de tarage de 5 à 20 barg pour une pression de design de 20 barg} 
 Si la pression de design est à $20\barg$, nous pouvons augmenter la pression de tarage à \[ 121\% \cdot p_{\text{design}} = 24.2\barg \]
 
 Nous recalculons A avec la pression et température plus élevées,
 et obtenons que la soupape doit avoir une section de $590\si{\milli\meter\squared}$
-ce qui nous donne $0.9118 \, \text{sqinch}$. Ceci correspond à une PSV de type $2J3$ comme celle trouvée précédemment. Il n'y a donc pas d'intérêt
+ce qui nous donne $0.9118 \, \text{inch}^2$. Ceci correspond à une PSV de type $2J3$ comme celle trouvée précédemment. Il n'y a donc pas d'intérêt
 à augmenter la pression de design dans ces conditions.
 
 % Pour la première pression de tarage, quelle est l’influence d’isoler thermiquement 
@@ -66,6 +70,7 @@ Nous isolons la cuve avec un isolant réduisant le coefficient d'échange de la 
 $10 \si{\watt}/\si{\meter\squared} \cdot \si{\kelvin}$
 On réduit donc le facteur environnemental à $F = 0.15$. 
 Notre $W$ va donc être fortement réduit, et nous pouvons donc réduire la taille de la soupape à 
-$110\si{\milli\meter\squared}$ ou $0.17 \, \text{sqinch}$. Cette PSV est du type $1E2$. L'ajout de l'isolant réduit donc fortement la taille de
+$110\si{\milli\meter\squared}$ ou $0.17 \, \text{inch}^2$. 
+Cette PSV est du type $1E2$. L'ajout de l'isolant réduit donc fortement la taille de
 la soupape requise.
 

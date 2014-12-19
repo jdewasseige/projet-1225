@@ -24,7 +24,7 @@ figure
 surf(p,t,s);
 
 hold on;
-title('Rendement du reacteur de synthese en fonction de la pression et de la temperature, avec une purge de 5% du recyclage');
+title('Rendement du reacteur de synthese en fonction de la pression et de la temperature, avec une purge de 5%');
 xlabel('Pression [bar]') ;
 ylabel('Temperature [K]');
 zlabel('Rendement');
