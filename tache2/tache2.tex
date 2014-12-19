@@ -1,5 +1,3 @@
-
-
 \section{Analyse des conditions optimales du réacteur de synthèse d'ammoniac}
 
 Jusqu'ici nous avons considéré la dernière étape du procédé - la synthèse d'ammoniac -
@@ -44,15 +42,21 @@ K = \exp{\left( \frac{- \Delta_r H^{\circ} + T \, \Delta_r S^{\circ}}{R T}\right
 
 \subsection{Limite sur la température imposée par le catalyseur}
 
-Après quelques recherches sur internet \cite{catalyseur}, nous avons découvert que les catalyseurs utilisés
-pour le production d'ammoniac en milieu industriel contenaient principalement du fer (type \ce{Fe3O4}). 
-Pour une usine produisant des quantités de \ce{NH3} similaire à la notre (~1500T/jour), une quantité de 100 tonnes
-de catalyseur a une durée de vie d'environ 10 ans. Etant donné que notre la réaction de 
-production de l'ammoniac est
-endothermique, on s'attend à ce que la réaction se déplace vers le droite pour une température plus basse et c'est le cas.
-Cependant le catalyseur ne se comporte pas de la m\^eme manière à toutes les températures. Et il s'avère que dans notre
-cas, le catalyseur n'est pas efficace à basse température. C'est la raison pour laquelle il ne faut pas effectuer
-cette réaction à basse température comme le suggérait nos premières observations.
+Après quelques recherches sur internet \cite{catalyseur}, 
+nous avons découvert que les catalyseurs utilisés
+pour le production d'ammoniac en milieu industriel 
+contenaient principalement du fer (type \ce{Fe3O4}). 
+
+Pour une usine produisant des quantités de \ce{NH3} similaire à la notre (~$1500$ tonnes/jour), 
+une quantité de $100\si{\tonne}$ de catalyseur a une durée de vie d'environ 10 ans. 
+Étant donné que la réaction de production de l'ammoniac est endothermique,
+on s'attend à ce que la réaction se déplace vers le droite 
+pour une température plus basse et c'est le cas.
+Cependant le catalyseur ne se comporte pas de la m\^eme manière à toutes les températures. 
+Et il s'avère que dans notre cas,
+le catalyseur n'est pas efficace à basse température. 
+C'est la raison pour laquelle il ne faut pas effectuer
+cette réaction à basse température comme le suggéraient nos premières observations.
 
 \subsection{Limite sur la pression imposée par les matériaux du réacteur}
 
@@ -78,7 +82,7 @@ en un certain nombre de processus intermédiaires.
 Le gaz entrant, composé d'\ce{N2}, d'\ce{H2} et d'\ce{Ar}, passe par un réchauffeur 
 et par un compresseur pour atteindre respectivement la température et la pression voulue. 
 Il va ensuite dans le réacteur où se déroule la réaction.
-Le produit est refroidit dans une installation prévue à cette effet, 
+Le produit est refroidi dans une installation prévue à cette effet, 
 pour arriver enfin dans un séparateur où on extrait l'ammoniac.
 
 Il semblait intéressant de créer un circuit de recyclage pour réutiliser 
@@ -110,11 +114,13 @@ Le diagramme se trouve dans la figure \ref{fig:flow_synthese}.
 \subsection{Prévisions}
 
 Dans cette sous-section, nous faisons notre propre simulation de la dernière étape, en considérant
-le système à l'équilibre. Les flux y sont donc constants. Notre but est ici de calculer le rendement du circuit en terme de production d'ammoniac. Nous cherchons donc la quantité d'\ce{NH3} réellement produite.
+le système à l'équilibre. Les flux y sont donc constants. Notre but est ici de calculer 
+le rendement du circuit en terme de production d'ammoniac. 
+Nous cherchons donc la quantité d'\ce{NH3} réellement produite.
 A cette fin, nous fixons la température et la pression dans le réacteur, ainsi que la fraction X
 à purger dans le recyclage.
 Nous négligeons l'imperfection du séparateur et faisons donc l'hypothèse 
-que l'ammoniac sortant est pur, ce qui est bien sur impossible.
+que l'ammoniac sortant est pur, ce qui est bien s\^ur impossible.
 Nous nous référerons au flowsheet pour ce qu'il en est des notations et
 faisons l'hypothèse que nous connaissons le flux entrant de réactifs.
 
@@ -128,7 +134,7 @@ faisons l'hypothèse que nous connaissons le flux entrant de réactifs.
 
 Comme dit précédemment, la purge doit permettre un débit 
 de sortie d'argon égal à celui d'entrée dans le système. 
-On peut écrire ça sous la forme:
+On peut écrire cela sous la forme:
 
 \begin{equation}
 \dot{n}_{\ce{Ar},\text{in}}=\dot{n}_{\ce{Ar},purge}=x_{\ce{Ar},\text{purge}} \dot{n}_{\text{purge}}
@@ -162,7 +168,7 @@ $\bullet$ Bilan molaire total:
 	\label{eq:bilan_mol_tot}
 \end{equation}
 
-avec $\xi$ étant l'avancement, c'est à dire le nombre de moles de \ce{N2} ayant réagit. 
+avec $\xi$ étant l'avancement, c'est à dire le nombre de moles de \ce{N2} ayant réagi. 
 Cela est résumé dans le tableau \ref{tab:reaction_purge_eq}.
 On analyse le débit de moles à l'entrée du réacteur pour les différents composés, 
 ainsi qu'à la sortie (on considère que l'équilibre a été atteint). 
@@ -196,7 +202,7 @@ L'expression de la constante d'équilibre $K_p$ est également:
 K_p=\frac{{x_{\ce{NH3},\text{out}}}^2}{x_{\ce{N2},\text{out}}{x_{\ce{H2},\text{out}}}^3} \cdot p^{-2} = 
 \frac{{n_{\ce{NH3},\text{out}}}^2}{n_{\ce{N2},out}\cdot {n_{\ce{H2},out}}^3}\cdot {n_{\text{total,out}}}^2\cdot p^{-2}
 \]
-si on utilise la loi des gaz parfait et plus précisément celle de Dalton. Faisons attention que c'est une hypothèse simplificatrice forte. 
+si on utilise la loi des gaz parfaits et plus précisément celle de Dalton. Faisons attention que c'est une hypothèse simplificatrice forte. 
 Comme $n_{\ce{H2}}=3\cdot n_{\ce{N2}}$ (éléments en quantité stœchiométrique), 
 on a donc 
 $K=\frac{{n_{\ce{NH3},\text{out}}}^2}{27{n_{\ce{N2},out}}^4} \cdot
@@ -225,7 +231,7 @@ On trouve une deuxième grâce à l'équation \ref{eq:bilan_mol_purge} où on re
 \[ \dot{n}_{\ce{Ar},\text{in}}=(1-4*x_{\ce{N2},purge}) \dot{n}_{\text{purge}} \]
 
 On utilise enfin l'équation \ref{eq:bilan_mol_purge}, 
-ce qui nous donne tout le nécessaire pour résoudre le problème! On peut en effet alors
+ce qui nous permet de résoudre le problème! On peut en effet alors
 trouver la valeur des inconnues citées plus haut.
 Une manière simple de faire cela est d'utiliser les calcul symbolique de \textsc{Matlab}. 
 Comme dit précédemment, la quantité réelle d'ammoniac produite est égale à $2 \xi$ 
@@ -235,9 +241,11 @@ par la quantité produite prévue dans le cas d'une réaction hypothétiquement 
 Le même cheminement est suivi dans le programme \texttt{equilibriumSimulation} 
 disponible dans notre outil de gestion. Ce dernier nous donne le rendement pour un
 certain jeu de paramètres. Un autre programme, \texttt{efficiencePlot}, trace un graphe
-tri-dimensionnel de ces résultats avec une purge fixée, variant avec la température et la
-pression. Comme attendu, le rendement augmente toujours avec la pression et diminue
-de manière plus conséquente avec la température. Les graphes \ref{fig:efficienceS} et \ref{fig:efficienceC} nous montrent cela.
+tri-dimensionnel de ces résultats avec une purge fixée à $5\%$,
+variant avec la température et la pression. 
+Comme attendu, le rendement augmente toujours avec la pression et diminue
+de manière plus conséquente avec la température. 
+Les graphes \ref{fig:efficienceS} et \ref{fig:efficienceC} nous montrent cela.
 
 \begin{figure}
 	\centering
@@ -253,8 +261,8 @@ de manière plus conséquente avec la température. Les graphes \ref{fig:efficie
 	\end{subfigure} \\
 	\caption{Efficacité du réacteur de synthèse en fonction de la température 
 		et de la pression en tenant compte d'une perte d'une partie des 
-		réactifs (\ce{H2} et \ce{N2}) lors de la purge, nécessaire pour
-		éviter l'accumulation de \ce{Ar}.}
+		réactifs (\ce{H2} et \ce{N2}) lors de la purge ($5\%$ dans ce cas),
+		nécessaire pour éviter l'accumulation de \ce{Ar}.}
 \end{figure}
 
 \subsection{Validation du modèle}
@@ -264,7 +272,7 @@ qui nous permettrait de simuler notre réaction.
 Le logiciel \textsc{Aspen Plus} propose de nombreuses 
 modélisations du comportement des fluides, 
 plus ou moins fidèles selon les composés et 
-les conditions dans lesquels on les observe. 
+les conditions dans lesquelles on les observe. 
 Notre recherche s'est limitée aux modèles à haute pression. 
 
 Après en avoir fait l'étude en comparant les bases de données de chacun d'eux, 
@@ -275,7 +283,7 @@ comme ceux auxquels nous avons affaire ici.
 Ces modèles sont également les seuls à être capables de faire 
 des prédictions correctes à une pression supérieure à $150\si{\bar}$. 
 Nous avons donc effectué quelques tests sur chacun des trois 
-et nous avons obtenus des résultats assez similaires.
+et nous avons obtenu des résultats assez similaires.
 Cependant, le modèle SRK promet de garder sa précision dans des conditions 
 quasi critiques, ce qui n'est pas le cas des deux autres. 
 La pression dans notre circuit pouvant avoisiner les $270\si{\bar}$, 
@@ -340,8 +348,8 @@ Il se trouve que les résultats de nos deux simulations
 sont exactement identiques! Et pour ce qu'il en est
 de la simulation sur \textsc{Aspen Plus}, les résultats sont
 remarquablement proches malgré les imprécisions du modèle
-utilisé. Nous avons en effet considéré que l'installation
-était parfaite et appliqué la loi des gaz parfait.
+utilisé, à savoir, que l'installation
+est parfaite et que les gaz sont parfaits.
 
 On remarque cependant une divergence marquée lorsque l'on travaille 
 avec une haute température. A titre d'illustration, 
