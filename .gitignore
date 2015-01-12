@@ -1,6 +1,7 @@
 *.log
 *.aux
 *.pdf
+!annexe-gr25.pdf
 *.swp
 *.DS_Store
 *.d

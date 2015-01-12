@@ -29,6 +29,7 @@ et dans notre cas, favorisera la production de \ce{NH3}.
 \[
 K = \frac{p_{eq,\ce{NH3}}^2}{p_{eq,\ce{H2}}^3 \cdot p_{eq,\ce{N2}} \cdot p_{\text{total}}^2}
 \]
+
 \subsection{Température}
 
 La réaction de synthèse est une réaction fortement exothermique 
@@ -123,8 +124,13 @@ qu'on ne peut séparer du reste. En effet, sa température d'ébullition est bie
 proche de celle des autres composés et les moyens à mettre en œuvre en seraient 
 très couteux et/ou à faible rendement.
 
-Notre groupe a donc décidé de faire une purge dans le circuit de recyclage afin d'éviter que l'argon ne s'accumule. Il y a donc une fraction minimale à purger. Mais cette purge ne doit pas être trop grande sinon la quantité perdue des réactifs serait conséquente. 
-La condition à respecter est donc d'avoir un flux entrant d'argon égal à celui de sortie lorsque la réaction est en "régime", c'est à dire après un nombre conséquent d'itérations.
+Notre groupe a donc décidé de faire une purge dans le circuit de recyclage
+afin d'éviter que l'argon ne s'accumule. 
+Il y a donc une fraction minimale à purger. 
+Mais cette purge ne doit pas être trop grande sinon la quantité perdue 
+des réactifs serait conséquente. 
+La condition à respecter est donc d'avoir un flux entrant d'argon égal à celui de sortie 
+lorsque la réaction est en "régime", c'est à dire après un nombre conséquent d'itérations.
 
 Le flowsheet de notre installation correspondant à la modélisation 
 du réacteur de synthèse sur \textsc{Aspen Plus} 
@@ -232,7 +238,8 @@ Il est facile de calculer $K$ en trouvant $\Delta_r G$ au préalable.
 Nous pouvons faire cela en utilisant notre outil de calcul.
 
 \[
-K=\exp{\left(\frac{-\Delta G}{R \cdot T}\right)}\]
+K=\exp{\left(\frac{-\Delta G}{R \cdot T}\right)}
+\]
 
 L'expression de la constante d'équilibre $K_p$ est également: 
 
@@ -406,7 +413,7 @@ de résultats venant des deux simulations:
 	\begin{tabular}{l|c|c}
 		Paramètres choisis & $n_{\ce{NH3}}$ - \textsc{Aspen} & $n_{\ce{NH3}}$ - \textsc{Matlab}\\
 		\hline
-		 T=750K, p=270bar  x=5\% & 942,94mol/s & 937,795mol/s \\
+		 T=750K, p=270bar,  x=5\% & 942,94mol/s & 937,795mol/s \\
 
 		\hline\hline
 

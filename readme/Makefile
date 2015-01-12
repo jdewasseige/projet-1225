@@ -1,2 +1,2 @@
 NAME=readme
-include ../../.root.mk
+include ../.root.mk
