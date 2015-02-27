@@ -37,8 +37,9 @@ La pression de stockage en été est de $10.625 \barg$ à $30\si{\celsius}$.
 
 % Quel sera la pression maximale de tarage de la soupape de sécurité ?
 \section{Pression maximale de tarage de la soupape} 
-La pression maximale de tarage de la soupape de sécurité vaut 
-\[ 121\% \cdot p_{\text{design}} = 18.15 \barg \]
+La pression maximale de tarage de la soupape de sécurité
+correspond à la pression de design du réservoir
+\[ p_{\text{max,tarage}} = 15\barg \]
 
 % Dimensionner la soupape pour cette pression de tarage.
 %     -	Quelle sera la pression durant la décharge ?
@@ -55,7 +56,10 @@ ou $1.13 \, \text{inch}^2$. Ceci correspond à une PSV de type $2J3$
 \[ A = \frac{W}{C \cdot 0.975 \cdot 20.071 \cdot 1 \cdot 1} \cdot \sqrt{\frac{323.15}{17}} \]
 
 \section{Effet de l'augmentation de la pression de tarage de 5 à 20 barg pour une pression de design de 20 barg} 
-Si la pression de design est à $20\barg$, nous pouvons augmenter la pression de tarage à \[ 121\% \cdot p_{\text{design}} = 24.2\barg \]
+Si la pression de design est à $20\barg$, 
+on autorise une supression de $21\%$ de la pression de tarage,
+qui correspond cette fois-ci à $20\barg$ (la pression de design).
+\[ 121\% \cdot p_{\text{design}} = 24.2\barg \]
 
 Nous recalculons A avec la pression et température plus élevées,
 et obtenons que la soupape doit avoir une section de $590\si{\milli\meter\squared}$
@@ -67,7 +71,7 @@ ce qui nous donne $0.9118 \, \text{inch}^2$. Ceci correspond à une PSV de type 
 % soit réduit à une valeur de 10 W/m2.K ? 
 \section{Isolation thermique du tank}
 Nous isolons la cuve avec un isolant réduisant le coefficient d'échange de la cuve avec l'extérieur à 
-$10 \si{\watt}/\si{\meter\squared} \cdot \si{\kelvin}$
+$10 \si{\watt}/\si{\meter\squared} \cdot \si{\kelvin}$.
 On réduit donc le facteur environnemental à $F = 0.15$. 
 Notre $W$ va donc être fortement réduit, et nous pouvons donc réduire la taille de la soupape à 
 $110\si{\milli\meter\squared}$ ou $0.17 \, \text{inch}^2$. 
